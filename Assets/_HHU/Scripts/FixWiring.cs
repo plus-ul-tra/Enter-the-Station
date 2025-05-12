@@ -21,6 +21,11 @@ public class FixWiring : MonoBehaviour
 
     private void OnEnable()
     {
+        for(int i =0; i < leftWires.Count; i++)
+        {
+            leftWires[i].ResetTarget();
+            leftWires[i].DisconnectWire();
+        }
         List<int> numberPool = new List<int>();
         for(int i = 0; i < 4; i++)
         {
@@ -78,6 +83,7 @@ public class FixWiring : MonoBehaviour
                             selectWire.ConnectWire(right);
                             right.ConnectWire(selectWire);
                             selectWire = null;
+                            CheckComplete();
                             return;
                         }
                     }
@@ -87,6 +93,7 @@ public class FixWiring : MonoBehaviour
                 selectWire.ResetTarget();
                 selectWire.DisconnectWire();
                 selectWire = null;
+                CheckComplete();
             }
         }
 
@@ -94,5 +101,33 @@ public class FixWiring : MonoBehaviour
         {
             selectWire.SetTarget(Input.mousePosition, 15.0f);
         }
+    }
+    private void CheckComplete()
+    {  //Could close when all Wires are Connected;
+        bool isAllComplete = true;
+        foreach(var wire in leftWires)
+        {
+            if (!wire.isConnected)
+            {
+                isAllComplete = false;
+                break;
+            }
+        }
+        if (isAllComplete)
+        {
+            Close();
+        }
+    }
+    public void Open()
+    {
+        //player 움직임 제한
+        gameObject.transform.parent.gameObject.SetActive(true);
+        gameObject.SetActive(true);
+    }
+    public void Close()
+    {
+        //player 움직임 활성화
+        gameObject.transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
