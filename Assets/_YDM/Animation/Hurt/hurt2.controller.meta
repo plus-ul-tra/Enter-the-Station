@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 673277512f19244c28670f3615e95bf5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 211512
+  packageName: Streets of Fight
+  packageVersion: 1.0
+  assetPath: Assets/Streets of Fight/Sprites/Brawler-Girl/Hurt/hurt2.controller
+  uploadId: 475553
