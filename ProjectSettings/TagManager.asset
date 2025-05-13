@@ -11,6 +11,7 @@ TagManager:
   - EventObject
   - MonsterContainer
   - Wall
+  - Canvas
   layers:
   - Default
   - TransparentFX
