@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     [Header("수직 이동 속도")]
     [SerializeField] private float verticalSpeed = 0.5f;
 
-    [Header("이동 범위 제한")]
-    [SerializeField] private float minX = -5f, maxX = 5f;
-    [SerializeField] private float minY = -3f, maxY = 3f;
+    //[Header("이동 범위 제한")]
+    //[SerializeField] private float minX = -5f, maxX = 5f;
+    //[SerializeField] private float minY = -3f, maxY = 3f;
 
     [Header("몬스터스포너")]
     [SerializeField] private Transform[] spawner;
@@ -46,9 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!canMove) return;
 
-        Vector2 input = ReadInput();//키입력 받음
-        ApplyMovement(input);//이동 로직
-        ClampPlayerPosition();//플레이어 이동제한
+        
+        //ClampPlayerPosition();//플레이어 이동제한
 
         // E 키 눌러서 상호작용
         if (Input.GetKeyDown(KeyCode.E) && randomEventObject != null)
@@ -56,6 +55,11 @@ public class PlayerController : MonoBehaviour
             randomEventObject.CompleteInteractEvent(); // 이벤트 실행
             randomEventObject = null; // 참조 초기화
         }
+    }
+    private void FixedUpdate()
+    {
+        Vector2 input = ReadInput();//키입력 받음
+        ApplyMovement(input);//이동 로직
     }
     private Vector2 ReadInput()//키입력
     {
@@ -78,29 +82,29 @@ public class PlayerController : MonoBehaviour
             input.y * verticalSpeed
         );
 
-        if (Mathf.Approximately(raw.x, 0f) && Mathf.Approximately(raw.y, 0f))//키입력 없어도 이동
-        {
-            raw.x = horizontalDirection;  // ±1 방향
-            raw.y = 0f;
-        }
-
         // 3) 방향 벡터 정규화: (0,0)일 땐 Normalize 하지 않음
         if (raw.sqrMagnitude > 1f)
             raw.Normalize();
 
+        if(!Mathf.Approximately(input.x, 0f) || !Mathf.Approximately(input.y, 0f))
+            playerAnim.SetMoved(true);
+        else
+            playerAnim.SetMoved(false);
+
+
         // 4) 실제 이동: 방향(normalized) * 수평 속도 * deltaTime
         Vector3 move = new Vector3(raw.x, raw.y, 0f)
-                     * horizontalSpeed
-                     * Time.deltaTime;
+                         * horizontalSpeed
+                         * Time.deltaTime;
         transform.Translate(move, Space.World);
     }
-    private void ClampPlayerPosition()//플레이어 이동제한
-    {
-        Vector3 pos = transform.position;
-        pos.x = Mathf.Clamp(pos.x, minX, maxX);
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        transform.position = pos;
-    }
+    //private void ClampPlayerPosition()//플레이어 이동제한
+    //{
+    //    Vector3 pos = transform.position;
+    //    pos.x = Mathf.Clamp(pos.x, minX, maxX);
+    //    pos.y = Mathf.Clamp(pos.y, minY, maxY);
+    //    transform.position = pos;
+    //}
     void OnTriggerEnter2D(Collider2D other)
     {
         Vector3 delta = Vector3.zero;
@@ -148,8 +152,8 @@ public class PlayerController : MonoBehaviour
 
         // 2) 스포너 위치 이동 및 Y 범위 업데이트
         Vector3 yOffset = new Vector3(0f, delta.y, 0f);
-        minY += delta.y;
-        maxY += delta.y;
+        //minY += delta.y;
+        //maxY += delta.y;
         cameraClamp.minPos.y += delta.y;
         cameraClamp.maxPos.y += delta.y;
         foreach (var sp in spawner)
