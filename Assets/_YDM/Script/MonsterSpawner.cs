@@ -42,6 +42,7 @@ public class MonsterSpawner : MonoBehaviour
 
             // 2) 몬스터 인스턴스화
             GameObject m = Instantiate(monsterPrefab, point.position, Quaternion.identity);
+            //m.transform.SetParent(transform);
             activeMonsters.Add(m);
 
             // 3) 방향 결정: spawnPoints[0..2] → 왼쪽(-1), [3..5] → 오른쪽(+1)

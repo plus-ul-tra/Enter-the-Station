@@ -1,26 +1,34 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Cinemachine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("¼öÆò ÀÌµ¿ ¼Óµµ")]
+    [Header("ìˆ˜í‰ ì´ë™ ì†ë„")]
     [SerializeField] private float horizontalSpeed = 5f;
-    [Header("¼öÁ÷ ÀÌµ¿ ¼Óµµ")]
+    [Header("ìˆ˜ì§ ì´ë™ ì†ë„")]
     [SerializeField] private float verticalSpeed = 0.5f;
 
-    [Header("ÀÌµ¿ ¹üÀ§ Á¦ÇÑ")]
+    [Header("ì´ë™ ë²”ìœ„ ì œí•œ")]
     [SerializeField] private float minX = -5f, maxX = 5f;
     [SerializeField] private float minY = -3f, maxY = 3f;
 
-    [Header("¸ó½ºÅÍ½ºÆ÷³Ê")]
+    [Header("ëª¬ìŠ¤í„°ìŠ¤í¬ë„ˆ")]
     [SerializeField] private Transform[] spawner;
+
+    [Header("ëª¬ìŠ¤í„° ì»¨í…Œì´ë„ˆ")]
+    [SerializeField] private Transform monsterContainer;
+
+    [Header("Cinemachine ê°€ìƒ ì¹´ë©”ë¼")]
+    [SerializeField] private CinemachineCamera cinemachineCam;
 
     private SpriteRenderer spriteRenderer;
     private PlayerAnimator playerAnim;
-    private Rigidbody2D rigidbody;
+    //private Rigidbody2D rigidbody;
     private int horizontalDirection = 1;
     private bool canMove = true;
+    private CinemachineCameraClamp cameraClamp;
 
     // --------------------------------------------------
 
@@ -28,87 +36,83 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();//í”Œë¦½ì‹œ ì‚¬ìš©
         playerAnim = GetComponent<PlayerAnimator>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        cameraClamp = cinemachineCam.GetComponent<CinemachineCameraClamp>();
+        //rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         if (!canMove) return;
 
-        // New Input System °ª ÀĞ±â
-        float inputX = InputManager.Instance.Horizontal;
-        float inputY = InputManager.Instance.Vertical;
-        //bool jump = InputManager.Instance.JumpPressed;
+        Vector2 input = ReadInput();//í‚¤ì…ë ¥ ë°›ìŒ
+        ApplyMovement(input);//ì´ë™ ë¡œì§
+        ClampPlayerPosition();//í”Œë ˆì´ì–´ ì´ë™ì œí•œ
 
-        bool horizontalKey = !Mathf.Approximately(inputX, 0f);
-        bool verticalKey = !Mathf.Approximately(inputY, 0f);
-
-        // ÁÂ¿ì ¹æÇâ ÀüÈ¯
-        if (horizontalKey)
+        // E í‚¤ ëˆŒëŸ¬ì„œ ìƒí˜¸ì‘ìš©
+        if (Input.GetKeyDown(KeyCode.E) && randomEventObject != null)
         {
-            horizontalDirection = inputX > 0f ? 1 : -1;
-            spriteRenderer.flipX = (horizontalDirection < 0);
+            randomEventObject.CompleteInteractEvent(); // ì´ë²¤íŠ¸ ì‹¤í–‰
+            randomEventObject = null; // ì°¸ì¡° ì´ˆê¸°í™”
+        }
+    }
+    private Vector2 ReadInput()//í‚¤ì…ë ¥
+    {
+        return new Vector2(
+            InputManager.Instance.Horizontal,
+            InputManager.Instance.Vertical
+        );
+    }
+    private void ApplyMovement(Vector2 input)//ì´ë™ë¡œì§
+    {
+        if (!Mathf.Approximately(input.x, 0f))
+        {
+            horizontalDirection = input.x > 0f ? 1 : -1;
+            spriteRenderer.flipX = horizontalDirection < 0;
         }
 
-        // ¼öÆò/¼öÁ÷ ÀÌµ¿ ·ÎÁ÷ (ÀÌÀü°ú µ¿ÀÏ)
-        float dx = horizontalSpeed * horizontalDirection;
-        if (verticalKey && !horizontalKey) dx = 0f;
-        float dy = verticalKey
-                 ? inputY * horizontalSpeed * verticalSpeed
-                 : 0f;
+        // 2) ì›ì‹œ ì´ë™ ë²¡í„° ë§Œë“¤ê¸° (Yì¶•ì—ë§Œ verticalSpeed ë°˜ì˜)
+        Vector2 raw = new Vector2(
+            input.x,
+            input.y * verticalSpeed
+        );
 
-        // ¿¹: Á¡ÇÁ Ã³¸® (°£´ÜÈ÷ ·Î±×)
-        //if (jump)
-        //    Debug.Log("Jump!");
+        if (Mathf.Approximately(raw.x, 0f) && Mathf.Approximately(raw.y, 0f))//í‚¤ì…ë ¥ ì—†ì–´ë„ ì´ë™
+        {
+            raw.x = horizontalDirection;  // Â±1 ë°©í–¥
+            raw.y = 0f;
+        }
 
-        // ½ÇÁ¦ ÀÌµ¿
-        Vector3 move = new Vector3(dx, dy, 0f) * Time.deltaTime;
+        // 3) ë°©í–¥ ë²¡í„° ì •ê·œí™”: (0,0)ì¼ ë• Normalize í•˜ì§€ ì•ŠìŒ
+        if (raw.sqrMagnitude > 1f)
+            raw.Normalize();
+
+        // 4) ì‹¤ì œ ì´ë™: ë°©í–¥(normalized) * ìˆ˜í‰ ì†ë„ * deltaTime
+        Vector3 move = new Vector3(raw.x, raw.y, 0f)
+                     * horizontalSpeed
+                     * Time.deltaTime;
         transform.Translate(move, Space.World);
-
-        // È­¸é Á¦ÇÑ
+    }
+    private void ClampPlayerPosition()//í”Œë ˆì´ì–´ ì´ë™ì œí•œ
+    {
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
         transform.position = pos;
-
-        // E Å° ´­·¯¼­ »óÈ£ÀÛ¿ë
-        if (Input.GetKeyDown(KeyCode.E) && randomEventObject != null)
-        {
-            randomEventObject.CompleteInteractEvent(); // ÀÌº¥Æ® ½ÇÇà
-            randomEventObject = null; // ÂüÁ¶ ÃÊ±âÈ­
-        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         Vector3 delta = Vector3.zero;
 
-        if (other.CompareTag("obstacle"))
+        if (other.CompareTag("obstacle"))//ìŠ¹ê°ì¶©ëŒí™•ì¸
         {
-            playerAnim.SetStunned(true);
-            StartCoroutine(StunRoutine(2f));
-            StartCoroutine(PauseMovement(2f));
+            HandleObstacleCollision();
         }
-        if (other.CompareTag("Stairs_up"))// ÇöÀç ¹ö±× ÀÖÀ½ ¼öÁ¤ÇÊ¿ä
-            delta = new Vector3(-1, 5.5f, 0f);
-        else if (other.CompareTag("Stairs_down"))
-            delta = new Vector3(+1, -5.5f, 0f);
-
-        if (delta != Vector3.zero)
+        if (other.CompareTag("Stairs_up") || other.CompareTag("Stairs_down"))//ê³„ë‹¨ì¶©ëŒí™•ì¸
         {
-            // 1) ÇÃ·¹ÀÌ¾î ÀÌµ¿
-            rigidbody.transform.position += delta;
-
-            // 2) ¸ğµç ½ºÆ÷³Ê ÀÌµ¿
-            foreach (var spawner in spawner)
-            {
-                // ½ºÆ÷³Ê ¿ÀºêÁ§Æ® ÀÚÃ¼¸¦ ¿Å±æ °æ¿ì
-                spawner.transform.position += delta;
-
-                // ¸¸¾à MonsterSpawner ³»ºÎ¿¡ ShiftSpawnPoints(delta)°¡ ±¸ÇöµÇ¾î ÀÖ´Ù¸é
-                // spawner.ShiftSpawnPoints(delta);
-            }
+            bool isUp = other.CompareTag("Stairs_up");
+            HandleStairsCollision(isUp);
         }
 
         if (other.CompareTag("EventObject"))
@@ -116,19 +120,66 @@ public class PlayerController : MonoBehaviour
             randomEventObject = other.GetComponent<RandomEventObject>();
         }
     }
-    private IEnumerator StunRoutine(float duration)
+    private void HandleObstacleCollision()
     {
-        canMove = false;
+        playerAnim.SetStunned(true);
+        StartCoroutine(StunRoutine(2f));//ì •ì§€ì• ë‹ˆë©”ì´ì…˜
+        StartCoroutine(PauseMovement(2f));//ì •ì§€
+    }
+    private void HandleStairsCollision(bool isUp)//ê³„ë‹¨ì´ë™
+    {
+        // ì´ë™ ë²¡í„° ê²°ì •
+        Vector3 delta = isUp
+            ? new Vector3(+6f, +6.5f, 0f)
+            : new Vector3(-6f, -6.5f, 0f);
+
+        StartCoroutine(PauseMovement(3f));//ì •ì§€ ì½”ë£¨í‹´
+        StartCoroutine(ScreenFader.Instance.FadeTeleport(() =>//í™”ë©´ì „í™˜ í˜ì´ë“œì•„ì›ƒ
+        {
+            // A) í”Œë ˆì´ì–´ & ìŠ¤í¬ë„ˆ ì´ë™, ëª¬ìŠ¤í„° ì´ˆê¸°í™”, ì¹´ë©”ë¼ ì›Œí”„
+            PerformStairsTeleport(delta);
+        }));
+    }
+
+    private void PerformStairsTeleport(Vector3 delta)
+    {
+        // 1) í”Œë ˆì´ì–´ ì´ë™
+        transform.position += delta;
+
+        // 2) ìŠ¤í¬ë„ˆ ìœ„ì¹˜ ì´ë™ ë° Y ë²”ìœ„ ì—…ë°ì´íŠ¸
+        Vector3 yOffset = new Vector3(0f, delta.y, 0f);
+        minY += delta.y;
+        maxY += delta.y;
+        cameraClamp.minPos.y += delta.y;
+        cameraClamp.maxPos.y += delta.y;
+        foreach (var sp in spawner)
+            sp.position += yOffset;
+
+        // 3) ëª¬ìŠ¤í„° ì´ˆê¸°í™”
+        ClearAllMonsters();
+
+        // 4) Cinemachine Warp ì•Œë¦¼
+        cinemachineCam.OnTargetObjectWarped(transform, delta);
+    }
+    private IEnumerator StunRoutine(float duration)//ì• ë‹ˆë©”ì´ì…˜ ì½”ë£¨í‹´
+    {
         yield return new WaitForSeconds(duration);
 
-        // 3) ³Ë´Ù¿î ÇØÁ¦
+        // 3) ë„‰ë‹¤ìš´ í•´ì œ
         playerAnim.SetStunned(false);
-        canMove = true;
     }
-    private IEnumerator PauseMovement(float duration)
+    private IEnumerator PauseMovement(float duration)//ì •ì§€ ì½”ë£¨í‹´
     {
         canMove = false;
         yield return new WaitForSeconds(duration);
         canMove = true;
+    }
+
+    private void ClearAllMonsters()//ëª¬ìŠ¤í„°ì»¨í…Œì´ë„ˆ ìˆœíšŒ ë° ì‚­ì œ
+    {
+        for (int i = monsterContainer.childCount - 1; i >= 0; --i)
+        {
+            Destroy(monsterContainer.GetChild(i).gameObject);
+        }
     }
 }
