@@ -10,7 +10,7 @@ public enum EWireColor
     Yellow,
     Magenta,
 }
-public class FixWiring : MonoBehaviour
+public class FixWiring : Task
 {
     [SerializeField]
     private List<LeftWire> leftWires;
@@ -21,11 +21,8 @@ public class FixWiring : MonoBehaviour
 
     private void OnEnable()
     {
-        for(int i =0; i < leftWires.Count; i++)
-        {
-            leftWires[i].ResetTarget();
-            leftWires[i].DisconnectWire();
-        }
+        InitGame();
+
         List<int> numberPool = new List<int>();
         for(int i = 0; i < 4; i++)
         {
@@ -102,9 +99,10 @@ public class FixWiring : MonoBehaviour
             selectWire.SetTarget(Input.mousePosition, 15.0f);
         }
     }
+
     private void CheckComplete()
     {  //Could close when all Wires are Connected;
-        bool isAllComplete = true;
+        bool isAllComplete = true; //전선 체크, 
         foreach(var wire in leftWires)
         {
             if (!wire.isConnected)
@@ -115,19 +113,16 @@ public class FixWiring : MonoBehaviour
         }
         if (isAllComplete)
         {
+            // 성공
             Close();
         }
     }
-    public void Open()
+    public override void InitGame()
     {
-        //player 움직임 제한
-        gameObject.transform.parent.gameObject.SetActive(true);
-        gameObject.SetActive(true);
-    }
-    public void Close()
-    {
-        //player 움직임 활성화
-        gameObject.transform.parent.gameObject.SetActive(false);
-        gameObject.SetActive(false);
+        for (int i = 0; i < leftWires.Count; i++)
+        {
+            leftWires[i].ResetTarget();
+            leftWires[i].DisconnectWire();
+        }
     }
 }
