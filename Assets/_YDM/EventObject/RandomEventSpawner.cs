@@ -4,6 +4,7 @@ using System.Threading;
 
 public class RandomEventSpawner : MonoBehaviour
 {
+    public TaskManager taskManager;                     // 미니게임 실행 매니저
     public EventDirectionArrow eventDirectionArrow;     // 이벤트 화살표
     public SpeechBubble speechBubble;                   // 무전기 말풍선
 
@@ -31,7 +32,7 @@ public class RandomEventSpawner : MonoBehaviour
             currentSpawnTimer -= eventSpawnTime;
 
             // TODO : 테스트용 랜덤 스폰 나중에 변경해야함.
-            Vector3 randomPosition = new Vector3(Random.Range(1, 5), Random.Range(1, 5), 0);
+            Vector3 randomPosition = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
             CreateRandomEventObject(randomPosition);
         }
     }
@@ -52,6 +53,9 @@ public class RandomEventSpawner : MonoBehaviour
             // 콜백 (상호작용 성공 / 실패) 등록
             randomEvent.onEventSuccess += OnRandomEventSuccess;
             randomEvent.onEventFailed += OnRandomEventInteractFailed;
+
+            // 미니게임 생성용 참조
+            randomEvent.ReferTaskManager(taskManager);
 
             // 화살표 생성
             eventDirectionArrow.CreateArrow(randomEvent);

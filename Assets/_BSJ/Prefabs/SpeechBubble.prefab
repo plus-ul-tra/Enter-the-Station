@@ -142,8 +142,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "2\uBC88 \uCD9C\uAD6C \uBC29\uD5A5\n\uC5D8\uB9AC\uBCA0\uC774\uD130 \uACE0\uC7A5!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 20b2c75dedbe8af42bf77a8494cbbf0e, type: 2}
-  m_sharedMaterial: {fileID: 3378959705678867089, guid: 20b2c75dedbe8af42bf77a8494cbbf0e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 155bb6f68eaca3f42afe77f31d7cf85f, type: 2}
+  m_sharedMaterial: {fileID: -6099442001514594830, guid: 155bb6f68eaca3f42afe77f31d7cf85f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -264,9 +264,9 @@ MonoBehaviour:
   popUpObject: {fileID: 8080928726193795889}
   tmpText: {fileID: 8392927380104510255}
   imageRect: {fileID: 1281830996009019086}
-  punchCount: 5
-  punchInterval: 0.2
-  punchPower: 0.2
+  punchCount: 7
+  punchInterval: 0.5
+  punchPower: 0.3
 --- !u!225 &5081677072122826475
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7925363782294618000}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 public class EventDirectionArrow : MonoBehaviour
 {
-    public GameObject arrowPrefab;          // È­»ìÇ¥ ÇÁ¸®ÆÕ
-    public float ellipseX = 1f;             // Å¸¿øÇü X ¹İÁö¸§
-    public float ellipseY = 0.6f;             // Å¸¿øÇü Y ¹İÁö¸§
-    public float spriteAngleOffset = -90f;  // È­»ìÇ¥ Sprite°¡ ±âº»ÀûÀ¸·Î ¹Ù¶óº¸´Â ¹æÇâ°ú XÃà »çÀÌÀÇ °¢µµ
+    public GameObject arrowPrefab;          // í™”ì‚´í‘œ í”„ë¦¬íŒ¹
+    public float radius = 0.2f;               // ì›í˜• ë°˜ì§€ë¦„
+    public float yOffset = 0.3f; // ì›ì„ ì–¼ë§ˆë‚˜ ì•„ë˜ë¡œ ë‚´ë¦´ì§€ ì„¤ì •
+    public float spriteAngleOffset = -90f;  // í™”ì‚´í‘œ Spriteê°€ ê¸°ë³¸ì ìœ¼ë¡œ ë°”ë¼ë³´ëŠ” ë°©í–¥ê³¼ Xì¶• ì‚¬ì´ì˜ ê°ë„
 
-    private Transform player;               // ÇÃ·¹ÀÌ¾î (À§Ä¡ Áß½É Àâ±â À§ÇØ¼­)
+    private Transform player;               // í”Œë ˆì´ì–´ (ìœ„ì¹˜ ì¤‘ì‹¬ ì¡ê¸° ìœ„í•´ì„œ)
 
-    // ÃßÀûÇÒ µ¹¹ß»óÈ²°ú ±× Æ®·£½ºÆû
+    // ì¶”ì í•  ëŒë°œìƒí™©ê³¼ ê·¸ íŠ¸ëœìŠ¤í¼
     private Dictionary<RandomEventObject, Transform> arrowDict = new Dictionary<RandomEventObject, Transform>();
 
     private void Awake()
@@ -24,9 +24,9 @@ public class EventDirectionArrow : MonoBehaviour
     }
 
     /// <summary>
-    /// µ¹¹ß»óÈ² ÃßÀûÇÏ´Â È­»ìÇ¥ »ı¼º
+    /// ëŒë°œìƒí™© ì¶”ì í•˜ëŠ” í™”ì‚´í‘œ ìƒì„±
     /// </summary>
-    /// <param name="eventObj">·£´ı µ¹¹ß»óÈ²</param>
+    /// <param name="eventObj">ëœë¤ ëŒë°œìƒí™©</param>
     public void CreateArrow(RandomEventObject eventObj)
     {
         GameObject newArrow = Instantiate(arrowPrefab, player.position, Quaternion.identity, transform);
@@ -34,9 +34,9 @@ public class EventDirectionArrow : MonoBehaviour
     }
 
     /// <summary>
-    /// Æ¯Á¤ È­»ìÇ¥ Á¦°Å (ÂüÁ¶ ¶Ç´Â index·Î °¡´É)
+    /// íŠ¹ì • í™”ì‚´í‘œ ì œê±° (ì°¸ì¡° ë˜ëŠ” indexë¡œ ê°€ëŠ¥)
     /// </summary>
-    /// <param name="eventObj">·£´ı µ¹¹ß»óÈ²</param>
+    /// <param name="eventObj">ëœë¤ ëŒë°œìƒí™©</param>
     public void RemoveArrow(RandomEventObject eventObj)
     {
         if(arrowDict.TryGetValue(eventObj, out Transform arrow))
@@ -45,7 +45,6 @@ public class EventDirectionArrow : MonoBehaviour
             arrowDict.Remove(eventObj);
         }
     }
-
 
     private void UpdateArrows()
     {
@@ -59,56 +58,35 @@ public class EventDirectionArrow : MonoBehaviour
             Vector3 toTarget = eventObj.transform.position - player.position;
             float distance = toTarget.magnitude;
 
-            if (distance >= 10f)
+            if (distance >= 2.75f)
             {
-                // Å¸¿ø ±Ëµµ À§ À§Ä¡ °è»ê
-                Vector2 dir = toTarget.normalized;
-                float angle = Mathf.Atan2(dir.y, dir.x);
-                float x = Mathf.Cos(angle) * ellipseX;
-                float y = Mathf.Sin(angle) * ellipseY;
+                // ğŸ”¥ ì ì˜ ìœ„ì¹˜ë¥¼ ë°˜ì˜í•˜ì—¬ ì› ê¶¤ë„ ì´ë™ ê°ë„ ê³„ì‚°
+                float angleRad = Mathf.Atan2(toTarget.y, toTarget.x);
 
-                arrow.position = player.position + new Vector3(x, y, 0f);
+                // ğŸ”„ ì‹œê°„ì— ë”°ë¥¸ íšŒì „ ì¶”ê°€ (ì ì„ í–¥í•˜ëŠ” ë°©í–¥ ê³ ë ¤)
+                angleRad += Time.deltaTime * 2f; // íšŒì „ ì†ë„ ì¡°ì •
 
-                float arrowAngle = angle * Mathf.Rad2Deg;
-                arrow.rotation = Quaternion.Euler(0, 0, arrowAngle + spriteAngleOffset);
+                float x = Mathf.Cos(angleRad) * radius;
+                float y = Mathf.Sin(angleRad) * radius;
+
+                // ğŸŒ ì¤‘ì‹¬ì„ ì•„ë˜ë¡œ yOffset ë§Œí¼ ì´ë™ (ì´ ë¶€ë¶„ ì¶”ê°€!)
+                Vector3 orbitCenter = player.position + new Vector3(0f, -yOffset, 0f);
+                arrow.position = orbitCenter + new Vector3(x, y, 0f);
+
+                // ğŸ”„ ì ì„ í–¥í•˜ë„ë¡ íšŒì „
+                float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+                arrow.rotation = Quaternion.Euler(0, 0, angle + spriteAngleOffset);
             }
             else
             {
-                // ¿ÀºêÁ§Æ® ¾Æ·¡ È­»ìÇ¥
-                Vector3 offset = Vector3.down * 1.5f;
+                // ì˜¤ë¸Œì íŠ¸ ì•„ë˜ í™”ì‚´í‘œ
+                Vector3 offset = new Vector3(0, -0.6f, 0);
                 arrow.position = eventObj.transform.position + offset;
 
                 Vector2 dir = Vector2.up;
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 arrow.rotation = Quaternion.Euler(0, 0, angle + spriteAngleOffset);
             }
-        }
-    }
-
-    // ¾À ºä¿¡¼­ Å¸¿ø Gizmo·Î ±×¸®±â
-    private void OnDrawGizmos()
-    {
-        if (player == null) return;
-
-        Gizmos.color = Color.yellow;
-
-        int segments = 60;
-        Vector3 prevPoint = Vector3.zero;
-
-        for (int i = 0; i <= segments; i++)
-        {
-            float angle = 2 * Mathf.PI * i / segments;
-            float x = Mathf.Cos(angle) * ellipseX;
-            float y = Mathf.Sin(angle) * ellipseY;
-
-            Vector3 point = player.position + new Vector3(x, -0.5f, 0f);
-
-            if(i > 0)
-            {
-                Gizmos.DrawLine(prevPoint, point);
-            }
-
-            prevPoint = point;
         }
     }
 }
