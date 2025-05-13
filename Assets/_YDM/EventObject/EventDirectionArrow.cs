@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public class EventDirectionArrow : MonoBehaviour
 {
     public GameObject arrowPrefab;          // 화살표 프리팹
-    public float radius = 5f;               // 플레이어 중심 원 반지름
+    public float ellipseX = 1f;             // 타원형 X 반지름
+    public float ellipseY = 0.6f;             // 타원형 Y 반지름
     public float spriteAngleOffset = -90f;  // 화살표 Sprite가 기본적으로 바라보는 방향과 X축 사이의 각도
 
     private Transform player;               // 플레이어 (위치 중심 잡기 위해서)
@@ -55,11 +56,59 @@ public class EventDirectionArrow : MonoBehaviour
 
             if (eventObj == null || arrow == null) continue;
 
-            Vector2 dir = (eventObj.transform.position - player.position).normalized;
-            arrow.position = player.position + (Vector3)(dir * radius);
+            Vector3 toTarget = eventObj.transform.position - player.position;
+            float distance = toTarget.magnitude;
 
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            arrow.rotation = Quaternion.Euler(0, 0, angle + spriteAngleOffset);
+            if (distance >= 10f)
+            {
+                // 타원 궤도 위 위치 계산
+                Vector2 dir = toTarget.normalized;
+                float angle = Mathf.Atan2(dir.y, dir.x);
+                float x = Mathf.Cos(angle) * ellipseX;
+                float y = Mathf.Sin(angle) * ellipseY;
+
+                arrow.position = player.position + new Vector3(x, y, 0f);
+
+                float arrowAngle = angle * Mathf.Rad2Deg;
+                arrow.rotation = Quaternion.Euler(0, 0, arrowAngle + spriteAngleOffset);
+            }
+            else
+            {
+                // 오브젝트 아래 화살표
+                Vector3 offset = Vector3.down * 1.5f;
+                arrow.position = eventObj.transform.position + offset;
+
+                Vector2 dir = Vector2.up;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                arrow.rotation = Quaternion.Euler(0, 0, angle + spriteAngleOffset);
+            }
+        }
+    }
+
+    // 씬 뷰에서 타원 Gizmo로 그리기
+    private void OnDrawGizmos()
+    {
+        if (player == null) return;
+
+        Gizmos.color = Color.yellow;
+
+        int segments = 60;
+        Vector3 prevPoint = Vector3.zero;
+
+        for (int i = 0; i <= segments; i++)
+        {
+            float angle = 2 * Mathf.PI * i / segments;
+            float x = Mathf.Cos(angle) * ellipseX;
+            float y = Mathf.Sin(angle) * ellipseY;
+
+            Vector3 point = player.position + new Vector3(x, -0.5f, 0f);
+
+            if(i > 0)
+            {
+                Gizmos.DrawLine(prevPoint, point);
+            }
+
+            prevPoint = point;
         }
     }
 }

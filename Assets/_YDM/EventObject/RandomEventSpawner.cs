@@ -5,6 +5,7 @@ using System.Threading;
 public class RandomEventSpawner : MonoBehaviour
 {
     public EventDirectionArrow eventDirectionArrow;     // 이벤트 화살표
+    public SpeechBubble speechBubble;                   // 무전기 말풍선
 
     public List<RandomEventObject> randomEventList;     // 랜덤 돌발상황 업스케일 관리 리스트
     public List<RandomEventObject> createdEventList;    // 생성된 돌발상황 관리 리스트
@@ -30,7 +31,7 @@ public class RandomEventSpawner : MonoBehaviour
             currentSpawnTimer -= eventSpawnTime;
 
             // TODO : 테스트용 랜덤 스폰 나중에 변경해야함.
-            Vector3 randomPosition = new Vector3(Random.Range(0, 20), Random.Range(0, 20), 0);
+            Vector3 randomPosition = new Vector3(Random.Range(1, 5), Random.Range(1, 5), 0);
             CreateRandomEventObject(randomPosition);
         }
     }
@@ -48,12 +49,15 @@ public class RandomEventSpawner : MonoBehaviour
         {
             createdEventList.Add(randomEvent);
 
-            // 화살표 생성
-            eventDirectionArrow.CreateArrow(randomEvent);
-
             // 콜백 (상호작용 성공 / 실패) 등록
             randomEvent.onEventSuccess += OnRandomEventSuccess;
             randomEvent.onEventFailed += OnRandomEventInteractFailed;
+
+            // 화살표 생성
+            eventDirectionArrow.CreateArrow(randomEvent);
+
+            // 말풍선 생성
+            speechBubble.PlaySpeechBubble();
         }
     }
 

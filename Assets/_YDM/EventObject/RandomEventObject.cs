@@ -47,6 +47,14 @@ public class RandomEventObject : MonoBehaviour
         isComplete = true;
         Debug.Log("이벤트 성공");
         onEventSuccess?.Invoke(this);
+
+        // LEGACY : Task로 변경
+        // 미니게임을 실행한다.
+        //IMiniGame miniGame = GetComponent<IMiniGame>();
+        //if(miniGame != null)
+        //{
+        //    miniGame.PlayMiniGame();
+        //}
     }
 
     private void OnDisable()
