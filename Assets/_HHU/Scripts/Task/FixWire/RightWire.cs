@@ -65,7 +65,7 @@ public class RightWire : MonoBehaviour
         }
         else
         {
-            lightImage.color = Color.yellow;
+            lightImage.color = Color.gray;
             isConnected = false;
         }
     }
