@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 7389374184071397770}
   - component: {fileID: 7122171767316536684}
   - component: {fileID: 5851989287654259090}
+  - component: {fileID: -2146550522047830622}
   m_Layer: 0
   m_Name: RandomEvent_02
   m_TagString: EventObject
@@ -392,7 +393,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -453,3 +454,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.75}
   m_Radius: 1.5
+--- !u!114 &-2146550522047830622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322388333577483565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090cc308ba2eb0f4e965bc4f15238662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
