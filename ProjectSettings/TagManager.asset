@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - TaskWire
+  - Stairs_down
+  - Stairs_up
+  - obstacle
+  - EventObject
+  - MonsterContainer
   layers:
   - Default
   - TransparentFX
