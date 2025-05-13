@@ -76,11 +76,11 @@ public class ArrowMatching : Task
     }
     private void checkSuccess()
     {
-        if(matchIndex == 8)
+        if(matchIndex == maxBlockCount-1)
         {
             successCount++;
         }
-        if(matchIndex == 8 && successCount < maxSuccessCount)
+        if(matchIndex == maxBlockCount - 1 && successCount < maxSuccessCount)
         {
             ClearBlocks();
             SetBlock();

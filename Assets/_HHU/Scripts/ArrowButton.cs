@@ -18,15 +18,19 @@ public class ArrowButton : MonoBehaviour
         {
             case ArrowDir.Up:
                 gameObject.transform.Rotate(0.0f, 0.0f, 180.0f);
+                image.color = Color.red;
                 break;
             case ArrowDir.Right:
                 gameObject.transform.Rotate(0.0f, 0.0f, 90.0f);
+                image.color = Color.blue;
                 break;
             case ArrowDir.Down:
                 gameObject.transform.Rotate(0.0f, 0.0f, 0.0f);
+                image.color = Color.green;
                 break;
             case ArrowDir.Left:
                 gameObject.transform.Rotate(0.0f, 0.0f, 270.0f);
+                image.color = Color.yellow;
                 break;
 
         }
