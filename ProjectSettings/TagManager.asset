@@ -10,6 +10,7 @@ TagManager:
   - obstacle
   - EventObject
   - MonsterContainer
+  - Wall
   layers:
   - Default
   - TransparentFX
