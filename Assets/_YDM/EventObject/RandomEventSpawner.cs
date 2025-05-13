@@ -32,7 +32,8 @@ public class RandomEventSpawner : MonoBehaviour
             currentSpawnTimer -= eventSpawnTime;
 
             // TODO : 테스트용 랜덤 스폰 나중에 변경해야함.
-            Vector3 randomPosition = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+            // 맵 크기 테스트용
+            Vector3 randomPosition = new Vector3(Random.Range(-10, 7), Random.Range(-4.5f, -1f), 0);
             CreateRandomEventObject(randomPosition);
         }
     }
