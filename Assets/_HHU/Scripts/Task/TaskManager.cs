@@ -14,8 +14,6 @@ public class TaskManager : MonoBehaviour
 
     public void StartTask(KindOfTask task) //얘를 어디서 호출해 줘야함 enum 파라미터와 함께
     { //여기서 enum으로 Task 요청 받음
-        Debug.Log("태스크 스타트");
-
         if (!CheckOnTask())
         {
             for (int i = 0; i < taskList.Count; i++)
