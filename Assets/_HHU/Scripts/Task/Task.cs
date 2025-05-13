@@ -17,6 +17,7 @@ public class Task : MonoBehaviour
         isOnTask = true;
     }
     protected void Close() {
+        //close 전에 성공 or 실패 효과 및 delay
         gameObject.transform.parent.gameObject.SetActive(false);
         gameObject.SetActive(false); //종료
         isOnTask = false;

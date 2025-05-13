@@ -25,7 +25,9 @@ public class ArrowMatching : Task
 
     private void OnEnable()
     {
-        SetBlock();
+        ClearBlocks();
+        InitGame();
+        successCount = 0;
     }
 
     // Update is called once per frame
