@@ -2766,7 +2766,7 @@ MonoBehaviour:
   container: {fileID: 1674621693}
   blockPrefabs: {fileID: 4654216733916487804, guid: 776ce91cba26cb844be9610066aee4f7, type: 3}
   maxBlockCount: 9
-  maxSuccessCount: 2
+  maxSuccessCount: 3
 --- !u!1 &1187070430
 GameObject:
   m_ObjectHideFlags: 0

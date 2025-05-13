@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class RandomEventObject : MonoBehaviour
 {
+    public KindOfTask task;
+
     [Header("상호작용 안하면 실패되는 시간")]
     [SerializeField]
     private float failTime = 15f;
@@ -16,6 +18,8 @@ public class RandomEventObject : MonoBehaviour
     private Coroutine failCoroutine;
 
     private GameObject interactUI;
+
+    private TaskManager taskManager;
     private void Awake()
     {
         interactUI = transform.GetChild(0).gameObject;
@@ -48,13 +52,13 @@ public class RandomEventObject : MonoBehaviour
         Debug.Log("이벤트 성공");
         onEventSuccess?.Invoke(this);
 
-        // LEGACY : Task로 변경
-        // 미니게임을 실행한다.
-        //IMiniGame miniGame = GetComponent<IMiniGame>();
-        //if(miniGame != null)
-        //{
-        //    miniGame.PlayMiniGame();
-        //}
+        // 미니게임 실행
+        taskManager.StartTask(task);
+    }
+
+    public void ReferTaskManager(TaskManager _taskManager)
+    {
+        taskManager = _taskManager;
     }
 
     private void OnDisable()

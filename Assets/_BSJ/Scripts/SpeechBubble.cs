@@ -55,7 +55,7 @@ public class SpeechBubble : MonoBehaviour
         {
             imageRect.DOKill();
             imageRect.DOShakeAnchorPos(
-                1f,
+                1.2f,
                 strength: new Vector2(20f, 20f),
                 vibrato: 10,
                 randomness: 90f,
