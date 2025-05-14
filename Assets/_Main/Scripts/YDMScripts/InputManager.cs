@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     // 내부 저장용
     private Vector2 moveInput = Vector2.zero;
     private bool jumpPressed = false;
-    private bool attackPressed = false;
+    private bool pausePressed = false;
     private bool interactPressed = false;
     // … 필요하다면 더 추가
 
@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
     public Vector2 MoveInput => moveInput;
 
     public bool JumpPressed => jumpPressed;
-    public bool AttackPressed => attackPressed;
+    public bool PausePressed => pausePressed;
     public bool InteractPressed => interactPressed;
     // … 필요하다면 더 추가
 
@@ -47,9 +47,9 @@ public class InputManager : MonoBehaviour
         controls.Player.Jump.started += ctx => jumpPressed = true;
         controls.Player.Jump.canceled += ctx => jumpPressed = false;
 
-        // Attack (Button)
-        controls.Player.Attack.started += ctx => attackPressed = true;
-        controls.Player.Attack.canceled += ctx => attackPressed = false;
+        // Pause (Button)
+        controls.Player.Pause.started += ctx => pausePressed = true;
+        controls.Player.Pause.canceled += ctx => pausePressed = false;
 
         // Interact (Button)
         controls.Player.Interact.started += ctx => interactPressed = true;

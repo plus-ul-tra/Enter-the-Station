@@ -12,6 +12,7 @@ TagManager:
   - MonsterContainer
   - Wall
   - Canvas
+  - Option
   layers:
   - Default
   - TransparentFX
