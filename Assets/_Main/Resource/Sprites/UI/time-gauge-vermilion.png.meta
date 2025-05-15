@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      time-gauge-vermilion_0: -3269926534279237051
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
