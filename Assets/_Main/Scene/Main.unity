@@ -1505,8 +1505,8 @@ PolygonCollider2D:
     - - {x: 8.569285, y: 1.3799015}
       - {x: -17.170328, y: 1.3865929}
       - {x: -17.180275, y: -7.9199715}
-      - {x: 13.072524, y: -7.9210095}
-      - {x: 13.065951, y: -4.4100404}
+      - {x: 12.887906, y: -7.9377923}
+      - {x: 12.914901, y: -4.3596897}
   m_UseDelaunayMesh: 0
 --- !u!4 &283215535
 Transform:
@@ -5190,7 +5190,6 @@ GameObject:
   - component: {fileID: 1013765521}
   - component: {fileID: 1013765523}
   - component: {fileID: 1013765522}
-  - component: {fileID: 1013765524}
   m_Layer: 5
   m_Name: TaskUI
   m_TagString: Untagged
@@ -5257,18 +5256,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013765520}
   m_CullTransparentMesh: 1
---- !u!114 &1013765524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013765520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d620afbf7f0aec48bbddb5e97a6f797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1027794272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1157217059939159090, guid: 738079e36baddff4b815e383abe20a38, type: 3}
@@ -5896,11 +5883,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 4.5990677, y: 0.51353216}
-      - {x: -25.311914, y: 0.45182347}
-      - {x: -25.291233, y: -11.196168}
-      - {x: 4.679421, y: -11.235678}
-      - {x: 4.645746, y: 0.5352421}
+    - - {x: -0.157588, y: -2.8357244}
+      - {x: -25.383175, y: -2.8439872}
+      - {x: -25.394747, y: -14.446958}
+      - {x: 4.5190845, y: -14.460228}
+      - {x: 4.52104, y: -2.8674598}
   m_UseDelaunayMesh: 0
 --- !u!4 &1205614017
 Transform:

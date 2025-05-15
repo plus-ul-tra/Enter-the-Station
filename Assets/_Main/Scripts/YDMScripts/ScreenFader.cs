@@ -40,7 +40,7 @@ public class ScreenFader : MonoBehaviour
         yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
     }
 
-    private IEnumerator Fade(float from, float to, float duration)
+    public IEnumerator Fade(float from, float to, float duration)
     {
         float t = 0f;
         while (t < duration)

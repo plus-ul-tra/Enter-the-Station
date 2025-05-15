@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class MovingScope : MonoBehaviour
 {
+    Collider2D collider4Wall;
     float ScopePosX;
     Vector2 vectorScope;
     public float ScopeSpeed;
-    bool isStopped;
 
-    public void OnEnable()
+    void Start()
     {
-        isStopped = false;
         vectorScope.x = -1.0f;
-        transform.localPosition = new Vector3(-300.0f, transform.localPosition.y, transform.localPosition.z);
     }
 
     // Update is called once per frame
     void Update()
-    { 
-        if (isStopped)
+    {
+        if (MovingCircle.isStopped)
             return;
 
      ScopePosX = vectorScope.x * ScopeSpeed * Time.deltaTime;
@@ -34,8 +32,6 @@ public class MovingScope : MonoBehaviour
         {
             vectorScope.x = 1.0f;
         }
+        Debug.Log(gameObject.transform.position.x);
     }
-
-    public void SetStop()
-    { isStopped = true; }
 }

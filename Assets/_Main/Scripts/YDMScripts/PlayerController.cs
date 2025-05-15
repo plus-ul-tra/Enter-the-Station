@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
     [Header("아래층(Down)으로 내려갈 때 사용할 카메라 제한 콜라이더")]
     [SerializeField] private PolygonCollider2D downZoneCollider;
 
+    [Header("올라가는 계단")]
+    [SerializeField] GameObject stairs_Up;
+    [Header("내려가는 계단")]
+    [SerializeField] GameObject stairs_Down;
+
     [Header("옵션 창")]
     [SerializeField] private GameObject optionPanel;
 
@@ -37,21 +42,22 @@ public class PlayerController : MonoBehaviour
     private int horizontalDirection = 1;
     [HideInInspector]public bool canMove = true;
     private CinemachineCameraClamp cameraClamp;
-    private TaskManager taskManager;
-
+    //private TaskManager taskManager;
+    [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
     // --------------------------------------------------
-    
     RandomEventObject randomEventObject;
-    Item item;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//플립시 사용
         playerAnim = GetComponent<PlayerAnimator>();
-        cameraClamp = cinemachineCam.GetComponent<CinemachineCameraClamp>();
+        cameraClamp = cinemachineCam.GetComponent<CinemachineCameraClamp>();        
         //rigidbody = GetComponent<Rigidbody2D>();
     }
-
+    private void Start()
+    {
+        StartCoroutine(PauseMovement(introCameraSwitcher.introDuration+2));
+    }
     void Update()
     {
         //if (InputManager.Instance.PausePressed)
@@ -66,12 +72,6 @@ public class PlayerController : MonoBehaviour
         {
             randomEventObject.CompleteInteractEvent(); // 이벤트 실행
             randomEventObject = null; // 참조 초기화
-        }
-        if (Input.GetKeyDown(KeyCode.E) && item !=null)
-        {
-            item.Picked();
-            // 플레이어 들고 있는 아이템 -> UI 표시용
-            // 상태 업데이트로직 추가
         }
     }
     private void FixedUpdate()
@@ -138,10 +138,6 @@ public class PlayerController : MonoBehaviour
         {
             randomEventObject = other.GetComponent<RandomEventObject>();
         }
-        if (other.CompareTag("Item"))
-        {
-            item = other.GetComponent<Item>();
-        }
     }
     private void HandleObstacleCollision()
     {
@@ -152,9 +148,11 @@ public class PlayerController : MonoBehaviour
     private void HandleStairsCollision(bool isUp)//계단이동
     {
         // 이동 벡터 결정
-        Vector3 delta = isUp
-            ? new Vector3(+6f, +6.5f, 0f)
-            : new Vector3(-6f, -8.5f, 0f);
+        Vector2 delta = isUp
+            ? new Vector2(0f, 9f) 
+         : new Vector2(0f, -9f);
+
+        
 
         StartCoroutine(PauseMovement(3f));//정지 코루틴
 
@@ -162,23 +160,32 @@ public class PlayerController : MonoBehaviour
         {
             var zoneCollider = isUp ? upZoneCollider : downZoneCollider;
             // A) 플레이어 & 스포너 이동, 몬스터 초기화, 카메라 워프
+            Vector2 pos = isUp
+          ? stairs_Down.transform.position
+         : stairs_Up.transform.position;
+
+            float offsetX = isUp
+                ? -3f   // stairs_Down 일 때
+                : +3f; // stairs_Up 일 때
+
+            pos.x = pos.x + offsetX;
+
+            transform.position = pos;
+            playerAnim.SetMoved(false);
             PerformStairsTeleport(delta, zoneCollider);
         }));
+        
     }
 
     private void PerformStairsTeleport(Vector3 delta, PolygonCollider2D nextZone)
     {
-        // 1) 플레이어 이동
-        transform.position += delta;//임시
-
+       
         // 2) 스포너 위치 이동 및 Y 범위 업데이트
-        Vector3 yOffset = new Vector3(0f, delta.y, 0f);//임시
-        //minY += delta.y;
-        //maxY += delta.y;
-        cameraClamp.minPos.y += delta.y;
-        cameraClamp.maxPos.y += delta.y;
-        foreach (var sp in spawner)
-            sp.position += yOffset;
+        //Vector3 yOffset = new Vector3(0f, delta.y, 0f);
+        //cameraClamp.minPos.y += delta.y;
+        //cameraClamp.maxPos.y += delta.y;
+        //foreach (var sp in spawner)
+        //    sp.position += yOffset;
 
         // 3) 몬스터 초기화
         ClearAllMonsters();
@@ -205,6 +212,7 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator PauseMovement(float duration)//정지 코루틴
     {
+        
         canMove = false;
         yield return new WaitForSeconds(duration);
         canMove = true;
@@ -212,6 +220,7 @@ public class PlayerController : MonoBehaviour
 
     private void ClearAllMonsters()//몬스터컨테이너 순회 및 삭제
     {
+
         for (int i = monsterContainer.childCount - 1; i >= 0; --i)
         {
             Destroy(monsterContainer.GetChild(i).gameObject);

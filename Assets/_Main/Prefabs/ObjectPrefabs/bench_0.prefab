@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8116264479685463096}
   - component: {fileID: 841546102766339937}
   - component: {fileID: 2546982162734517911}
-  - component: {fileID: -1778066757084484502}
+  - component: {fileID: 6341514662256649341}
   m_Layer: 0
   m_Name: bench_0
   m_TagString: Untagged
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.73, y: 0.29646826}
   m_EdgeRadius: 0
---- !u!114 &-1778066757084484502
+--- !u!114 &6341514662256649341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
