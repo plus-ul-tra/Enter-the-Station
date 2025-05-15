@@ -2131,7 +2131,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 20.194824, y: 0.3078308}
+  m_Offset: {x: 25.894012, y: 0.30781555}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2141,7 +2141,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 36.46399, y: 24.765808}
+  m_Size: {x: 47.862366, y: 54.761444}
   m_EdgeRadius: 0
 --- !u!114 &775778691
 MonoBehaviour:
@@ -5563,7 +5563,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 20.194824, y: 0.3078308}
+  m_Offset: {x: 27.693756, y: -0.59207153}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5573,7 +5573,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 36.46399, y: 24.765808}
+  m_Size: {x: 51.461853, y: 54.16156}
   m_EdgeRadius: 0
 --- !u!114 &1877049610
 MonoBehaviour:
@@ -6262,7 +6262,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 20.194824, y: 0.3078308}
+  m_Offset: {x: 26.793854, y: 0.6077881}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6272,7 +6272,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 36.46399, y: 24.765808}
+  m_Size: {x: 49.66205, y: 52.961792}
   m_EdgeRadius: 0
 --- !u!114 &2005735620
 MonoBehaviour:
@@ -6459,7 +6459,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 20.194824, y: 0.3078308}
+  m_Offset: {x: 26.19394, y: 0.9077606}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6469,7 +6469,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 36.46399, y: 24.765808}
+  m_Size: {x: 48.46222, y: 49.96219}
   m_EdgeRadius: 0
 --- !u!114 &2029692769
 MonoBehaviour:
