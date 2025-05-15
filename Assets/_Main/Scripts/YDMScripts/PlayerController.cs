@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.Cinemachine;
+using DG.Tweening.Core.Easing;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
@@ -22,16 +23,24 @@ public class PlayerController : MonoBehaviour
 
     [Header("Cinemachine 가상 카메라")]
     [SerializeField] private CinemachineCamera cinemachineCam;
+    [Header("위층(Up)으로 올라갈 때 사용할 카메라 제한 콜라이더")]
+    [SerializeField] private PolygonCollider2D upZoneCollider;
+    [Header("아래층(Down)으로 내려갈 때 사용할 카메라 제한 콜라이더")]
+    [SerializeField] private PolygonCollider2D downZoneCollider;
+
+    [Header("옵션 창")]
+    [SerializeField] private GameObject optionPanel;
 
     private SpriteRenderer spriteRenderer;
     private PlayerAnimator playerAnim;
     //private Rigidbody2D rigidbody;
     private int horizontalDirection = 1;
-    private bool canMove = true;
+    [HideInInspector]public bool canMove = true;
     private CinemachineCameraClamp cameraClamp;
+    private TaskManager taskManager;
 
     // --------------------------------------------------
-
+    
     RandomEventObject randomEventObject;
 
     void Awake()
@@ -44,10 +53,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!canMove) return;
-
-        
-        //ClampPlayerPosition();//플레이어 이동제한
+        //if (InputManager.Instance.PausePressed)
+        //{
+        //    Debug.Log("GameController에서 Pause 감지!");
+        //    if (optionPanel == null) return;
+        //    optionPanel.SetActive(true);
+        //}
 
         // E 키 눌러서 상호작용
         if (Input.GetKeyDown(KeyCode.E) && randomEventObject != null)
@@ -58,6 +69,9 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (!canMove) return;
+        
+
         Vector2 input = ReadInput();//키입력 받음
         ApplyMovement(input);//이동 로직
     }
@@ -98,13 +112,7 @@ public class PlayerController : MonoBehaviour
                          * Time.deltaTime;
         transform.Translate(move, Space.World);
     }
-    //private void ClampPlayerPosition()//플레이어 이동제한
-    //{
-    //    Vector3 pos = transform.position;
-    //    pos.x = Mathf.Clamp(pos.x, minX, maxX);
-    //    pos.y = Mathf.Clamp(pos.y, minY, maxY);
-    //    transform.position = pos;
-    //}
+
     void OnTriggerEnter2D(Collider2D other)
     {
         Vector3 delta = Vector3.zero;
@@ -135,23 +143,25 @@ public class PlayerController : MonoBehaviour
         // 이동 벡터 결정
         Vector3 delta = isUp
             ? new Vector3(+6f, +6.5f, 0f)
-            : new Vector3(-6f, -6.5f, 0f);
+            : new Vector3(-6f, -8.5f, 0f);
 
         StartCoroutine(PauseMovement(3f));//정지 코루틴
+
         StartCoroutine(ScreenFader.Instance.FadeTeleport(() =>//화면전환 페이드아웃
         {
+            var zoneCollider = isUp ? upZoneCollider : downZoneCollider;
             // A) 플레이어 & 스포너 이동, 몬스터 초기화, 카메라 워프
-            PerformStairsTeleport(delta);
+            PerformStairsTeleport(delta, zoneCollider);
         }));
     }
 
-    private void PerformStairsTeleport(Vector3 delta)
+    private void PerformStairsTeleport(Vector3 delta, PolygonCollider2D nextZone)
     {
         // 1) 플레이어 이동
-        transform.position += delta;
+        transform.position += delta;//임시
 
         // 2) 스포너 위치 이동 및 Y 범위 업데이트
-        Vector3 yOffset = new Vector3(0f, delta.y, 0f);
+        Vector3 yOffset = new Vector3(0f, delta.y, 0f);//임시
         //minY += delta.y;
         //maxY += delta.y;
         cameraClamp.minPos.y += delta.y;
@@ -162,8 +172,18 @@ public class PlayerController : MonoBehaviour
         // 3) 몬스터 초기화
         ClearAllMonsters();
 
-        // 4) Cinemachine Warp 알림
         cinemachineCam.OnTargetObjectWarped(transform, delta);
+        // 4) Cinemachine Warp 알림
+        var confiner = cinemachineCam.GetComponent<CinemachineConfiner2D>();
+        if (confiner != null)
+        {
+            confiner.BoundingShape2D = nextZone;//카메라 콜라이더 변경
+            confiner.InvalidateBoundingShapeCache();
+        }
+        else
+        {
+            Debug.LogWarning("CinemachineConfiner2D를 찾을 수 없습니다!");
+        }
     }
     private IEnumerator StunRoutine(float duration)//애니메이션 코루틴
     {

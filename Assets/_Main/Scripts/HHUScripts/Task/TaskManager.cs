@@ -23,7 +23,6 @@ public class TaskManager : MonoBehaviour
                     taskList[i].Open();
                     break;
                 }
-
             }
         }
     }
@@ -36,7 +35,6 @@ public class TaskManager : MonoBehaviour
             {
                 return true; // 작업 중인 것이 있다면 ture
             }
-            
         }
         return false; //작업 없는 상태
     }

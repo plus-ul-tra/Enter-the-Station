@@ -25,7 +25,7 @@ public class ScreenFader : MonoBehaviour
     }
 
     /// 페이드아웃 → 액션 → 페이드인 순으로 실행합니다.
-    public IEnumerator FadeTeleport(System.Action action, float fadeDuration = 3f)
+    public IEnumerator FadeTeleport(System.Action action, float fadeDuration = 2f)
     {
         // 1) 페이드아웃
         yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
