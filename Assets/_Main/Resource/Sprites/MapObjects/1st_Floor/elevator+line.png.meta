@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 08f7d07bb6cd91c47867b968f3145b6f
+guid: cb0d7426f2bf623478cc2ba6f4cde7c1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3766042663834863746
-    second: b2_floor_0
+      213: -6722264024765363516
+    second: elevator_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: b2_floor_0
+      name: elevator_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2997
-        height: 438
+        width: 289
+        height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 288c7d279dba34430800000000000000
-      internalID: 3766042663834863746
+      spriteID: 4ca097d4c78b5b2a0800000000000000
+      internalID: -6722264024765363516
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      b2_floor_0: 3766042663834863746
+      elevator_0: -6722264024765363516
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
