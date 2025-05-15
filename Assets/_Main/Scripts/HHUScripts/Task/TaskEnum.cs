@@ -4,4 +4,5 @@ public enum KindOfTask
 {
     FixWire,
     ArrowMatch, // Ãß°¡
+    MapGuide,
 }
