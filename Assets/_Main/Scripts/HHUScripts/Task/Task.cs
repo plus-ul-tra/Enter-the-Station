@@ -8,6 +8,7 @@ public class Task : MonoBehaviour
     //[SerializeField]
     //protected float limitTime = 6.0f;
     //private float timer;
+    private PlayerController playerController;
 
     public virtual void InitGame() { } //초기화 방식은 Task마다 다름. 시작이 아닌 말그대로 초기화 시작시 불러져야 하는 것
     
@@ -15,11 +16,30 @@ public class Task : MonoBehaviour
         gameObject.transform.parent.gameObject.SetActive(true);
         gameObject.SetActive(true); //시작
         isOnTask = true;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
+        {
+            playerController = playerObject.GetComponent<PlayerController>();
+        }
+        else
+        {
+            Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다!");
+        }
+        playerController.canMove = false;
+        //++애니메이션
     }
     protected void Close() {
         //close 전에 성공 or 실패 효과 및 delay
         gameObject.transform.parent.gameObject.SetActive(false);
         gameObject.SetActive(false); //종료
         isOnTask = false;
+
+        if(playerController)
+        {
+            playerController.canMove = true;
+            playerController = null;
+        }
     }
 }
