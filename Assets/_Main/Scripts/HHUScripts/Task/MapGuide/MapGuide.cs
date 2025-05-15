@@ -42,7 +42,7 @@ public class MapGuide : Task
                     selectStartPoint = CreateNewWay(point);
                     ways.Add(selectStartPoint);
                     passedNodes.Add(point);
-                    lastConnectedNode = null;      
+                    lastConnectedNode = point;      
                 }
             }
             
@@ -59,12 +59,12 @@ public class MapGuide : Task
                 if (hit.collider != null) //충돌시
                 {
                     var node = hit.collider.GetComponentInParent<Node>();
-                    if (node != null && ! passedNodes.Contains(node))
+                    if (node != null && ! passedNodes.Contains(node) && lastConnectedNode.CanConnectTo(node))
                     {
-                        //Debug.Log("노드 충돌");
+                      
                         
                         selectStartPoint.ConnectNode(node);
-                        node.ConnectWire(selectStartPoint);
+                        //node.ConnectWire(selectStartPoint);
                         passedNodes.Add(node);
                         lastConnectedNode = node;
                         selectStartPoint = CreateNewWay(node);

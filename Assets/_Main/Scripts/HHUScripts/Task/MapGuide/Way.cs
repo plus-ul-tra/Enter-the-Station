@@ -23,7 +23,6 @@ public class Way : MonoBehaviour
         GameCanvas = FindAnyObjectByType<Canvas>();
     }
    
-    
     public void SetTarget(Vector3 targetPosition, float offset)
     {
         float angle = Vector2.SignedAngle(transform.position + Vector3.right - transform.position,
@@ -32,29 +31,15 @@ public class Way : MonoBehaviour
         way.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, angle));
         way.sizeDelta = new Vector2(distance * (1 / GameCanvas.transform.localScale.x), way.sizeDelta.y);
     }
-
-    //public void ResetTarget()
-    //{
-    //    way.localRotation = Quaternion.Euler(Vector3.zero);
-    //    way.sizeDelta = new Vector2(0.0f, way.sizeDelta.y);
-    //}
     public void ConnectNode(Node node)
     {
         if (connectedNode != null && connectedNode != node)
         {
-            connectedNode.DisconnectWire(this);
+            //connectedNode.DisconnectWire(this);
             connectedNode = null;
         }
 
         connectedNode = node;
     }
-    //public void DisconnectNode()
-    //{
-    //    if (connectedNode != null)
-    //    {
-    //        connectedNode.DisconnectWire(this);
-    //        connectedNode = null;
-    //    }
-    //    isConnected = false;
-    //}
+    
 }

@@ -5190,6 +5190,7 @@ GameObject:
   - component: {fileID: 1013765521}
   - component: {fileID: 1013765523}
   - component: {fileID: 1013765522}
+  - component: {fileID: 1013765524}
   m_Layer: 5
   m_Name: TaskUI
   m_TagString: Untagged
@@ -5256,6 +5257,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013765520}
   m_CullTransparentMesh: 1
+--- !u!114 &1013765524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013765520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d620afbf7f0aec48bbddb5e97a6f797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1027794272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1157217059939159090, guid: 738079e36baddff4b815e383abe20a38, type: 3}

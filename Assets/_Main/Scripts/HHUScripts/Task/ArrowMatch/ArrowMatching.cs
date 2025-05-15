@@ -54,7 +54,7 @@ public class ArrowMatching : Task
     {
        // arrowBlocks.Clear();
         matchIndex = 0;
-        for (int i=0; i< maxBlockCount-1; i++)
+        for (int i=0; i< maxBlockCount; i++)
         {
             //별로 좋은 방법은 아닌거 같은데
             int random = Random.Range(0, 4);
@@ -78,11 +78,11 @@ public class ArrowMatching : Task
     }
     private void checkSuccess()
     {
-        if(matchIndex == maxBlockCount-1)
+        if(matchIndex == maxBlockCount)
         {
             successCount++;
         }
-        if(matchIndex == maxBlockCount - 1 && successCount < maxSuccessCount)
+        if(matchIndex == maxBlockCount && successCount < maxSuccessCount)
         {
             ClearBlocks();
             SetBlock();

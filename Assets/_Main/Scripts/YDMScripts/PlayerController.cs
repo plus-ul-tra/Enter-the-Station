@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // --------------------------------------------------
     
     RandomEventObject randomEventObject;
+    Item item;
 
     void Awake()
     {
@@ -65,6 +66,12 @@ public class PlayerController : MonoBehaviour
         {
             randomEventObject.CompleteInteractEvent(); // 이벤트 실행
             randomEventObject = null; // 참조 초기화
+        }
+        if (Input.GetKeyDown(KeyCode.E) && item !=null)
+        {
+            item.Picked();
+            // 플레이어 들고 있는 아이템 -> UI 표시용
+            // 상태 업데이트로직 추가
         }
     }
     private void FixedUpdate()
@@ -130,6 +137,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("EventObject"))
         {
             randomEventObject = other.GetComponent<RandomEventObject>();
+        }
+        if (other.CompareTag("Item"))
+        {
+            item = other.GetComponent<Item>();
         }
     }
     private void HandleObstacleCollision()
