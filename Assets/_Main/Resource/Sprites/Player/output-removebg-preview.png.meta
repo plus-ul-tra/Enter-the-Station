@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3a9c4f5d7d8048241a777aa840e9c7cf
+guid: 315cb23519fbe7c478dd2cff8ff0388b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -301024757878305662
-    second: b2_stairs_0
+      213: 1420896778628528434
+    second: output-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 800
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: b2_stairs_0
+      name: output-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 355
-        height: 380
+        x: 28
+        y: 26
+        width: 290
+        height: 672
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 28cc01ed39b82dbf0800000000000000
-      internalID: -301024757878305662
+      spriteID: 23976a8871a08b310800000000000000
+      internalID: 1420896778628528434
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      output-removebg-preview_0: 1420896778628528434
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

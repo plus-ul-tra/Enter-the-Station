@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3b800cc437fde0c4e826d933be572b1b
+guid: 0f44d3e7fdea431468c1bf5a80383cb1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1463446100111776614
-    second: vendingmachine_white_0
+      213: -8896261469119600892
+    second: notice_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vendingmachine_white_0
+      name: notice_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 120
-        height: 191
+        x: 0
+        y: 0
+        width: 75
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a9428ee868bc0bbe0800000000000000
-      internalID: -1463446100111776614
+      spriteID: 407a12804512a8480800000000000000
+      internalID: -8896261469119600892
       vertices: []
       indices: 
       edges: []
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      notice_0: -8896261469119600892
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
