@@ -1,22 +1,28 @@
 fileFormatVersion: 2
-guid: 2dd04e917696c844fa0e2455040a6afc
+guid: 750aa0fe256f439489c402e738b111fb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8970858595910987574
-    second: Title Line_0
+      213: 1361045060741195963
+    second: SignArrow_0
   - first:
-      213: 9013169997724844838
-    second: Title Line_1
+      213: -818559051577314036
+    second: SignArrow_1
   - first:
-      213: 1398709084424000661
-    second: Title Line_2
+      213: -3250966706404508822
+    second: SignArrow_2
   - first:
-      213: 7839607830940683135
-    second: Title Line_3
+      213: -3255576743886286409
+    second: SignArrow_3
   - first:
-      213: 429808527106172409
-    second: Title Line_4
+      213: 1049308084705980799
+    second: SignArrow_4
+  - first:
+      213: -1978761731514173558
+    second: SignArrow_5
+  - first:
+      213: 8815087914994840852
+    second: SignArrow_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,128 +114,49 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Title Line_0
+      name: SignArrow_5
       rect:
         serializedVersion: 2
-        x: 123
-        y: 1343
-        width: 690
-        height: 89
+        x: 502
+        y: 183
+        width: 20
+        height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ac0577cf2ab118380800000000000000
-      internalID: -8970858595910987574
+      spriteID: a87f5f960b60a84e0800000000000000
+      internalID: -1978761731514173558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Title Line_1
+      name: SignArrow_6
       rect:
         serializedVersion: 2
-        x: 814
-        y: 1309
-        width: 159
-        height: 159
+        x: 489
+        y: 9
+        width: 355
+        height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 623099eeb56351d70800000000000000
-      internalID: 9013169997724844838
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Title Line_2
-      rect:
-        serializedVersion: 2
-        x: 984
-        y: 1251
-        width: 1063
-        height: 274
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 59454396086396310800000000000000
-      internalID: 1398709084424000661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Title Line_3
-      rect:
-        serializedVersion: 2
-        x: 2058
-        y: 1310
-        width: 159
-        height: 159
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f7b079549c1ebcc60800000000000000
-      internalID: 7839607830940683135
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Title Line_4
-      rect:
-        serializedVersion: 2
-        x: 2218
-        y: 1347
-        width: 689
-        height: 89
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9f5e893049cf6f500800000000000000
-      internalID: 429808527106172409
+      spriteID: 4153b1d11cb755a70800000000000000
+      internalID: 8815087914994840852
       vertices: []
       indices: 
       edges: []
@@ -238,7 +165,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3385d2d49bc18674797556b3fbd75b35
     internalID: 0
     vertices: []
     indices: 
@@ -248,11 +175,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Title Line_0: -8970858595910987574
-      Title Line_1: 9013169997724844838
-      Title Line_2: 1398709084424000661
-      Title Line_3: 7839607830940683135
-      Title Line_4: 429808527106172409
+      SignArrow_5: -1978761731514173558
+      SignArrow_6: 8815087914994840852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

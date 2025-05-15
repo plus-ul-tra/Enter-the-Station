@@ -15,7 +15,7 @@ public class ReachScope : BaseGauge
     {
         successImage.SetActive(false);
         failedImage.SetActive(false);
-        gauge.fillAmount = 0.0f;
+        gauge.fillAmount = 0.7f;
         time = 0.0f;
         closeTime = 0.0f;
 
