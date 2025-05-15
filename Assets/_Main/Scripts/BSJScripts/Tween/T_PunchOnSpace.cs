@@ -14,6 +14,8 @@ public class T_PunchOnSpace : MonoBehaviour
     public Vector3 punchStrength = new Vector3(0.3f, 0.3f, 0f);  // 얼마나 튀어나올지
     public float punchDuration = 0.3f;          // 애니메이션 지속 시간
 
+    private Tween punchTween;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -24,8 +26,8 @@ public class T_PunchOnSpace : MonoBehaviour
 
     private void PlayPunch()
     {
-        // 트윈 중복 방지 (필요에 따라 제거 가능)
-        targetRect.DOKill();
+        // 기존 트윈 중단
+        punchTween?.Kill();
 
         // 크기 초기화 (중첩 효과 방지, 부드럽게 돌아가게 하고 싶으면 DOScale 사용)
         targetRect.localScale = Vector3.one;
@@ -39,12 +41,18 @@ public class T_PunchOnSpace : MonoBehaviour
         instance.GetComponent<RectTransform>().anchoredPosition = new Vector2(randomX, randomY);
 
         // 펀치 애니메이션 실행
-        targetRect.DOPunchScale(punchStrength, punchDuration)
-                  .SetEase(Ease.OutBack)
-                  .OnComplete(() =>
-                  {
-                      // 애니메이션 끝나고 크기 리셋
-                      targetRect.localScale = Vector3.one;
-                  });
+        punchTween = targetRect.DOPunchScale(punchStrength, punchDuration)
+                               .SetEase(Ease.OutBack)
+                               .OnComplete(() =>
+                               {
+                                   // 애니메이션 끝나고 크기 리셋
+                                   targetRect.localScale = Vector3.one;
+                               });
+    }
+
+    private void OnDisable()
+    {
+        punchTween?.Kill();
+        punchTween = null;
     }
 }

@@ -17,6 +17,8 @@ public class T_StageStart : MonoBehaviour
     public float moveUpDuration = 2f;
     public float moveUpDistance = 50f;
 
+    private Sequence seq;
+
     private void Start()
     {
         uiCanvasGroup = startUI.GetComponent<CanvasGroup>();
@@ -47,10 +49,16 @@ public class T_StageStart : MonoBehaviour
         textRect.anchoredPosition = startPos - new Vector3(0, moveUpDistance, 0);
 
         // 트윈 재생
-        Sequence seq = DOTween.Sequence();
+        seq = DOTween.Sequence();
         seq.Join(textCanvasGroup.DOFade(1f, fadeDuration));
         seq.Join(textRect.DOAnchorPos(startPos, moveUpDuration).SetEase(Ease.OutCubic));
         seq.Append(uiCanvasGroup.DOFade(0f, fadeDuration));
         seq.OnComplete(() => startUI.SetActive(false));
+    }
+
+    private void OnDisable()
+    {
+        seq?.Kill();
+        seq = null;
     }
 }
