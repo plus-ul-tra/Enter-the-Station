@@ -4,16 +4,21 @@ using System.Threading;
 
 public class RandomEventSpawner : MonoBehaviour
 {
+    [Header("매니저")]
+    public StageManager stageManager;                   // 스테이지 매니저
     public TaskManager taskManager;                     // 미니게임 실행 매니저
+
+    [Header("화살표, 무전기")]
     public EventDirectionArrow eventDirectionArrow;     // 이벤트 화살표
     public SpeechBubble speechBubble;                   // 무전기 말풍선
 
+    [Header("돌발상황 오브젝트")]
     public List<RandomEventObject> randomEventList;     // 랜덤 돌발상황 업스케일 관리 리스트
     public List<RandomEventObject> createdEventList;    // 생성된 돌발상황 관리 리스트
 
     [Header("돌발상황 발생 주기(시간)")]
     [SerializeField]
-    private float eventSpawnTime = 15f;
+    private float eventSpawnTime = 16f;
     private float currentSpawnTimer = 0f;               // 현재 스폰 시간
 
     private void Start()
@@ -27,7 +32,7 @@ public class RandomEventSpawner : MonoBehaviour
         // 돌발상황 발생 주기 마다 이벤트 생성
         currentSpawnTimer += Time.deltaTime;
 
-        if(currentSpawnTimer >= eventSpawnTime)
+        if (currentSpawnTimer >= eventSpawnTime)
         {
             currentSpawnTimer -= eventSpawnTime;
 
@@ -44,6 +49,8 @@ public class RandomEventSpawner : MonoBehaviour
     /// <param name="eventPosition"></param>
     public void CreateRandomEventObject(Vector3 eventPosition)
     {
+        if (stageManager.playerCurHp <= 0) return;
+
         int randomIndex = Random.Range(0, randomEventList.Count);
 
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
@@ -71,6 +78,10 @@ public class RandomEventSpawner : MonoBehaviour
     {
         Debug.Log("이벤트 상호작용 성공 감지 : " + successEvent.name);
 
+        // 이벤트 해제 (누수 방지)
+        successEvent.onEventSuccess -= OnRandomEventSuccess;
+        successEvent.onEventFailed -= OnRandomEventInteractFailed;
+
         createdEventList.Remove(successEvent);
         eventDirectionArrow.RemoveArrow(successEvent);
         Destroy(successEvent.gameObject);
@@ -81,8 +92,13 @@ public class RandomEventSpawner : MonoBehaviour
     {
         Debug.Log("이벤트 상호작용 실패 감지 : " + failedEvent.name);
 
-        createdEventList.Remove(failedEvent);
-        eventDirectionArrow.RemoveArrow(failedEvent);
-        Destroy(failedEvent.gameObject);
+        // 이벤트 해제 (누수 방지)
+        failedEvent.onEventSuccess -= OnRandomEventSuccess;
+        failedEvent.onEventFailed -= OnRandomEventInteractFailed;
+
+        stageManager.DecreasePlayerHp();                // 플레이어 Hp 감소
+        createdEventList.Remove(failedEvent);           // 생성된 돌발상황 오브젝트 삭제
+        eventDirectionArrow.RemoveArrow(failedEvent);   // 추적하는 화살표 삭제
+        Destroy(failedEvent.gameObject);                // 오브젝트 파괴
     }
 }
