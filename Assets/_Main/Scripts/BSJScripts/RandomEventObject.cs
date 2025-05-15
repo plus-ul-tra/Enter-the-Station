@@ -19,7 +19,7 @@ public class RandomEventObject : MonoBehaviour
 
     private GameObject interactUI;
 
-    private TaskManager taskManager;
+    [HideInInspector] public TaskManager taskManager;
     private void Awake()
     {
         interactUI = transform.GetChild(0).gameObject;

@@ -16,7 +16,6 @@ public class FixWiring : Task
     private List<LeftWire> leftWires;
     [SerializeField]
     private List<RightWire> rightWires;
-
     private LeftWire selectWire;
 
     private void OnEnable()
@@ -50,7 +49,7 @@ public class FixWiring : Task
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //down 되어있는 동안은 선을 끌고 있다는 것
         {
 
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.right, 1.0f);

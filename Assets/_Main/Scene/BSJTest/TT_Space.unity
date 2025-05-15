@@ -683,6 +683,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 704796d18e6b6bf4db8bb80d43adddfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  spaceBar: {fileID: 0}
 --- !u!1 &879710011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRect: {fileID: 1680095323}
-  prefab: {fileID: 6382669941540049415, guid: 0188167352b18204ba85bb51b6243c8b, type: 3}
+  prefab: {fileID: 6382669941540049415, guid: a1caed803e0d4864bbcfff73fccd7619, type: 3}
   xRange: {x: -275, y: 275}
   yRange: {x: -150, y: 150}
   punchStrength: {x: 0.3, y: 0.3, z: 0}
