@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// 스페이스를 누를 때 실행되는 트윈입니다.
+/// </summary>
 public class T_PunchOnSpace : MonoBehaviour
 {
     public RectTransform targetRect;           // 대상 이미지 (Image의 RectTransform)

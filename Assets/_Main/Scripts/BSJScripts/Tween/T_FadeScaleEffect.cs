@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+/// <summary>
+/// 이미지가 커지면서 페이드 아웃 되는 트윈입니다.
+/// </summary>
 public class T_FadeScaleEffect : MonoBehaviour
 {
     public Image targetImage;       // 대상 이미지

@@ -3,6 +3,10 @@ using UnityEngine;
 public enum KindOfTask
 {
     FixWire,
-    ArrowMatch, // �߰�
+    ArrowMatch, // Ãß°¡
+    MaintainingGauge,
+    MovingCircle,
+    RythmGauge,
+    StackingGauge.
     MapGuide,
 }
