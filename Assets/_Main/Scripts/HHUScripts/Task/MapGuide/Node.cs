@@ -3,38 +3,47 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    [SerializeField]
+    protected List<Node> adjacentNodes = new List<Node>(); // 인접한 노드들
+
     private List<Way> connectedWires = new List<Way>();
-    public bool isConnected { get; private set; }
-    public void ConnectWire(Way startPoint)
+
+    public bool CanConnectTo(Node other)
     {
-        if (connectedWires.Contains(startPoint))
+        return adjacentNodes.Contains(other);
+    }
+
+    public void RegisterAdjacentNode(Node node)
+    {
+        if (!adjacentNodes.Contains(node))
         {
-            return;
-        }
-        connectedWires.Add(startPoint);
-        if (connectedWires.Count == 1)
-        {
-            
-            isConnected = true;
-        }
-        else
-        {
-            isConnected = false;
+            adjacentNodes.Add(node);
         }
     }
 
-    public void DisconnectWire(Way startPoint)
+    //public void ConnectWire(Way wire)
+    //{
+    //    if (!connectedWires.Contains(wire))
+    //    {
+    //        connectedWires.Add(wire);
+    //    }
+    //}
+
+    //public void DisconnectWire(Way wire)
+    //{
+    //    if (connectedWires.Contains(wire))
+    //    {
+    //        connectedWires.Remove(wire);
+    //    }
+    //}
+
+    //public void ClearAllConnections()
+    //{
+    //    connectedWires.Clear();
+    //}
+
+    public List<Node> GetAdjacentNodes()
     {
-        connectedWires.Remove(startPoint);
-        if (connectedWires.Count == 1)
-        {
-            
-            isConnected = true;
-        }
-        else
-        {
-            
-            isConnected = false;
-        }
+        return adjacentNodes;
     }
 }

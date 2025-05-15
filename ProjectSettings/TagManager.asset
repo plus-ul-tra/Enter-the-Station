@@ -13,6 +13,7 @@ TagManager:
   - Wall
   - Canvas
   - Option
+  - Item
   layers:
   - Default
   - TransparentFX
