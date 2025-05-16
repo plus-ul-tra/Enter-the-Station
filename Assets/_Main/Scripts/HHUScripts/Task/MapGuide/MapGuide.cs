@@ -97,7 +97,7 @@ public class MapGuide : Task
 
         if (selectStartPoint != null)
         {
-            selectStartPoint.SetTarget(Input.mousePosition, -10.0f);
+            selectStartPoint.SetTarget(Input.mousePosition, -15.0f);
         }
         CheckComplete();
     }
