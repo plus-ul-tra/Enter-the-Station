@@ -48,10 +48,10 @@ public class TurningKeyManager : Task
         { successImage.SetActive(true);
             Close();
         }
-        else if (clearNum < 2 && time >= 6.5f)
-        { failedImage.SetActive(true);
-            Close();
-        }
+        //else if (clearNum < 2 && time >= 6.5f)
+        //{ failedImage.SetActive(true);
+        //    Close();
+        //}
     }
     public void SetisClear()
     { isClear = true; }
