@@ -4,7 +4,8 @@ using DG.Tweening;
 using System.Collections;
 using System.Text;
 
-public enum SpeechKey{
+public enum SpeechKey
+{
     FALL,
     FALL_FAIL,
     SLEEP,
@@ -65,11 +66,14 @@ public class SpeechBubble : MonoBehaviour
         int randomSpeechIndex = 0;
         sb.Clear();
 
-        switch(speechKey)
+        switch (speechKey)
         {
+            case SpeechKey.FALL:
+                sb.Append("\"승객 추락 발생!\"");
+                break;
             case SpeechKey.FALL_FAIL:
                 randomSpeechIndex = Random.Range(0, 3);
-                switch(randomSpeechIndex)
+                switch (randomSpeechIndex)
                 {
                     case 0:
                         sb.Append("\"너 죽고싶어?\"");
@@ -81,6 +85,9 @@ public class SpeechBubble : MonoBehaviour
                         sb.Append("\"미쳤어?\"");
                         break;
                 }
+                break;
+            case SpeechKey.SLEEP:
+                sb.Append("\"취객 발생!\"");
                 break;
             case SpeechKey.SLEEP_FAIL:
                 randomSpeechIndex = Random.Range(0, 4);
@@ -100,6 +107,9 @@ public class SpeechBubble : MonoBehaviour
                         break;
                 }
                 break;
+            case SpeechKey.ELV:
+                sb.Append("\"엘리베이터 고장 발생!\"");
+                break;
             case SpeechKey.ELV_FAIL:
                 randomSpeechIndex = Random.Range(0, 3);
                 switch (randomSpeechIndex)
@@ -114,6 +124,9 @@ public class SpeechBubble : MonoBehaviour
                         sb.Append("\"그거 잇다 감전되겠다!\"");
                         break;
                 }
+                break;
+            case SpeechKey.CS:
+                sb.Append("\"진상 고객 발생!\"");
                 break;
             case SpeechKey.CS_FAIL:
                 randomSpeechIndex = Random.Range(0, 4);
@@ -133,6 +146,9 @@ public class SpeechBubble : MonoBehaviour
                         break;
                 }
                 break;
+            case SpeechKey.MAP:
+                sb.Append("\"승객 분이 길 물어보려고 부르잖냐!\"");
+                break;
             case SpeechKey.MAP_FAIL:
                 randomSpeechIndex = Random.Range(0, 2);
                 switch (randomSpeechIndex)
@@ -145,11 +161,20 @@ public class SpeechBubble : MonoBehaviour
                         break;
                 }
                 break;
+            case SpeechKey.ESC:
+                sb.Append("\"에스컬레이터 고장 발생\"");
+                break;
             case SpeechKey.ESC_FAIL:
                 sb.Append("\"그 열쇠로 문 여는 줄 알았네. 왜 계속 돌려?\"");
                 break;
+            case SpeechKey.HEART:
+                sb.Append("\"응급 상황 발생!\"");
+                break;
             case SpeechKey.HEART_FAIL:
                 sb.Append("\"그 상태로 놔두면 넌 구급차에 같이 실려가.\"");
+                break;
+            case SpeechKey.CSSLEEP:
+                sb.Append("\"진상 취객 발생!\"");
                 break;
             case SpeechKey.CSSLEEP_FAIL:
                 randomSpeechIndex = Random.Range(0, 2);

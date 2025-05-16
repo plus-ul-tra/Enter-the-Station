@@ -46,7 +46,7 @@ public class RandomEventSpawner : MonoBehaviour
 
     private int currentSequenceIndex = 0;       // 현재 선택된 zone 수열의 인덱스
     private int currentSequenceElement = 0;     // 현재 수열 내에서 몇 번째 위치인지
-    
+
     private struct SpawnPointData
     {
         public int zoneIndex;
@@ -141,7 +141,7 @@ public class RandomEventSpawner : MonoBehaviour
 
 
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
-        if(eventObject.TryGetComponent<RandomEventObject>(out RandomEventObject randomEvent))
+        if (eventObject.TryGetComponent<RandomEventObject>(out RandomEventObject randomEvent))
         {
             createdEventList.Add(randomEvent);
 
@@ -177,7 +177,19 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (randomEvent.task == KindOfTask.MovingCircle)
         {
-
+            speechBubble.PlaySpeechBubble(SpeechKey.CS);
+        }
+        else if (randomEvent.task == KindOfTask.RythmGauge)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.CSSLEEP);
+        }
+        else if (randomEvent.task == KindOfTask.MapGuide)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.MAP);
+        }
+        else if (randomEvent.task == KindOfTask.StackingGauge)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.FALL);
         }
     }
 
@@ -223,7 +235,7 @@ public class RandomEventSpawner : MonoBehaviour
     {
         int eventIndex = 0;
 
-        if(spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 0)
+        if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 0)
         {
             eventIndex = 7;
         }
@@ -231,7 +243,7 @@ public class RandomEventSpawner : MonoBehaviour
         {
             int randValue = Random.Range(0, 3);
 
-            switch(randValue)
+            switch (randValue)
             {
                 case 0:
                     eventIndex = 2;
