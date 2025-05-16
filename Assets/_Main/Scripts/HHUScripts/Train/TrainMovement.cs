@@ -35,7 +35,7 @@ public class TrainMovement : MonoBehaviour
         transform.position += Vector3.left * trainSpeed * Time.deltaTime;
 
         // 중간 지점에서 한 번만 멈춤
-        if (!hasPaused && transform.position.x < startPos.x - 25f)
+        if (!hasPaused && transform.position.x < startPos.x - 33f)
         {
             hasPaused = true;
             StartCoroutine(PauseAndAnimateDoors());
@@ -43,7 +43,7 @@ public class TrainMovement : MonoBehaviour
         }
 
         // 끝 지점 도달 시 리셋
-        if (transform.position.x < startPos.x - 45f)
+        if (transform.position.x < startPos.x - 70f)
         {
             transform.position = startPos;
             hasPaused = false;

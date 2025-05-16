@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
-using UnityEditor.Experimental.GraphView;
+
 public class MapGuide : Task
 {
     public Way way; // 이어줄 길
