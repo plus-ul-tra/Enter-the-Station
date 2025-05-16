@@ -33,7 +33,8 @@ public class T_StageStart : MonoBehaviour
             textCanvasGroup.alpha = 0f;
         }
 
-        StartStage();
+        // 10초 대기 후 시작 ( 인트로 컷신 8초 )
+        Invoke("StartStage", 10f);
     }
 
     /// <summary>
