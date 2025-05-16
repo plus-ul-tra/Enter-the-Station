@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 85ff4b04c1fb8174cabf7c8c4ceba838
+guid: c700338bdbb41d04bb4ece7aae507b5f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3396297909463405701
-    second: train_first_car_0
+      213: 4369572136041557648
+    second: title_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: train_first_car_0
+      name: title_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 1094
-        height: 352
-      alignment: 9
-      pivot: {x: 0.5, y: 0.07}
+        x: 0
+        y: 0
+        width: 1562
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7b2803bb0dedd0d0800000000000000
-      internalID: -3396297909463405701
+      spriteID: 09ea33de4b6d3ac30800000000000000
+      internalID: 4369572136041557648
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 84604a73e4004194686356480ad70559
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      train_first_car_0: -3396297909463405701
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 89cdaa305bfcef741b173ffa7fc01e0d
+guid: a6bfccc1785559748bc25e04b292012a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3755169886223635564
-    second: Train2_0
+      213: 3794550611322748858
+    second: play_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.49869433, y: 0.027661549}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Train2_0
+      name: play_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1272
-        height: 373
+        width: 370
+        height: 127
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c649a93ad1b0d1430800000000000000
-      internalID: 3755169886223635564
+      spriteID: abf32263da3f8a430800000000000000
+      internalID: 3794550611322748858
       vertices: []
       indices: 
       edges: []
@@ -125,8 +125,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Train2_0: 3755169886223635564
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -33,7 +33,8 @@ public class T_StageStart : MonoBehaviour
             textCanvasGroup.alpha = 0f;
         }
 
-        StartStage();
+        Invoke("StartStage", 10f);
+        //StartStage();
     }
 
     /// <summary>
