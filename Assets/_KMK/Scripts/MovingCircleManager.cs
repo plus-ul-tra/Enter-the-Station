@@ -42,22 +42,25 @@ public class MovingCircleManager : Task
             {
                 SuccessImage.SetActive(true);
                 isClose = true;
+                Close();
             }
 
             else if (!isSuccess)
             {
                 FailedImage.SetActive(true);
                 isClose = true;
+                Close();
             }
         }
         if (time >= 6.5f && !isSuccess)
         {
             FailedImage.SetActive(true);
             isClose = true;
+            Close();
         }
 
         if (isClose) { SetAllStop.Invoke(); closeTime += Time.deltaTime; }
-        if (closeTime >= 1.0f) { Close(); }
+        //if (closeTime >= 1.0f) { Close(); }
     }
 
     public void SetSuccess() { isSuccess = true; }
