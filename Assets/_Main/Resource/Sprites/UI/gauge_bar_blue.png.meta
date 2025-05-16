@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gauge_bar_blue_0: 1727748478552403192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
