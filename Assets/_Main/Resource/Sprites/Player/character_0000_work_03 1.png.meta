@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 85ff4b04c1fb8174cabf7c8c4ceba838
+guid: 53e627e5f89606a42ad829b15ab10f01
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3396297909463405701
-    second: train_first_car_0
+      213: 4374135929807675531
+    second: character_0000_work_03_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 800
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: train_first_car_0
+      name: character_0000_work_03_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 1094
-        height: 352
+        x: 0
+        y: 0
+        width: 625
+        height: 754
       alignment: 9
-      pivot: {x: 0.5, y: 0.07}
+      pivot: {x: 0.5, y: 0.08}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7b2803bb0dedd0d0800000000000000
-      internalID: -3396297909463405701
+      spriteID: b80a577f37d04bc30800000000000000
+      internalID: 4374135929807675531
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 84604a73e4004194686356480ad70559
+    spriteID: 5e718c332f156f446b80d91dad4795a7
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      train_first_car_0: -3396297909463405701
+      character_0000_work_03_0: 4374135929807675531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

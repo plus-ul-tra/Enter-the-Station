@@ -8,6 +8,7 @@ public class Task : MonoBehaviour
     //protected float limitTime = 6.0f;
     //private float timer;
     private PlayerController playerController;
+    private PlayerAnimator playerAnimator;
     private UIAction action;
 
     public virtual void InitGame() { } //초기화 방식은 Task마다 다름. 시작이 아닌 말그대로 초기화 시작시 불러져야 하는 것
@@ -19,7 +20,6 @@ public class Task : MonoBehaviour
         isOnTask = true;
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-
         if (playerObject != null)
         {
             playerController = playerObject.GetComponent<PlayerController>();
@@ -32,6 +32,28 @@ public class Task : MonoBehaviour
         //++애니메이션
     }
     protected void Close() {
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            playerAnimator = playerObject.GetComponent<PlayerAnimator>();
+        }
+        else
+        {
+            Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다!");
+        }
+
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetStunned(false);
+            playerAnimator.SetMoved(false);
+            playerAnimator.SetMap(false);
+            playerAnimator.SetClear(false);
+            playerAnimator.SetFail(false);
+            playerAnimator.SetWork(false);
+            playerAnimator.SetFight(false);
+        }
+
         //close 전에 성공 or 실패 효과 및 delay
         Debug.Log("Call Close");
         action = gameObject.transform.parent.gameObject.GetComponent<UIAction>();
