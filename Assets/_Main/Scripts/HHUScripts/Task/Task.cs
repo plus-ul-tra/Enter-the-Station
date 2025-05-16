@@ -52,6 +52,7 @@ public class Task : MonoBehaviour
             playerAnimator.SetFail(false);
             playerAnimator.SetWork(false);
             playerAnimator.SetFight(false);
+            playerAnimator.SetSitting(false);
         }
 
         //close 전에 성공 or 실패 효과 및 delay
