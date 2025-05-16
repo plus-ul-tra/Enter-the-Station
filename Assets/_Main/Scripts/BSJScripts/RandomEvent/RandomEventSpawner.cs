@@ -21,10 +21,44 @@ public class RandomEventSpawner : MonoBehaviour
     private float eventSpawnTime = 16f;
     private float currentSpawnTimer = 0f;               // 현재 스폰 시간
 
+    // --------------------------------------------------
+
+    [Header("zone 스폰 포인트 들")]
+    public List<Transform> zoneSpawnPoint_01;
+    public List<Transform> zoneSpawnPoint_02;
+    public List<Transform> zoneSpawnPoint_03;
+    public List<Transform> zoneSpawnPoint_04;
+    public List<Transform> zoneSpawnPoint_05;
+    public List<Transform> zoneSpawnPoint_06;
+
+    // zone 수열 리스트로 정의
+    private int[,] randomSequences = new int[,]
+    {
+        {1, 3, 5, 2, 4, 6},  // zone 수열1
+        {1, 3, 6, 4, 2, 5},  // zone 수열2
+        {1, 4, 2, 5, 3, 6},  // zone 수열3
+        {1, 4, 6, 3, 5, 2},  // zone 수열4
+        {2, 5, 3, 1, 4, 6},  // zone 수열5
+        {2, 5, 3, 6, 4, 1},  // zone 수열6
+        {3, 1, 5, 2, 6, 4},  // zone 수열7
+        {3, 5, 2, 6, 4, 1},  // zone 수열8
+    };
+
+    private int currentSequenceIndex = 0;       // 현재 선택된 zone 수열의 인덱스
+    private int currentSequenceElement = 0;     // 현재 수열 내에서 몇 번째 위치인지
+    
+    private struct SpawnPointData
+    {
+        public int zoneIndex;
+        public int spawnPoint;
+    }
+    private SpawnPointData spawnPointData;       // 현재 존의 몇 번째 스폰 포인트 인지?
+
     private void Start()
     {
-        // 테스트 : 시작할 때 몇 초 후에 돌발상황 발생할 것인지?
+        // TODO : 오프닝 컷신 끝나고 몇 초후에 시작하도록 설정
         currentSpawnTimer = 10f;
+        SelectRandomEventZone();
     }
 
     private void Update()
@@ -36,10 +70,55 @@ public class RandomEventSpawner : MonoBehaviour
         {
             currentSpawnTimer -= eventSpawnTime;
 
-            // TODO : 테스트용 랜덤 스폰 나중에 변경해야함.
-            // 맵 크기 테스트용
-            Vector3 randomPosition = new Vector3(Random.Range(-10, 7), Random.Range(-4.5f, -1f), 0);
-            CreateRandomEventObject(randomPosition);
+            // 현재 수열에서 위치 가져오기
+            int zoneNumber = randomSequences[currentSequenceIndex, currentSequenceElement];
+            spawnPointData.zoneIndex = zoneNumber;
+
+            // zoneNumber 기반으로 위치 정하기 (예: zoneNumber에 따라 미리 정의된 위치 사용)
+            Transform selectSpawnPoint;
+            switch (zoneNumber)
+            {
+                case 1: // zone 1
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_01.Count);
+                    selectSpawnPoint = zoneSpawnPoint_01[spawnPointData.spawnPoint];
+                    break;
+                case 2: // zone 2
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_02.Count);
+                    selectSpawnPoint = zoneSpawnPoint_02[spawnPointData.spawnPoint];
+                    break;
+                case 3: // zone 3
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_03.Count);
+                    selectSpawnPoint = zoneSpawnPoint_03[spawnPointData.spawnPoint];
+                    break;
+                case 4: // zone 4
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_04.Count);
+                    selectSpawnPoint = zoneSpawnPoint_04[spawnPointData.spawnPoint];
+                    break;
+                case 5: // zone 5
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_05.Count);
+                    selectSpawnPoint = zoneSpawnPoint_05[spawnPointData.spawnPoint];
+                    break;
+                case 6: // zone 6
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_06.Count);
+                    selectSpawnPoint = zoneSpawnPoint_06[spawnPointData.spawnPoint];
+                    break;
+                default:
+                    spawnPointData.spawnPoint = Random.Range(0, zoneSpawnPoint_01.Count);
+                    selectSpawnPoint = zoneSpawnPoint_01[spawnPointData.spawnPoint];
+                    break;
+            }
+
+            // 랜덤 이벤트 오브젝트 생성
+            CreateRandomEventObject(selectSpawnPoint.position);
+
+            // 다음 step으로 이동
+            currentSequenceElement++;
+
+            // 수열 끝까지 다 돌면 다시 랜덤 수열 선택
+            if (currentSequenceElement >= randomSequences.GetLength(1))
+            {
+                SelectRandomEventZone();
+            }
         }
     }
 
@@ -51,7 +130,16 @@ public class RandomEventSpawner : MonoBehaviour
     {
         if (stageManager.playerCurHp <= 0) return;
 
-        int randomIndex = Random.Range(0, randomEventList.Count);
+        // 랜덤 이벤트 선택하기
+        int randomIndex = SelectRandomEventIndex() - 1;
+
+        // 디버그 찍어보기
+        Debug.Log($"현재 수열 : {currentSequenceIndex}");
+        Debug.Log($"현재 수열의 인덱스 : {currentSequenceElement}");
+        Debug.Log($"현재 존 : {spawnPointData.zoneIndex}");
+        Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
+        Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
+
 
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
         if(eventObject.TryGetComponent<RandomEventObject>(out RandomEventObject randomEvent))
@@ -100,5 +188,363 @@ public class RandomEventSpawner : MonoBehaviour
         createdEventList.Remove(failedEvent);           // 생성된 돌발상황 오브젝트 삭제
         eventDirectionArrow.RemoveArrow(failedEvent);   // 추적하는 화살표 삭제
         Destroy(failedEvent.gameObject);                // 오브젝트 파괴
+    }
+
+    // 랜덤 이벤트 생성 존을 선택한다.
+    private void SelectRandomEventZone()
+    {
+        // 랜덤 수열 중 하나 선택
+        currentSequenceIndex = Random.Range(0, randomSequences.GetLength(0));
+        currentSequenceElement = 0; // 수열의 처음부터 시작
+    }
+
+    // 랜덤 이벤트의 인덱스를 선택한다.
+    private int SelectRandomEventIndex()
+    {
+        int eventIndex = 0;
+
+        if(spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 0)
+        {
+            eventIndex = 7;
+        }
+        else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 1)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch(randValue)
+            {
+                case 0:
+                    eventIndex = 2;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                case 2:
+                    eventIndex = 8;
+                    break;
+                default:
+                    eventIndex = 2;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 2)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 2;
+                    break;
+                case 1:
+                    eventIndex = 3;
+                    break;
+                case 2:
+                    eventIndex = 6;
+                    break;
+                default:
+                    eventIndex = 2;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 3)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 5;
+                    break;
+                case 1:
+                    eventIndex = 6;
+                    break;
+                case 2:
+                    eventIndex = 9;
+                    break;
+                default:
+                    eventIndex = 5;
+                    break;
+            }
+        }
+
+        else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 0)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 2;
+                    break;
+                case 1:
+                    eventIndex = 6;
+                    break;
+                default:
+                    eventIndex = 2;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 1)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 5;
+                    break;
+                case 1:
+                    eventIndex = 6;
+                    break;
+                default:
+                    eventIndex = 5;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 2)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 2;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                case 2:
+                    eventIndex = 9;
+                    break;
+                default:
+                    eventIndex = 2;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 3)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 2;
+                    break;
+                case 1:
+                    eventIndex = 6;
+                    break;
+                default:
+                    eventIndex = 2;
+                    break;
+            }
+        }
+
+        else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 0)
+        {
+            eventIndex = 4;
+        }
+        else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 1)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 5;
+                    break;
+                case 1:
+                    eventIndex = 6;
+                    break;
+                default:
+                    eventIndex = 5;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 2)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 2;
+                    break;
+                case 1:
+                    eventIndex = 6;
+                    break;
+                case 2:
+                    eventIndex = 8;
+                    break;
+                default:
+                    eventIndex = 2;
+                    break;
+            }
+        }
+
+        else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 0)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 1)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                case 2:
+                    eventIndex = 9;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 2)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                case 2:
+                    eventIndex = 8;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 3)
+        {
+            eventIndex = 1;
+        }
+
+        else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 0)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 1)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                case 2:
+                    eventIndex = 9;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 2)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 8;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 3)
+        {
+            eventIndex = 1;
+        }
+
+        else if (spawnPointData.zoneIndex == 6 && spawnPointData.spawnPoint == 0)
+        {
+            int randValue = Random.Range(0, 3);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 5;
+                    break;
+                case 2:
+                    eventIndex = 8;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 6 && spawnPointData.spawnPoint == 1)
+        {
+            int randValue = Random.Range(0, 2);
+
+            switch (randValue)
+            {
+                case 0:
+                    eventIndex = 3;
+                    break;
+                case 1:
+                    eventIndex = 9;
+                    break;
+                default:
+                    eventIndex = 3;
+                    break;
+            }
+        }
+        else if (spawnPointData.zoneIndex == 6 && spawnPointData.spawnPoint == 2)
+        {
+            eventIndex = 1;
+        }
+
+        return eventIndex;
     }
 }
