@@ -6,7 +6,7 @@ public class TrainMovement : MonoBehaviour
     [Header("기차 이동 속도")]
     public float trainSpeed = 1f;
     [Header("멈춤 시간 (초)")]
-    public float pauseDuration = 2f;
+    public float pauseDuration = 4f;
 
     [Header("왼쪽 문들")]
     [SerializeField] private GameObject[] leftDoor;
