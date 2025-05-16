@@ -156,7 +156,28 @@ public class RandomEventSpawner : MonoBehaviour
             eventDirectionArrow.CreateArrow(randomEvent);
 
             // 富浅急 积己
-            speechBubble.PlaySpeechBubble();
+            CreateSpeech(randomEvent);
+        }
+    }
+
+    // 富浅急 积己
+    private void CreateSpeech(RandomEventObject randomEvent)
+    {
+        if (randomEvent.task == KindOfTask.FixWire)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.ELV);
+        }
+        else if (randomEvent.task == KindOfTask.ArrowMatch)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.SLEEP);
+        }
+        else if (randomEvent.task == KindOfTask.MaintainingGauge)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.HEART);
+        }
+        else if (randomEvent.task == KindOfTask.MovingCircle)
+        {
+
         }
     }
 
