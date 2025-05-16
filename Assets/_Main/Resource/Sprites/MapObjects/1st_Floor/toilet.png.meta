@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: a7e4e16e58ff9744cb12157ab6efae17
+guid: a3c2745eeeb5bbd41b07e0888cbc9905
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2839898442314059692
-    second: b1_stairs_with_railing_0
+      213: -8243884347342347663
+    second: toilet_0
+  - first:
+      213: -4879703352707559730
+    second: toilet_1
+  - first:
+      213: -1767755706354810716
+    second: toilet_2
+  - first:
+      213: 8784545413129680212
+    second: toilet_3
+  - first:
+      213: -980263191578305854
+    second: toilet_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,23 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: b1_stairs_with_railing_0
+      name: toilet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 528
-        height: 290
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5931776}
+        y: 0
+        width: 411
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4507fa3c967a698d0800000000000000
-      internalID: -2839898442314059692
+      spriteID: 172a1433dd6d79d80800000000000000
+      internalID: -8243884347342347663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toilet_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 0
+        width: 135
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ece459c87afc74cb0800000000000000
+      internalID: -4879703352707559730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toilet_2
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 0
+        width: 134
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a04d011d8ba777e0800000000000000
+      internalID: -1767755706354810716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toilet_3
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 170
+        width: 32
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 455b1eeb289f8e970800000000000000
+      internalID: 8784545413129680212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toilet_4
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 79
+        width: 36
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ca959722d76562f0800000000000000
+      internalID: -980263191578305854
       vertices: []
       indices: 
       edges: []
@@ -125,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 92c2dab31843d0b449c6047079151614
+    spriteID: 6c1ba31eb9a061a43a314f07d481cd72
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      b1_stairs_with_railing_0: -2839898442314059692
+      toilet_0: -8243884347342347663
+      toilet_1: -4879703352707559730
+      toilet_2: -1767755706354810716
+      toilet_3: 8784545413129680212
+      toilet_4: -980263191578305854
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

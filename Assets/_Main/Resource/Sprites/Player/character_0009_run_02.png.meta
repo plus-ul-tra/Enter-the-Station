@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a7e4e16e58ff9744cb12157ab6efae17
+guid: 6cb2b62837a55084780ae6d1a23655fb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2839898442314059692
-    second: b1_stairs_with_railing_0
+      213: -1674075665884293321
+    second: character_0009_run_02_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 800
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: b1_stairs_with_railing_0
+      name: character_0009_run_02_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 528
-        height: 290
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5931776}
+        y: 0
+        width: 680
+        height: 792
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4507fa3c967a698d0800000000000000
-      internalID: -2839898442314059692
+      spriteID: 73757df2d0d74c8e0800000000000000
+      internalID: -1674075665884293321
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 92c2dab31843d0b449c6047079151614
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      b1_stairs_with_railing_0: -2839898442314059692
+      character_0009_run_02_0: -1674075665884293321
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

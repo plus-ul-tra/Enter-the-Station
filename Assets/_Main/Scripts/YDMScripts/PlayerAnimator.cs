@@ -20,4 +20,5 @@ public class PlayerAnimator : MonoBehaviour
         //TODO : 몬스터 충돌 시 기절
         anim.SetBool("Move", move);
     }
+
 }
