@@ -8,6 +8,7 @@ public class Reach100 : BaseGauge
 
     void OnEnable()
     {
+        Debug.Log("chchchc");
         InitGame();
     }
     public override void InitGame()
@@ -37,21 +38,23 @@ public class Reach100 : BaseGauge
                 {
                     isFilled = true;
                 }
-                Debug.Log(isFilled);
-                Debug.Log(time);
+                //Debug.Log(isFilled);
+                //Debug.Log(time);
             }
             else if (isFilled && time <= 6.5f)
             {
-                successImage.SetActive(true);
+                //successImage.SetActive(true);
                 isClose = true;
+                Close();
             }
             else if (!isFilled && time >= 6.5f)
             {
-                failedImage.SetActive(true);
+                //failedImage.SetActive(true);
                 isClose = true;
+                Close();
             }
         }
-        if (isClose) { closeTime += Time.deltaTime; }
-        if (closeTime >= 1.0f) { Close(); }
+        
+       
     }
 }
