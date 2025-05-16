@@ -40,6 +40,7 @@ public class ReachAim : BaseGauge
                 if (gauge.fillAmount == 1.0f)
                 {
                     isOver = true;
+                    
                 }
             }
             else if (!isReached)
@@ -51,22 +52,32 @@ public class ReachAim : BaseGauge
         }
         else if (isOver)
         {
+            Close();
             successImage.SetActive(true);
             onResult.Invoke();
-            isClose = true;
-            closeTime += Time.deltaTime;
+
+            if (!isClose)
+            {
+                isClose = true;
+                Close();
+            }
         }
         else if (!isOver && time >= 6.5f || gauge.fillAmount == 0.0f)
         {
+            Close();
             failedImage.SetActive(true);
             onResult.Invoke();
-            isClose = true;
-            closeTime += Time.deltaTime;
+
+            if(!isClose)
+            {
+                isClose = true;
+                Close();
+            }
+
         }
 
-        if (isClose && closeTime >= 1.0f) { Close(); }
 
-        if (time <= 6.5f && !isOver) // ½Ã°£ ¿À¹ÙµÇÁö ¾Ê´Â ÇÑ °è¼Ó °ÔÀÌÁö °¨¼Ò
+        if (time <= 6.5f && !isOver) // ì‹œê°„ ì˜¤ë°”ë˜ì§€ ì•ŠëŠ” í•œ ê³„ì† ê²Œì´ì§€ ê°ì†Œ
         {
             SubGauge();      
         }

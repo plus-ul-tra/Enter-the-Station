@@ -55,6 +55,7 @@ public class Task : MonoBehaviour
         }
 
         //close 전에 성공 or 실패 효과 및 delay
+        Debug.Log("Call Close");
         action = gameObject.transform.parent.gameObject.GetComponent<UIAction>();
         action.HideAction(gameObject);
        // gameObject.SetActive(false); //종료

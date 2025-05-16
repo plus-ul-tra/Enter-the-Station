@@ -2,8 +2,8 @@ using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
-/// ½ºÅ×ÀÌÁö ÀüÈ¯ µÉ ¶§ ³ª¿À´Â ÅØ½ºÆ® Æ®À©ÀÔ´Ï´Ù.
-/// ÆäÀÌµå ÀÎ µÇ¸é¼­ À§·Î ¶°¿À¸£´Â ´À³¦
+/// ìŠ¤í…Œì´ì§€ ì „í™˜ ë  ë•Œ ë‚˜ì˜¤ëŠ” í…ìŠ¤íŠ¸ íŠ¸ìœˆì…ë‹ˆë‹¤.
+/// í˜ì´ë“œ ì¸ ë˜ë©´ì„œ ìœ„ë¡œ ë– ì˜¤ë¥´ëŠ” ëŠë‚Œ
 /// </summary>
 public class T_StageStart : MonoBehaviour
 {
@@ -33,23 +33,23 @@ public class T_StageStart : MonoBehaviour
             textCanvasGroup.alpha = 0f;
         }
 
+        // 10ì´ˆ ëŒ€ê¸° í›„ ì‹œì‘ ( ì¸íŠ¸ë¡œ ì»·ì‹  8ì´ˆ )
         Invoke("StartStage", 10f);
-        //StartStage();
     }
 
     /// <summary>
-    /// ½ºÅ×ÀÌÁö ÀüÈ¯ µÉ ¶§ ³ª¿À´Â ÅØ½ºÆ® Æ®À©À» ½ÇÇàÇÏ´Â ÇÔ¼ö
+    /// ìŠ¤í…Œì´ì§€ ì „í™˜ ë  ë•Œ ë‚˜ì˜¤ëŠ” í…ìŠ¤íŠ¸ íŠ¸ìœˆì„ ì‹¤í–‰í•˜ëŠ” í•¨ìˆ˜
     /// </summary>
     public void StartStage()
     {
-        // ½ºÅ×ÀÌÁö ½ÃÀÛ UI È°¼ºÈ­
+        // ìŠ¤í…Œì´ì§€ ì‹œì‘ UI í™œì„±í™”
         startUI.SetActive(true);
 
-        // ¾Æ·¡·Î À§Ä¡½ÃÅ² ÈÄ ½ÃÀÛ
+        // ì•„ë˜ë¡œ ìœ„ì¹˜ì‹œí‚¨ í›„ ì‹œì‘
         Vector3 startPos = textRect.anchoredPosition;
         textRect.anchoredPosition = startPos - new Vector3(0, moveUpDistance, 0);
 
-        // Æ®À© Àç»ı
+        // íŠ¸ìœˆ ì¬ìƒ
         seq = DOTween.Sequence();
         seq.Join(textCanvasGroup.DOFade(1f, fadeDuration));
         seq.Join(textRect.DOAnchorPos(startPos, moveUpDuration).SetEase(Ease.OutCubic));

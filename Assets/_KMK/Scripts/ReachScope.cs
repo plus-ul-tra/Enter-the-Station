@@ -43,19 +43,21 @@ public class ReachScope : BaseGauge
             {
                 successImage.SetActive(true);
                 isClose = true;
+                Close();
             }
             else if (!isReached && time >= 6.5f)
             {
                 failedImage.SetActive(true);
                 isClose = true;
+                Close();
             }
         }
         colliderPosY = gaugeCollider.offset.y * 2 * gauge.fillAmount; // 게이지 콜라이더 y좌표 움직임
         movingGaugeCollider.transform.localPosition = new Vector3(0, -colliderPosY, 0); // '-'를 안붙혀주면 콜라이더가 반대로 가는데 이걸 이해할 수가 없드아..
         if (gauge.fillAmount >= 1.0f) { failedImage.SetActive(true); isClose = true; } // 게이지가 100%에 도달해도 실패!
 
-        if (isClose) { closeTime += Time.deltaTime; }
-        if (closeTime >= 1.0f) { Close(); }
+        //if (isClose) { closeTime += Time.deltaTime; }
+        //if (closeTime >= 1.0f) { Close(); }
     }
 
     public void SetIsReached()
