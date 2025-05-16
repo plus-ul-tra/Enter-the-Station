@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "escalator-key_insert - \uBCF5\uC0AC\uBCF8_0": 1568323565120577930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
