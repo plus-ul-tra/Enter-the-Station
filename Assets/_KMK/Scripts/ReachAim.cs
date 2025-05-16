@@ -53,18 +53,25 @@ public class ReachAim : BaseGauge
         {
             successImage.SetActive(true);
             onResult.Invoke();
-            isClose = true;
-            closeTime += Time.deltaTime;
+
+            if (!isClose)
+            {
+                isClose = true;
+                Close();
+            }
         }
         else if (!isOver && time >= 6.5f || gauge.fillAmount == 0.0f)
         {
             failedImage.SetActive(true);
             onResult.Invoke();
-            isClose = true;
-            closeTime += Time.deltaTime;
-        }
 
-        if (isClose && closeTime >= 1.0f) { Close(); }
+            if(!isClose)
+            {
+                isClose = true;
+                Close();
+            }
+
+        }
 
         if (time <= 6.5f && !isOver) // 시간 오바되지 않는 한 계속 게이지 감소
         {

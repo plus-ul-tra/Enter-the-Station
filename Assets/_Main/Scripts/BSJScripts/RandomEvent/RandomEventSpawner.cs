@@ -18,7 +18,7 @@ public class RandomEventSpawner : MonoBehaviour
 
     [Header("돌발상황 발생 주기(시간)")]
     [SerializeField]
-    private float eventSpawnTime = 16f;
+    private float eventSpawnTime = 15f;
     private float currentSpawnTimer = 0f;               // 현재 스폰 시간
 
     // --------------------------------------------------
@@ -56,8 +56,7 @@ public class RandomEventSpawner : MonoBehaviour
 
     private void Start()
     {
-        // TODO : 오프닝 컷신 끝나고 몇 초후에 시작하도록 설정
-        currentSpawnTimer = 10f;
+        // TODO : 오프닝 컷신 끝나고 몇 초후에 시작하도록 설정 (10초여서 그냥 그대로 실행해도됨)
         SelectRandomEventZone();
     }
 
