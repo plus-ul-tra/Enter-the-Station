@@ -42,11 +42,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _HoleRadius: 0
+    - _HoleRadius: 2
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _HoleCenter: {r: 0.5, g: 0.55357146, b: 0, a: 0}
+    - _HoleCenter: {r: 0.13816288, g: 1.480608, b: 0, a: 0}
     - _RectAspect: {r: 1.7777778, g: 1, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
