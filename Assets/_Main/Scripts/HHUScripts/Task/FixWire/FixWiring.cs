@@ -49,6 +49,17 @@ public class FixWiring : Task
     }
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer >= limitTime)
+        {
+            failedImage.SetActive(true);
+            Close();
+            timer = 0.0f;
+            return;
+
+            
+        }
+
         if (Input.GetMouseButtonDown(0)) //down 되어있는 동안은 선을 끌고 있다는 것
         {
 
@@ -75,7 +86,7 @@ public class FixWiring : Task
                         var right = hit.collider.GetComponentInParent<RightWire>();
                         if (right != null)
                         {
-                            selectWire.SetTarget(hit.transform.position, 50.0f);
+                            selectWire.SetTarget(hit.transform.position, -100.0f);
                             selectWire.ConnectWire(right);
                             right.ConnectWire(selectWire);
                             selectWire = null;
@@ -95,7 +106,7 @@ public class FixWiring : Task
 
         if (selectWire != null)
         {
-            selectWire.SetTarget(Input.mousePosition, 15.0f);
+            selectWire.SetTarget(Input.mousePosition, -100.0f);
         }
     }
 
@@ -113,11 +124,15 @@ public class FixWiring : Task
         if (isAllComplete)
         {
             // 성공
+            successImage.SetActive(true);
             Close();
         }
     }
     public override void InitGame()
     {
+        timer = 0.0f;
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
         for (int i = 0; i < leftWires.Count; i++)
         {
             leftWires[i].ResetTarget();

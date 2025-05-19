@@ -23,16 +23,6 @@ public class Item : MonoBehaviour
             Destroy(gameObject); // ¶Ç´Â Ç®¸µ ¹ÝÈ¯
         });
     }
-    //private void StartBlinking()
-    //{
-    //    float blinkDuration = lifeTime - blinkStart;
-
-    //    // DOTween Sequence·Î ±ôºýÀÓ ºóµµ Áõ°¡
-    //    blinkTween = DOTween.To(() => 0.5f, interval =>
-    //    {
-    //        sprite.DOFade(0, interval / 2f).SetLoops(2, LoopType.Yoyo);
-    //    }, 0.5f, blinkDuration).SetEase(Ease.Linear);
-    //}
     private void StartBlinking()
     {
         float totalBlinkTime = lifeTime - blinkStart;

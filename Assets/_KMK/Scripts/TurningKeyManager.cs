@@ -4,8 +4,6 @@ using UnityEngine.Events;
 public class TurningKeyManager : Task
 {
     public UnityEvent Initial;
-    public GameObject successImage;
-    public GameObject failedImage;
     public GameObject firstScene;
     public GameObject secondScene;
     float time;
@@ -48,10 +46,10 @@ public class TurningKeyManager : Task
         { successImage.SetActive(true);
             Close();
         }
-        else if (clearNum < 2 && time >= 6.5f)
-        { failedImage.SetActive(true);
-            Close();
-        }
+        //else if (clearNum < 2 && time >= 6.5f)
+        //{ failedImage.SetActive(true);
+        //    Close();
+        //}
     }
     public void SetisClear()
     { isClear = true; }

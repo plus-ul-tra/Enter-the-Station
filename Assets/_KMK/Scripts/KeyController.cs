@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEditor.Rendering;
 
 public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public UnityEvent SetSuccess;
     public GameObject light1, light2;
     public GameObject KeyHole;
+    public GameObject signGroup;
 
     public int totalSteps; // 다이얼에 숫자가 몇 칸인지 (예: 0~9면 10칸)
     public float snapSpeed; // 스냅되는 속도
@@ -29,10 +29,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
     private Vector2 centerPos;
     private float currentAngle;
     private float lastStepAngle = -999f; // 틱틱 사운드 중복 방지
-    private float targetAngle;
 
-
-    private bool isDragging = false;
 
     public void OnEnable()
     {
@@ -42,28 +39,26 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         light1.SetActive(false);
         light2.SetActive(false);
         currentAngle = 0f;
-        targetAngle = 0f;
         lightNum = 0;   
-        isClear = false;
-        goalNum = Random.Range(1, totalSteps);
-        Debug.Log(goalNum);
+        isClear = true;
     }
 
     void Update()
     {
-        if (isClear && lightNum < 1) 
+        if (isClear && lightNum < 2) 
         {
+            goalNum = Random.Range(0, totalSteps);
+            signGroup.transform.GetChild(goalNum).gameObject.SetActive(true);
             lightNum++;
-            goalNum = Random.Range(0, totalSteps); 
-            isClear = false; 
+            isClear = false;
             Debug.Log(goalNum); 
         }
+         
         
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        isDragging = true;
         centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, KeyHole.transform.position);
         //centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransform.position);
 
@@ -85,8 +80,8 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
             // 각도 변화 계산 후 감도 적용
             float angleDelta = Mathf.DeltaAngle(currentAngle, rawAngle);
             currentAngle += angleDelta * sensitivity;
-            //rectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
-            KeyHole.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        //rectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        KeyHole.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
 
             // 틱 사운드
             float stepAngle = 360f / totalSteps;
@@ -97,16 +92,14 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
             if (Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f) // Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f
             {
                 StartCoroutine(SnapToAngle(steppedAngle));
-
                 lastStepAngle = steppedAngle;
+            if(Mathf.Abs(steppedAngle) == Mathf.Abs(steppedAngle))
                 PlayTickSound();
             }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-
-        isDragging = false;
 
         // 스냅 각도 계산
         float stepAngle = 360f / totalSteps;
@@ -118,14 +111,14 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         // 번호 계산
         int dialNumber = Mathf.RoundToInt(snappedAngle / stepAngle) % totalSteps;
         dialNumber = Mathf.Abs(dialNumber);
-        Debug.Log("다이얼 번호: " + dialNumber);
 
         if (dialNumber == goalNum)
         { 
             PlayUnlockSound();  
             SetSuccess.Invoke();
-            if (lightNum == 0) { light1.SetActive(true); }
-            else if (lightNum == 1) { light2.SetActive(true); }
+            if (lightNum == 1) { light1.SetActive(true); }
+            else if (lightNum == 2) { light2.SetActive(true); }
+            signGroup.transform.GetChild(goalNum).gameObject.SetActive(false);
             isClear = true; 
         }
     }
