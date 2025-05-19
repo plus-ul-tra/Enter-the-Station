@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 504544418902296836}
   - component: {fileID: 4938304531348683458}
   m_Layer: 0
-  m_Name: Rrain-Door_Left
+  m_Name: Train-Door_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
