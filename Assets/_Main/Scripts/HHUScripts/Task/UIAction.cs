@@ -5,8 +5,11 @@ using DG.Tweening;
 public class UIAction : MonoBehaviour
 {
     private RectTransform rect;
+    [SerializeField]
+    private GameObject ResultUI;
     private void OnEnable()
     {
+        ResultUI.gameObject.SetActive(true);
         ShowAction();
      }
 
@@ -34,7 +37,7 @@ public class UIAction : MonoBehaviour
     }
     public void HideAction(GameObject child)
     {
-        Debug.Log("HideAction");
+       // Debug.Log("HideAction");
         Vector2 currentPos = rect.anchoredPosition;
         Vector2 targetPos = currentPos + new Vector2(0, 1500); // 위로 이동
 
@@ -42,7 +45,7 @@ public class UIAction : MonoBehaviour
             .SetEase(Ease.InCubic)
         .OnComplete(() =>
         {
-            Debug.Log("애니 완료");
+            //Debug.Log("애니 완료");
             child.SetActive(false); // 애니메이션 완료 후 끔
             gameObject.SetActive(false); // 자기 자신도 끔
         });

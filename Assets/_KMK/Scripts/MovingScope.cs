@@ -11,7 +11,7 @@ public class MovingScope : MonoBehaviour
     {
         isStopped = false;
         vectorScope.x = -1.0f;
-        transform.localPosition = new Vector3(-300.0f, transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(-230.0f, transform.localPosition.y, transform.localPosition.z);
     }
 
     // Update is called once per frame

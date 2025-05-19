@@ -1,15 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 public class Task : MonoBehaviour
 {
     public bool isComplete { get; protected set; }
     public bool isOnTask { get; protected set; }  //현재 상태 프로퍼티 쓰는데 public?
     public KindOfTask kindOfTask;
-    //[SerializeField]
-    //protected float limitTime = 6.0f;
-    //private float timer;
+    [SerializeField]
+    protected float limitTime = 6.0f;
+    protected float timer;
     private PlayerController playerController;
     private PlayerAnimator playerAnimator;
     private UIAction action;
+    public GameObject successImage;
+    public GameObject failedImage;
 
     public virtual void InitGame() { } //초기화 방식은 Task마다 다름. 시작이 아닌 말그대로 초기화 시작시 불러져야 하는 것
     
@@ -31,6 +34,10 @@ public class Task : MonoBehaviour
         playerController.canMove = false;
         //++애니메이션
     }
+    protected void Timer()
+    {
+
+    }
     protected void Close() {
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -41,6 +48,7 @@ public class Task : MonoBehaviour
         else
         {
             Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다!");
+            //return;
         }
 
         if (playerAnimator != null)
@@ -56,7 +64,7 @@ public class Task : MonoBehaviour
         }
 
         //close 전에 성공 or 실패 효과 및 delay
-        Debug.Log("Call Close");
+        //Debug.Log("Call Close");
         action = gameObject.transform.parent.gameObject.GetComponent<UIAction>();
         action.HideAction(gameObject);
        // gameObject.SetActive(false); //종료
@@ -67,5 +75,10 @@ public class Task : MonoBehaviour
             playerController.canMove = true;
             playerController = null;
         }
+    }
+
+    public float GetLimitTime()
+    {
+        return limitTime;
     }
 }
