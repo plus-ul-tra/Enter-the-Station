@@ -63,18 +63,32 @@ public class SpeechBubble : MonoBehaviour
     /// <summary>
     /// 무전기 말풍선을 실행시키는 함수
     /// </summary>
-    public void PlaySpeechBubble(SpeechKey speechKey)
+    public void PlaySpeechBubble(SpeechKey speechKey, int zoneIndex = 1)
     {
-        SetSpeechBubbleText(speechKey);
+        SetSpeechBubbleText(speechKey, zoneIndex);
         tmpText.text = sb.ToString();
 
         StartCoroutine(PunchMultipleTimes());
     }
 
-    void SetSpeechBubbleText(SpeechKey speechKey)
+    void SetSpeechBubbleText(SpeechKey speechKey, int zoneIndex = 1)
     {
         int randomSpeechIndex = 0;
         sb.Clear();
+
+        switch (zoneIndex)
+        {
+            case 1:
+            case 2:
+            case 3:
+                sb.AppendLine("\"1층\"");
+                break;
+            case 4:
+            case 5:
+            case 6:
+                sb.AppendLine("\"2층\"");
+                break;
+        }
 
         switch (speechKey)
         {

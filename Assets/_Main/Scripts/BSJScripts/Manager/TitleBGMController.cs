@@ -4,6 +4,9 @@ public class TitleBGMController : MonoBehaviour
 {
     void Start()
     {
-        SoundManager.Instance.PlayMusic("Title_bgm");
+        if(SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayMusic("Title_bgm");
+        }
     }
 }
