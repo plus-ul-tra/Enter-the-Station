@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3377689247928657348}
   m_Layer: 0
   m_Name: column_0
-  m_TagString: Untagged
+  m_TagString: MapObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
