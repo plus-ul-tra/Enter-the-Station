@@ -81,7 +81,7 @@ public class IngameOptionManager : MonoBehaviour
 
             // 타이틀 씬으로 이동 ( 재시작 전에 실행 중인 트윈 코드 정리 )
             DOTween.KillAll();
-            SceneManager.LoadScene("BSJ_Title");
+            SceneManager.LoadScene("Title");
         });
         // 버튼 이벤트 }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Unity.Cinemachine;
 using DG.Tweening.Core.Easing;
+using UnityEditor.Experimental.GraphView;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
     RandomEventObject randomEventObject;
     Item item;
 
+    [Header("튜토리얼이면 체크")]
+    [SerializeField] private bool isTutorial;
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//플립시 사용
@@ -54,7 +57,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        // StartCoroutine(PauseMovement(introCameraSwitcher.introDuration+2));
+        if(isTutorial) {
+            StartCoroutine(PauseMovement(introCameraSwitcher.introDuration + 2));
+        }
+        else { /*DoNothing*/ }
     }
     void Update()
     {

@@ -67,7 +67,7 @@ public class FadeController : MonoBehaviour
         seq.OnComplete(() => {
             // 실패 엔딩씬으로 이동
             DOTween.KillAll();
-            SceneManager.LoadScene("BSJ_FailEnding");
+            SceneManager.LoadScene("FailEnding");
         });
     }
 
