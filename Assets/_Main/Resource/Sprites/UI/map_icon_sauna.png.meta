@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      map_icon_sauna_0: -5643770669544909073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

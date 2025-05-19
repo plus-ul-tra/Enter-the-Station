@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      map_icon_baseball_1_0: -153225239515374937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

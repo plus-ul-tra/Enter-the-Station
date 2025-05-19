@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      train-indoor_0: 6406878338743866238
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
