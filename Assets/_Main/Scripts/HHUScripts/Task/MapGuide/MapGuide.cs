@@ -96,7 +96,7 @@ public class MapGuide : Task
 
         if (selectStartPoint != null)
         {
-            selectStartPoint.SetTarget(Input.mousePosition, -15.0f);
+            selectStartPoint.SetTarget(Input.mousePosition, -8.0f);
         }
         CheckComplete();
     }
@@ -133,6 +133,7 @@ public class MapGuide : Task
       
         if (completeCheck)
         {
+            Close();
             foreach (var way in ways)
             {
                 //¼± ÆÄ±«
@@ -142,7 +143,7 @@ public class MapGuide : Task
 
                 }
             }
-            Close();
+            
         }
 
     }
