@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private CinemachineCameraClamp cameraClamp;
     //private TaskManager taskManager;
     [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
+    [HideInInspector]public int count;
     // --------------------------------------------------
     RandomEventObject randomEventObject;
     Item item;
@@ -190,9 +191,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Item") && Input.GetKeyDown(KeyCode.E))
         {
+            count++;
             item = other.GetComponent<Item>();
             item.Picked();
             //item 관련 index++
+        }
+        if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E))
+        {
+            count = 0;
         }
     }
 
@@ -211,39 +217,36 @@ public class PlayerController : MonoBehaviour
 
         
 
-        StartCoroutine(PauseMovement(3f));//정지 코루틴
+        StartCoroutine(PauseMovement(0.5f));//정지 코루틴
 
-        StartCoroutine(ScreenFader.Instance.FadeTeleport(() =>//화면전환 페이드아웃
+        StartCoroutine(
+        ScreenFader.Instance.FadeTeleport(
+        () =>
         {
+            // Teleport Action: 위치 이동, 애니메이션 리셋, 몬스터 리스폰 존 이동 등
             var zoneCollider = isUp ? upZoneCollider : downZoneCollider;
-            // A) 플레이어 & 스포너 이동, 몬스터 초기화, 카메라 워프
+
             Vector2 pos = isUp
-          ? stairs_Down.transform.position
-         : stairs_Up.transform.position;
+                ? stairs_Down.transform.position
+                : stairs_Up.transform.position;
 
-            float offsetX = isUp
-                ? -3f   // stairs_Down 일 때
-                : +3f; // stairs_Up 일 때
-
-            pos.x = pos.x + offsetX;
+            float offsetX = isUp ? -3f : +3f;
+            pos.x += offsetX;
 
             transform.position = pos;
             playerAnim.SetMoved(false);
             PerformStairsTeleport(delta, zoneCollider);
-        }));
-        
+        },
+        fadeOutDuration: 0.1f,   // 페이드아웃 0.5초
+        fadeInDuration: 0.1f,   // 페이드인  0.3초
+        holdDuration: 0.1f    // 액션 후 0.1초 대기
+    )
+);
+
     }
 
     private void PerformStairsTeleport(Vector3 delta, PolygonCollider2D nextZone)
     {
-       
-        // 2) 스포너 위치 이동 및 Y 범위 업데이트
-        //Vector3 yOffset = new Vector3(0f, delta.y, 0f);
-        //cameraClamp.minPos.y += delta.y;
-        //cameraClamp.maxPos.y += delta.y;
-        //foreach (var sp in spawner)
-        //    sp.position += yOffset;
-
         // 3) 몬스터 초기화
         ClearAllMonsters();
 

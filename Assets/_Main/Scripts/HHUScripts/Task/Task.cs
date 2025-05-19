@@ -20,12 +20,17 @@ public class Task : MonoBehaviour
         
         gameObject.transform.parent.gameObject.SetActive(true);
         gameObject.SetActive(true); //시작
+        
+
         isOnTask = true;
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
             playerController = playerObject.GetComponent<PlayerController>();
+
+            var capsule = playerController.GetComponent<CapsuleCollider2D>();
+            capsule.enabled = false;// 플레이어컨트롤러에 존재하는 콜라이더 컴포넌트 off
         }
         else
         {
@@ -39,6 +44,8 @@ public class Task : MonoBehaviour
 
     }
     protected void Close() {
+
+        
 
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
@@ -73,6 +80,10 @@ public class Task : MonoBehaviour
         if(playerController)
         {
             playerController.canMove = true;
+
+            var capsule = playerController.GetComponent<CapsuleCollider2D>();
+            capsule.enabled = true;// 플레이어컨트롤러에 존재하는 콜라이더 컴포넌트 on
+
             playerController = null;
         }
     }

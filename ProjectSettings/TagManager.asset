@@ -16,6 +16,7 @@ TagManager:
   - Item
   - MapObstacle
   - BoothObstacle
+  - Return
   layers:
   - Default
   - TransparentFX
