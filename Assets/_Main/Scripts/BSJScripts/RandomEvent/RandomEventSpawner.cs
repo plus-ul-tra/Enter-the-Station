@@ -47,6 +47,10 @@ public class RandomEventSpawner : MonoBehaviour
     private int currentSequenceIndex = 0;       // 현재 선택된 zone 수열의 인덱스
     private int currentSequenceElement = 0;     // 현재 수열 내에서 몇 번째 위치인지
 
+    // --------------------------------------------------
+    [Header("튜토리얼이면 체크")]
+    [SerializeField] private bool isTutorial = false;
+
     private struct SpawnPointData
     {
         public int zoneIndex;
@@ -56,8 +60,18 @@ public class RandomEventSpawner : MonoBehaviour
 
     private void Start()
     {
-        // TODO : 오프닝 컷신 끝나고 몇 초후에 시작하도록 설정 (10초여서 그냥 그대로 실행해도됨)
-        SelectRandomEventZone();
+        // TODO : 튜토리얼 일때에는 그냥 실행, 
+        if(isTutorial)
+        {
+            SelectRandomEventZone();
+        }
+
+        // 일차일 경우에는 시작 시간 10초에서부터 시작
+        else
+        {
+            currentSpawnTimer = 10f;
+            SelectRandomEventZone();
+        }
     }
 
     private void Update()
@@ -153,7 +167,7 @@ public class RandomEventSpawner : MonoBehaviour
             randomEvent.ReferTaskManager(taskManager);
 
             // 화살표 생성
-            eventDirectionArrow.CreateArrow(randomEvent);
+            eventDirectionArrow.CreateArrow(randomEvent, spawnPointData.zoneIndex);
 
             // 말풍선 생성
             CreateSpeech(randomEvent);
@@ -165,31 +179,31 @@ public class RandomEventSpawner : MonoBehaviour
     {
         if (randomEvent.task == KindOfTask.FixWire)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.ELV);
+            speechBubble.PlaySpeechBubble(SpeechKey.ELV, spawnPointData.zoneIndex);
         }
         else if (randomEvent.task == KindOfTask.ArrowMatch)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.SLEEP);
+            speechBubble.PlaySpeechBubble(SpeechKey.SLEEP, spawnPointData.zoneIndex);
         }
         else if (randomEvent.task == KindOfTask.MaintainingGauge)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.HEART);
+            speechBubble.PlaySpeechBubble(SpeechKey.HEART, spawnPointData.zoneIndex);
         }
         else if (randomEvent.task == KindOfTask.MovingCircle)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.CS);
+            speechBubble.PlaySpeechBubble(SpeechKey.CS, spawnPointData.zoneIndex);
         }
         else if (randomEvent.task == KindOfTask.RythmGauge)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.CSSLEEP);
+            speechBubble.PlaySpeechBubble(SpeechKey.CSSLEEP, spawnPointData.zoneIndex);
         }
         else if (randomEvent.task == KindOfTask.MapGuide)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.MAP);
+            speechBubble.PlaySpeechBubble(SpeechKey.MAP, spawnPointData.zoneIndex);
         }
         else if (randomEvent.task == KindOfTask.StackingGauge)
         {
-            speechBubble.PlaySpeechBubble(SpeechKey.FALL);
+            speechBubble.PlaySpeechBubble(SpeechKey.FALL, spawnPointData.zoneIndex);
         }
     }
 

@@ -19,6 +19,16 @@ public class StageManager : MonoBehaviour
 
     //--------------------------------------------------
 
+    [Header("튜토리얼일 때 체크")]
+    [SerializeField] private bool isTutorial;
+
+    // 시간 흐름 관련
+    private bool isTimerActive = false;
+    private float tutorialDelay = 10f; // 튜토리얼일 때 지연 시간
+    private float tutorialTimer = 0f;
+
+    //--------------------------------------------------
+
     private FadeController fadeController;
 
     private void Awake()
@@ -38,12 +48,30 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
+        // 튜토리얼이면 10초 대기 후 시간 흐름 시작
+        if (isTutorial && !isTimerActive)
+        {
+            tutorialTimer += Time.deltaTime;
+            if (tutorialTimer >= tutorialDelay)
+            {
+                isTimerActive = true;
+            }
+            return;
+        }
+
+        // 튜토리얼이 아니면 처음부터 시간 흐름
+        if (!isTutorial)
+        {
+            isTimerActive = true;
+        }
+
         // 시간이 계속 증가하는 로직
-        if(stageCurTime < stageMaxTime)
+        if (isTimerActive && stageCurTime < stageMaxTime)
         {
             stageCurTime += Time.deltaTime;
         }
-        else
+
+        else if (stageCurTime >= stageMaxTime)
         {
             // TODO : 스테이지 클리어
         }
