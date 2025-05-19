@@ -8,8 +8,6 @@ public class MapGuide : Task
     private List<Node> passedNodes = new List<Node>();
     private List<Way> ways = new List<Way>();
     private Node lastConnectedNode = null;
-    //private RectTransform currentNodePos;
-    //Goal
     [SerializeField]
     private List<Node> goals; // 마지막 노드들
     private Node goal; // 랜덤으로 정해질 목표
@@ -30,6 +28,23 @@ public class MapGuide : Task
     }
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer >= limitTime)
+        {
+            failedImage.SetActive(true);
+            Close();
+            timer = 0.0f;
+            foreach (var way in ways)
+            {
+                //선 파괴
+                if (way != null)
+                {
+                    Destroy(way.gameObject);
+
+                }
+            }
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.right, 1.0f);
@@ -103,6 +118,9 @@ public class MapGuide : Task
 
     public override void InitGame()
     {
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
+        timer = 0.0f;
         for (int i = 0; i < goals.Count; i++)
         {
             goals[i].gameObject.SetActive(true);
@@ -133,6 +151,7 @@ public class MapGuide : Task
       
         if (completeCheck)
         {
+            successImage.SetActive(true);
             Close();
             foreach (var way in ways)
             {

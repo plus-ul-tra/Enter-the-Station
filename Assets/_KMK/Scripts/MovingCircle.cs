@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.Splines.ExtrusionShapes;
 
 
@@ -9,9 +10,10 @@ public class MovingCircle : MonoBehaviour
     public UnityEvent Success;
     public UnityEvent Fail;
     public UnityEvent ScopeStop;
-
+    public Sprite rage;
+    public Sprite smile;
     bool isStopped;
-   
+    private Image image;
     float circlePosX;
     Vector2 vectorCircle;
     public float circleSpeed;
@@ -20,10 +22,13 @@ public class MovingCircle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
-        gameObject.transform.localPosition = new Vector3(480.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
+        gameObject.transform.localPosition = new Vector3(290.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
+        image = GetComponent<Image>();
         vectorCircle.x = -1.0f;
         //circleSpeed = 0.0f;
         isStopped = false;
+        image.sprite = rage;
+        
     }
 
     // Update is called once per frame
@@ -38,7 +43,7 @@ public class MovingCircle : MonoBehaviour
         {
             circlePosX = vectorCircle.x * circleSpeed * Time.deltaTime;
             gameObject.transform.Translate(circlePosX, 0, 0);
-            Debug.Log(circlePosX);
+            //Debug.Log(circlePosX);
         }
     }
 
@@ -52,12 +57,16 @@ public class MovingCircle : MonoBehaviour
             {
                 vectorCircle.x = 1.0f;
             }
-        Debug.Log(gameObject.transform.position.x);
+        //Debug.Log(gameObject.transform.position.x);
     }
-
+    public void SetSmile()
+    {
+        image.sprite = smile;
+    }
     void OnTriggerEnter2D(Collider2D collision) // scopeSqaure人 違張 凶
     {
         Success.Invoke();
+        
     }
     void OnTriggerExit2D(Collider2D collision) // scopeSqaure人 照 違張 凶
     {

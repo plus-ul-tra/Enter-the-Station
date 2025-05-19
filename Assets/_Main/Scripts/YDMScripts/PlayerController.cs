@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
     // --------------------------------------------------
     RandomEventObject randomEventObject;
+    Item item;
 
     void Awake()
     {
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
             optionPanel.SetActive(true);
             canMove = true;
         }
-
+     
         // E 키 눌러서 상호작용
         if (Input.GetKeyDown(KeyCode.E) && randomEventObject != null)
         {
@@ -182,7 +183,19 @@ public class PlayerController : MonoBehaviour
         {
             randomEventObject = other.GetComponent<RandomEventObject>();
         }
+
+        
     }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Item") && Input.GetKeyDown(KeyCode.E))
+        {
+            item = other.GetComponent<Item>();
+            item.Picked();
+            //item 관련 index++
+        }
+    }
+
     private void HandleObstacleCollision()
     {
         playerAnim.SetStunned(true);

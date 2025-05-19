@@ -4,8 +4,6 @@ using UnityEngine.Events;
 public class TurningKeyManager : Task
 {
     public UnityEvent Initial;
-    public GameObject successImage;
-    public GameObject failedImage;
     public GameObject firstScene;
     public GameObject secondScene;
     float time;
