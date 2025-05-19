@@ -17828,8 +17828,9 @@ GameObject:
   - component: {fileID: 1355444030}
   - component: {fileID: 1355444032}
   - component: {fileID: 1355444031}
+  - component: {fileID: 1355444033}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Image _ Talkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17892,6 +17893,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355444029}
   m_CullTransparentMesh: 1
+--- !u!114 &1355444033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355444029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd8af8949b3ebc458fc39e06cd2aefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1359257024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5990851002682993871, guid: 41adb7902ae864640b91006fc92ebabe, type: 3}
@@ -24577,7 +24590,7 @@ MonoBehaviour:
   stageManager: {fileID: 533266233}
   taskManager: {fileID: 2070640014}
   eventDirectionArrow: {fileID: 2115276352}
-  speechBubble: {fileID: 1872442239728866255}
+  speechBubble: {fileID: 8080928725972994599}
   randomEventList:
   - {fileID: 7122171767316536684, guid: 30655f4728261c04abc098095c810571, type: 3}
   - {fileID: 7122171767316536684, guid: e17ddcea532e44f40b686fb7a0ed16c0, type: 3}
@@ -25243,24 +25256,6 @@ RectTransform:
   m_AnchoredPosition: {x: 26, y: 0}
   m_SizeDelta: {x: 1200, y: 264}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1872442239728866255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7925363782534268548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16859eda85b13904ca18e031b78713ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popUpObject: {fileID: 8080928725972994597}
-  tmpText: {fileID: 8392927380932280891}
-  imageRect: {fileID: 1281830996255891418}
-  punchCount: 7
-  punchInterval: 0.5
-  punchPower: 0.3
 --- !u!1 &1977982298509798235
 GameObject:
   m_ObjectHideFlags: 0
@@ -25327,18 +25322,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &5081677072908810239
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7925363782534268548}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!224 &5700385772290979618
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25395,8 +25378,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1279178487675128160}
-  - component: {fileID: 1872442239728866255}
-  - component: {fileID: 5081677072908810239}
   m_Layer: 0
   m_Name: SpeechBubble
   m_TagString: Untagged
@@ -25413,6 +25394,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5700385772290979618}
+  - component: {fileID: 8080928725972994599}
+  - component: {fileID: 8080928725972994598}
   m_Layer: 5
   m_Name: SpeechBubble _ Object
   m_TagString: Untagged
@@ -25420,6 +25403,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!225 &8080928725972994598
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8080928725972994597}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &8080928725972994599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8080928725972994597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16859eda85b13904ca18e031b78713ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUpObject: {fileID: 8080928725972994597}
+  tmpText: {fileID: 8392927380932280891}
+  imageRect: {fileID: 1281830996255891418}
+  punchCount: 7
+  punchInterval: 0.5
+  punchPower: 0.3
+  t_talkleEffect: {fileID: 1355444033}
 --- !u!222 &8165097871343673065
 CanvasRenderer:
   m_ObjectHideFlags: 0

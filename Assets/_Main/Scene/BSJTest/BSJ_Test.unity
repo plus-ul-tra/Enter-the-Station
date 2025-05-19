@@ -9404,9 +9404,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 4
-  gauge: {fileID: 1047469278}
+  limitTime: 6
   successImage: {fileID: 1817863999}
   failedImage: {fileID: 2033579935}
+  gauge: {fileID: 1047469278}
   addGauge: 0.2
   subtractGauge: 0.001
   onSpacebar:
@@ -9548,9 +9549,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 5
-  gauge: {fileID: 1096513656}
+  limitTime: 6
   successImage: {fileID: 705855649}
   failedImage: {fileID: 542279455}
+  gauge: {fileID: 1096513656}
   addGauge: 0.08
   subtractGauge: 0.03
 --- !u!1 &696505794
@@ -10462,6 +10464,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 0
+  limitTime: 6
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   leftWires:
   - {fileID: 281773167}
   - {fileID: 1115468776}
@@ -12899,6 +12904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d620afbf7f0aec48bbddb5e97a6f797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResultUI: {fileID: 0}
 --- !u!1 &1016954208
 GameObject:
   m_ObjectHideFlags: 0
@@ -16368,6 +16374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 3
+  limitTime: 6
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   Initial:
     m_PersistentCalls:
       m_Calls:
@@ -16424,6 +16433,7 @@ MonoBehaviour:
         m_CallState: 2
   SuccessImage: {fileID: 1349612201}
   FailedImage: {fileID: 643685480}
+  circle: {fileID: 0}
 --- !u!1001 &1247829040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17611,7 +17621,7 @@ GameObject:
   - component: {fileID: 1355444032}
   - component: {fileID: 1355444031}
   m_Layer: 0
-  m_Name: Image _ Talkle
+  m_Name: Talkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18438,6 +18448,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 6
+  limitTime: 6
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   way: {fileID: 876814190723657094, guid: feba7a60d68571d41a1d758bfea6beb3, type: 3}
   goals:
   - {fileID: 250260933}
@@ -21423,6 +21436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 1
+  limitTime: 6
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   container: {fileID: 534049280}
   blockPrefabs: {fileID: 4654216733916487804, guid: 776ce91cba26cb844be9610066aee4f7, type: 3}
   maxBlockCount: 7
@@ -22198,9 +22214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 2
-  gauge: {fileID: 573654327}
+  limitTime: 6
   successImage: {fileID: 1174724844}
   failedImage: {fileID: 1266198528}
+  gauge: {fileID: 573654327}
   addGauge: 0.05
   subtractGauge: 0.02
   movingGaugeCollider: {fileID: 1137958435}
@@ -24746,6 +24763,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  rage: {fileID: 0}
+  smile: {fileID: 0}
   circleSpeed: 600
 --- !u!50 &2139504036
 Rigidbody2D:
