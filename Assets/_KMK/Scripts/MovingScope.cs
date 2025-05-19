@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class MovingScope : MonoBehaviour
@@ -11,6 +12,7 @@ public class MovingScope : MonoBehaviour
     {
         isStopped = false;
         vectorScope.x = -1.0f;
+
         transform.localPosition = new Vector3(-230.0f, transform.localPosition.y, transform.localPosition.z);
     }
 
@@ -20,17 +22,17 @@ public class MovingScope : MonoBehaviour
         if (isStopped)
             return;
 
-     ScopePosX = vectorScope.x * ScopeSpeed * Time.deltaTime;
-     gameObject.transform.Translate(ScopePosX, 0, 0);
+        ScopePosX = vectorScope.x * ScopeSpeed;
+        gameObject.transform.localPosition = new Vector3(transform.localPosition.x + ScopePosX, transform.localPosition.y, transform.localPosition.z);
     }
 
-    void OnCollisionEnter2D(Collision2D collision) // BaseSqaureÀÇ ³¡¿¡ ºÎµúÇûÀ» ¶§
+    void OnCollisionEnter2D(Collision2D collision) // BaseSqaureì˜ ëì— ë¶€ë”ªí˜”ì„ ë•Œ
     {
-        if (vectorScope.x > 0.0f) // ¹æÇâ º¤ÅÍ°¡ ¾ç¼ö¸é -1·Î ¹Ù²Û´Ù
+        if (vectorScope.x > 0.0f) // ë°©í–¥ ë²¡í„°ê°€ ì–‘ìˆ˜ë©´ -1ë¡œ ë°”ê¾¼ë‹¤
         {
             vectorScope.x = -1.0f;
         }
-        else if (vectorScope.x < 0.0f) // ¹æÇâ º¤ÅÍ°¡ À½¼ö¸é +1·Î ¹Ù²Û´Ù
+        else if (vectorScope.x < 0.0f) // ë°©í–¥ ë²¡í„°ê°€ ìŒìˆ˜ë©´ +1ë¡œ ë°”ê¾¼ë‹¤
         {
             vectorScope.x = 1.0f;
         }

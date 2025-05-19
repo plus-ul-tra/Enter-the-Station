@@ -1,7 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+
+using DG.Tweening;
+
 using UnityEngine.UI;
+
 using UnityEngine.Splines.ExtrusionShapes;
 
 
@@ -22,8 +26,10 @@ public class MovingCircle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
+
         gameObject.transform.localPosition = new Vector3(290.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
         image = GetComponent<Image>();
+
         vectorCircle.x = -1.0f;
         //circleSpeed = 0.0f;
         isStopped = false;
@@ -41,19 +47,21 @@ public class MovingCircle : MonoBehaviour
         }
         else if(!isStopped)
         {
+
             circlePosX = vectorCircle.x * circleSpeed * Time.deltaTime;
             gameObject.transform.Translate(circlePosX, 0, 0);
             //Debug.Log(circlePosX);
+
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision) // BaseSqaureÀÇ ³¡¿¡ ºÎµúÇûÀ» ¶§
+    void OnCollisionEnter2D(Collision2D collision) // BaseSqaureì˜ ëì— ë¶€ë”ªí˜”ì„ ë•Œ
     {
-            if (vectorCircle.x > 0.0f) // ¹æÇâ º¤ÅÍ°¡ ¾ç¼ö¸é -1·Î ¹Ù²Û´Ù
+            if (vectorCircle.x > 0.0f) // ë°©í–¥ ë²¡í„°ê°€ ì–‘ìˆ˜ë©´ -1ë¡œ ë°”ê¾¼ë‹¤
             {
                 vectorCircle.x = -1.0f;
             }
-            else if (vectorCircle.x < 0.0f) // ¹æÇâ º¤ÅÍ°¡ À½¼ö¸é +1·Î ¹Ù²Û´Ù
+            else if (vectorCircle.x < 0.0f) // ë°©í–¥ ë²¡í„°ê°€ ìŒìˆ˜ë©´ +1ë¡œ ë°”ê¾¼ë‹¤
             {
                 vectorCircle.x = 1.0f;
             }
@@ -63,12 +71,12 @@ public class MovingCircle : MonoBehaviour
     {
         image.sprite = smile;
     }
-    void OnTriggerEnter2D(Collider2D collision) // scopeSqaure¿Í °ãÄ¥ ¶§
+    void OnTriggerEnter2D(Collider2D collision) // scopeSqaureì™€ ê²¹ì¹  ë•Œ
     {
         Success.Invoke();
         
     }
-    void OnTriggerExit2D(Collider2D collision) // scopeSqaure¿Í ¾È °ãÄ¥ ¶§
+    void OnTriggerExit2D(Collider2D collision) // scopeSqaureì™€ ì•ˆ ê²¹ì¹  ë•Œ
     {
         Fail.Invoke();
     }

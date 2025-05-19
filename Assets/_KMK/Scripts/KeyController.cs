@@ -3,16 +3,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+using UnityEditor.Rendering;
+using DG.Tweening;
+
 public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+
     public UnityEvent SetSuccess;
     public GameObject light1, light2;
     public GameObject KeyHole;
     public GameObject signGroup;
 
-    public int totalSteps; // ´ÙÀÌ¾ó¿¡ ¼ıÀÚ°¡ ¸î Ä­ÀÎÁö (¿¹: 0~9¸é 10Ä­)
-    public float snapSpeed; // ½º³ÀµÇ´Â ¼Óµµ
-    public float sensitivity; // ¸¶¿ì½º °¨µµ
+    public int totalSteps; // ë‹¤ì´ì–¼ì— ìˆ«ìê°€ ëª‡ ì¹¸ì¸ì§€ (ì˜ˆ: 0~9ë©´ 10ì¹¸)
+    public float snapSpeed; // ìŠ¤ëƒ…ë˜ëŠ” ì†ë„
+    public float sensitivity; // ë§ˆìš°ìŠ¤ ê°ë„
     float rawAngle;
 
     int goalNum;
@@ -21,14 +25,14 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
     Vector2 dirS;
     
 
-    public AudioClip tickSound; // ´ÙÀÌ¾ó µ¹¸± ¶§ Æ½Æ½ ¼Ò¸®
-    public AudioClip unlockSound; // Ç®¾úÀ» ¶§ ³ª´Â ¼Ò¸®
+    public AudioClip tickSound; // ë‹¤ì´ì–¼ ëŒë¦´ ë•Œ í‹±í‹± ì†Œë¦¬
+    public AudioClip unlockSound; // í’€ì—ˆì„ ë•Œ ë‚˜ëŠ” ì†Œë¦¬
     public AudioSource audioSource;
 
     private RectTransform rectTransform;
     private Vector2 centerPos;
     private float currentAngle;
-    private float lastStepAngle = -999f; // Æ½Æ½ »ç¿îµå Áßº¹ ¹æÁö
+    private float lastStepAngle = -999f; // í‹±í‹± ì‚¬ìš´ë“œ ì¤‘ë³µ ë°©ì§€
 
 
     public void OnEnable()
@@ -52,63 +56,63 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
             lightNum++;
             isClear = false;
             Debug.Log(goalNum); 
-        }
-         
-        
+        }  
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, KeyHole.transform.position);
-        //centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransform.position);
+        Canvas canvas = GetComponentInParent<Canvas>();
+        Camera cam = null;
+        if (canvas.renderMode == RenderMode.ScreenSpaceCamera || canvas.renderMode == RenderMode.WorldSpace)
+        {
+            cam = canvas.worldCamera;
+        }
 
-        dirS = eventData.position - centerPos;
+        centerPos = RectTransformUtility.WorldToScreenPoint(cam, KeyHole.transform.position);
+
+        dirS = (eventData.position - centerPos).normalized;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-            Vector2 dir = eventData.position - centerPos;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            if (dirS.y < 0)
-            {
-                rawAngle = angle + 90f;
-            }
-            else if (dirS.y > 0)  // ÀÌ¹ÌÁö À§ÂÊÀÌ ±âÁØÀÌ¶ó -90µµ Á¶Á¤
-            {
-                rawAngle = angle - 90f;
-            }
-            // °¢µµ º¯È­ °è»ê ÈÄ °¨µµ Àû¿ë
-            float angleDelta = Mathf.DeltaAngle(currentAngle, rawAngle);
-            currentAngle += angleDelta * sensitivity;
-        //rectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        Vector2 currentDir = (eventData.position - centerPos).normalized;
+
+        // ì´ì „ ë°©í–¥ê³¼ í˜„ì¬ ë°©í–¥ ì‚¬ì´ì˜ ìƒëŒ€ì ì¸ ê°ë„ ê³„ì‚°
+        float angleDelta = Vector2.SignedAngle(dirS, currentDir);
+
+        currentAngle += angleDelta * sensitivity;
         KeyHole.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
 
-            // Æ½ »ç¿îµå
-            float stepAngle = 360f / totalSteps;
-            int stepIndex = Mathf.RoundToInt((currentAngle + 360f) % 360f / stepAngle);
-            float steppedAngle = stepIndex * stepAngle;
-            
-            Debug.Log("steppedAngle: " + steppedAngle);
-            if (Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f) // Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f
-            {
-                StartCoroutine(SnapToAngle(steppedAngle));
-                lastStepAngle = steppedAngle;
-            if(Mathf.Abs(steppedAngle) == Mathf.Abs(steppedAngle))
-                PlayTickSound();
-            }
+        dirS = currentDir; // ë‹¤ìŒ í”„ë ˆì„ì„ ìœ„í•œ ê¸°ì¤€ ê°±ì‹ 
+
+        // í‹± ì‚¬ìš´ë“œ
+        float stepAngle = 360f / totalSteps;
+        int stepIndex = Mathf.RoundToInt((currentAngle + 360f) % 360f / stepAngle);
+        float steppedAngle = stepIndex * stepAngle;
+   
+        Debug.Log("steppedAngle: " + steppedAngle);
+        if (Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f) // Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f
+        {
+            StartCoroutine(SnapToAngle(steppedAngle));
+            lastStepAngle = steppedAngle;
+            PlayTickSound();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
 
-        // ½º³À °¢µµ °è»ê
+        // ìŠ¤ëƒ… ê°ë„ ê³„ì‚°
         float stepAngle = 360f / totalSteps;
         float snappedAngle = Mathf.Round((currentAngle + 360f) % 360f / stepAngle) * stepAngle;
 
-        // ÄÚ·çÆ¾À¸·Î ºÎµå·´°Ô ½º³À
-        StartCoroutine(SnapToAngle(0f));
+        // ì›ë˜ ê°ë„(0)ìœ¼ë¡œ 0.5ì´ˆ ë™ì•ˆ ëŒì•„ê°
+        KeyHole.transform.DORotate(new Vector3(0, 0, 0), 0.5f).OnComplete(() =>
+        {
+            currentAngle = 0f;
+        });
 
-        // ¹øÈ£ °è»ê
+        // ë²ˆí˜¸ ê³„ì‚°
         int dialNumber = Mathf.RoundToInt(snappedAngle / stepAngle) % totalSteps;
         dialNumber = Mathf.Abs(dialNumber);
 
@@ -129,9 +133,8 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         float t = 0f;
         while (t < 1f)
         {
-            t += Time.deltaTime * snapSpeed;
+            t += snapSpeed; // t += Time.deltaTime * snapSpeed;
             currentAngle = Mathf.LerpAngle(startAngle, targetAngle, t);
-            //rectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
             KeyHole.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
             yield return null;
         }
