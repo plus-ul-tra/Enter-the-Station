@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
+    //public static StageManager Instance { get; private set; }
     [Header("플레이어 HP (민원)")]
     public int playerMaxHp { get; private set; }
     public int playerCurHp { get; private set; }
@@ -32,6 +33,7 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+
         // Hp 초기화
         playerMaxHp = 3;
         playerCurHp = playerMaxHp;

@@ -15,22 +15,24 @@ public class MovingCircleManager : Task
 
     float time;
     float closeTime;
-    
-    public GameObject SuccessImage;
-    public GameObject FailedImage;
+   
     [SerializeField]
     private MovingCircle circle;
+    //private int count;
     void OnEnable()
     {
+       // count = 0;
         InitGame();
         Initial.Invoke();
     }
     public override void InitGame()
     {
-        SuccessImage.SetActive(false);
-        FailedImage.SetActive(false);
+
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
         timer = 0.0f;
         isClose = false;
+        //isSuccess = false;
     }
 
     void Update()
@@ -40,30 +42,37 @@ public class MovingCircleManager : Task
         {
             if (isSuccess)
             {
+                //3번 성공 종료
                 circle.SetSmile();
-                SuccessImage.SetActive(true);
+                successImage.SetActive(true);
                 isClose = true;
                 Close();
+                timer = 0.0f;
             }
 
             else if (!isSuccess)
             {
-                FailedImage.SetActive(true);
+                stageManager.DecreasePlayerHp();
+                failedImage.SetActive(true);
                 isClose = true;
                 Close();
             }
         }
+
+        //타임오버
         if (timer >= limitTime && !isSuccess)
         {
-            FailedImage.SetActive(true);
+            stageManager.DecreasePlayerHp();
+            failedImage.SetActive(true);
             isClose = true;
             Close();
+            timer = 0.0f;
         }
 
         if (isClose) { SetAllStop.Invoke();}
         //if (closeTime >= 1.0f) { Close(); }
     }
 
-    public void SetSuccess() { isSuccess = true; }
+    public void SetSuccess() {  isSuccess = true; }
     public void SetFail() { isSuccess = false; }
 }
