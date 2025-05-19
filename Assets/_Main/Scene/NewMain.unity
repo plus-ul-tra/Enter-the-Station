@@ -1963,7 +1963,7 @@ Transform:
   m_GameObject: {fileID: 145157827}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.06, y: 121.7, z: -9720}
+  m_LocalPosition: {x: 36.06, y: 342.7, z: -9720}
   m_LocalScale: {x: 2, y: 100, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2973,7 +2973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 112}
+  m_AnchoredPosition: {x: 0, y: 345}
   m_SizeDelta: {x: 70.28963, y: 89.6251}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &195110669
@@ -9918,6 +9918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 4
   limitTime: 6
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   gauge: {fileID: 1047469278}
@@ -10062,6 +10063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 5
   limitTime: 6
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   gauge: {fileID: 1096513656}
@@ -10903,7 +10905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &782553725
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10947,6 +10949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 0
   limitTime: 6
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   leftWires:
@@ -12504,7 +12507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.8, y: -439.6}
+  m_AnchoredPosition: {x: -35.8, y: -186.4}
   m_SizeDelta: {x: 44.515, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &941356131
@@ -13530,7 +13533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1013765521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13940,7 +13943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 108.9}
+  m_AnchoredPosition: {x: 0, y: 341.9}
   m_SizeDelta: {x: 70.28963, y: 89.6251}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023709147
@@ -15525,7 +15528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 122.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137958437
@@ -15605,7 +15608,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -81.188576}
+  m_Offset: {x: 0, y: -85.1111}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -15615,7 +15618,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 217, y: 54.622845}
+  m_Size: {x: 217, y: 24.948143}
   m_EdgeRadius: 0
 --- !u!1 &1144507822
 GameObject:
@@ -16294,7 +16297,7 @@ Transform:
   m_GameObject: {fileID: 1174647107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.26, y: 131.2, z: -9720}
+  m_LocalPosition: {x: -36.26, y: 344.6, z: -9720}
   m_LocalScale: {x: 2, y: 100, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17165,8 +17168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 3
   limitTime: 6
-  successImage: {fileID: 0}
-  failedImage: {fileID: 0}
+  stageManager: {fileID: 533266233}
+  successImage: {fileID: 1283796251}
+  failedImage: {fileID: 1096044055}
   Initial:
     m_PersistentCalls:
       m_Calls:
@@ -17221,8 +17225,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  SuccessImage: {fileID: 1283796251}
-  FailedImage: {fileID: 1096044055}
   circle: {fileID: 2139504035}
 --- !u!1 &1237603573
 GameObject:
@@ -19203,6 +19205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 6
   limitTime: 6
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   way: {fileID: 876814190723657094, guid: feba7a60d68571d41a1d758bfea6beb3, type: 3}
@@ -22326,6 +22329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 1
   limitTime: 6
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   container: {fileID: 534049280}
@@ -22829,7 +22833,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.57574415, y: 0}
+  m_Offset: {x: 1.6540985, y: 4.3436356}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -22839,7 +22843,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 21.264404, y: 100}
+  m_Size: {x: 39.508507, y: 240.73238}
   m_EdgeRadius: 0
 --- !u!1 &1827288556
 GameObject:
@@ -23028,6 +23032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 2
   limitTime: 6
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   gauge: {fileID: 573654327}
@@ -25241,8 +25246,8 @@ MonoBehaviour:
   - {fileID: 7122171767316536684, guid: 825174a5ce2b62744b9a4e4073c8b0d5, type: 3}
   - {fileID: 7122171767316536684, guid: c5b1da25e5f236046892d95fa3516a16, type: 3}
   - {fileID: 7122171767316536684, guid: 3f5d93d1969f5ac4893fc67c7708c472, type: 3}
-  - {fileID: 7122171767316536684, guid: c5b1da25e5f236046892d95fa3516a16, type: 3}
-  - {fileID: 7122171767316536684, guid: c5b1da25e5f236046892d95fa3516a16, type: 3}
+  - {fileID: 7122171767316536684, guid: e17ddcea532e44f40b686fb7a0ed16c0, type: 3}
+  - {fileID: 7122171767316536684, guid: e17ddcea532e44f40b686fb7a0ed16c0, type: 3}
   createdEventList: []
   eventSpawnTime: 16
   zoneSpawnPoint_01:
@@ -25624,7 +25629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 191.1, y: -439.1}
+  m_AnchoredPosition: {x: 191.1, y: -185.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2139504035
@@ -25748,8 +25753,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 50
+  m_Offset: {x: 0, y: -0.90094334}
+  m_Radius: 49.09906
 --- !u!222 &2139504039
 CanvasRenderer:
   m_ObjectHideFlags: 0
