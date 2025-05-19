@@ -54,16 +54,20 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(PauseMovement(introCameraSwitcher.introDuration+2));
+        // StartCoroutine(PauseMovement(introCameraSwitcher.introDuration+2));
     }
     void Update()
     {
         if (InputManager.Instance.PausePressed)
         {
             Debug.Log("GameController에서 Pause 감지!");
-            //if (optionPanel == null) return;
-            optionPanel.SetActive(true);
+
+            if (optionPanel != null)
+                optionPanel.SetActive(true);
+
             canMove = true;
+
+            Time.timeScale = 0f;
         }
      
         // E 키 눌러서 상호작용

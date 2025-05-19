@@ -31,6 +31,7 @@ public class MapGuide : Task
         timer += Time.deltaTime;
         if (timer >= limitTime)
         {
+            stageManager.DecreasePlayerHp();
             failedImage.SetActive(true);
             Close();
             timer = 0.0f;
@@ -151,6 +152,7 @@ public class MapGuide : Task
       
         if (completeCheck)
         {
+            timer = 0.0f;
             successImage.SetActive(true);
             Close();
             foreach (var way in ways)

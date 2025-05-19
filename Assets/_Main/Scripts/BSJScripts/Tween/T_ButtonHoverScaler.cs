@@ -17,15 +17,23 @@ public class T_ButtonHoverScaler : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SoundManager.Instance.PlaySFX("UIButton_hover");
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("UIButton_hover");
+
         currentTween?.Kill(); // 이전 트윈 중지
-        currentTween = transform.DOScale(originalScale * scaleFactor, duration).SetEase(Ease.OutBack);
+        currentTween = transform
+            .DOScale(originalScale * scaleFactor, duration)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);   // Time.timeScale 무시
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         currentTween?.Kill();
-        currentTween = transform.DOScale(originalScale, duration).SetEase(Ease.OutBack);
+        currentTween = transform
+            .DOScale(originalScale, duration)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);   // Time.timeScale 무시
     }
 
     private void OnDisable()

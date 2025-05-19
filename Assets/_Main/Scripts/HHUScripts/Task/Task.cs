@@ -8,11 +8,14 @@ public class Task : MonoBehaviour
     [SerializeField]
     protected float limitTime = 6.0f;
     protected float timer;
+    [SerializeField]
+    protected StageManager stageManager;
     private PlayerController playerController;
     private PlayerAnimator playerAnimator;
     private UIAction action;
     public GameObject successImage;
     public GameObject failedImage;
+
 
     public virtual void InitGame() { } //초기화 방식은 Task마다 다름. 시작이 아닌 말그대로 초기화 시작시 불러져야 하는 것
     
@@ -87,7 +90,6 @@ public class Task : MonoBehaviour
             playerController = null;
         }
     }
-
     public float GetLimitTime()
     {
         return limitTime;

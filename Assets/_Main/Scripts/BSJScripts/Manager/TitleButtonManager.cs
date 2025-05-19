@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,8 +44,9 @@ public class TitleButtonManager : MonoBehaviour
         // 옵션 버튼 이벤트
         option_Button.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySFX("UIButton_sound");
-
+            if(SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("UIButton_sound");
+            
             // 옵션 팝업 열기
             optionUI_Obj.SetActive(true);
         });
@@ -52,7 +54,8 @@ public class TitleButtonManager : MonoBehaviour
         // 플레이 버튼
         play_Button.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySFX("UIButton_sound");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("UIButton_sound");
 
             // TODO : 오프닝 컷신 + 튜토리얼 씬으로 넘어가기.
         });
@@ -60,13 +63,16 @@ public class TitleButtonManager : MonoBehaviour
         // 나가기 버튼
         quit_Button.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySFX("UIButton_sound");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("UIButton_sound");
 
 #if UNITY_EDITOR
             // 에디터에서 실행 중일 경우, 플레이 모드 종료
+            DOTween.KillAll();
             UnityEditor.EditorApplication.isPlaying = false;
 #else
             // 빌드된 게임에서는 게임 종료
+            DOTween.KillAll();
             Application.Quit();
 #endif
         });
@@ -82,7 +88,8 @@ public class TitleButtonManager : MonoBehaviour
         // 크레딧 버튼
         credit_Button.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySFX("UIButton_sound");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("UIButton_sound");
 
             // 크레딧 화면 열기
             creditUI_Obj.SetActive(true);
@@ -91,7 +98,8 @@ public class TitleButtonManager : MonoBehaviour
         // 메인 화면으로 버튼
         goToMain_Button.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySFX("UIButton_sound");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("UIButton_sound");
 
             // 옵션 팝업 닫기
             optionUI_Obj.SetActive(false);
@@ -101,7 +109,8 @@ public class TitleButtonManager : MonoBehaviour
         // 크레딧 {
         creditClose_Button.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySFX("UIButton_sound");
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySFX("UIButton_sound");
 
             // 크레딧 화면 닫기
             creditUI_Obj.SetActive(false);
@@ -112,8 +121,11 @@ public class TitleButtonManager : MonoBehaviour
         optionUI_Obj.SetActive(false);
         creditUI_Obj.SetActive(false);
 
-        sfx_Slider.value = SoundManager.Instance.SFXVolume;
-        bgm_Slider.value = SoundManager.Instance.MusicVolume;
+        if(SoundManager.Instance != null)
+        {
+            sfx_Slider.value = SoundManager.Instance.SFXVolume;
+            bgm_Slider.value = SoundManager.Instance.MusicVolume;
+        }
     }
 
     /// <summary>
@@ -122,7 +134,8 @@ public class TitleButtonManager : MonoBehaviour
     /// <param name="value"></param>
     private void ChangeBGMVolume(float value)
     {
-        SoundManager.Instance.SetMusicVolume(value);
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.SetMusicVolume(value);
     }
 
     /// <summary>
@@ -131,6 +144,7 @@ public class TitleButtonManager : MonoBehaviour
     /// <param name="value"></param>
     private void ChangeSFXVolume(float value)
     {
-        SoundManager.Instance.SetSFXVolume(value);
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.SetSFXVolume(value);
     }
 }
