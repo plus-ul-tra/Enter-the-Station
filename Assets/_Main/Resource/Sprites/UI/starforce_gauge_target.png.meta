@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      starforce_gauge_target_0: 5590232258420487120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
