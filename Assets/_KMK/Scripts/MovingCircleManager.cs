@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.Splines.ExtrusionShapes;
 
 
@@ -14,10 +15,11 @@ public class MovingCircleManager : Task
 
     float time;
     float closeTime;
-
+    
     public GameObject SuccessImage;
     public GameObject FailedImage;
-
+    [SerializeField]
+    private MovingCircle circle;
     void OnEnable()
     {
         InitGame();
@@ -27,19 +29,18 @@ public class MovingCircleManager : Task
     {
         SuccessImage.SetActive(false);
         FailedImage.SetActive(false);
-        time = 0.0f;
-        closeTime = 0.0f;
+        timer = 0.0f;
         isClose = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Space) && !isClose)
         {
             if (isSuccess)
             {
+                circle.SetSmile();
                 SuccessImage.SetActive(true);
                 isClose = true;
                 Close();
@@ -52,14 +53,14 @@ public class MovingCircleManager : Task
                 Close();
             }
         }
-        if (time >= 6.5f && !isSuccess)
+        if (timer >= limitTime && !isSuccess)
         {
             FailedImage.SetActive(true);
             isClose = true;
             Close();
         }
 
-        if (isClose) { SetAllStop.Invoke(); closeTime += Time.deltaTime; }
+        if (isClose) { SetAllStop.Invoke();}
         //if (closeTime >= 1.0f) { Close(); }
     }
 

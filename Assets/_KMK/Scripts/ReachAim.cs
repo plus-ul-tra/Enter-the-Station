@@ -22,15 +22,13 @@ public class ReachAim : BaseGauge
         successImage.SetActive(false);
         failedImage.SetActive(false);
         gauge.fillAmount = 0.5f;
-        time = 0.0f;
-        closeTime = 0.0f;
         isReached = false;
         isOver = false;
         isClose = false;
     }
     void Update()
     {
-        time += Time.deltaTime;
+        timer += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space) && !isOver)
         {    
@@ -62,7 +60,7 @@ public class ReachAim : BaseGauge
                 Close();
             }
         }
-        else if (!isOver && time >= 6.5f || gauge.fillAmount == 0.0f)
+        else if (!isOver && timer >= limitTime || gauge.fillAmount == 0.0f)
         {
             Close();
             failedImage.SetActive(true);
@@ -77,7 +75,7 @@ public class ReachAim : BaseGauge
         }
 
 
-        if (time <= 6.5f && !isOver) // 시간 오바되지 않는 한 계속 게이지 감소
+        if (timer <= limitTime && !isOver) // 시간 오바되지 않는 한 계속 게이지 감소
         {
             SubGauge();      
         }

@@ -33,6 +33,15 @@ public class ArrowMatching : Task
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer >= limitTime)
+        {
+            failedImage.SetActive(true);
+            Close();
+            timer = 0.0f;
+            return;
+        }
+
         if (arrowBlocks.Count == 0) return;
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) TryMatch(ArrowDir.Up);
@@ -45,6 +54,7 @@ public class ArrowMatching : Task
         {
             // task 성공
             //필요시 함수 추가
+            successImage.SetActive(true);
             Close();
             return;
         }
@@ -101,7 +111,7 @@ public class ArrowMatching : Task
         }
         else
         {
-            Debug.Log("오답");
+            //Debug.Log("오답");
             //Block.MatcheFail();
 
         }
@@ -109,6 +119,9 @@ public class ArrowMatching : Task
 
     public override void InitGame()
     {
+        timer = 0.0f;
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
         SetBlock();
     }
     

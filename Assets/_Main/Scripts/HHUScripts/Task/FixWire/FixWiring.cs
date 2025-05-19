@@ -49,6 +49,17 @@ public class FixWiring : Task
     }
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer >= limitTime)
+        {
+            failedImage.SetActive(true);
+            Close();
+            timer = 0.0f;
+            return;
+
+            
+        }
+
         if (Input.GetMouseButtonDown(0)) //down 되어있는 동안은 선을 끌고 있다는 것
         {
 
@@ -113,11 +124,15 @@ public class FixWiring : Task
         if (isAllComplete)
         {
             // 성공
+            successImage.SetActive(true);
             Close();
         }
     }
     public override void InitGame()
     {
+        timer = 0.0f;
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
         for (int i = 0; i < leftWires.Count; i++)
         {
             leftWires[i].ResetTarget();

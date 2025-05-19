@@ -9,6 +9,11 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] 
     private List<ItemDataSO> itemDataList;
 
+    private void Update()
+    {
+       //SpawnRandomItem();
+    }
+
     public void SpawnRandomItem()
     {
         int index = Random.Range(0, itemDataList.Count);

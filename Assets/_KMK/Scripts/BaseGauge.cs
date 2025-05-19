@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class BaseGauge : Task
 {
     public Image gauge;
-    public GameObject successImage;
-    public GameObject failedImage;
 
     public float addGauge; // 밖에서 조절
     public float subtractGauge;
