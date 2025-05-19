@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FadeController : MonoBehaviour
@@ -64,7 +65,9 @@ public class FadeController : MonoBehaviour
         );
 
         seq.OnComplete(() => {
-            // TODO : Scene 전환
+            // 실패 엔딩씬으로 이동
+            DOTween.KillAll();
+            SceneManager.LoadScene("FailEnding");
         });
     }
 

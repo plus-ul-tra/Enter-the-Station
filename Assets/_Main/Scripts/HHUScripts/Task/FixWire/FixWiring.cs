@@ -17,6 +17,7 @@ public class FixWiring : Task
     [SerializeField]
     private List<RightWire> rightWires;
     private LeftWire selectWire;
+    private bool isOver = false;
 
     private void OnEnable()
     {
@@ -49,7 +50,17 @@ public class FixWiring : Task
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) //down 되어있는 동안은 선을 끌고 있다는 것
+        timer += Time.deltaTime;
+        if (timer >= limitTime)
+        {
+            stageManager.DecreasePlayerHp(); //singleton 객체 사용
+            failedImage.SetActive(true);
+            Close();
+            timer = 0.0f;
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(0)&&!isOver) //down 되어있는 동안은 선을 끌고 있다는 것
         {
 
             RaycastHit2D hit = Physics2D.Raycast(Input.mousePosition, Vector2.right, 1.0f);
@@ -63,7 +74,7 @@ public class FixWiring : Task
                 }
             }
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)&&!isOver)
         {
             if (selectWire != null)
             {
@@ -75,7 +86,7 @@ public class FixWiring : Task
                         var right = hit.collider.GetComponentInParent<RightWire>();
                         if (right != null)
                         {
-                            selectWire.SetTarget(hit.transform.position, -20.0f);
+                            selectWire.SetTarget(hit.transform.position, -100.0f);
                             selectWire.ConnectWire(right);
                             right.ConnectWire(selectWire);
                             selectWire = null;
@@ -95,7 +106,7 @@ public class FixWiring : Task
 
         if (selectWire != null)
         {
-            selectWire.SetTarget(Input.mousePosition, -10.0f);
+            selectWire.SetTarget(Input.mousePosition, -100.0f);
         }
     }
 
@@ -112,12 +123,20 @@ public class FixWiring : Task
         }
         if (isAllComplete)
         {
+            timer = 0.0f;
             // 성공
+            successImage.SetActive(true);
             Close();
+            
         }
     }
+
     public override void InitGame()
     {
+        timer = 0.0f;
+        isOver = false;
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
         for (int i = 0; i < leftWires.Count; i++)
         {
             leftWires[i].ResetTarget();

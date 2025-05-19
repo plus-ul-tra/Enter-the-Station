@@ -14,6 +14,9 @@ TagManager:
   - Canvas
   - Option
   - Item
+  - MapObstacle
+  - BoothObstacle
+  - Return
   layers:
   - Default
   - TransparentFX

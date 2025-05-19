@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance { get; private set; }
+    public static InputManager Instance { get; private set; } = null;
 
     // 에셋에서 Generate 한 C# 클래스
     private GameControls controls;

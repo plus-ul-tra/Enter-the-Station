@@ -8,25 +8,24 @@ public class Reach100 : BaseGauge
 
     void OnEnable()
     {
-        Debug.Log("chchchc");
+        //Debug.Log("chchchc");
         InitGame();
     }
     public override void InitGame()
     {
+        timer = 0.0f;
         successImage.SetActive(false);
         failedImage.SetActive(false);
         gauge.fillAmount = 0.0f;
-        time = 0.0f;
-        closeTime = 0.0f;
         isClose = false;
         isFilled = false;
     }
     void Update()
     {    
-        time += Time.deltaTime;
+        timer += Time.deltaTime;
         if (!isClose)
         {
-            if (time <= 6.5f && !isFilled) // 시간 오바되지 않는 한
+            if (timer <= limitTime && !isFilled) // 시간 오바되지 않는 한
             {
                 SubGauge();
             }
@@ -38,20 +37,23 @@ public class Reach100 : BaseGauge
                 {
                     isFilled = true;
                 }
-                //Debug.Log(isFilled);
-                //Debug.Log(time);
+                
             }
-            else if (isFilled && time <= 6.5f)
+            else if (isFilled && timer <= limitTime)
             {
-                //successImage.SetActive(true);
+                successImage.SetActive(true);
                 isClose = true;
                 Close();
+                timer = 0.0f;
             }
-            else if (!isFilled && time >= 6.5f)
+            else if (!isFilled && timer >= limitTime)
             {
-                //failedImage.SetActive(true);
+                //Debug.Log("호호호풀훛푸");
+                stageManager.DecreasePlayerHp();
+                failedImage.SetActive(true);
                 isClose = true;
                 Close();
+                timer = 0.0f;
             }
         }
         

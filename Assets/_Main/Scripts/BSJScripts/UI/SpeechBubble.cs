@@ -28,8 +28,13 @@ public enum SpeechKey
 
 public class SpeechBubble : MonoBehaviour
 {
+    [Header("팝업 오브젝트")]
     public GameObject popUpObject;
+
+    [Header("텍스트")]
     public TMP_Text tmpText;
+
+    [Header("이미지 (말풍선)")]
     public RectTransform imageRect;
 
     public int punchCount = 7; // 몇 번 펀칭할지
@@ -38,6 +43,11 @@ public class SpeechBubble : MonoBehaviour
 
     private CanvasGroup canvasGroup;
     private StringBuilder sb;
+
+    // 스크립트 참조
+    [Header("무전기 트윈 이펙트")]
+    [SerializeField] private T_TalkleEffect t_talkleEffect;
+    private WaitForSeconds speechWaitTime = new WaitForSeconds(0.5f);    // 말하기 까지 대기시간
 
     private void Awake()
     {
@@ -53,18 +63,32 @@ public class SpeechBubble : MonoBehaviour
     /// <summary>
     /// 무전기 말풍선을 실행시키는 함수
     /// </summary>
-    public void PlaySpeechBubble(SpeechKey speechKey)
+    public void PlaySpeechBubble(SpeechKey speechKey, int zoneIndex = 1)
     {
-        SetSpeechBubbleText(speechKey);
+        SetSpeechBubbleText(speechKey, zoneIndex);
         tmpText.text = sb.ToString();
 
         StartCoroutine(PunchMultipleTimes());
     }
 
-    void SetSpeechBubbleText(SpeechKey speechKey)
+    void SetSpeechBubbleText(SpeechKey speechKey, int zoneIndex = 1)
     {
         int randomSpeechIndex = 0;
         sb.Clear();
+
+        switch (zoneIndex)
+        {
+            case 1:
+            case 2:
+            case 3:
+                sb.AppendLine("\"1층\"");
+                break;
+            case 4:
+            case 5:
+            case 6:
+                sb.AppendLine("\"2층\"");
+                break;
+        }
 
         switch (speechKey)
         {
@@ -226,6 +250,10 @@ public class SpeechBubble : MonoBehaviour
 
     IEnumerator PunchMultipleTimes()
     {
+        // 무전기 올라오는 트윈
+        t_talkleEffect.MoveUp();
+        yield return speechWaitTime;
+
         // 캔버스 그룹 초기화
         canvasGroup.alpha = 1;
 
@@ -254,6 +282,10 @@ public class SpeechBubble : MonoBehaviour
 
             yield return new WaitForSeconds(punchInterval);
         }
+
+        // 무전기 내려가는 트윈
+        t_talkleEffect.MoveDown();
+        yield return speechWaitTime;
 
         // 팝업 오브젝트 페이드아웃
         canvasGroup.DOFade(0, 1f);

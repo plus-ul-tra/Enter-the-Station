@@ -30,8 +30,8 @@ public class ReachAim : Task
     {
         successImage.SetActive(false);
         failedImage.SetActive(false);
-        
-        time = 0.0f;
+
+        gauge.fillAmount = 0.5f;
         isReached = false;
         isOver = false;
         isClose = false;
@@ -42,7 +42,7 @@ public class ReachAim : Task
 
     void Update()
     {
-        time += Time.deltaTime;
+        timer += Time.deltaTime;
 
         if (isReached)
         {
@@ -94,7 +94,8 @@ public class ReachAim : Task
                 Close();
             }
         }
-        else if (!isOver && time >= 6.5f)
+
+        else if (!isOver && timer >= limitTime || gauge.fillAmount == 0.0f)
         {
             failedImage.SetActive(true);
             onResult.Invoke();
@@ -103,6 +104,14 @@ public class ReachAim : Task
                 isClose = true;
                 Close();
             }
+
+
+        }
+
+
+        if (timer <= limitTime && !isOver) // 시간 오바되지 않는 한 계속 게이지 감소
+        {
+            SubGauge();      
         }
     }
     public void SetIsReached()

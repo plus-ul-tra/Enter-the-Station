@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.Splines.ExtrusionShapes;
 
 
@@ -14,55 +15,64 @@ public class MovingCircleManager : Task
 
     float time;
     float closeTime;
-
-    public GameObject SuccessImage;
-    public GameObject FailedImage;
-
+   
+    [SerializeField]
+    private MovingCircle circle;
+    //private int count;
     void OnEnable()
     {
+       // count = 0;
         InitGame();
         Initial.Invoke();
     }
     public override void InitGame()
     {
-        SuccessImage.SetActive(false);
-        FailedImage.SetActive(false);
-        time = 0.0f;
-        closeTime = 0.0f;
+
+        successImage.SetActive(false);
+        failedImage.SetActive(false);
+        timer = 0.0f;
         isClose = false;
+        //isSuccess = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        timer += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Space) && !isClose)
         {
             if (isSuccess)
             {
-                SuccessImage.SetActive(true);
+                //3번 성공 종료
+                circle.SetSmile();
+                successImage.SetActive(true);
                 isClose = true;
                 Close();
+                timer = 0.0f;
             }
 
             else if (!isSuccess)
             {
-                FailedImage.SetActive(true);
+                stageManager.DecreasePlayerHp();
+                failedImage.SetActive(true);
                 isClose = true;
                 Close();
             }
         }
-        if (time >= 6.5f && !isSuccess)
+
+        //타임오버
+        if (timer >= limitTime && !isSuccess)
         {
-            FailedImage.SetActive(true);
+            stageManager.DecreasePlayerHp();
+            failedImage.SetActive(true);
             isClose = true;
             Close();
+            timer = 0.0f;
         }
 
-        if (isClose) { SetAllStop.Invoke(); closeTime += Time.deltaTime; }
+        if (isClose) { SetAllStop.Invoke();}
         //if (closeTime >= 1.0f) { Close(); }
     }
 
-    public void SetSuccess() { isSuccess = true; }
+    public void SetSuccess() {  isSuccess = true; }
     public void SetFail() { isSuccess = false; }
 }

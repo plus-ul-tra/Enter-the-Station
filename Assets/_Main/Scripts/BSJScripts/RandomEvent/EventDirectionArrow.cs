@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class EventDirectionArrow : MonoBehaviour
 {
-    public GameObject arrowPrefab;          // 화살표 프리팹
+    public GameObject arrowPrefab_1th;          // 1층 화살표 프리팹
+    public GameObject arrowPrefab_2nd;          // 2층 화살표 프리팹
     public float radius = 0.2f;               // 원형 반지름
     public float yOffset = 0.3f; // 원을 얼마나 아래로 내릴지 설정
     public float spriteAngleOffset = -90f;  // 화살표 Sprite가 기본적으로 바라보는 방향과 X축 사이의 각도
@@ -27,9 +29,30 @@ public class EventDirectionArrow : MonoBehaviour
     /// 돌발상황 추적하는 화살표 생성
     /// </summary>
     /// <param name="eventObj">랜덤 돌발상황</param>
-    public void CreateArrow(RandomEventObject eventObj)
+    public void CreateArrow(RandomEventObject eventObj, int zoneIndex = 1)
     {
-        GameObject newArrow = Instantiate(arrowPrefab, player.position, Quaternion.identity, transform);
+        GameObject arrowSelect;
+
+        switch(zoneIndex)
+        {
+            case 1:
+            case 2:
+            case 3:
+                arrowSelect = arrowPrefab_1th;
+                break;
+
+            case 4:
+            case 5:
+            case 6:
+                arrowSelect = arrowPrefab_2nd;
+                break;
+
+            default:
+                arrowSelect = arrowPrefab_1th;
+                break;
+        }
+
+        GameObject newArrow = Instantiate(arrowSelect, player.position, Quaternion.identity, transform);
         arrowDict[eventObj] = newArrow.transform;
     }
 
