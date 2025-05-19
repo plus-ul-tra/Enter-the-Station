@@ -37,20 +37,23 @@ public class Reach100 : BaseGauge
                 {
                     isFilled = true;
                 }
-                //Debug.Log(isFilled);
-                //Debug.Log(time);
+                
             }
             else if (isFilled && timer <= limitTime)
             {
                 successImage.SetActive(true);
                 isClose = true;
                 Close();
+                timer = 0.0f;
             }
             else if (!isFilled && timer >= limitTime)
             {
+                //Debug.Log("ȣȣȣǮ�kǪ");
+                stageManager.DecreasePlayerHp();
                 failedImage.SetActive(true);
                 isClose = true;
                 Close();
+                timer = 0.0f;
             }
         }
         

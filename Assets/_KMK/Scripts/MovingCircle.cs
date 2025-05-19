@@ -36,7 +36,7 @@ public class MovingCircle : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isStopped = true;
+            //sStopped = true;
             ScopeStop.Invoke();
         }
         else if(!isStopped)
