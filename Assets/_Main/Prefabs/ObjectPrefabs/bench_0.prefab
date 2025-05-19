@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1778066757084484502}
   m_Layer: 0
   m_Name: bench_0
-  m_TagString: Untagged
+  m_TagString: MapObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4972563291699396620}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.728, y: -2.101, z: 0.18777873}
+  m_LocalPosition: {x: 15.376, y: -1.937, z: 0.18777873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.0065128803}
+  m_Offset: {x: 0, y: -0.009904385}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.17678839}
@@ -133,7 +133,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.73, y: 0.29646826}
+  m_Size: {x: 1.73, y: 0.25576878}
   m_EdgeRadius: 0
 --- !u!114 &-1778066757084484502
 MonoBehaviour:
