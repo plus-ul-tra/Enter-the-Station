@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using DG.Tweening;
 using UnityEngine.UI;
 using UnityEditor.Rendering;
 using TreeEditor;
@@ -11,8 +12,7 @@ public class MovingKey : MonoBehaviour, IPointerDownHandler, IDragHandler
     public UnityEvent transition;
     private RectTransform rectTransform;
     public float speed;
-    float time;
-    Vector2 mousPos;
+    float delay;
     Vector2 pointerOffset; // 오프셋 저장용
     bool isMoving;
 
@@ -21,21 +21,18 @@ public class MovingKey : MonoBehaviour, IPointerDownHandler, IDragHandler
         rectTransform = GetComponent<RectTransform>();
         rectTransform.localPosition = new Vector3(480f, rectTransform.localPosition.y, rectTransform.localPosition.z);
         isMoving = true;
-        time = 0f;
+        delay = 0f;
     }
 
     void Update()
     {
-        float snapSpeed = Time.deltaTime * speed;
         if (isMoving) return;
-        time += Time.deltaTime;
-        
-        if (time > 0.001f && rectTransform.localPosition.x >= -16.5f)
+        delay += Time.deltaTime;
+        if (rectTransform.localPosition.x >= -14f)
         {
-            rectTransform.Translate(-1 * snapSpeed, 0, 0);
-            time = 0f;
+            rectTransform.Translate(-1 * speed, 0, 0);
         }
-        if (rectTransform.localPosition.x <= -16.5f && time > 1f)
+        if (rectTransform.localPosition.x <= -14f && delay > 0.6f)
         {
             transition.Invoke();
         }
@@ -43,21 +40,32 @@ public class MovingKey : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Canvas canvas = GetComponentInParent<Canvas>();
+        Camera cam = null;
+        if (canvas.renderMode == RenderMode.ScreenSpaceCamera || canvas.renderMode == RenderMode.WorldSpace)
+        {
+            cam = canvas.worldCamera;
+        }
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
         rectTransform,
         eventData.position,
-        eventData.pressEventCamera,
+        cam, // null or eventData.pressEventCamera,
         out pointerOffset
     );
     }
     public void OnDrag(PointerEventData eventData)
     {
         if (!isMoving) return;
-
+        Canvas canvas = GetComponentInParent<Canvas>();
+        Camera cam = null;
+        if (canvas.renderMode == RenderMode.ScreenSpaceCamera || canvas.renderMode == RenderMode.WorldSpace)
+        {
+            cam = canvas.worldCamera;
+        }
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
         rectTransform.parent as RectTransform,
         eventData.position,
-        eventData.pressEventCamera,
+        cam, // null or eventData.pressEventCamera,
         out Vector2 localPoint))
         {
             // 오프셋을 보정하여 자연스럽게 따라오도록
@@ -75,13 +83,3 @@ public class MovingKey : MonoBehaviour, IPointerDownHandler, IDragHandler
         isMoving = false;
     }
 }
-//if (dir.x > 0)
-//{
-//    //rectTransform.position = new Vector3(eventData.position.x, 28, 0);
-//    //Debug.Log(dir.x);
-//}
-//else if (dir.x < 0)
-//{
-//    //rectTransform.position = new Vector3(eventData.position.x, 28, 0);
-//    //Debug.Log(dir.x); 
-//}

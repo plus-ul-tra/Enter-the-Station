@@ -3,9 +3,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEditor.Rendering;
+using DG.Tweening;
 
 public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+
     public UnityEvent SetSuccess;
     public GameObject light1, light2;
     public GameObject KeyHole;
@@ -53,50 +55,47 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
             lightNum++;
             isClear = false;
             Debug.Log(goalNum); 
-        }
-         
-        
+        }  
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, KeyHole.transform.position);
-        //centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransform.position);
+        Canvas canvas = GetComponentInParent<Canvas>();
+        Camera cam = null;
+        if (canvas.renderMode == RenderMode.ScreenSpaceCamera || canvas.renderMode == RenderMode.WorldSpace)
+        {
+            cam = canvas.worldCamera;
+        }
 
-        dirS = eventData.position - centerPos;
+        centerPos = RectTransformUtility.WorldToScreenPoint(cam, KeyHole.transform.position);
+
+        dirS = (eventData.position - centerPos).normalized;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-            Vector2 dir = eventData.position - centerPos;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            if (dirS.y < 0)
-            {
-                rawAngle = angle + 90f;
-            }
-            else if (dirS.y > 0)  // 이미지 위쪽이 기준이라 -90도 조정
-            {
-                rawAngle = angle - 90f;
-            }
-            // 각도 변화 계산 후 감도 적용
-            float angleDelta = Mathf.DeltaAngle(currentAngle, rawAngle);
-            currentAngle += angleDelta * sensitivity;
-        //rectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
+        Vector2 currentDir = (eventData.position - centerPos).normalized;
+
+        // 이전 방향과 현재 방향 사이의 상대적인 각도 계산
+        float angleDelta = Vector2.SignedAngle(dirS, currentDir);
+
+        currentAngle += angleDelta * sensitivity;
         KeyHole.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
 
-            // 틱 사운드
-            float stepAngle = 360f / totalSteps;
-            int stepIndex = Mathf.RoundToInt((currentAngle + 360f) % 360f / stepAngle);
-            float steppedAngle = stepIndex * stepAngle;
-            
-            Debug.Log("steppedAngle: " + steppedAngle);
-            if (Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f) // Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f
-            {
-                StartCoroutine(SnapToAngle(steppedAngle));
-                lastStepAngle = steppedAngle;
-            if(Mathf.Abs(steppedAngle) == Mathf.Abs(steppedAngle))
-                PlayTickSound();
-            }
+        dirS = currentDir; // 다음 프레임을 위한 기준 갱신
+
+        // 틱 사운드
+        float stepAngle = 360f / totalSteps;
+        int stepIndex = Mathf.RoundToInt((currentAngle + 360f) % 360f / stepAngle);
+        float steppedAngle = stepIndex * stepAngle;
+   
+        Debug.Log("steppedAngle: " + steppedAngle);
+        if (Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f) // Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f
+        {
+            StartCoroutine(SnapToAngle(steppedAngle));
+            lastStepAngle = steppedAngle;
+            PlayTickSound();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -106,8 +105,11 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         float stepAngle = 360f / totalSteps;
         float snappedAngle = Mathf.Round((currentAngle + 360f) % 360f / stepAngle) * stepAngle;
 
-        // 코루틴으로 부드럽게 스냅
-        StartCoroutine(SnapToAngle(0f));
+        // 원래 각도(0)으로 0.5초 동안 돌아감
+        KeyHole.transform.DORotate(new Vector3(0, 0, 0), 0.5f).OnComplete(() =>
+        {
+            currentAngle = 0f;
+        });
 
         // 번호 계산
         int dialNumber = Mathf.RoundToInt(snappedAngle / stepAngle) % totalSteps;
@@ -130,9 +132,8 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         float t = 0f;
         while (t < 1f)
         {
-            t += Time.deltaTime * snapSpeed;
+            t += snapSpeed; // t += Time.deltaTime * snapSpeed;
             currentAngle = Mathf.LerpAngle(startAngle, targetAngle, t);
-            //rectTransform.rotation = Quaternion.Euler(0, 0, currentAngle);
             KeyHole.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
             yield return null;
         }

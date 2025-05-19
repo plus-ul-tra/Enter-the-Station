@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class MovingScope : MonoBehaviour
@@ -11,7 +12,7 @@ public class MovingScope : MonoBehaviour
     {
         isStopped = false;
         vectorScope.x = -1.0f;
-        transform.localPosition = new Vector3(-300.0f, transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(-312.0f, transform.localPosition.y, transform.localPosition.z);
     }
 
     // Update is called once per frame
@@ -20,8 +21,8 @@ public class MovingScope : MonoBehaviour
         if (isStopped)
             return;
 
-     ScopePosX = vectorScope.x * ScopeSpeed * Time.deltaTime;
-     gameObject.transform.Translate(ScopePosX, 0, 0);
+        ScopePosX = vectorScope.x * ScopeSpeed;
+        gameObject.transform.localPosition = new Vector3(transform.localPosition.x + ScopePosX, transform.localPosition.y, transform.localPosition.z);
     }
 
     void OnCollisionEnter2D(Collision2D collision) // BaseSqaureÀÇ ³¡¿¡ ºÎµúÇûÀ» ¶§

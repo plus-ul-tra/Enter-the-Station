@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 9e1793f3391e030438b6b2bc1df7c03e
+guid: 3189004736b0afd4a80e6af849af7d04
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2637094390118253933
-    second: talkie_0
+      213: 7035211901092639918
+    second: Heart&Lines_0
+  - first:
+      213: 7025176929173389161
+    second: Heart&Lines_1
+  - first:
+      213: 7601065435947455802
+    second: Heart&Lines_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +106,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: talkie_0
+      name: Heart&Lines_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 341
-        height: 1001
+        x: 14
+        y: 570
+        width: 637
+        height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 637, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 430083e966d725e4bbc869fa1e9f8ca1
+      internalID: 1724564108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart&Lines_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 240
+        width: 212
+        height: 289
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d658c2a3067d89420800000000000000
-      internalID: 2637094390118253933
+      spriteID: 29d77f732b250df438a38d398915bb5f
+      internalID: 458641959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart&Lines_2
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 0
+        width: 166
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a3c98fe8cc2d44f9cad053097e1877
+      internalID: -569786946
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6073ce021b89234408d29e0c501e75b1
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      talkie_0: 2637094390118253933
+      Heart&Lines_0: 1724564108
+      Heart&Lines_1: 458641959
+      Heart&Lines_2: -569786946
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

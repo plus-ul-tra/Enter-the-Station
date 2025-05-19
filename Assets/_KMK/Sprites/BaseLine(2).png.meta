@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9e1793f3391e030438b6b2bc1df7c03e
+guid: 6bce925e06cbbb54299b34d42a042950
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2637094390118253933
-    second: talkie_0
+      213: -7358197773669295993
+    second: BaseLine(2)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: talkie_0
+      name: BaseLine(2)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 341
-        height: 1001
+        width: 558
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d658c2a3067d89420800000000000000
-      internalID: 2637094390118253933
+      spriteID: 7881f593c1e62e990800000000000000
+      internalID: -7358197773669295993
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2607a27a212102c499cce5558c4f78bd
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      talkie_0: 2637094390118253933
+      BaseLine(2)_0: -7358197773669295993
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

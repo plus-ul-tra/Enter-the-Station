@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 using UnityEngine.Splines.ExtrusionShapes;
 
 
@@ -20,7 +21,7 @@ public class MovingCircle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
-        gameObject.transform.localPosition = new Vector3(480.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
+        gameObject.transform.localPosition = new Vector3(330.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
         vectorCircle.x = -1.0f;
         //circleSpeed = 0.0f;
         isStopped = false;
@@ -36,8 +37,8 @@ public class MovingCircle : MonoBehaviour
         }
         else if(!isStopped)
         {
-            circlePosX = vectorCircle.x * circleSpeed * Time.deltaTime;
-            gameObject.transform.Translate(circlePosX, 0, 0);
+            circlePosX = vectorCircle.x * circleSpeed;
+            gameObject.transform.Translate(circlePosX, 0, 0, Space.Self);
             Debug.Log(circlePosX);
         }
     }
@@ -52,7 +53,6 @@ public class MovingCircle : MonoBehaviour
             {
                 vectorCircle.x = 1.0f;
             }
-        Debug.Log(gameObject.transform.position.x);
     }
 
     void OnTriggerEnter2D(Collider2D collision) // scopeSqaure¿Í °ãÄ¥ ¶§

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9e1793f3391e030438b6b2bc1df7c03e
+guid: 11d324a45dc7a4b4cb888f0b74e58a86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2637094390118253933
-    second: talkie_0
+      213: 4706202297198099816
+    second: rage_mini_02_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: talkie_0
+      name: rage_mini_02_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 341
-        height: 1001
+        width: 590
+        height: 883
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d658c2a3067d89420800000000000000
-      internalID: 2637094390118253933
+      spriteID: 86dbe950e0acf4140800000000000000
+      internalID: 4706202297198099816
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      talkie_0: 2637094390118253933
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
