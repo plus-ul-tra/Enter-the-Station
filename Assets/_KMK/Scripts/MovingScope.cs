@@ -22,7 +22,7 @@ public class MovingScope : MonoBehaviour
         if (isStopped)
             return;
 
-        ScopePosX = vectorScope.x * ScopeSpeed;
+        ScopePosX = vectorScope.x * ScopeSpeed * Time.deltaTime;
         gameObject.transform.localPosition = new Vector3(transform.localPosition.x + ScopePosX, transform.localPosition.y, transform.localPosition.z);
     }
 

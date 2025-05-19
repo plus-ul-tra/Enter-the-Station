@@ -10594,7 +10594,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  penaltyGauge: 0.1
+  baseLineGroup: {fileID: 0}
+  pressSignGroup: {fileID: 0}
+  countLevel: 0
 --- !u!1 &672273331
 GameObject:
   m_ObjectHideFlags: 0
@@ -11532,7 +11534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &782553725
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11576,7 +11578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 0
   limitTime: 6
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 1283796251}
   failedImage: {fileID: 1096044055}
   leftWires:
@@ -14474,7 +14476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1013765521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18070,7 +18072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1229835953
 RectTransform:
   m_ObjectHideFlags: 0

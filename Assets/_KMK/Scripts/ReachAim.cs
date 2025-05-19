@@ -1,25 +1,23 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ReachAim : Task
+public class ReachAim : BaseGauge
 {
     public UnityEvent onSpacebar;
     public UnityEvent onResult;
     public UnityEvent initial;
 
-    public GameObject successImage;
-    public GameObject failedImage;
     public GameObject baseLineGroup;
     public GameObject pressSignGroup;
 
     bool isReached;
     bool isLeft;
     bool isOver;
-    bool isClose;
+    //bool isClose;
 
     public int countLevel;
 
-    float time;
+    //float time;
 
     void OnEnable()
     {
