@@ -3,27 +3,41 @@ using UnityEngine.Events;
 using DG.Tweening;
 using static UnityEditor.PlayerSettings;
 using UnityEditor.U2D.Sprites;
+using UnityEngine.UI;
 
-public class Zigzag : MonoBehaviour
+public class Drunken : MonoBehaviour
 {
-   
     public UnityEvent onTriggerEnter;
     public UnityEvent onTriggerExit;
     public UnityEvent onLeft;
     public UnityEvent onRight;
 
-    Vector3 pos;
-    Quaternion rotation;
-    Vector2 dirVector;
-    public float speed;
-    bool isOver;
-    Rigidbody2D rb;
-    [SerializeField]
-    private ReachAim reachAim;
-    private Vector2 dir = Vector2.left;
+    public Sprite drunken1;
+    public Sprite drunken2;
+    public Sprite drunken3;
+    Image thisImage;
 
-    public void OnEnable()
+    [SerializeField]
+    private DrunkenManager drunkenManager;
+
+    Rigidbody2D rb;
+
+    Vector3 pos;
+    Vector2 dirVector;
+    Quaternion rotation;
+    
+    public float adjustSpeed;
+    public float speed;
+    float applySpeed;
+
+    float animTime;
+    bool isOver;
+    
+
+    void OnEnable()
     {
+        thisImage = GetComponent<Image>();
+        thisImage.sprite = drunken1;
 
         isOver = false;
         rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -35,24 +49,23 @@ public class Zigzag : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.gravityScale = 0f;
-    }
-    void Start()
-    {
-        OnEnable();
+
+        animTime = 0f;
+        applySpeed = speed;
     }
 
     void Update()
     {
-        if (reachAim.countLevel == 0 || reachAim.countLevel == 1) { speed = 0.5f; }
-        if (reachAim.countLevel == 2) { speed = 0.45f; }
-        if (reachAim.countLevel == 3) { speed = 0.4f; }
-        if (reachAim.countLevel == 4) { speed = 0.35f; }
+        ChangeSpeed();
+
+        animTime += Time.deltaTime;
+        if (animTime >= Mathf.Pow(0.6f , drunkenManager.countLevel)) { ChangeImage(); animTime = 0f; }
     }
     void FixedUpdate()
     {
-        if (isOver) return;
-
-        pos.x = transform.localPosition.x + (dirVector.x * speed * 2.75f);
+        if (isOver) { thisImage.sprite = drunken1; return; }
+       
+        pos.x = transform.localPosition.x + (dirVector.x * applySpeed * 2.75f * Time.fixedDeltaTime);
         pos.y = -0.00116f * Mathf.Pow(pos.x, 2f) + 53.5f;
 
         transform.localPosition = pos;
@@ -65,7 +78,8 @@ public class Zigzag : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (dirVector.x > 0) { transform.localPosition = new Vector3(transform.localPosition.x - 10f, transform.localPosition.y - 10f, transform.localPosition.z); } // 10f는 콜라이더 지름 길이임
+        // 10f는 drunken 콜라이더의 반지름 길이
+        if (dirVector.x > 0) { transform.localPosition = new Vector3(transform.localPosition.x - 10f, transform.localPosition.y - 10f, transform.localPosition.z); }
         else if (dirVector.x < 0) { transform.localPosition = new Vector3(transform.localPosition.x + 10f, transform.localPosition.y - 10f, transform.localPosition.z); }
 
         dirVector.x *= -1f; // 좌우만 반전
@@ -85,8 +99,19 @@ public class Zigzag : MonoBehaviour
         rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.localPosition = new Vector3(0f, 55f, 0f);
     }
-    public void SetIsOver() // ReachAim을 갖고 있는 Spacebar 객체에서 사용
+    public void SetIsOver() { isOver = true; }// ReachAim을 갖고 있는 Spacebar 객체에서 사용
+
+    void ChangeSpeed()
     {
-        isOver = true;
+        if (drunkenManager.countLevel == 0 || drunkenManager.countLevel == 1) { applySpeed = speed + (adjustSpeed * 0); }
+        if (drunkenManager.countLevel == 2) { applySpeed = speed + (adjustSpeed * 1); }
+        if (drunkenManager.countLevel == 3) { applySpeed = speed + (adjustSpeed * 2); }
+        if (drunkenManager.countLevel == 4) { applySpeed = speed + (adjustSpeed * 3); }
+    }
+    void ChangeImage()
+    {
+        if (thisImage.sprite == drunken1) { thisImage.sprite = drunken2; }
+        else if (thisImage.sprite == drunken2) { thisImage.sprite = drunken3; }
+        else if (thisImage.sprite == drunken3) { thisImage.sprite = drunken2; }
     }
 }
