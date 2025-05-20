@@ -7,7 +7,6 @@ TagManager:
   - TaskWire
   - Stairs_down
   - Stairs_up
-  - obstacle
   - EventObject
   - MonsterContainer
   - Wall
@@ -17,6 +16,10 @@ TagManager:
   - MapObstacle
   - BoothObstacle
   - Return
+  - FxTemporaire
+  - Enemy
+  - EnemyStun
+  - EnemyKnockback
   layers:
   - Default
   - TransparentFX

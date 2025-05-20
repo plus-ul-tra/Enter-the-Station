@@ -16,6 +16,8 @@ public class IntroMoveCamera : MonoBehaviour
     [Tooltip("FadeTeleport에 넘길 페이드인/아웃 시간")]
     public float fadeDuration = 1f;
 
+    [Header("컷씬이면 체크")]
+    [SerializeField] private bool isCutScene;
     void Start()
     {
         // 시작 위치 세팅
@@ -36,7 +38,11 @@ public class IntroMoveCamera : MonoBehaviour
         //img.color = new Color(0, 0, 0, 1);
         //yield return null;
 
-        StartCoroutine(ScreenFader.Instance.Fade(2f, 0f, 2f));
+        if (!isCutScene)
+        {
+            StartCoroutine(ScreenFader.Instance.Fade(2f, 0f, 2f));
+        }
+        
 
         // 3) 순간이동 (Y만)
         var p = transform.position;

@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 695318491972578770}
   m_Layer: 0
   m_Name: PlayerCollision
-  m_TagString: obstacle
+  m_TagString: EnemyKnockback
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,7 +242,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.026199818, y: -0.23699856}
+  m_Offset: {x: -0.0047875643, y: -0.18385662}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -252,7 +252,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7, y: 0.20921135}
+  m_Size: {x: 1.0455525, y: 0.31549522}
   m_EdgeRadius: 0
 --- !u!1 &8362521661329479961
 GameObject:
@@ -337,7 +337,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5510246359534357324, guid: 39db65ad831f2e344b4cc65883b18bbb, type: 3}
+  m_Sprite: {fileID: 7751201320590130070, guid: 511f21d9a9f038945a8ceeba8222800b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

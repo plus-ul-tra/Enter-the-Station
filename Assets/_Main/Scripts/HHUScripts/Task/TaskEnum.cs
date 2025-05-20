@@ -6,7 +6,7 @@ public enum KindOfTask
     ArrowMatch,
     MaintainingGauge,
     MovingCircle,
-    RythmGauge,
+    Swinging,
     StackingGauge,
     MapGuide,
     TurningKey,

@@ -147,11 +147,11 @@ public class RandomEventSpawner : MonoBehaviour
         int randomIndex = SelectRandomEventIndex() - 1;
 
         // 디버그 찍어보기
-        Debug.Log($"현재 수열 : {currentSequenceIndex}");
-        Debug.Log($"현재 수열의 인덱스 : {currentSequenceElement}");
-        Debug.Log($"현재 존 : {spawnPointData.zoneIndex}");
-        Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
-        Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
+        //Debug.Log($"현재 수열 : {currentSequenceIndex}");
+        //Debug.Log($"현재 수열의 인덱스 : {currentSequenceElement}");
+        //Debug.Log($"현재 존 : {spawnPointData.zoneIndex}");
+        //Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
+        //Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
 
 
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
@@ -193,7 +193,7 @@ public class RandomEventSpawner : MonoBehaviour
         {
             speechBubble.PlaySpeechBubble(SpeechKey.CS, spawnPointData.zoneIndex);
         }
-        else if (randomEvent.task == KindOfTask.RythmGauge)
+        else if (randomEvent.task == KindOfTask.Swinging)
         {
             speechBubble.PlaySpeechBubble(SpeechKey.CSSLEEP, spawnPointData.zoneIndex);
         }

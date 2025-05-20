@@ -6,10 +6,10 @@ public class TurningKeyManager : Task
     public UnityEvent Initial;
     public GameObject firstScene;
     public GameObject secondScene;
-    float time;
     int clearNum;
     bool isClear;
     bool transition;
+    bool isDone;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
@@ -22,34 +22,51 @@ public class TurningKeyManager : Task
         failedImage.SetActive(false);
         firstScene.SetActive(true);
         secondScene.SetActive(false);
-        time = 0.0f;
         isClear = false;
+        isDone = false;
         clearNum = 0;
         transition = false;
+        timer = 0.0f;
     }
-    // Update is called once per frame
+ 
+
     void Update()
     {
         if (transition)
         {
+            SoundManager.Instance.PlaySFX("Fix_escalate_insertkey");
             firstScene.SetActive(false);
             secondScene.SetActive(true);
             transition = false;
         }
    
         if (isClear)
-        { clearNum++; isClear = false; }
+        { clearNum++; isClear = false; SoundManager.Instance.PlaySFX("Fix_escalate_complete_input"); }
 
-        if (secondScene.activeSelf == false) return;
-        time += Time.deltaTime;
-        if (clearNum == 2 && time <= 6.5f)
-        { successImage.SetActive(true);
+        //if (secondScene.activeSelf == false) return;
+
+        timer += Time.deltaTime;
+
+        if (clearNum == 2 && timer <= limitTime && !isDone)
+        {
+            isDone = true;
+            //Debug.Log("성공");
+            successImage.SetActive(true);
+            SoundManager.Instance.PlaySFX("Fix_escalate_finish");
             Close();
+            timer = 0.0f;
         }
-        //else if (clearNum < 2 && time >= 6.5f)
-        //{ failedImage.SetActive(true);
-        //    Close();
-        //}
+
+        if (clearNum < 2 && timer >= limitTime &&!isDone)
+        {
+            isDone = true;
+            //Debug.Log("실패");
+            SoundManager.Instance.PlaySFX("Fail_sound");
+            stageManager.DecreasePlayerHp();
+            failedImage.SetActive(true);
+            Close();
+            timer = 0.0f;
+        }
     }
     public void SetisClear()
     { isClear = true; }

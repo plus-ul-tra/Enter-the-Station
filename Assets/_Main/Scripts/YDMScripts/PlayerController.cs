@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Cinemachine;
 using DG.Tweening.Core.Easing;
 using UnityEditor.Experimental.GraphView;
+using System.Threading;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
@@ -42,6 +43,12 @@ public class PlayerController : MonoBehaviour
     //private TaskManager taskManager;
     [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
     [HideInInspector]public int count;
+
+    [Header("넉백 지속 시간")]
+    public float knockbackDuration = 0.2f;
+    [Header("무적 지속 시간")]
+    public float invincibleTime = 0.5f;
+    private bool isInvincible = false;
     // --------------------------------------------------
     RandomEventObject randomEventObject;
     Item item;
@@ -107,7 +114,7 @@ public class PlayerController : MonoBehaviour
                     playerAnim.SetFight(true);
                     break;
 
-                case KindOfTask.RythmGauge:
+                case KindOfTask.Swinging:
                     // TODO : RythmGauge 애니메이션 변경
                     playerAnim.SetFight(true);
                     break;
@@ -180,22 +187,39 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 delta = Vector3.zero;
 
-        if (other.CompareTag("obstacle"))//승객충돌확인
+        if(!isInvincible)//무적상태가 아닐때만 충돌확인
         {
-            HandleObstacleCollision();
+            if (other.CompareTag("Enemy"))//승객충돌확인(기본 남성 여성)
+            {
+                HandleEnemyCollision();//기본승객충돌 코루틴
+                StartCoroutine(InvincibleCoroutine());//무적시간
+            }
+            if (other.CompareTag("EnemyStun"))//승객충돌확인(양아치)
+            {
+                HandleEnemyStunCollision();//양아치승객충돌코루틴
+                StartCoroutine(InvincibleCoroutine());
+            }
+            if (other.CompareTag("EnemyKnockback"))//승객충돌확인(덩치)
+            {
+                float diffX = transform.position.x - other.transform.position.x;
+                float knockDir = diffX < 0 ? -1f : 1f;//충돌오브젝와 자신 x 좌표 비교
+                StartCoroutine(KnockbackCoroutine(knockDir, 1f));//넉백코루틴
+                HandleEnemyKnockbackCollision();//덩치충돌코루틴
+                StartCoroutine(InvincibleCoroutine());
+            }
         }
+        
+
         if (other.CompareTag("Stairs_up") || other.CompareTag("Stairs_down"))//계단충돌확인
         {
             bool isUp = other.CompareTag("Stairs_up");
-            HandleStairsCollision(isUp);
+            HandleStairsCollision(isUp);//업인지 다운이지 확인 플래그를 코루틴으로 보내줌
         }
 
         if (other.CompareTag("EventObject"))
         {
             randomEventObject = other.GetComponent<RandomEventObject>();
         }
-
-        
     }
     void OnTriggerStay2D(Collider2D other)
     {
@@ -204,6 +228,7 @@ public class PlayerController : MonoBehaviour
             count++;
             item = other.GetComponent<Item>();
             item.Picked();
+            CountManager.Instance.AddItemCount();//아이템 획득 횟수 증가 //아직 초기화기능 없음
             //item 관련 index++
         }
         if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E))
@@ -212,11 +237,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleObstacleCollision()
+    private IEnumerator InvincibleCoroutine()//무적 시간 코루틴
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibleTime);
+        isInvincible = false;
+    }
+    private void HandleEnemyCollision()
     {
         playerAnim.SetStunned(true);
         StartCoroutine(StunRoutine(2f));//정지애니메이션
         StartCoroutine(PauseMovement(2f));//정지
+    }
+    private void HandleEnemyStunCollision()
+    {
+        playerAnim.SetStunned(true);
+        StartCoroutine(StunRoutine(4f));//정지애니메이션
+        StartCoroutine(PauseMovement(4f));//정지
+    }
+    private void HandleEnemyKnockbackCollision()
+    {
+        
+        playerAnim.SetStunned(true);
+        StartCoroutine(StunRoutine(3f));//정지애니메이션
+        StartCoroutine(PauseMovement(3f));//정지
+    }
+    private IEnumerator KnockbackCoroutine(float direction, float distance)
+    {
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + Vector3.right * direction * distance;
+
+        float elapsed = 0f;
+        while (elapsed < knockbackDuration)
+        {
+            float t = elapsed / knockbackDuration;
+            transform.position = Vector3.Lerp(startPos, endPos, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        // 마지막 위치 보정
+        transform.position = endPos;
     }
     private void HandleStairsCollision(bool isUp)//계단이동
     {

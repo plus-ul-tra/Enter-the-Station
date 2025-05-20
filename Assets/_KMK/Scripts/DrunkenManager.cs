@@ -1,48 +1,56 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
-public class ReachAim : BaseGauge
+public class DrunkenManager : Task
 {
     public UnityEvent onSpacebar;
     public UnityEvent onResult;
-    public UnityEvent initial;
 
     public GameObject baseLineGroup;
     public GameObject pressSignGroup;
 
+    Image img;
+
     bool isReached;
     bool isLeft;
     bool isOver;
-    //bool isClose;
+    bool isClose;
 
     public int countLevel;
 
-    //float time;
+    float time;
 
     void OnEnable()
     {
         InitGame();
-        initial.Invoke();
     }
     public override void InitGame()
     {
+        baseLineGroup.transform.GetChild(0).gameObject.SetActive(true);
+        for (int i = 1; i < 5; i++)
+        {
+            baseLineGroup.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
         successImage.SetActive(false);
         failedImage.SetActive(false);
 
-        gauge.fillAmount = 0.5f;
         isReached = false;
         isOver = false;
         isClose = false;
 
         countLevel = 0;
-        SetActive();
+        
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (isReached)
+        if (isReached)  // ½º¸¶ÀÏ ¾ÆÀÌÄÜ
         {
             if (isLeft)
             { pressSignGroup.transform.GetChild(0).transform.GetChild(countLevel).gameObject.SetActive(true); }
@@ -66,10 +74,8 @@ public class ReachAim : BaseGauge
                 onSpacebar.Invoke();
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(false);
 
-                if (isLeft)
-                { pressSignGroup.transform.GetChild(0).transform.GetChild(countLevel).gameObject.SetActive(false); }
-                else if (!isLeft)
-                { pressSignGroup.transform.GetChild(1).transform.GetChild(countLevel).gameObject.SetActive(false); }
+                if (isLeft) { PopEffect(0); }
+                else if (!isLeft) { PopEffect(1); }
 
                 countLevel++;
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(true);
@@ -82,7 +88,7 @@ public class ReachAim : BaseGauge
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(true);
             }
         }
-        if (isOver && time < 6.5f)
+        if (isOver && time < limitTime)
         {
             successImage.SetActive(true);
             onResult.Invoke();
@@ -93,7 +99,7 @@ public class ReachAim : BaseGauge
             }
         }
 
-        else if (!isOver && timer >= limitTime || gauge.fillAmount == 0.0f)
+        else if (!isOver && timer >= limitTime)
         {
             failedImage.SetActive(true);
             onResult.Invoke();
@@ -102,14 +108,6 @@ public class ReachAim : BaseGauge
                 isClose = true;
                 Close();
             }
-
-
-        }
-
-
-        if (timer <= limitTime && !isOver) // ì‹œê°„ ì˜¤ë°”ë˜ì§€ ì•ŠëŠ” í•œ ê³„ì† ê²Œì´ì§€ ê°ì†Œ
-        {
-            SubGauge();      
         }
     }
     public void SetIsReached()
@@ -122,27 +120,20 @@ public class ReachAim : BaseGauge
     }
     public void SetisLeft() { isLeft = true; }
     public void SetisRight() { isLeft = false; }
-    
-    void SetActive()
+    public void PopEffect(int i)
     {
-        baseLineGroup.transform.GetChild(0).gameObject.SetActive(true);
-        baseLineGroup.transform.GetChild(1).gameObject.SetActive(false);
-        baseLineGroup.transform.GetChild(2).gameObject.SetActive(false);
-        baseLineGroup.transform.GetChild(3).gameObject.SetActive(false);
-        baseLineGroup.transform.GetChild(4).gameObject.SetActive(false);
+        Sequence seq = DOTween.Sequence();
+        img = pressSignGroup.transform.GetChild(i).transform.GetChild(countLevel).GetComponent<Image>();
 
-        pressSignGroup.transform.GetChild(0).gameObject.SetActive(true);  
-        pressSignGroup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(0).transform.GetChild(2).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(0).transform.GetChild(3).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(0).transform.GetChild(4).gameObject.SetActive(false);
-
-        pressSignGroup.transform.GetChild(1).gameObject.SetActive(true);
-        pressSignGroup.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(1).transform.GetChild(1).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(1).transform.GetChild(2).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(1).transform.GetChild(3).gameObject.SetActive(false);
-        pressSignGroup.transform.GetChild(1).transform.GetChild(4).gameObject.SetActive(false);
+        // Ä¿Á³´Ù°¡ ÁÙ¾îµé¸é¼­ »ç¶óÁö±â
+        seq.Append(img.transform.DOScale(1.3f, 0.2f).SetEase(Ease.OutBack))
+           .Join(img.DOFade(0f, 0.3f)) // µ¿½Ã¿¡ Åõ¸íµµ °¨¼Ò
+           .Append(img.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack))
+           .OnComplete(() => {
+               img.gameObject.SetActive(false); // ¾Ö´Ï¸ÞÀÌ¼Ç ³¡³ª¸é ºñÈ°¼ºÈ­
+               // Àç»ç¿ëÀ» À§ÇÑ º¹¿ø
+               img.color = new Color(img.color.r, img.color.g, img.color.b, 1f);
+               img.transform.localScale = Vector3.one;
+           });
     }
 }

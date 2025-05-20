@@ -15,7 +15,7 @@ public class ReachScope : BaseGauge
     {
         successImage.SetActive(false);
         failedImage.SetActive(false);
-        gauge.fillAmount = 0.7f;
+        gauge.fillAmount = 0.1f;
         timer = 0.0f;
         closeTime = 0.0f;
 
@@ -38,19 +38,20 @@ public class ReachScope : BaseGauge
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 gauge.fillAmount += addGauge;
-                //Debug.Log(isReached);
+                SoundManager.Instance.PlaySFX("Medical_input");
             }
 
             if (isReached && timer >= limitTime)
             { //성공
-                Debug.Log("성공");
+                //Debug.Log("성공");
+                SoundManager.Instance.PlaySFX("Medical_finish");
                 successImage.SetActive(true);
                 isClose = true;
                 Close();
             }
             if (!isReached && timer >= limitTime)
             {//실패
-                Debug.Log("실패");
+                //Debug.Log("실패");
                 failedImage.SetActive(true);
                 stageManager.DecreasePlayerHp();
                 isClose = true;

@@ -18,6 +18,7 @@ public class FixWiring : Task
     private List<RightWire> rightWires;
     private LeftWire selectWire;
     private bool isOver = false;
+    private bool isDone = false; 
 
     private void OnEnable()
     {
@@ -47,16 +48,19 @@ public class FixWiring : Task
             rightWires[index++].SetWireColor((EWireColor)number);
             numberPool.Remove(number);
         }
+        SoundManager.Instance.PlaySFX("Fix_elevator");
     }
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= limitTime)
+        if (timer >= limitTime&&!isDone)
         {
             stageManager.DecreasePlayerHp(); //singleton 객체 사용
             failedImage.SetActive(true);
+            SoundManager.Instance.PlaySFX("Fail_sound");
             Close();
             timer = 0.0f;
+            isDone = true;
             return;
         }
 
@@ -121,11 +125,13 @@ public class FixWiring : Task
                 break;
             }
         }
-        if (isAllComplete)
+        if (isAllComplete && !isDone)
         {
+            isDone = true;
             timer = 0.0f;
             // 성공
             successImage.SetActive(true);
+            SoundManager.Instance.PlaySFX("Fix_elevator_finish");
             Close();
             
         }
@@ -133,6 +139,7 @@ public class FixWiring : Task
 
     public override void InitGame()
     {
+        isDone = false;
         timer = 0.0f;
         isOver = false;
         successImage.SetActive(false);
