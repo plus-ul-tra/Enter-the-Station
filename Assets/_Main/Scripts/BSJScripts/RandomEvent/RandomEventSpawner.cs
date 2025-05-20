@@ -61,7 +61,7 @@ public class RandomEventSpawner : MonoBehaviour
     private void Start()
     {
         // TODO : 튜토리얼 일때에는 그냥 실행, 
-        if(isTutorial)
+        if (isTutorial)
         {
             SelectRandomEventZone();
         }
@@ -147,11 +147,11 @@ public class RandomEventSpawner : MonoBehaviour
         int randomIndex = SelectRandomEventIndex() - 1;
 
         // 디버그 찍어보기
-        //Debug.Log($"현재 수열 : {currentSequenceIndex}");
-        //Debug.Log($"현재 수열의 인덱스 : {currentSequenceElement}");
-        //Debug.Log($"현재 존 : {spawnPointData.zoneIndex}");
-        //Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
-        //Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
+        Debug.Log($"현재 수열 : {currentSequenceIndex}");
+        Debug.Log($"현재 수열의 인덱스 : {currentSequenceElement}");
+        Debug.Log($"현재 존 : {spawnPointData.zoneIndex}");
+        Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
+        Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
 
 
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
@@ -251,7 +251,7 @@ public class RandomEventSpawner : MonoBehaviour
 
         if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 0)
         {
-            eventIndex = 7;
+            eventIndex = 6;
         }
         else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 1)
         {
@@ -263,10 +263,10 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 8;
+                    eventIndex = 7;
                     break;
                 default:
                     eventIndex = 2;
@@ -283,10 +283,10 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 3;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 default:
                     eventIndex = 2;
@@ -300,16 +300,16 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 1:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 case 2:
-                    eventIndex = 9;
+                    eventIndex = 8;
                     break;
                 default:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
             }
         }
@@ -324,7 +324,7 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 default:
                     eventIndex = 2;
@@ -338,13 +338,13 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 1:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 default:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
             }
         }
@@ -358,10 +358,10 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 9;
+                    eventIndex = 8;
                     break;
                 default:
                     eventIndex = 2;
@@ -378,7 +378,7 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 default:
                     eventIndex = 2;
@@ -388,7 +388,7 @@ public class RandomEventSpawner : MonoBehaviour
 
         else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 0)
         {
-            eventIndex = 4;
+            eventIndex = 3;
         }
         else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 1)
         {
@@ -397,13 +397,13 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 1:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 default:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
             }
         }
@@ -417,10 +417,10 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 6;
+                    eventIndex = 5;
                     break;
                 case 2:
-                    eventIndex = 8;
+                    eventIndex = 7;
                     break;
                 default:
                     eventIndex = 2;
@@ -435,13 +435,13 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
@@ -452,16 +452,16 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 9;
+                    eventIndex = 8;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
@@ -472,16 +472,16 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 8;
+                    eventIndex = 7;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
@@ -497,13 +497,13 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
@@ -514,16 +514,16 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 9;
+                    eventIndex = 8;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
@@ -534,13 +534,13 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 8;
+                    eventIndex = 7;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
@@ -556,33 +556,36 @@ public class RandomEventSpawner : MonoBehaviour
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 5;
+                    eventIndex = 4;
                     break;
                 case 2:
-                    eventIndex = 8;
+                    eventIndex = 7;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }
         else if (spawnPointData.zoneIndex == 6 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 2);
+            int randValue = Random.Range(0, 3);
 
             switch (randValue)
             {
                 case 0:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
                 case 1:
-                    eventIndex = 9;
+                    eventIndex = 4;
+                    break;
+                case 2:
+                    eventIndex = 8;
                     break;
                 default:
-                    eventIndex = 3;
+                    eventIndex = 2;
                     break;
             }
         }

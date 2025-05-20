@@ -22,6 +22,8 @@ public class CountManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    // 미니게임 트라이 횟수
+
     // 클리어 횟수 증가
     public void AddClearCount(int amount = 1)
     {
@@ -29,7 +31,7 @@ public class CountManager : MonoBehaviour
     }
 
     // 아이템 획득 횟수 증가
-    public void AddItemCount(int amount = 1)
+    public void AddItemCount(int amount)
     {
         itemCount += amount;
         Debug.Log("카운트"+itemCount);

@@ -10,9 +10,12 @@ public class Item : MonoBehaviour
     private float lifeTime = 10.0f;
     private float blinkStart = 6.0f;
     private Tween blinkTween;
-
+    private GameObject interactUI;
     private void OnEnable()
     {
+        interactUI = transform.GetChild(0).gameObject;
+        interactUI.SetActive(false);
+
         sprite.enabled = true;
         DOVirtual.DelayedCall(blinkStart, StartBlinking);
 
@@ -53,7 +56,27 @@ public class Item : MonoBehaviour
 
         sprite.DOFade(1, 0); // 완전히 복원 (안정성용)
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (interactUI != null)
+            {
+                interactUI.SetActive(true);
+            }
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (interactUI != null)
+            {
+                interactUI.SetActive(false);
+            }
+        }
+    }
     public void SetUp(ItemDataSO data)
     {
         itemData = data;

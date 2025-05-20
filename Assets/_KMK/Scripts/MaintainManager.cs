@@ -62,7 +62,8 @@ public class MaintainManager : BaseGauge
             {//실패
                 //Debug.Log("실패");
                 failedImage.SetActive(true);
-                stageManager.DecreasePlayerHp();
+                if (stageManager != null)
+                    stageManager.DecreasePlayerHp();
                 isClose = true;
                 Close();
                 timer = 0.0f;

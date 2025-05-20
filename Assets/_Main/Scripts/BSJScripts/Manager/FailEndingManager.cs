@@ -19,7 +19,7 @@ public class FailEndingManager : MonoBehaviour
 
             // 이전 씬으로 돌아가기 (돌아가기 전에 트윈 정리)
             DOTween.KillAll();
-            SceneManager.LoadScene("BSJ_Test"); //이전 Scene으로
+            SceneManager.LoadScene("Day1"); //이전 Scene으로
         });
     }
 }

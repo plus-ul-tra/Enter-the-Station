@@ -6,4 +6,6 @@ public enum ItemEnum
    Wallet,
    Phone,
    Nintendo,
+   Bag,
+   Bag2,
 }

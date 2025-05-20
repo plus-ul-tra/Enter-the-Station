@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -36,7 +38,7 @@ public class StageManager : MonoBehaviour
         playerCurHp = playerMaxHp;
 
         // Stage Time 초기화
-        stageMaxTime = 180f;
+        stageMaxTime = 60f; // 3분인데 테스트용으로 1분만 함
         stageCurTime = 0f;
 
         // FadeController 초기화
@@ -65,7 +67,8 @@ public class StageManager : MonoBehaviour
 
         else if (stageCurTime >= stageMaxTime)
         {
-            // TODO : 스테이지 클리어
+            // 스테이지 클리어
+            ClearStage();
         }
     }
 
@@ -97,6 +100,7 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void ClearStage()
     {
-
+        DOTween.KillAll();
+        SceneManager.LoadScene("Clear");
     }
 }

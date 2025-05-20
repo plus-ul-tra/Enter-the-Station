@@ -670,7 +670,7 @@ public class TutorialManager : MonoBehaviour
             playerController.canMove = false;
 
         // 譬配府倔 6 积己
-        CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 1);
+        CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
 
         textLines = event9_Lines;
         t_talkleEffect.MoveUp();
@@ -707,7 +707,7 @@ public class TutorialManager : MonoBehaviour
             playerController.canMove = false;
 
         // 譬配府倔 7 积己
-        CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 1);
+        CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
 
         textLines = event10_Lines;
         t_talkleEffect.MoveUp();
@@ -744,7 +744,7 @@ public class TutorialManager : MonoBehaviour
             playerController.canMove = false;
 
         // 譬配府倔 8 积己
-        CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 1);
+        CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
 
         textLines = event11_Lines;
         t_talkleEffect.MoveUp();

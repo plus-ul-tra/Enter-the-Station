@@ -25,6 +25,7 @@ public class DrunkenManager : Task
 
     void OnEnable()
     {
+
         InitGame();
     }
     public override void InitGame()
@@ -43,7 +44,6 @@ public class DrunkenManager : Task
         isClose = false;
 
         countLevel = 0;
-        
     }
 
     void Update()
@@ -97,6 +97,7 @@ public class DrunkenManager : Task
                 isClose = true;
                 Close();
             }
+            timer = 0f;
         }
 
         else if (!isOver && timer >= limitTime)
@@ -110,6 +111,7 @@ public class DrunkenManager : Task
                 isClose = true;
                 Close();
             }
+            timer = 0f;
         }
     }
     public void SetIsReached()

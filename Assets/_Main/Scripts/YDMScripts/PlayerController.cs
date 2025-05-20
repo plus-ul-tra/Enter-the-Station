@@ -228,11 +228,12 @@ public class PlayerController : MonoBehaviour
             count++;
             item = other.GetComponent<Item>();
             item.Picked();
-            CountManager.Instance.AddItemCount();//아이템 획득 횟수 증가 //아직 초기화기능 없음
+            
             //item 관련 index++
         }
         if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E))
         {
+            CountManager.Instance.AddItemCount(count);
             count = 0;
         }
     }
