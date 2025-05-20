@@ -184,7 +184,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      drunk_ui_bar_0: 4133221582366048730
+      drunk_ui_bar_1: -8699389050066856106
+      drunk_ui_bar_2: 6072985706071471521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

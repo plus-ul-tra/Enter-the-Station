@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      drunk_note_down_0: 4179002675801994697
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
