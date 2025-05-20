@@ -42,11 +42,20 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         //centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransform.position);
         light1.SetActive(false);
         light2.SetActive(false);
+        //signGroup.SetActive(false);
+        InitSignGroup();
         currentAngle = 0f;
         lightNum = 0;   
         isClear = true;
+        
     }
-
+    void InitSignGroup()
+    {
+        for(int i=0; i < goalNum; i++)
+        {
+            signGroup.transform.GetChild(goalNum).gameObject.SetActive(false);
+        }
+    }
     void Update()
     {
         if (isClear && lightNum < 2) 
@@ -55,7 +64,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
             signGroup.transform.GetChild(goalNum).gameObject.SetActive(true);
             lightNum++;
             isClear = false;
-            Debug.Log(goalNum); 
+            //Debug.Log(goalNum); 
         }  
     }
 
@@ -90,7 +99,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         int stepIndex = Mathf.RoundToInt((currentAngle + 360f) % 360f / stepAngle);
         float steppedAngle = stepIndex * stepAngle;
    
-        Debug.Log("steppedAngle: " + steppedAngle);
+        //Debug.Log("steppedAngle: " + steppedAngle);
         if (Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f) // Mathf.Abs(steppedAngle - lastStepAngle) > stepAngle * 0.5f
         {
             StartCoroutine(SnapToAngle(steppedAngle));

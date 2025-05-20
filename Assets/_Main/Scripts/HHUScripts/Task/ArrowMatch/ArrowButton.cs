@@ -1,10 +1,14 @@
 using DG.Tweening;
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ArrowButton : MonoBehaviour
 {
     public ArrowDir Dir { get;private set; }
+    [SerializeField]
+    private List<Sprite> buttonImages;
     private Image image;
     private float duration = 0.2f;   // 애니메이션 시간
     private float targetScale = 1.2f;  // 최종 스케일 배수
@@ -19,20 +23,21 @@ public class ArrowButton : MonoBehaviour
         switch (Dir)
         {
             case ArrowDir.Up:
-                gameObject.transform.Rotate(0.0f, 0.0f, 180.0f);
-                image.color = Color.red;
+                //gameObject.transform.Rotate(0.0f, 0.0f, 180.0f);
+                //image.color = Color.red;
+                image.sprite = buttonImages[0];
                 break;
             case ArrowDir.Right:
-                gameObject.transform.Rotate(0.0f, 0.0f, 90.0f);
-                image.color = Color.blue;
+                
+                image.sprite = buttonImages[1];
                 break;
             case ArrowDir.Down:
-                gameObject.transform.Rotate(0.0f, 0.0f, 0.0f);
-                image.color = Color.green;
+                
+                image.sprite = buttonImages[2];
                 break;
             case ArrowDir.Left:
-                gameObject.transform.Rotate(0.0f, 0.0f, 270.0f);
-                image.color = Color.yellow;
+                
+                image.sprite = buttonImages[3];
                 break;
 
         }

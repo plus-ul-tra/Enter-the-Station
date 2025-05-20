@@ -3115,9 +3115,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 4
-  gauge: {fileID: 94401740}
+  limitTime: 6
+  stageManager: {fileID: 0}
   successImage: {fileID: 1527902534}
   failedImage: {fileID: 1811706593}
+  gauge: {fileID: 94401740}
   addGauge: 0.2
   subtractGauge: 0.005
   onSpacebar:
@@ -3165,7 +3167,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  penaltyGauge: 0.1
+  baseLineGroup: {fileID: 0}
+  pressSignGroup: {fileID: 0}
+  countLevel: 0
 --- !u!1 &614122811
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,6 +4140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 0
+  limitTime: 6
+  stageManager: {fileID: 0}
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   way: {fileID: 876814190723657094, guid: feba7a60d68571d41a1d758bfea6beb3, type: 3}
   goals:
   - {fileID: 1413898288}
@@ -5083,7 +5091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &959820090
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5120,6 +5128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 7
+  limitTime: 6
+  stageManager: {fileID: 0}
+  successImage: {fileID: 1877092953}
+  failedImage: {fileID: 86132125}
   Initial:
     m_PersistentCalls:
       m_Calls:
@@ -5147,8 +5159,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  successImage: {fileID: 1877092953}
-  failedImage: {fileID: 86132125}
   firstScene: {fileID: 12787309}
   secondScene: {fileID: 488430784}
 --- !u!1 &1006738331
@@ -5853,6 +5863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d620afbf7f0aec48bbddb5e97a6f797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResultUI: {fileID: 0}
 --- !u!114 &1084225751 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6365718906239466634, guid: 45accb9617f08b947a65ef87f85e9408, type: 3}
@@ -6297,9 +6308,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 5
-  gauge: {fileID: 1133212749}
+  limitTime: 6
+  stageManager: {fileID: 0}
   successImage: {fileID: 1839722039}
   failedImage: {fileID: 1883164223}
+  gauge: {fileID: 1133212749}
   addGauge: 0.08
   subtractGauge: 0.03
 --- !u!114 &1126375908
@@ -6733,6 +6746,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 0
+  limitTime: 6
+  stageManager: {fileID: 0}
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   container: {fileID: 1674621693}
   blockPrefabs: {fileID: 4654216733916487804, guid: 776ce91cba26cb844be9610066aee4f7, type: 3}
   maxBlockCount: 7
@@ -6903,9 +6920,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 2
-  gauge: {fileID: 1825128752}
+  limitTime: 6
+  stageManager: {fileID: 0}
   successImage: {fileID: 890334975}
   failedImage: {fileID: 1536306402}
+  gauge: {fileID: 1825128752}
   addGauge: 0.05
   subtractGauge: 0.02
   movingGaugeCollider: {fileID: 1426683512}
@@ -10632,7 +10651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1688223394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10671,6 +10690,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 3
+  limitTime: 6
+  stageManager: {fileID: 0}
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   Initial:
     m_PersistentCalls:
       m_Calls:
@@ -10725,8 +10748,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  SuccessImage: {fileID: 1527886224}
-  FailedImage: {fileID: 1617932524}
+  circle: {fileID: 0}
 --- !u!224 &1690028173 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7119540375260829617, guid: 45accb9617f08b947a65ef87f85e9408, type: 3}
@@ -10951,6 +10973,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  rage: {fileID: 0}
+  smile: {fileID: 0}
   circleSpeed: 5
 --- !u!50 &1698034252
 Rigidbody2D:
@@ -12635,6 +12659,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kindOfTask: 0
+  limitTime: 6
+  stageManager: {fileID: 0}
+  successImage: {fileID: 0}
+  failedImage: {fileID: 0}
   leftWires:
   - {fileID: 1398513153}
   - {fileID: 1073448291}

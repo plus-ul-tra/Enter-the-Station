@@ -60,6 +60,7 @@ public class ArrowMatching : Task
             successImage.SetActive(true);
             timer = 0.0f;
             isOver = true;
+            SoundManager.Instance.PlaySFX("Treat_DR_finish");
             Close();
             return;
         }
@@ -112,10 +113,12 @@ public class ArrowMatching : Task
         if(Block.Dir == inputDir)
         {
             Block.Matched();
+            SoundManager.Instance.PlaySFX("Treat_DR_input1");
             matchIndex++;
         }
         else
         {
+            SoundManager.Instance.PlaySFX("Fail_sound");
             //Debug.Log("¿À´ä");
             //Block.MatcheFail();
 
