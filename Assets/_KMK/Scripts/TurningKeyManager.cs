@@ -62,7 +62,8 @@ public class TurningKeyManager : Task
             isDone = true;
             //Debug.Log("½ÇÆÐ");
             SoundManager.Instance.PlaySFX("Fail_sound");
-            stageManager.DecreasePlayerHp();
+            if(stageManager !=null)
+                stageManager.DecreasePlayerHp();
             failedImage.SetActive(true);
             Close();
             timer = 0.0f;

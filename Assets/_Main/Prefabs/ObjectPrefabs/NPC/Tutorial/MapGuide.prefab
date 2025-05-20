@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 8148627311074919743}
   - component: {fileID: 7122171767316536684}
   m_Layer: 0
-  m_Name: TutoEvent_06
+  m_Name: MapGuide
   m_TagString: EventObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614695a6decf95543a83f6ae367b20c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  task: 5
+  task: 6
   failTime: 15
   isTutorial: 1
   taskManager: {fileID: 0}

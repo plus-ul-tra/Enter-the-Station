@@ -40,7 +40,8 @@ public class ArrowMatching : Task
             failedImage.SetActive(true);
             Close();
             isOver = true;
-            stageManager.DecreasePlayerHp();
+            if (stageManager != null)
+                stageManager.DecreasePlayerHp();
             timer = 0.0f;
             return;
         }

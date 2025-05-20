@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 8148627311074919743}
   - component: {fileID: 7122171767316536684}
   m_Layer: 0
-  m_Name: TutoEvent_01
+  m_Name: FixWire
   m_TagString: EventObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

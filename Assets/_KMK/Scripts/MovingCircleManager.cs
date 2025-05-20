@@ -52,7 +52,8 @@ public class MovingCircleManager : Task
 
             else if (!isSuccess)
             {
-                stageManager.DecreasePlayerHp();
+                if (stageManager != null)
+                    stageManager.DecreasePlayerHp();
                 failedImage.SetActive(true);
                 isClose = true;
                 Close();
@@ -62,7 +63,8 @@ public class MovingCircleManager : Task
         //타임오버
         if (timer >= limitTime && !isSuccess)
         {
-            stageManager.DecreasePlayerHp();
+            if (stageManager != null)
+                stageManager.DecreasePlayerHp();
             failedImage.SetActive(true);
             isClose = true;
             Close();

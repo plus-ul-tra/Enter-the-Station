@@ -55,7 +55,9 @@ public class FixWiring : Task
         timer += Time.deltaTime;
         if (timer >= limitTime&&!isDone)
         {
-            stageManager.DecreasePlayerHp(); //singleton °´Ã¼ »ç¿ë
+            if(stageManager != null)
+                stageManager.DecreasePlayerHp(); //singleton °´Ã¼ »ç¿ë
+
             failedImage.SetActive(true);
             SoundManager.Instance.PlaySFX("Fail_sound");
             Close();

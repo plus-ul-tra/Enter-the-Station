@@ -32,7 +32,8 @@ public class MapGuide : Task
         timer += Time.deltaTime;
         if (timer >= limitTime)
         {
-            stageManager.DecreasePlayerHp();
+            if (stageManager != null)
+                stageManager.DecreasePlayerHp();
             failedImage.SetActive(true);
             Close();
             timer = 0.0f;
@@ -156,6 +157,7 @@ public class MapGuide : Task
         {
             timer = 0.0f;
             successImage.SetActive(true);
+            
             SoundManager.Instance.PlaySFX("Map_finish");
             Close();
             foreach (var way in ways)

@@ -21,7 +21,7 @@ public class DrunkenManager : Task
 
     public int countLevel;
 
-    float time;
+    //float time;
 
     void OnEnable()
     {
@@ -88,7 +88,7 @@ public class DrunkenManager : Task
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(true);
             }
         }
-        if (isOver && time < limitTime)
+        if (isOver && timer < limitTime)
         {
             successImage.SetActive(true);
             onResult.Invoke();
@@ -101,6 +101,8 @@ public class DrunkenManager : Task
 
         else if (!isOver && timer >= limitTime)
         {
+            if (stageManager != null)
+                stageManager.DecreasePlayerHp();
             failedImage.SetActive(true);
             onResult.Invoke();
             if (!isClose)

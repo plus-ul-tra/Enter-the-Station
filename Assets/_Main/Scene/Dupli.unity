@@ -9707,6 +9707,7 @@ MonoBehaviour:
   fadeDuration: 2
   moveUpDuration: 2
   moveUpDistance: 50
+  isTutorial: 0
 --- !u!114 &533266233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9735,6 +9736,7 @@ MonoBehaviour:
   fadeMat: {fileID: 2100000, guid: fdbd0d8feb3570049852e6e91f9d7725, type: 2}
   player: {fileID: 232534223}
   fadeImage: {fileID: 1100159143}
+  isTutorial: 0
 --- !u!114 &533266235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11338,7 +11340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &672273332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26057,7 +26059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1765696311
 RectTransform:
   m_ObjectHideFlags: 0

@@ -76,7 +76,8 @@ public class Reach100 : BaseGauge
             else if (!isFilled && timer >= limitTime)
             {
                 //Debug.Log("ȣȣȣǮ�kǪ");
-                stageManager.DecreasePlayerHp();
+                if (stageManager != null)
+                    stageManager.DecreasePlayerHp();
                 failedImage.SetActive(true);
                 SoundManager.Instance.PlaySFX("Fail_sound");
                 isClose = true;
