@@ -7,18 +7,27 @@ public class MovingScope : MonoBehaviour
     Vector2 vectorScope;
     public float ScopeSpeed;
     bool isStopped;
+    public float startPosX = -230f;
 
     public void OnEnable()
     {
         isStopped = false;
         vectorScope.x = -1.0f;
 
-        transform.localPosition = new Vector3(-230.0f, transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(startPosX, transform.localPosition.y, transform.localPosition.z);
     }
+    public void RandomizeStartX(float minX, float maxX)
+    {
+        startPosX = Random.Range(minX, maxX);//x위치랜덤
+        transform.localPosition = new Vector3(startPosX,
+                                               transform.localPosition.y,
+                                               transform.localPosition.z);
 
+        vectorScope.x = (Random.value < 0.5f) ? -1f : 1f;//방향랜덤
+    }
     // Update is called once per frame
     void Update()
-    { 
+    {
         if (isStopped)
             return;
 

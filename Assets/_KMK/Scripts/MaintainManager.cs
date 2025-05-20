@@ -1,11 +1,18 @@
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UIElements;
 
-public class ReachScope : BaseGauge
+public class MaintainManager : BaseGauge
 {
     BoxCollider2D gaugeCollider;
     public GameObject movingGaugeCollider;
+
+    [SerializeField]
+    private GameObject spacebar;
+    [SerializeField]
+    private GameObject heart;
     bool isReached;
+
     float colliderPosY;
     void OnEnable()
     {
@@ -23,6 +30,9 @@ public class ReachScope : BaseGauge
         colliderPosY = 0.0f;
         isReached = false;
         isClose = false;
+
+        heart.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        spacebar.transform.localPosition = new Vector3(spacebar.transform.localPosition.x, -250f, 0f);
     }
     void Update()
     {
@@ -32,7 +42,6 @@ public class ReachScope : BaseGauge
             if (timer <= limitTime) // 등속 감소 게이지
             {
                 SubGauge();
-
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -63,9 +72,19 @@ public class ReachScope : BaseGauge
         colliderPosY = gaugeCollider.offset.y * 2 * gauge.fillAmount; // 게이지 콜라이더 y좌표 움직임
         movingGaugeCollider.transform.localPosition = new Vector3(0, -colliderPosY, 0); // '-'를 안붙혀주면 콜라이더가 반대로 가는데 이걸 이해할 수가 없드아..
         if (gauge.fillAmount >= 1.0f) { failedImage.SetActive(true); isClose = true; Close(); timer = 0.0f; return; } // 게이지가 100%에 도달해도 실패!
+    }
+    private void FixedUpdate()
+    {
+        if (isClose) return;
 
-        //if (isClose) { Close(); }
-        //if (closeTime >= 1.0f) { Close(); }
+        if (Input.GetKeyDown(KeyCode.Space))
+        { HeartAnim(); }
+    }
+    void HeartAnim()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.Append(heart.transform.DOScale(0.5f, 0.08f).SetEase(Ease.OutBounce))
+           .Append(heart.transform.DOScale(0.3f, 0.08f).SetEase(Ease.InBounce));
     }
 
     public void SetIsReached()
