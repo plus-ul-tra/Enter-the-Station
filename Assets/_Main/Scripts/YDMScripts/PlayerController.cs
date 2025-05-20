@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
                     playerAnim.SetFight(true);
                     break;
 
-                case KindOfTask.RythmGauge:
+                case KindOfTask.Swinging:
                     // TODO : RythmGauge 애니메이션 변경
                     playerAnim.SetFight(true);
                     break;

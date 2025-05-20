@@ -193,7 +193,7 @@ public class RandomEventSpawner : MonoBehaviour
         {
             speechBubble.PlaySpeechBubble(SpeechKey.CS, spawnPointData.zoneIndex);
         }
-        else if (randomEvent.task == KindOfTask.RythmGauge)
+        else if (randomEvent.task == KindOfTask.Swinging)
         {
             speechBubble.PlaySpeechBubble(SpeechKey.CSSLEEP, spawnPointData.zoneIndex);
         }

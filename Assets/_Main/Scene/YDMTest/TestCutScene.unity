@@ -341,9 +341,9 @@ MonoBehaviour:
   waitTime: 1
   cameraSizes:
   - 5
-  - 100
+  - 10
   - 5
-  - 100
+  - 10
   vcam: {fileID: 1449922574}
 --- !u!1 &780034327
 GameObject:

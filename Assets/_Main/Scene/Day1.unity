@@ -4464,6 +4464,8 @@ MonoBehaviour:
   canMove: 1
   introCameraSwitcher: {fileID: 1935231341}
   count: 0
+  knockbackDuration: 0.2
+  invincibleTime: 1.5
   isTutorial: 0
 --- !u!212 &232534222
 SpriteRenderer:
@@ -10694,6 +10696,7 @@ MonoBehaviour:
   moveDuration: 2
   snapY: -14
   fadeDuration: 1
+  isCutScene: 0
 --- !u!1 &626178565
 GameObject:
   m_ObjectHideFlags: 0
@@ -15179,7 +15182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1013765521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28361,7 +28364,7 @@ MonoBehaviour:
   - {fileID: 1765696312}
   - {fileID: 672273335}
   - {fileID: 1444262036}
-  - {fileID: 0}
+  - {fileID: 125894915}
 --- !u!4 &2070640015
 Transform:
   m_ObjectHideFlags: 0
@@ -28837,9 +28840,9 @@ MonoBehaviour:
   - {fileID: 7122171767316536684, guid: 1ab9b0abbeaa390409adebdc418f9c93, type: 3}
   - {fileID: 7122171767316536684, guid: 825174a5ce2b62744b9a4e4073c8b0d5, type: 3}
   - {fileID: 7122171767316536684, guid: c5b1da25e5f236046892d95fa3516a16, type: 3}
-  - {fileID: 7122171767316536684, guid: 3f5d93d1969f5ac4893fc67c7708c472, type: 3}
-  - {fileID: 7122171767316536684, guid: c5b1da25e5f236046892d95fa3516a16, type: 3}
-  - {fileID: 7122171767316536684, guid: c5b1da25e5f236046892d95fa3516a16, type: 3}
+  - {fileID: 7122171767316536684, guid: 2421c2077b5e50344a61060375653671, type: 3}
+  - {fileID: 7122171767316536684, guid: 2421c2077b5e50344a61060375653671, type: 3}
+  - {fileID: 7122171767316536684, guid: 2421c2077b5e50344a61060375653671, type: 3}
   createdEventList: []
   eventSpawnTime: 16
   zoneSpawnPoint_01:
