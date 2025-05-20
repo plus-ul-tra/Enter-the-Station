@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 695318491972578770}
   m_Layer: 0
   m_Name: PlayerCollision
-  m_TagString: obstacle
+  m_TagString: EnemyStun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 8362521661329479961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.778, y: -6.77, z: 0}
+  m_LocalPosition: {x: -2.092, y: -6.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -337,7 +337,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5510246359534357324, guid: 39db65ad831f2e344b4cc65883b18bbb, type: 3}
+  m_Sprite: {fileID: -8784871298974742299, guid: ef67d389ac80bf248bafb9bdcf68099c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
