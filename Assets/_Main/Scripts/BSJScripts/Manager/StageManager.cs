@@ -24,8 +24,6 @@ public class StageManager : MonoBehaviour
 
     // 시간 흐름 관련
     private bool isTimerActive = false;
-    private float tutorialDelay = 10f; // 튜토리얼일 때 지연 시간
-    private float tutorialTimer = 0f;
 
     //--------------------------------------------------
 
@@ -33,7 +31,6 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
-
         // Hp 초기화
         playerMaxHp = 3;
         playerCurHp = playerMaxHp;
@@ -48,14 +45,9 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        // 튜토리얼이면 10초 대기 후 시간 흐름 시작
-        if (isTutorial && !isTimerActive)
+        // 튜토리얼이면 시간이 흐르지 않음
+        if (isTutorial)
         {
-            tutorialTimer += Time.deltaTime;
-            if (tutorialTimer >= tutorialDelay)
-            {
-                isTimerActive = true;
-            }
             return;
         }
 

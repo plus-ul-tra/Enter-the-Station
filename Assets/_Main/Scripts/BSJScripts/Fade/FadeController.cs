@@ -12,6 +12,9 @@ public class FadeController : MonoBehaviour
     private Vector3 playerFaceOffset = new Vector3(0f, 0.8f, 0f);
     private Sequence seq;
 
+    [Header("튜토리얼인지 체크")]
+    [SerializeField] private bool isTutorial = false;
+
     private void Start()
     {
         // 시작값 : 페이드 활짝 열기
@@ -65,9 +68,18 @@ public class FadeController : MonoBehaviour
         );
 
         seq.OnComplete(() => {
-            // 실패 엔딩씬으로 이동
-            DOTween.KillAll();
-            SceneManager.LoadScene("FailEnding");
+            if(isTutorial)
+            {
+                // 실패 엔딩씬으로 이동
+                DOTween.KillAll();
+                SceneManager.LoadScene("Day1");
+            }
+            else
+            {
+                // 실패 엔딩씬으로 이동
+                DOTween.KillAll();
+                SceneManager.LoadScene("FailEnding");
+            } 
         });
     }
 

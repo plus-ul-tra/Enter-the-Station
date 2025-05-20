@@ -11,6 +11,9 @@ public class RandomEventObject : MonoBehaviour
     [SerializeField]
     private float failTime = 15f;
 
+    [Header("튜토리얼이면 실패되지 않음")]
+    [SerializeField] private bool isTutorial = false;
+
     public Action<RandomEventObject> onEventFailed;   // 실패 시 호출될 콜백
     public Action<RandomEventObject> onEventSuccess;  // 성공 시 호출될 콜백
 
@@ -28,7 +31,11 @@ public class RandomEventObject : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FailInteractEvent());
+        if(!isTutorial)
+        {
+            StartCoroutine(FailInteractEvent());
+        }
+        else { /*DoNothing*/ }
     }
 
     IEnumerator FailInteractEvent()

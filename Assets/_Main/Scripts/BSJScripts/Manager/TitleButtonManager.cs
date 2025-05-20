@@ -58,9 +58,9 @@ public class TitleButtonManager : MonoBehaviour
             if (SoundManager.Instance != null)
                 SoundManager.Instance.PlaySFX("UIButton_sound");
 
-            // 오프닝 컷신 + 튜토리얼 씬으로 넘어가기 ( 트윈 정리 후 넘어가기 )
+            // 오프닝 컷 씬으로 넘어가기 ( 트윈 정리 후 넘어가기 )
             DOTween.KillAll();
-            SceneManager.LoadScene("Day1");
+            SceneManager.LoadScene("Intro");
         });
 
         // 나가기 버튼

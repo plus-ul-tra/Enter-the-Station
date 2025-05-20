@@ -19,6 +19,9 @@ public class T_StageStart : MonoBehaviour
 
     private Sequence seq;
 
+    [Header("튜토리얼이면 체크")]
+    [SerializeField] private bool isTutorial;
+
     private void Start()
     {
         uiCanvasGroup = startUI.GetComponent<CanvasGroup>();
@@ -33,8 +36,13 @@ public class T_StageStart : MonoBehaviour
             textCanvasGroup.alpha = 0f;
         }
 
-        // 10초 대기 후 시작 ( 인트로 컷신 8초 )
-        Invoke("StartStage", 10f);
+        if(isTutorial)
+        {
+            // 10초 대기 후 시작 ( 인트로 컷신 8초 )
+            Invoke("StartStage", 10f);
+        }
+        else { StartStage(); }
+        
     }
 
     /// <summary>
