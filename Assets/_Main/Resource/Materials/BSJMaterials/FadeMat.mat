@@ -46,7 +46,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _HoleCenter: {r: 0.37270224, g: 0.5536482, b: 0, a: 0}
+    - _HoleCenter: {r: 0.4855483, g: 0.5535796, b: 0, a: 0}
     - _RectAspect: {r: 1.7777778, g: 1, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
