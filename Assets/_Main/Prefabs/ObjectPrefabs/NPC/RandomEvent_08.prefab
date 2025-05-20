@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 8148627311074919743}
   - component: {fileID: 7122171767316536684}
   m_Layer: 0
-  m_Name: RandomEvent_03
+  m_Name: RandomEvent_08
   m_TagString: EventObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +401,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &8148627311074919743
@@ -452,5 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614695a6decf95543a83f6ae367b20c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  task: 4
+  task: 7
   failTime: 15
+  taskManager: {fileID: 0}

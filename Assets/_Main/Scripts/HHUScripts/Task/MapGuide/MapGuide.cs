@@ -19,6 +19,7 @@ public class MapGuide : Task
 
     private Way CreateNewWay(Node node)
     {
+        SoundManager.Instance.PlaySFX("Map_line_input");
         RectTransform nodeRect = node.GetComponent<RectTransform>();
         Way newSP = Instantiate(way, nodeRect.parent);
         RectTransform newRect = newSP.GetComponent<RectTransform>();
@@ -119,6 +120,7 @@ public class MapGuide : Task
 
     public override void InitGame()
     {
+        SoundManager.Instance.PlaySFX("Map_open");
         successImage.SetActive(false);
         failedImage.SetActive(false);
         timer = 0.0f;
@@ -154,6 +156,7 @@ public class MapGuide : Task
         {
             timer = 0.0f;
             successImage.SetActive(true);
+            SoundManager.Instance.PlaySFX("Map_finish");
             Close();
             foreach (var way in ways)
             {

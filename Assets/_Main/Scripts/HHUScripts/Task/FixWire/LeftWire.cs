@@ -29,6 +29,7 @@ public class LeftWire : MonoBehaviour
     }
     public void SetTarget(Vector3 targetPosition, float offset)
     {
+        SoundManager.Instance.PlaySFX("UIButton_hover");
         float angle = Vector2.SignedAngle(transform.position + Vector3.right - transform.position,
                 targetPosition - transform.position);
         float distance = (Vector2.Distance(wireBody.transform.position, targetPosition) - offset);

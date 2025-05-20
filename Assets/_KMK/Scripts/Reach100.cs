@@ -43,6 +43,7 @@ public class Reach100 : BaseGauge
             {
                 successImage.SetActive(true);
                 isClose = true;
+                SoundManager.Instance.PlaySFX("Medical_finish");
                 Close();
                 timer = 0.0f;
             }
@@ -51,6 +52,7 @@ public class Reach100 : BaseGauge
                 //Debug.Log("ȣȣȣǮ�kǪ");
                 stageManager.DecreasePlayerHp();
                 failedImage.SetActive(true);
+                SoundManager.Instance.PlaySFX("Fail_sound");
                 isClose = true;
                 Close();
                 timer = 0.0f;
