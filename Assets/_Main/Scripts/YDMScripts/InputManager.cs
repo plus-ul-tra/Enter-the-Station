@@ -60,13 +60,15 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.Player.Enable();
+        if (controls != null)
+            controls.Player.Enable();
         // UI 맵도 활성화 하고 싶다면: controls.UI.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Player.Disable();
+        if (controls != null)
+            controls.Player.Disable();
         // controls.UI.Disable();
     }
 }

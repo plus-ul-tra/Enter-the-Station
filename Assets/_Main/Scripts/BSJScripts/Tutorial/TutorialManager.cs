@@ -59,33 +59,31 @@ public class TutorialManager : MonoBehaviour
     // ----------------------------------------
 
     // 이벤트별 플래그
-    private bool isEvent01 = false;     // 1번 이벤트  오프닝 컷신 이후
-    private bool isEvent02 = false;     // 2번 이벤트  화살표 설명
-    private bool isEvent03 = false;     // 3번 이벤트  튜토리얼 미니게임 1  (에스컬레이터 고장)
-    private bool isEvent04 = false;     // 4번 이벤트  튜토리얼 미니게임 2  (취객 깨우기)
-    private bool isEvent05 = false;     // 5번 이벤트  튜토리얼 미니게임 3  (진상 고객 제압)
-    private bool isEvent06 = false;     // 6번 이벤트  튜토리얼 미니게임 4  (지도 안내)
-    private bool isEvent07 = false;     // 7번 이벤트  튜토리얼 미니게임 5  (엘레베이터 고장)
-    private bool isEvent08 = false;     // 8번 이벤트  튜토리얼 미니게임 6  (B1층 튜토 종료)
-    private bool isEvent09 = false;     // 9번 이벤트  튜토리얼 미니게임 7  (승객 추락 구조)
-    private bool isEvent10 = false;     // 10번 이벤트 튜토리얼 미니게임 8  (심장마비)
-    private bool isEvent11 = false;     // 11번 이벤트 튜토리얼 미니게임 9  (진상 취객 깨우기)
-    private bool isEvent12 = false;     // 12번 이벤트 튜토리얼 종료
+    private bool isEvent01 = false;     // 01번 이벤트  오프닝 컷신 이후
+    private bool isEvent02 = false;     // 02번 이벤트  화살표 설명 + 튜토리얼 미니게임 1  (에스컬레이터 고장)
+    private bool isEvent03 = false;     // 03번 이벤트  튜토리얼 미니게임 2  (취객 깨우기)
+    private bool isEvent04 = false;     // 04번 이벤트  튜토리얼 미니게임 3  (진상 고객 제압)
+    private bool isEvent05 = false;     // 05번 이벤트  튜토리얼 미니게임 4  (지도 안내)
+    private bool isEvent06 = false;     // 06번 이벤트  튜토리얼 미니게임 5  (엘레베이터 고장)
+    private bool isEvent07 = false;     // 07번 이벤트  튜토리얼 미니게임 6  (B1층 튜토 종료)
+    private bool isEvent08 = false;     // 08번 이벤트  튜토리얼 미니게임 7  (승객 추락 구조)
+    private bool isEvent09 = false;     // 09번 이벤트  튜토리얼 미니게임 8  (심장마비)
+    private bool isEvent10 = false;     // 10번 이벤트  튜토리얼 미니게임 9  (진상 취객 깨우기)
+    private bool isEvent11 = false;     // 11번 이벤트  튜토리얼 종료
 
     // 대사 리스트들
     private List<string> textLines;
-    private List<string> event1_Lines;    // 오프닝 컷신 이후
-    private List<string> event2_Lines;    // 화살표 설명
-    private List<string> event3_Lines;    // 튜토리얼 미니게임 1  (에스컬레이터 고장)
-    private List<string> event4_Lines;    // 튜토리얼 미니게임 2  (취객 깨우기)
-    private List<string> event5_Lines;    // 튜토리얼 미니게임 3  (진상 고객 제압)
-    private List<string> event6_Lines;    // 튜토리얼 미니게임 4  (지도 안내)
-    private List<string> event7_Lines;    // 튜토리얼 미니게임 5  (엘레베이터 고장)
-    private List<string> event8_Lines;    // 튜토리얼 미니게임 6  (B1층 튜토 종료)
-    private List<string> event9_Lines;    // 튜토리얼 미니게임 7  (승객 추락 구조)
-    private List<string> event10_Lines;   // 튜토리얼 미니게임 8  (심장마비)
-    private List<string> event11_Lines;   // 튜토리얼 미니게임 9  (진상 취객 깨우기)
-    private List<string> event12_Lines;   // 튜토리얼 종료
+    private List<string> event01_Lines;    // 오프닝 컷신 이후
+    private List<string> event02_Lines;    // 화살표 설명 + 튜토리얼 미니게임 1  (에스컬레이터 고장)
+    private List<string> event03_Lines;    // 튜토리얼 미니게임 2  (취객 깨우기)
+    private List<string> event04_Lines;    // 튜토리얼 미니게임 3  (진상 고객 제압)
+    private List<string> event05_Lines;    // 튜토리얼 미니게임 4  (지도 안내)
+    private List<string> event06_Lines;    // 튜토리얼 미니게임 5  (엘레베이터 고장)
+    private List<string> event07_Lines;    // 튜토리얼 미니게임 6  (B1층 튜토 종료)
+    private List<string> event08_Lines;    // 튜토리얼 미니게임 7  (승객 추락 구조)
+    private List<string> event09_Lines;    // 튜토리얼 미니게임 8  (심장마비)
+    private List<string> event10_Lines;    // 튜토리얼 미니게임 9  (진상 취객 깨우기)
+    private List<string> event11_Lines;    // 튜토리얼 종료
 
     private int currentLine = -1;
 
@@ -99,7 +97,7 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         // 오프닝 컷신 이후
-        event1_Lines = new List<string>
+        event01_Lines = new List<string>
         {
             "너가 새로운 수습이구나.",
             "우리 역은\n돌발 상황이 가끔 생기거든?",
@@ -107,55 +105,53 @@ public class TutorialManager : MonoBehaviour
             "해결 실패해서 민원 들어오면\n합격 못한다~"
         };
 
-        // 화살표 설명
-        event2_Lines = new List<string>
+        // 화살표 설명 + 튜토리얼 미니게임 1  (에스컬레이터 고장)
+        event02_Lines = new List<string>
         {
             "여기 옆에 화살표 보이지?",
             "화살표를 따라가면 네 할 일이 보여.",
             "빨강색 화살표는 지하 1층,",
             "노랑색은 지하 2층이니 명심해둬",
             "이제 할일 하러 가볼까?",
-        };
-
-        // 튜토리얼 미니게임 1  (에스컬레이터 고장)
-        event3_Lines = new List<string>
-        {
-            "너무 돌리면 부서진다.",
-            "우리 파트 예산은 너가 알아서 책임져?",
-            "열쇠?\n표시된 각도까지만 돌리는 거야.",
+            "먼저 에스컬레이터야.",
+            "열쇠를 돌려서 고쳐야해.",
+            "표시된 각도까지만 돌리는 거야.",
             "감으로 돌리지 마.",
+            "안그러면 부서진다?",
+            "부서지면...",
+            "우리 파트 예산은 알아서 책임져?",
         };
 
         // 튜토리얼 미니게임 2  (취객 깨우기)
-        event4_Lines = new List<string>
+        event03_Lines = new List<string>
         {
             "저 취객, 네가 아니면 못 깨워 ...\n나는 딱 봐도 인상 좋잖아.",
             "방향키대로 눌러.\n틀리면 둘 다 눕는다.",
         };
 
         // 튜토리얼 미니게임 3  (진상 고객 제압)
-        event5_Lines = new List<string>
+        event04_Lines = new List<string>
         {
             "말로 잘 달래봐~ 고집불통 같다고?\n그건 네 역량이지.",
             "게이지 범위에 맞춰서 딱 누르면 돼.\n떨면 끝.",
         };
 
         // 튜토리얼 미니게임 4  (지도 안내)
-        event6_Lines = new List<string>
+        event05_Lines = new List<string>
         {
             "길 모르면 물어보라고 배웠지?\n이제 네가 답할 차례야.",
             "시작지랑 목적지를 이어.\n단, 막힌 길로 못 가.",
         };
 
         // 튜토리얼 미니게임 5  (엘레베이터 고장)
-        event7_Lines = new List<string>
+        event06_Lines = new List<string>
         {
             "전선? 색깔 맞춰서 잇는 거,\n그 정도는 알지?",
             "이건 실수하면 욕먹기 쉽상이야",
         };
 
         // 튜토리얼 미니게임 6  (B1층 튜토 종료)
-        event8_Lines = new List<string>
+        event07_Lines = new List<string>
         {
             "업무에 좀 익숙해지는 것 같아?",
             "이제 B2층으로 가봐.",
@@ -164,14 +160,14 @@ public class TutorialManager : MonoBehaviour
         };
 
         // 튜토리얼 미니게임 7  (승객 추락 구조)
-        event9_Lines = new List<string>
+        event08_Lines = new List<string>
         {
             "승객이 떨어지는 경우가 있다.\n지금 잘 배워둬라.",
             "연타해서 게이지 채워!\n아니면 둘 다 끝장이야.",
         };
 
         // 튜토리얼 미니게임 8  (심장마비)
-        event10_Lines = new List<string>
+        event09_Lines = new List<string>
         {
             "응급상황은 언제나 일어나니까\n정신차려!!",
             "침착하게, 정확하게.",
@@ -179,7 +175,7 @@ public class TutorialManager : MonoBehaviour
         };
 
         // 튜토리얼 미니게임 9  (진상 취객 깨우기)
-        event11_Lines = new List<string>
+        event10_Lines = new List<string>
         {
             "저 사람? 일반 취객 아냐.",
             "잘못 건드리면 일날걸?",
@@ -187,7 +183,7 @@ public class TutorialManager : MonoBehaviour
         };
 
         // 튜토리얼 종료
-        event12_Lines = new List<string>
+        event11_Lines = new List<string>
         {
             "설명 끝. 내일부터 출근해.",
             "근무시간은\n9시부터 6시까지야 잊지마.",
@@ -204,9 +200,9 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         if (isEvent01 || isEvent02 || isEvent03 || isEvent04 || isEvent05 || isEvent06
-             || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11 || isEvent12)
+             || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
                 HandleTypingInput();
         }
 
@@ -233,8 +229,6 @@ public class TutorialManager : MonoBehaviour
             StartEvent10();
         else if (Input.GetKeyDown(KeyCode.F11))
             StartEvent11();
-        else if (Input.GetKeyDown(KeyCode.F12))
-            StartEvent12();
     }
 
     /// <summary>
@@ -323,11 +317,6 @@ public class TutorialManager : MonoBehaviour
                 isEvent11 = false;
                 yield return EndEvent11_Routine();
             }
-            else if (isEvent12)
-            {
-                isEvent12 = false;
-                yield return EndEvent12_Routine();
-            }
 
             // 플레이어가 다시 이동할 수 있게
             if(playerController != null)
@@ -375,7 +364,7 @@ public class TutorialManager : MonoBehaviour
         if (playerAnimator != null)
             playerAnimator.SetMoved(false);
 
-        textLines = event1_Lines;
+        textLines = event01_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent1WithDelay());
     }
@@ -405,7 +394,7 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 2 화살표 설명
+    #region 이벤트 2 화살표 설명 + 에스컬레이터 고장
     public void StartEvent2()
     {
         if (playerController != null)
@@ -416,7 +405,7 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼 1 생성
         CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
 
-        textLines = event2_Lines;
+        textLines = event02_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent2WithDelay());
     }
@@ -444,13 +433,18 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 3 에스컬레이터 고장
+    #region 이벤트 3 취객 깨우기
     public void StartEvent3()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        textLines = event3_Lines;
+        // 취객 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+
+        textLines = event03_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent3WithDelay());
     }
@@ -478,16 +472,18 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 4 취객 깨우기
+    #region 이벤트 4 진상 고객 제압
     public void StartEvent4()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        // 튜토리얼 2 생성
-        CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+        // 진상 고객 제압 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
 
-        textLines = event4_Lines;
+        textLines = event04_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent4WithDelay());
     }
@@ -515,16 +511,18 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 5 진상 고객 제압
+    #region 이벤트 5 지도 안내
     public void StartEvent5()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        // 튜토리얼 3 생성
-        CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+        // 지도 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
 
-        textLines = event5_Lines;
+        textLines = event05_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent5WithDelay());
     }
@@ -551,17 +549,19 @@ public class TutorialManager : MonoBehaviour
         speechText.text = "";
     }
     #endregion
-    
-    #region 이벤트 6 지도 안내
+
+    #region 이벤트 6 엘리베이터 고장
     public void StartEvent6()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        // 튜토리얼 4 생성
-        CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+        // 엘리베이터 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
 
-        textLines = event6_Lines;
+        textLines = event06_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent6WithDelay());
     }
@@ -589,16 +589,15 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 7 엘리베이터 고장
+    #region 이벤트 7 B1층 튜토리얼 끝
     public void StartEvent7()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        // 튜토리얼 5 생성
-        CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-
-        textLines = event7_Lines;
+        textLines = event07_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent7WithDelay());
     }
@@ -623,16 +622,24 @@ public class TutorialManager : MonoBehaviour
         // 팝업 페이드아웃
         canvasGroup.DOFade(0, 1f);
         speechText.text = "";
+
+        // 3초 후에 승객 추락 구조 이벤트
+        Invoke(nameof(StartEvent8), 3f);
     }
     #endregion
 
-    #region 이벤트 8 B1층 튜토리얼 끝
+    #region 이벤트 8 승객 추락 구조
     public void StartEvent8()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        textLines = event8_Lines;
+        // 승객 추락 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+
+        textLines = event08_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent8WithDelay());
     }
@@ -657,22 +664,21 @@ public class TutorialManager : MonoBehaviour
         // 팝업 페이드아웃
         canvasGroup.DOFade(0, 1f);
         speechText.text = "";
-
-        // 5초 후에 승객 추락 구조 이벤트
-        Invoke(nameof(StartEvent9), 5f);
     }
     #endregion
 
-    #region 이벤트 9 승객 추락 구조
+    #region 이벤트 9 심장마비
     public void StartEvent9()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        // 튜토리얼 6 생성
-        CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+        // 심장마비 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
 
-        textLines = event9_Lines;
+        textLines = event09_Lines;
         t_talkleEffect.MoveUp();
         StartCoroutine(StartEvent9WithDelay());
     }
@@ -700,14 +706,16 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 10 심장마비
+    #region 이벤트 10 진상 취객 깨우기
     public void StartEvent10()
     {
         if (playerController != null)
             playerController.canMove = false;
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
-        // 튜토리얼 7 생성
-        CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+        // 진상 취객 오브젝트 생성
+        CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
 
         textLines = event10_Lines;
         t_talkleEffect.MoveUp();
@@ -737,14 +745,13 @@ public class TutorialManager : MonoBehaviour
     }
     #endregion
 
-    #region 이벤트 11 진상 취객 깨우기
+    #region 이벤트 11 튜토리얼 끝
     public void StartEvent11()
     {
         if (playerController != null)
             playerController.canMove = false;
-
-        // 튜토리얼 8 생성
-        CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+        if (playerAnimator != null)
+            playerAnimator.SetMoved(false);
 
         textLines = event11_Lines;
         t_talkleEffect.MoveUp();
@@ -771,43 +778,9 @@ public class TutorialManager : MonoBehaviour
         // 팝업 페이드아웃
         canvasGroup.DOFade(0, 1f);
         speechText.text = "";
-    }
-    #endregion
-
-    #region 이벤트 12 튜토리얼 끝
-    public void StartEvent12()
-    {
-        if (playerController != null)
-            playerController.canMove = false;
-
-        textLines = event12_Lines;
-        t_talkleEffect.MoveUp();
-        StartCoroutine(StartEvent12WithDelay());
-    }
-
-    private IEnumerator StartEvent12WithDelay()
-    {
-        yield return new WaitForSeconds(1f);  // 1초 대기
-
-        canvasGroup.alpha = 1;
-        currentLine = -1;
-
-        isEvent12 = true;
-        StartCoroutine(ShowNextLine());
-    }
-
-    IEnumerator EndEvent12_Routine()
-    {
-        // 무전기 내려가는 트윈
-        t_talkleEffect.MoveDown();
-        yield return speechWaitTime;
-
-        // 팝업 페이드아웃
-        canvasGroup.DOFade(0, 1f);
-        speechText.text = "";
 
         // 페이드 아웃 엔딩씬
-        if(fadeController != null)
+        if (fadeController != null)
         {
             fadeController.DirectEndingFade();
         }
