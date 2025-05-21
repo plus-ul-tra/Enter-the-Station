@@ -26,7 +26,7 @@ public class Task : MonoBehaviour
         
 
         isOnTask = true;
-
+        CountManager.Instance.AddTryCount();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -42,10 +42,12 @@ public class Task : MonoBehaviour
         playerController.canMove = false;
         //++애니메이션
     }
+
     protected void Timer()
     {
 
     }
+
     protected void Close() {
 
         

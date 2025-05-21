@@ -90,6 +90,8 @@ public class StageManager : MonoBehaviour
     /// <param name="value"></param>
     public void DecreasePlayerHp(int value = 1)
     {
+        CountManager.Instance.AddClaimCount();
+
         playerCurHp -= value;
         OnPlayerHpChanged?.Invoke(playerCurHp);
 
