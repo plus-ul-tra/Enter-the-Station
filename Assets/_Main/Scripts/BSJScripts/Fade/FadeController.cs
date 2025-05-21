@@ -2,6 +2,8 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.Cinemachine;
+using System.Collections;
 
 public class FadeController : MonoBehaviour
 {
@@ -9,14 +11,31 @@ public class FadeController : MonoBehaviour
     public Transform player;        // 플레이어 트랜스폼
     public Image fadeImage;         // UI Image 컴포넌트
 
-    private Vector3 playerFaceOffset = new Vector3(0f, 0.8f, 0f);
+    private Vector3 playerFaceOffset = new Vector3(0f, 1.5f, 0f);
+
+    private PlayerAnimator playerAnimator;
+    private PlayerController playerController;
     private Sequence seq;
 
     [Header("튜토리얼인지 체크")]
     [SerializeField] private bool isTutorial = false;
 
+    [Header("줌 인할 Virtual Camera")]
+    [SerializeField] private CinemachineCamera vcam;
+
+    [Header("줌 인 시 Orthographic Size 값")]
+    [SerializeField] private float zoomSize = 1f;
+
+    [Header("기본 Orthographic Size 값")]
+    [SerializeField] private float defaultSize = 5f;
+
+    [Header("줌 인 지속 시간(초)")]
+    [SerializeField] private float duration = 1f;
     private void Start()
     {
+        playerAnimator = player.GetComponent<PlayerAnimator>();
+        playerController = player.GetComponent<PlayerController>();
+
         // 시작값 : 페이드 활짝 열기
         fadeMat.SetFloat("_HoleRadius", 2f);
         fadeImage.gameObject.SetActive(false);
@@ -37,8 +56,28 @@ public class FadeController : MonoBehaviour
     /// <summary>
     /// 엔딩 페이드를 연출하는 함수
     /// </summary>
-    public void DirectEndingFade()
+    public void DirectEndingFade(bool isClear)
     {
+        if (playerController != null)
+            playerController.canMove = true;
+
+        if(playerAnimator != null)
+        {
+            if (isClear)
+            {
+                StartCoroutine(MoveAndResizeCamera());
+                // 성공
+                playerAnimator.SetClear(true);
+            }
+            else
+            {
+                StartCoroutine(MoveAndResizeCamera());
+                // 실패
+                playerAnimator.SetFail(true);
+            }
+        }
+        
+
         // 0. 초기화
         fadeMat.SetFloat("_HoleRadius", 2f);
         fadeImage.gameObject.SetActive(true);
@@ -50,7 +89,7 @@ public class FadeController : MonoBehaviour
         seq.Append(
             DOTween.To(() => fadeMat.GetFloat("_HoleRadius"),
                        x => fadeMat.SetFloat("_HoleRadius", x),
-                       0.1f,
+                       0.3f,
                        2f)
                   .SetEase(Ease.InOutSine)
         );
@@ -68,23 +107,77 @@ public class FadeController : MonoBehaviour
         );
 
         seq.OnComplete(() => {
-            if(isTutorial)
+            if(isClear)
             {
-                // 실패 엔딩씬으로 이동
                 DOTween.KillAll();
-                SceneManager.LoadScene("Day1");
+                SceneManager.LoadScene("Clear");
             }
             else
             {
-                // 실패 엔딩씬으로 이동
-                DOTween.KillAll();
-                SceneManager.LoadScene("FailEnding");
-            } 
+                if (isTutorial)
+                {
+                    // 실패 엔딩씬으로 이동
+                    DOTween.KillAll();
+                    SceneManager.LoadScene("Day1");
+                }
+                else
+                {
+                    // 실패 엔딩씬으로 이동
+                    DOTween.KillAll();
+                    SceneManager.LoadScene("FailEnding");
+                }
+            }
         });
     }
+    private IEnumerator MoveAndResizeCamera()
+    {
+        // 시작 크기와 목표 크기
+        float startSize = vcam.Lens.OrthographicSize;
+        float endSize = zoomSize;
 
+        float elapsed = 0f;
+
+        // duration 동안 계속 반복
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            // 부드럽게 보간
+            vcam.Lens.OrthographicSize = Mathf.Lerp(startSize, endSize, t);
+
+            yield return null;
+        }
+
+        // 정확히 목표 크기로 맞춰주기
+        vcam.Lens.OrthographicSize = endSize;
+
+        // 예: 1초 대기 후 다시 원래 크기로 돌아가고 싶다면
+        // yield return new WaitForSeconds(1f);
+        // StartCoroutine(ResetCameraSize());
+    }
+
+    // 필요하다면 원상복구용 코루틴
+    private IEnumerator ResetCameraSize()
+    {
+        float startSize = vcam.Lens.OrthographicSize;
+        float endSize = defaultSize;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            vcam.Lens.OrthographicSize = Mathf.Lerp(startSize, endSize, t);
+            yield return null;
+        }
+
+        vcam.Lens.OrthographicSize = endSize;
+    }
     private void OnDisable()
     {
         seq?.Kill();
     }
 }
+
+

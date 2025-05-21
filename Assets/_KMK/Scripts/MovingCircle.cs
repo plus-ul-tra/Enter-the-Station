@@ -38,7 +38,7 @@ public class MovingCircle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -48,7 +48,7 @@ public class MovingCircle : MonoBehaviour
         else if(!isStopped)
         {
 
-            circlePosX = vectorCircle.x * circleSpeed * Time.deltaTime;
+            circlePosX = vectorCircle.x * circleSpeed * Time.fixedDeltaTime;
             gameObject.transform.Translate(circlePosX, 0, 0);
             //Debug.Log(circlePosX);
 

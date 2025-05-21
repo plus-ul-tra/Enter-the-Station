@@ -26,12 +26,12 @@ public class MovingScope : MonoBehaviour
         vectorScope.x = (Random.value < 0.5f) ? -1f : 1f;//방향랜덤
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (isStopped)
             return;
 
-        ScopePosX = vectorScope.x * ScopeSpeed * Time.deltaTime;
+        ScopePosX = vectorScope.x * ScopeSpeed * Time.fixedDeltaTime;
         gameObject.transform.localPosition = new Vector3(transform.localPosition.x + ScopePosX, transform.localPosition.y, transform.localPosition.z);
     }
 
