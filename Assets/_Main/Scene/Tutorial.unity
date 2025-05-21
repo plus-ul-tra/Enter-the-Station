@@ -4236,6 +4236,7 @@ MonoBehaviour:
   stairs_Up: {fileID: 424273756}
   stairs_Down: {fileID: 464167573}
   optionPanel: {fileID: 2109914471}
+  stunAim: {fileID: 0}
   canMove: 1
   introCameraSwitcher: {fileID: 1935231341}
   count: 0
@@ -4814,8 +4815,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  light1: {fileID: 793477540}
-  light2: {fileID: 1944501238}
   KeyHole: {fileID: 877413365}
   signGroup: {fileID: 1004270376}
   totalSteps: 12
@@ -14914,6 +14913,7 @@ MonoBehaviour:
   - {fileID: 649817064}
   doorOpenDistance: 0.6
   doorMoveDuration: 0.5
+  spawn: {fileID: 0}
 --- !u!4 &914862455
 Transform:
   m_ObjectHideFlags: 0
@@ -24760,8 +24760,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  SendIsOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 304870445}
+        m_TargetAssemblyTypeName: KeyController, Assembly-CSharp
+        m_MethodName: SetisOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   firstScene: {fileID: 38888479}
   secondScene: {fileID: 1310241511}
+  lightGroup: {fileID: 1899197939}
+  successNum: 2
 --- !u!1 &1456283207
 GameObject:
   m_ObjectHideFlags: 0

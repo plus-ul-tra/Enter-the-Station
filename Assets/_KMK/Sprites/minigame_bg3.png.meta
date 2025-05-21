@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 76659d91c3c1c834aa8a9cb5cf447fff
+guid: 63db8551530bb824c998782b43b37805
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2736764858301403488
-    second: result_3_0
-  - first:
-      213: 7336677529390664804
-    second: result_3_1
+      213: 6286585218145984655
+    second: minigame_bg3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: result_3_0
+      name: minigame_bg3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 400
-        height: 153
+        width: 1000
+        height: 700
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 061d3dc7321faf520800000000000000
-      internalID: 2736764858301403488
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: result_3_1
-      rect:
-        serializedVersion: 2
-        x: 415
-        y: 0
-        width: 192
-        height: 153
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 46ccbe2775d11d560800000000000000
-      internalID: 7336677529390664804
+      spriteID: f8020d9b2ff6e3750800000000000000
+      internalID: 6286585218145984655
       vertices: []
       indices: 
       edges: []
@@ -159,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      result_3_0: 2736764858301403488
-      result_3_1: 7336677529390664804
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

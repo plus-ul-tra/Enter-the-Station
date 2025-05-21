@@ -31,13 +31,14 @@ public class StageManager : MonoBehaviour
 
     private FadeController fadeController;
     private bool isStageClear = false;
+    //----------------------------------------------------
 
     private void Awake()
     {
         // Hp 초기화
         playerMaxHp = 3;
         playerCurHp = playerMaxHp;
-
+        CountManager.Instance.ResetCounts();
         // Stage Time 초기화
         // stageMaxTime = 60f; (인스펙터에서 초기화)
         stageCurTime = 0f;
@@ -107,6 +108,7 @@ public class StageManager : MonoBehaviour
     public void FailStage()
     {
         fadeController.DirectEndingFade(false);
+        
     }
 
     /// <summary>
@@ -114,6 +116,8 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void ClearStage()
     {
+        CountManager.Instance.ApplyAllCounts(); // total에 카운트 적용
         fadeController.DirectEndingFade(true);
+        
     }
 }

@@ -91,6 +91,7 @@ public class DrunkenManager : Task
         if (isOver && timer < limitTime)
         {
             successImage.SetActive(true);
+            CountManager.Instance.AddClearCount();
             onResult.Invoke();
             if (!isClose)
             {

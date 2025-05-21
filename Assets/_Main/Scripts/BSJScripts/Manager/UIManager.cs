@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < hpImages.Length; i++)
         {
 
-            if (i < currentHp)
+            if (i < 3 - currentHp)
             {
                 Debug.Log("Ä®¶óÃ¼ÀÎÁö");
                 hpImages[i].color = new Color(1f, 1f, 1f, 1f); 

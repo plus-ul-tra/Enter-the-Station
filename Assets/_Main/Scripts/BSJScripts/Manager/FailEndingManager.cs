@@ -19,6 +19,8 @@ public class FailEndingManager : MonoBehaviour
 
             // 이전 씬으로 돌아가기 (돌아가기 전에 트윈 정리)
             DOTween.KillAll();
+
+            // TODO : 이전 씬이 뭐지 알아야함
             SceneManager.LoadScene("Day1"); //이전 Scene으로
         });
     }

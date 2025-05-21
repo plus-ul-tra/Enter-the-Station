@@ -133,6 +133,7 @@ public class FixWiring : Task
             timer = 0.0f;
             // ¼º°ø
             successImage.SetActive(true);
+            CountManager.Instance.AddClearCount();
             SoundManager.Instance.PlaySFX("Fix_elevator_finish");
             Close();
             

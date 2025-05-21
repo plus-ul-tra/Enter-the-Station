@@ -31,6 +31,12 @@ public class FadeController : MonoBehaviour
 
     [Header("줌 인 지속 시간(초)")]
     [SerializeField] private float duration = 1f;
+
+    //---------------------------------------------------
+
+    [Header("셔터")]
+    [SerializeField] private UpDownMove shutter;
+
     private void Start()
     {
         playerAnimator = player.GetComponent<PlayerAnimator>();
@@ -39,6 +45,9 @@ public class FadeController : MonoBehaviour
         // 시작값 : 페이드 활짝 열기
         fadeMat.SetFloat("_HoleRadius", 2f);
         fadeImage.gameObject.SetActive(false);
+
+        // 셔터 열기
+        shutter.StartCoroutine(shutter.MoveUp());
     }
 
     private void Update()
@@ -106,11 +115,33 @@ public class FadeController : MonoBehaviour
                   .SetEase(Ease.InQuad)
         );
 
+        seq.AppendCallback(() =>
+        {
+            shutter.StartCoroutine(shutter.MoveDown());
+        });
+
+        seq.AppendInterval(2f);
+
         seq.OnComplete(() => {
+
+            Scene currentScene = SceneManager.GetActiveScene();
+
             if (isClear)
             {
                 DOTween.KillAll();
-                SceneManager.LoadScene("Clear");
+                
+                if (currentScene.name == "Day1")
+                {
+                    SceneManager.LoadScene("Day2t");
+                }
+                else if(currentScene.name == "Day2t")
+                {
+                    SceneManager.LoadScene("Day3t");
+                }
+                else if(currentScene.name == "Day3t")
+                {
+                    SceneManager.LoadScene("Clear");
+                }
             }
             else
             {

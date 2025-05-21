@@ -59,6 +59,7 @@ public class ArrowMatching : Task
             // task 성공
             //필요시 함수 추가
             successImage.SetActive(true);
+            CountManager.Instance.AddClearCount();
             timer = 0.0f;
             isOver = true;
             SoundManager.Instance.PlaySFX("Treat_DR_finish");

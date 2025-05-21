@@ -113,6 +113,7 @@ public class MovingCircleManager : Task
             if (count >= 4)// 성공시 실행 로직
             {
                 circle.SetSmile();
+                CountManager.Instance.AddClearCount();
                 successImage.SetActive(true);
                 isClose = true;
                 Close();

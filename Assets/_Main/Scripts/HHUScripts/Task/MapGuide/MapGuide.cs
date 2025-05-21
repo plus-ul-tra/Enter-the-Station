@@ -158,7 +158,7 @@ public class MapGuide : Task
         {
             timer = 0.0f;
             successImage.SetActive(true);
-            
+            CountManager.Instance.AddClearCount();
             SoundManager.Instance.PlaySFX("Map_finish");
             Close();
             foreach (var way in ways)

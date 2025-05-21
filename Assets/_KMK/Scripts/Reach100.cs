@@ -68,6 +68,7 @@ public class Reach100 : BaseGauge
             else if (isFilled && timer <= limitTime)
             {
                 successImage.SetActive(true);
+                CountManager.Instance.AddClearCount();
                 isClose = true;
                 SoundManager.Instance.PlaySFX("Medical_finish");
                 Close();

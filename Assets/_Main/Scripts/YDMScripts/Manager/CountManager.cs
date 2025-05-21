@@ -69,7 +69,7 @@ public class CountManager : MonoBehaviour
         totalClear = 0;
         totalItemCount = 0;
         totalClaim = 0;
-}
+    }
     public void ResetCounts()
     {    // Day 시작할때 초기화
         tryCount = 0;

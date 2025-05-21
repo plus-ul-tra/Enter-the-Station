@@ -54,6 +54,7 @@ public class MaintainManager : BaseGauge
             { //성공
                 //Debug.Log("성공");
                 SoundManager.Instance.PlaySFX("Medical_finish");
+                CountManager.Instance.AddClearCount();
                 successImage.SetActive(true);
                 isClose = true;
                 Close();

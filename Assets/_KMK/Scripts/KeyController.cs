@@ -10,7 +10,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
 {
 
     public UnityEvent SetSuccess;
-    public GameObject light1, light2;
+
     public GameObject KeyHole;
     public GameObject signGroup;
 
@@ -22,6 +22,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
     int goalNum;
     int lightNum;
     bool isClear;
+    bool isOver;
     Vector2 dirS;
     
 
@@ -40,25 +41,24 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         rectTransform = GetComponent<RectTransform>();
         centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, KeyHole.transform.position);
         //centerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, rectTransform.position);
-        light1.SetActive(false);
-        light2.SetActive(false);
         //signGroup.SetActive(false);
         InitSignGroup();
         currentAngle = 0f;
         lightNum = 0;   
         isClear = true;
+        isOver = false;
         
     }
     void InitSignGroup()
     {
         for(int i=0; i < goalNum; i++)
         {
-            signGroup.transform.GetChild(goalNum).gameObject.SetActive(false);
-        }
+            signGroup.transform.GetChild(i).gameObject.SetActive(false);
+        } // GetChild(goalNum)으로 되어있길래 i로 고침! 문제 생길 시 여길 살펴봐주세요
     }
     void Update()
     {
-        if (isClear && lightNum < 2) 
+        if (isClear && !isOver) 
         {
             goalNum = Random.Range(0, totalSteps);
             signGroup.transform.GetChild(goalNum).gameObject.SetActive(true);
@@ -68,7 +68,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         }  
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData) // 마우스 눌렀을 때
     {
         Canvas canvas = GetComponentInParent<Canvas>();
         Camera cam = null;
@@ -82,7 +82,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         dirS = (eventData.position - centerPos).normalized;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData) // 마우스 드래그 할 때
     {
         Vector2 currentDir = (eventData.position - centerPos).normalized;
 
@@ -108,7 +108,7 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         }
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData) // 마우스 뗐을 때
     {
 
         // 스냅 각도 계산
@@ -129,8 +129,6 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         { 
             PlayUnlockSound();  
             SetSuccess.Invoke();
-            if (lightNum == 1) { light1.SetActive(true); }
-            else if (lightNum == 2) { light2.SetActive(true); }
             signGroup.transform.GetChild(goalNum).gameObject.SetActive(false);
             isClear = true; 
         }
@@ -167,4 +165,6 @@ public class KeyController : MonoBehaviour, IPointerDownHandler, IDragHandler, I
             audioSource.PlayOneShot(unlockSound);
         }
     }
+
+    public void SetisOver() { isOver = true; }
 }
