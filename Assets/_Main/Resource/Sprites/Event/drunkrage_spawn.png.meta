@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: e754bd60769e07544967b7ba1ea60d0d
+guid: 2421b2ce27e348c4f87af9bf6a526f6c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4630334095526635483
-    second: train_first_car 1_0
+      213: 2916762496874231241
+    second: drunkrage_spawn_0
+  - first:
+      213: 5681590851916229610
+    second: drunkrage_spawn_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: train_first_car 1_0
+      name: drunkrage_spawn_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1304
-        height: 350
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        x: 135
+        y: 783
+        width: 563
+        height: 698
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bd7ae3bc350424040800000000000000
-      internalID: 4630334095526635483
+      spriteID: 315cd142a513d404a8082c5900208467
+      internalID: 1508797927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: drunkrage_spawn_1
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 0
+        width: 379
+        height: 792
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.012792321}
+      border: {x: 0, y: 0, z: 0, w: 9}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 902c3b466a2f6834db3375dd69570a51
+      internalID: 990231572
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b22d49df50b75c44ea0773ffaf5414d2
+    spriteID: c1d6721d850381c438fb854c3532a9ff
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      train_first_car 1_0: 4630334095526635483
+      drunkrage_spawn_0: 1508797927
+      drunkrage_spawn_1: 990231572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

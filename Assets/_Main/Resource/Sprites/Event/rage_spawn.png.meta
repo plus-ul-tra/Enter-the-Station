@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: e754bd60769e07544967b7ba1ea60d0d
+guid: 2900755cc7eef3349b8f752ccf165522
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4630334095526635483
-    second: train_first_car 1_0
+      213: -1627423409199809065
+    second: rage_spawn_0
+  - first:
+      213: -2304932135480026550
+    second: rage_spawn_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: train_first_car 1_0
+      name: rage_spawn_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1304
-        height: 350
+        y: 742
+        width: 563
+        height: 699
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5141136, y: 0.031085929}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bd7ae3bc350424040800000000000000
-      internalID: 4630334095526635483
+      spriteID: 7dd7d73280b3a69e0800000000000000
+      internalID: -1627423409199809065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rage_spawn_1
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 383
+        height: 744
+      alignment: 9
+      pivot: {x: 0.4948132, y: 0.016727544}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4a94515f6c3300e0800000000000000
+      internalID: -2304932135480026550
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b22d49df50b75c44ea0773ffaf5414d2
+    spriteID: 5caaf12bdca630848be63688f0275796
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      train_first_car 1_0: 4630334095526635483
+      rage_spawn_0: -1627423409199809065
+      rage_spawn_1: -2304932135480026550
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
