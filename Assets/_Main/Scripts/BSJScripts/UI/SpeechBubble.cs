@@ -60,6 +60,15 @@ public class SpeechBubble : MonoBehaviour
         canvasGroup.alpha = 0;
     }
 
+    ///// <summary>
+    ///// 화살표 안내 말풍선을 실행시키는 함수
+    ///// </summary>
+    //public void PlayArrowNotice()
+    //{
+    //    tmpText.text = sb.ToString();
+    //}
+
+
     /// <summary>
     /// 무전기 말풍선을 실행시키는 함수
     /// </summary>
