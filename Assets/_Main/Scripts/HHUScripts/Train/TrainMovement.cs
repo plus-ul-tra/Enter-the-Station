@@ -27,7 +27,8 @@ public class TrainMovement : MonoBehaviour
     private PassengerSpawner passengerSpawner;
     private void Start()
     {
-        passengerSpawner = spawn.GetComponent<PassengerSpawner>();
+        if (spawn != null)
+            passengerSpawner = spawn.GetComponent<PassengerSpawner>();
         startPos = transform.position;
     }
 
@@ -84,7 +85,8 @@ public class TrainMovement : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         //SoundManager.Instance.PlaySFX("Train_dooropen");
         // 3) 문 열기 애니메이션 (닫힌 → 열린)
-        passengerSpawner.StartCoroutine(passengerSpawner.SpawnRoutine(pauseDuration));
+        if (passengerSpawner != null)
+            passengerSpawner.StartCoroutine(passengerSpawner.SpawnRoutine(pauseDuration));
         yield return StartCoroutine(AnimateDoors(initialLeftPositions, openedLeftPositions,
                                                  initialRightPositions, openedRightPositions));
 

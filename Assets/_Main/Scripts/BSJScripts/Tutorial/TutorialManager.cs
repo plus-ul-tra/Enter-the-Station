@@ -160,7 +160,6 @@ public class TutorialManager : MonoBehaviour
         event09_Lines = new List<string>
         {
             "버튼을 눌러 심장박동\n 게이지를 올리고 유지해!",
-            "네 손에 달렸다.",
         };
 
         // 튜토리얼 미니게임 9  (진상 취객 깨우기)
