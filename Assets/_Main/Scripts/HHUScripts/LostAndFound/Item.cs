@@ -7,7 +7,8 @@ public class Item : MonoBehaviour
     private ItemDataSO itemData;
     [SerializeField]
     private SpriteRenderer sprite;
-    private float lifeTime = 10.0f;
+    [SerializeField]
+    private float lifeTime = 15.0f;
     private float blinkStart = 6.0f;
     private Tween blinkTween;
     private GameObject interactUI;
