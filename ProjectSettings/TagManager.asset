@@ -20,6 +20,7 @@ TagManager:
   - Enemy
   - EnemyStun
   - EnemyKnockback
+  - Trash
   layers:
   - Default
   - TransparentFX

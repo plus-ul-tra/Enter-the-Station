@@ -92,7 +92,7 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void FailStage()
     {
-        fadeController.DirectEndingFade();
+        fadeController.DirectEndingFade(false);
     }
 
     /// <summary>
@@ -100,7 +100,6 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void ClearStage()
     {
-        DOTween.KillAll();
-        SceneManager.LoadScene("Clear");
+        fadeController.DirectEndingFade(true);
     }
 }

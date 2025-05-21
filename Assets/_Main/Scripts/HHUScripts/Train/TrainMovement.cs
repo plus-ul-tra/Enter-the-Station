@@ -33,10 +33,12 @@ public class TrainMovement : MonoBehaviour
 
         // 기차 이동
         transform.position += Vector3.left * trainSpeed * Time.deltaTime;
+        
 
         // 중간 지점에서 한 번만 멈춤
         if (!hasPaused && transform.position.x < startPos.x - 33f)
         {
+            
             hasPaused = true;
             StartCoroutine(PauseAndAnimateDoors());
             return;
@@ -72,7 +74,7 @@ public class TrainMovement : MonoBehaviour
             openedRightPositions[i] = initialRightPositions[i] + Vector3.right * doorOpenDistance;
 
         yield return new WaitForSeconds(1.0f);
-
+        SoundManager.Instance.PlaySFX("Train_dooropen");
         // 3) 문 열기 애니메이션 (닫힌 → 열린)
         yield return StartCoroutine(AnimateDoors(initialLeftPositions, openedLeftPositions,
                                                  initialRightPositions, openedRightPositions));

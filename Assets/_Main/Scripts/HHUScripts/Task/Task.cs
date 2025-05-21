@@ -54,6 +54,7 @@ public class Task : MonoBehaviour
         if (playerObject != null)
         {
             playerAnimator = playerObject.GetComponent<PlayerAnimator>();
+            //playerController = playerObject.GetComponent<PlayerController>();
         }
         else
         {
@@ -86,6 +87,8 @@ public class Task : MonoBehaviour
 
             var capsule = playerController.GetComponent<CapsuleCollider2D>();
             capsule.enabled = true;// 플레이어컨트롤러에 존재하는 콜라이더 컴포넌트 on
+
+            playerController.StartCoroutine(playerController.InvincibleCoroutine());
 
             playerController = null;
         }

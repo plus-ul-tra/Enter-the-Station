@@ -809,7 +809,7 @@ public class TutorialManager : MonoBehaviour
         // ÆäÀÌµå ¾Æ¿ô ¿£µù¾À
         if(fadeController != null)
         {
-            fadeController.DirectEndingFade();
+            fadeController.DirectEndingFade(true);
         }
     }
     #endregion
