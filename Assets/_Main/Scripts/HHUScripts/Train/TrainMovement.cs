@@ -18,12 +18,16 @@ public class TrainMovement : MonoBehaviour
     [Header("문 이동 애니메이션 시간(초)")]
     public float doorMoveDuration = 0.5f;
 
+    [Header("스폰")]
+    [SerializeField] private GameObject spawn;
+
     private Vector3 startPos;//열차 시작 위치 저장
     private bool isWaiting = false;//열차 정지 플래그
     private bool hasPaused = false;//현재 정지 상태 확인 플래그
-
+    private PassengerSpawner passengerSpawner;
     private void Start()
     {
+        passengerSpawner = spawn.GetComponent<PassengerSpawner>();
         startPos = transform.position;
     }
 
@@ -78,8 +82,9 @@ public class TrainMovement : MonoBehaviour
             openedRightPositions[i] = initialRightPositions[i] + Vector3.right * doorOpenDistance;
 
         yield return new WaitForSeconds(1.0f);
-        SoundManager.Instance.PlaySFX("Train_dooropen");
+        //SoundManager.Instance.PlaySFX("Train_dooropen");
         // 3) 문 열기 애니메이션 (닫힌 → 열린)
+        passengerSpawner.StartCoroutine(passengerSpawner.SpawnRoutine(pauseDuration));
         yield return StartCoroutine(AnimateDoors(initialLeftPositions, openedLeftPositions,
                                                  initialRightPositions, openedRightPositions));
 

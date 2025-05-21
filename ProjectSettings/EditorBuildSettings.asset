@@ -26,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Main/Scene/Clear.unity
     guid: ee3a14703047a914e94bf9d26c8574db
+  - enabled: 1
+    path: Assets/_Main/Scene/YDM/New Scene 1.unity
+    guid: f8de11621ac9de44eb57772333a4eeef
+  - enabled: 1
+    path: Assets/_Main/Scene/YDM/New Scene.unity
+    guid: e644e9e42e67eb544b7e2dfe536123eb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
