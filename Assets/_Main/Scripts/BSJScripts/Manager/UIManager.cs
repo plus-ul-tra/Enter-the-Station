@@ -25,13 +25,13 @@ public class UIManager : MonoBehaviour
 
     private void UpdateHpUI(int currentHp) // 
     {
-        Debug.Log("호출");
+        //Debug.Log("호출");
         for (int i = 0; i < hpImages.Length; i++)
         {
 
             if (i < 3 - currentHp)
             {
-                Debug.Log("칼라체인지");
+                //Debug.Log("칼라체인지");
                 hpImages[i].color = new Color(1f, 1f, 1f, 1f); 
             }
            

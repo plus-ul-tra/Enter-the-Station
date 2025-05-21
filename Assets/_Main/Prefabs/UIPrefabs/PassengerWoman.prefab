@@ -123,6 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824b46a8287e3034fab60bd18812b860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropDistance: 2
+  dropDistance: 4
   duration: 3
   destroyOnComplete: 1

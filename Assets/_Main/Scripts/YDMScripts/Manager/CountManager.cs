@@ -10,7 +10,7 @@ public class CountManager : MonoBehaviour
     private int totalTry = 0;
     private int totalClear = 0;
     private int totalItemCount = 0;
-    private int totalClaim = 0;
+    //private int totalClaim = 0;
 
     public int tryCount { get; private set; } 
     public int clearCount { get; private set; }
@@ -60,26 +60,27 @@ public class CountManager : MonoBehaviour
         totalTry += tryCount;
         totalClear += clearCount;
         totalItemCount += itemCount;
-        totalClaim += claimCount;
+        //totalClaim += claimCount;
     }
 
     public void ResetTotal()
-    {
+    { //Title로 빠질때 or day1 시작에만
         totalTry = 0;
         totalClear = 0;
         totalItemCount = 0;
-        totalClaim = 0;
+        claimCount = 0;
     }
     public void ResetCounts()
     {    // Day 시작할때 초기화
         tryCount = 0;
         clearCount = 0;
         itemCount = 0;
-        claimCount = 0;
+        //claimCount = 0; //claim은 초기화 안하고 계속 카운트
     }
 
+    public int GetScore() {/*계산식 here*/ return 89; }//임시 
     public int GetTotalTry() { return totalTry; }
     public int GetTotalClear() { return totalClear; }
     public int GetTotalItemCount() { return totalItemCount; }
-    public int GetTotalClaim() { return totalClaim; }
+    public int GetClaim() { return claimCount; }
 }

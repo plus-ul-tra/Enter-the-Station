@@ -1796,7 +1796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 2
   limitTime: 6
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   gauge: {fileID: 362208570}
@@ -5309,7 +5309,6 @@ MonoBehaviour:
   stunAim: {fileID: 183159353}
   canMove: 1
   introCameraSwitcher: {fileID: 1935231341}
-  count: 0
   knockbackDuration: 0.2
   invincibleTime: 1.5
   stepInterval: 1
@@ -8997,7 +8996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 4
   limitTime: 11
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   onSpacebar:
@@ -10991,7 +10990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a06a152f3115d94cae4a27892ffba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <stageMaxTime>k__BackingField: 10
+  <stageMaxTime>k__BackingField: 100
   isTutorial: 0
 --- !u!114 &533266234
 MonoBehaviour:
@@ -12794,8 +12793,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34946e4a2b266a44e95bdc4839d9bcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnTime: 20
-  minSpawnTime: 15
+  maxSpawnTime: 10
+  minSpawnTime: 5
 --- !u!1 &633878721
 GameObject:
   m_ObjectHideFlags: 0
@@ -16752,7 +16751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 6
   limitTime: 7
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   way: {fileID: 876814190723657094, guid: feba7a60d68571d41a1d758bfea6beb3, type: 3}
@@ -17096,7 +17095,7 @@ GameObject:
   - component: {fileID: 906653789}
   m_Layer: 0
   m_Name: ReturnCollition
-  m_TagString: Untagged
+  m_TagString: Return
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21363,7 +21362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 7
   limitTime: 7
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   Initial:
@@ -22710,7 +22709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 0
   limitTime: 7
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   leftWires:
@@ -22854,7 +22853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 5
   limitTime: 7
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   gauge: {fileID: 1141264794}
@@ -23074,7 +23073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 1
   limitTime: 7
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   container: {fileID: 1971959320}
@@ -25190,7 +25189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kindOfTask: 3
   limitTime: 7
-  stageManager: {fileID: 0}
+  stageManager: {fileID: 533266233}
   successImage: {fileID: 794910077}
   failedImage: {fileID: 529051664}
   Initial:
@@ -29108,7 +29107,7 @@ Transform:
   m_GameObject: {fileID: 1509983790}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.634466, y: 0.09716463, z: 0.18777873}
+  m_LocalPosition: {x: 23.91, y: 0.09716463, z: 0.18777873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39566,7 +39565,7 @@ Transform:
   m_GameObject: {fileID: 2079509290}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.27, y: 0.41, z: 0.007936834}
+  m_LocalPosition: {x: 4.27, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

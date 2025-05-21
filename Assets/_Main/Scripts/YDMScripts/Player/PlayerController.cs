@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private CinemachineCameraClamp cameraClamp;
     //private TaskManager taskManager;
     [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
-    [HideInInspector]public int count;
+    private int count;
 
     [Header("넉백 지속 시간")]
     public float knockbackDuration = 0.2f;
@@ -209,10 +209,11 @@ public class PlayerController : MonoBehaviour
 
             //item 관련 index++
         }
-        if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E))
+        if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E) && count !=0)
         {
             CountManager.Instance.AddItemCount(count);
-            Debug.Log(count);
+            //item 반환 소리(아무거나 있는거 넣으삼)
+            //Debug.Log(count);
             count = 0;
         }
 

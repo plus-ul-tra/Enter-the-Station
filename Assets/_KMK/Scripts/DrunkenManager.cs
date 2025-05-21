@@ -90,11 +90,12 @@ public class DrunkenManager : Task
         }
         if (isOver && timer < limitTime)
         {
-            successImage.SetActive(true);
-            CountManager.Instance.AddClearCount();
+            
             onResult.Invoke();
             if (!isClose)
             {
+                successImage.SetActive(true);
+                CountManager.Instance.AddClearCount();
                 isClose = true;
                 Close();
             }
@@ -105,10 +106,11 @@ public class DrunkenManager : Task
         {
             if (stageManager != null)
                 stageManager.DecreasePlayerHp();
-            failedImage.SetActive(true);
+            
             onResult.Invoke();
             if (!isClose)
             {
+                failedImage.SetActive(true);
                 isClose = true;
                 Close();
             }

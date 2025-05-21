@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     private SpriteRenderer sprite;
     [SerializeField]
     private float lifeTime = 15.0f;
+    [SerializeField]
     private float blinkStart = 6.0f;
     private Tween blinkTween;
     private GameObject interactUI;
@@ -31,7 +32,7 @@ public class Item : MonoBehaviour
     {
         float totalBlinkTime = lifeTime - blinkStart;
         //float elapsed = 0f;
-        float minInterval = 0.05f;
+        float minInterval = 0.1f;
         float maxInterval = 0.5f;
 
         StartCoroutine(BlinkRoutine(totalBlinkTime, minInterval, maxInterval));
@@ -86,7 +87,8 @@ public class Item : MonoBehaviour
 
     public void Picked()
     {
-        //Debug.Log("줍줍");
+        
+        //줍는 소리 아무거나
         Destroy(gameObject);
     }
 }

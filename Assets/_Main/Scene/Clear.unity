@@ -1838,6 +1838,7 @@ GameObject:
   - component: {fileID: 1330268797}
   - component: {fileID: 1330268800}
   - component: {fileID: 1330268799}
+  - component: {fileID: 1330268801}
   m_Layer: 5
   m_Name: Image _ ResultPaper
   m_TagString: Untagged
@@ -1857,8 +1858,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1439027068}
   - {fileID: 1733751544}
+  - {fileID: 1439027068}
   - {fileID: 664237080}
   - {fileID: 656381836}
   m_Father: {fileID: 143225305}
@@ -1914,7 +1915,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330268794}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1932,6 +1933,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
   duration: 1
+--- !u!114 &1330268801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330268794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59f4d4e23e924649bc04963dfe3abe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tryCountText: {fileID: 377836922}
+  clearCountText: {fileID: 1743646142}
+  claimCountText: {fileID: 485585841}
+  itemCountText: {fileID: 646991411}
+  totalScoreText: {fileID: 2037456134}
 --- !u!1 &1359854600
 GameObject:
   m_ObjectHideFlags: 0

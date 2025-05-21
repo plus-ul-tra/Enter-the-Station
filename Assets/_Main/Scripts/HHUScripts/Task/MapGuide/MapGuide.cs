@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class MapGuide : Task
 {
@@ -11,6 +12,7 @@ public class MapGuide : Task
     [SerializeField]
     private List<Node> goals; // 마지막 노드들
     private Node goal; // 랜덤으로 정해질 목표
+    private bool isDone = false;
 
     private void OnEnable()
     {
@@ -126,6 +128,7 @@ public class MapGuide : Task
         successImage.SetActive(false);
         failedImage.SetActive(false);
         timer = 0.0f;
+        isDone = false;
         for (int i = 0; i < goals.Count; i++)
         {
             goals[i].gameObject.SetActive(true);
@@ -154,12 +157,13 @@ public class MapGuide : Task
            
         }
       
-        if (completeCheck)
+        if (completeCheck && !isDone)
         {
             timer = 0.0f;
             successImage.SetActive(true);
             CountManager.Instance.AddClearCount();
             SoundManager.Instance.PlaySFX("Map_finish");
+            isDone = true;
             Close();
             foreach (var way in ways)
             {

@@ -10991,7 +10991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a06a152f3115d94cae4a27892ffba7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <stageMaxTime>k__BackingField: 10
+  <stageMaxTime>k__BackingField: 100
   isTutorial: 0
 --- !u!114 &533266234
 MonoBehaviour:
