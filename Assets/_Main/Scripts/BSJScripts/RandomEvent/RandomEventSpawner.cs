@@ -258,6 +258,7 @@ public class RandomEventSpawner : MonoBehaviour
     private int SelectRandomEventIndex()
     {
         int eventIndex = 0;
+        int randValue = 0;
 
         if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 0)
         {
@@ -265,7 +266,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 3);
+            randValue = Random.Range(0, 3);
 
             switch (randValue)
             {
@@ -285,7 +286,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 2)
         {
-            int randValue = Random.Range(0, 3);
+            randValue = Random.Range(0, 3);
 
             switch (randValue)
             {
@@ -305,7 +306,14 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 1 && spawnPointData.spawnPoint == 3)
         {
-            int randValue = Random.Range(0, 3);
+            if (currentScene.name == "Day1")
+            {
+                randValue = Random.Range(0, 2);
+            }
+            else
+            {
+                randValue = Random.Range(0, 3);
+            }
 
             switch (randValue)
             {
@@ -326,7 +334,7 @@ public class RandomEventSpawner : MonoBehaviour
 
         else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 0)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -343,7 +351,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -360,7 +368,14 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 2)
         {
-            int randValue = Random.Range(0, 3);
+            if (currentScene.name == "Day1")
+            {
+                randValue = Random.Range(0, 2);
+            }
+            else
+            {
+                randValue = Random.Range(0, 3);
+            }
 
             switch (randValue)
             {
@@ -380,7 +395,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 2 && spawnPointData.spawnPoint == 3)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -402,7 +417,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -419,7 +434,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 3 && spawnPointData.spawnPoint == 2)
         {
-            int randValue = Random.Range(0, 3);
+            randValue = Random.Range(0, 3);
 
             switch (randValue)
             {
@@ -440,7 +455,7 @@ public class RandomEventSpawner : MonoBehaviour
 
         else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 0)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -457,7 +472,14 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 3);
+            if (currentScene.name == "Day1")
+            {
+                randValue = Random.Range(0, 2);
+            }
+            else
+            {
+                randValue = Random.Range(0, 3);
+            }
 
             switch (randValue)
             {
@@ -477,7 +499,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 4 && spawnPointData.spawnPoint == 2)
         {
-            int randValue = Random.Range(0, 3);
+            randValue = Random.Range(0, 3);
 
             switch (randValue)
             {
@@ -502,7 +524,7 @@ public class RandomEventSpawner : MonoBehaviour
 
         else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 0)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -519,7 +541,14 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 3);
+            if (currentScene.name == "Day1")
+            {
+                randValue = Random.Range(0, 2);
+            }
+            else
+            {
+                randValue = Random.Range(0, 3);
+            }
 
             switch (randValue)
             {
@@ -539,7 +568,7 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 5 && spawnPointData.spawnPoint == 2)
         {
-            int randValue = Random.Range(0, 2);
+            randValue = Random.Range(0, 2);
 
             switch (randValue)
             {
@@ -561,7 +590,7 @@ public class RandomEventSpawner : MonoBehaviour
 
         else if (spawnPointData.zoneIndex == 6 && spawnPointData.spawnPoint == 0)
         {
-            int randValue = Random.Range(0, 3);
+            randValue = Random.Range(0, 3);
 
             switch (randValue)
             {
@@ -581,7 +610,14 @@ public class RandomEventSpawner : MonoBehaviour
         }
         else if (spawnPointData.zoneIndex == 6 && spawnPointData.spawnPoint == 1)
         {
-            int randValue = Random.Range(0, 3);
+            if (currentScene.name == "Day1")
+            {
+                randValue = Random.Range(0, 2);
+            }
+            else
+            {
+                randValue = Random.Range(0, 3);
+            }
 
             switch (randValue)
             {

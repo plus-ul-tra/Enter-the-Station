@@ -4354,6 +4354,7 @@ MonoBehaviour:
   count: 0
   knockbackDuration: 0.2
   invincibleTime: 1.5
+  stepInterval: 0.4
   isTutorial: 0
 --- !u!212 &232534222
 SpriteRenderer:
@@ -10051,6 +10052,10 @@ MonoBehaviour:
   player: {fileID: 232534223}
   fadeImage: {fileID: 1100159143}
   isTutorial: 0
+  vcam: {fileID: 0}
+  zoomSize: 1
+  defaultSize: 5
+  duration: 1
 --- !u!114 &533266235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21202,7 +21207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1288859239
 RectTransform:
   m_ObjectHideFlags: 0

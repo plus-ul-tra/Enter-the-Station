@@ -19,7 +19,8 @@ public class LeftWire : MonoBehaviour
     private Canvas GameCanvas;
     void Start()
     {
-        GameCanvas = FindAnyObjectByType<Canvas>();
+        //GameCanvas = FindAnyObjectByType<Canvas>();
+        GameCanvas = this.transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.transform.GetComponent<Canvas>();
     }
 
     // Update is called once per frame

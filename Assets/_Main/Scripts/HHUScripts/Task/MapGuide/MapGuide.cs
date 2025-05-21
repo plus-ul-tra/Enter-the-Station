@@ -27,6 +27,7 @@ public class MapGuide : Task
         newRect.localScale = Vector3.one; // 스케일 보정 (중요)
         return newSP;
     }
+
     void Update()
     {
         timer += Time.deltaTime;

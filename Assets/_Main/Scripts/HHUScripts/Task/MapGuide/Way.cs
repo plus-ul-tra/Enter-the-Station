@@ -12,6 +12,7 @@ public class Way : MonoBehaviour
     private Node connectedNode;
     //[SerializeField]
     private RectTransform way;
+
     private Canvas GameCanvas;
     void Start()
     {
@@ -20,7 +21,8 @@ public class Way : MonoBehaviour
     private void OnEnable()
     {
         way = GetComponent<RectTransform>();
-        GameCanvas = FindAnyObjectByType<Canvas>();
+        //GameCanvas = FindAnyObjectByType<Canvas>();
+        GameCanvas = this.transform.parent.transform.parent.transform.parent.transform.parent.transform.GetComponent<Canvas>();
     }
    
     public void SetTarget(Vector3 targetPosition, float offset)

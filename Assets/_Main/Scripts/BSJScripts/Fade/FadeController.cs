@@ -61,7 +61,7 @@ public class FadeController : MonoBehaviour
         if (playerController != null)
             playerController.canMove = true;
 
-        if(playerAnimator != null)
+        if (playerAnimator != null)
         {
             if (isClear)
             {
@@ -76,7 +76,7 @@ public class FadeController : MonoBehaviour
                 playerAnimator.SetFail(true);
             }
         }
-        
+
 
         // 0. ÃÊ±âÈ­
         fadeMat.SetFloat("_HoleRadius", 2f);
@@ -107,7 +107,7 @@ public class FadeController : MonoBehaviour
         );
 
         seq.OnComplete(() => {
-            if(isClear)
+            if (isClear)
             {
                 DOTween.KillAll();
                 SceneManager.LoadScene("Clear");

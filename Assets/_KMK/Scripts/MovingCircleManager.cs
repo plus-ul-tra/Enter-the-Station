@@ -32,7 +32,7 @@ public class MovingCircleManager : Task
 
     [Header("제어할 UI Image")]
     public Image targetImage;
-
+    
     private int currentIndex = 0;//적 애니매이션 바뀌는 횟수
     private int count = 1;//성공횟수
     private void Start()
@@ -77,7 +77,6 @@ public class MovingCircleManager : Task
     }
     public override void InitGame()
     {
-
         successImage.SetActive(false);
         failedImage.SetActive(false);
         timer = 0.0f;
@@ -117,8 +116,7 @@ public class MovingCircleManager : Task
                 successImage.SetActive(true);
                 isClose = true;
                 Close();
-                timer = 0.0f;
-                count = 1;
+                Reset();
             }
             else if (count <= 0)//실패시 실행 로직
             {
@@ -127,8 +125,7 @@ public class MovingCircleManager : Task
                 failedImage.SetActive(true);
                 isClose = true;
                 Close();
-                timer = 0.0f;
-                count = 1;
+                Reset();
             }
             ApplyRotation(currentAngle);
         }
@@ -141,11 +138,19 @@ public class MovingCircleManager : Task
             failedImage.SetActive(true);
             isClose = true;
             Close();
-            timer = 0.0f;
-            count = 1;
+            Reset();
         }
 
         if (isClose) { SetAllStop.Invoke(); }
+    }
+
+    private void Reset()
+    {
+        timer = 0.0f;
+        count = 1;
+        currentIndex = 0;
+        targetImage.sprite = sprites[currentIndex];
+        currentAngle = 0f;
     }
     public void ApplyRotation(float angle)
     {

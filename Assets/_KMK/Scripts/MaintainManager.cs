@@ -7,8 +7,8 @@ public class MaintainManager : BaseGauge
     BoxCollider2D gaugeCollider;
     public GameObject movingGaugeCollider;
 
-    [SerializeField]
-    private GameObject spacebar;
+    //[SerializeField]
+    //private GameObject spacebar;
     [SerializeField]
     private GameObject heart;
     bool isReached;
@@ -32,7 +32,7 @@ public class MaintainManager : BaseGauge
         isClose = false;
 
         heart.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-        spacebar.transform.localPosition = new Vector3(spacebar.transform.localPosition.x, -250f, 0f);
+        //spacebar.transform.localPosition = new Vector3(spacebar.transform.localPosition.x, -250f, 0f);
     }
     void Update()
     {
