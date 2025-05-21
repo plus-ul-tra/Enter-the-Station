@@ -38,7 +38,10 @@ public class TrainMovement : MonoBehaviour
         if (!hasPaused && transform.position.x < startPos.x - 33f)
         {
             hasPaused = true;
-            StartCoroutine(PauseAndAnimateDoors());
+            if (leftDoor != null && rightDoor != null) {
+                StartCoroutine(PauseAndAnimateDoors());
+            }
+            
             return;
         }
 
@@ -56,6 +59,7 @@ public class TrainMovement : MonoBehaviour
         isWaiting = true;
 
         // 1) ´ÝÈù »óÅÂ ¹® À§Ä¡ ÀúÀå (´ÝÈù »óÅÂ)
+        
         Vector3[] initialLeftPositions = new Vector3[leftDoor.Length];
         Vector3[] initialRightPositions = new Vector3[rightDoor.Length];
         for (int i = 0; i < leftDoor.Length; i++)
