@@ -81,12 +81,12 @@ public class SpeechBubble : MonoBehaviour
             case 1:
             case 2:
             case 3:
-                sb.AppendLine("\"1층\"");
+                sb.AppendLine("\"지하 1층\"");
                 break;
             case 4:
             case 5:
             case 6:
-                sb.AppendLine("\"2층\"");
+                sb.AppendLine("\"지하 2층\"");
                 break;
         }
 

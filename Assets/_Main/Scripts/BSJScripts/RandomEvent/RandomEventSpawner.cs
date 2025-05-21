@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Threading;
+using UnityEngine.SceneManagement;
 
 public class RandomEventSpawner : MonoBehaviour
 {
@@ -51,6 +51,9 @@ public class RandomEventSpawner : MonoBehaviour
     [Header("튜토리얼이면 체크")]
     [SerializeField] private bool isTutorial = false;
 
+    // 현재 씬 체크 (1일차, 2일차, 3일차)
+    Scene currentScene;
+
     private struct SpawnPointData
     {
         public int zoneIndex;
@@ -60,6 +63,9 @@ public class RandomEventSpawner : MonoBehaviour
 
     private void Start()
     {
+        // 현재 씬 체크
+        currentScene = SceneManager.GetActiveScene();
+
         // TODO : 튜토리얼 일때에는 그냥 실행, 
         if (isTutorial)
         {
@@ -205,6 +211,10 @@ public class RandomEventSpawner : MonoBehaviour
         {
             speechBubble.PlaySpeechBubble(SpeechKey.FALL, spawnPointData.zoneIndex);
         }
+        else if (randomEvent.task == KindOfTask.TurningKey)
+        {
+            speechBubble.PlaySpeechBubble(SpeechKey.ESC, spawnPointData.zoneIndex);
+        }
     }
 
     // 랜덤 돌발상황 상호작용 성공 감지
@@ -306,6 +316,7 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 5;
                     break;
                 case 2:
+                    if(SceneManager.)
                     eventIndex = 8;
                     break;
                 default:
