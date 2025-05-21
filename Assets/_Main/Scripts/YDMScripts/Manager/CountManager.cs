@@ -7,8 +7,15 @@ public class CountManager : MonoBehaviour
     public static CountManager Instance { get; private set; }
 
     // 저장할 카운트 변수들
+    private int totalTry = 0;
+    private int totalClear = 0;
+    private int totalItemCount = 0;
+    private int totalClaim = 0;
+
+    public int tryCount { get; private set; } 
     public int clearCount { get; private set; }
     public int itemCount { get; private set; }
+    public int claimCount { get; private set; }
 
     void Awake()
     {
@@ -25,22 +32,54 @@ public class CountManager : MonoBehaviour
     // 미니게임 트라이 횟수
 
     // 클리어 횟수 증가
-    public void AddClearCount(int amount = 1)
+
+    public void AddTryCount(int count = 1)
     {
-        clearCount += amount;
+        tryCount += count;
+    }
+    public void AddClearCount(int count = 1)
+    {
+        clearCount += count;
     }
 
     // 아이템 획득 횟수 증가
-    public void AddItemCount(int amount)
+    public void AddItemCount(int count)
     {
-        itemCount += amount;
-        Debug.Log("카운트"+itemCount);
+        itemCount += count;
+        //Debug.Log("카운트"+itemCount);
+    }
+    public void AddClaimCount(int count = 1)
+    {
+        claimCount += count;
     }
 
-    // 원하는 곳에서 리셋 가능
-    public void ResetCounts()
+
+    public void ApplyAllCounts()
     {
+        //Day Clear 시 호출
+        totalTry += tryCount;
+        totalClear += clearCount;
+        totalItemCount += itemCount;
+        totalClaim += claimCount;
+    }
+
+    public void ResetTotal()
+    {
+        totalTry = 0;
+        totalClear = 0;
+        totalItemCount = 0;
+        totalClaim = 0;
+}
+    public void ResetCounts()
+    {    // Day 시작할때 초기화
+        tryCount = 0;
         clearCount = 0;
         itemCount = 0;
+        claimCount = 0;
     }
+
+    public int GetTotalTry() { return totalTry; }
+    public int GetTotalClear() { return totalClear; }
+    public int GetTotalItemCount() { return totalItemCount; }
+    public int GetTotalClaim() { return totalClaim; }
 }

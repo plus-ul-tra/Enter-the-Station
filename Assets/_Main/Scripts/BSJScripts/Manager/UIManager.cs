@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,11 +23,19 @@ public class UIManager : MonoBehaviour
             stageManager.OnPlayerHpChanged -= UpdateHpUI;
     }
 
-    private void UpdateHpUI(int currentHp)
+    private void UpdateHpUI(int currentHp) // 
     {
+        Debug.Log("호출");
         for (int i = 0; i < hpImages.Length; i++)
         {
-            hpImages[i].enabled = (i < currentHp);
+
+            if (i < currentHp)
+            {
+                Debug.Log("칼라체인지");
+                hpImages[i].color = new Color(1f, 1f, 1f, 1f); 
+            }
+           
+           
         }
     }
 }

@@ -44,7 +44,7 @@ public class RandomEventObject : MonoBehaviour
 
         if (isComplete) yield break;
 
-        Debug.Log("이벤트 실패");
+        //Debug.Log("이벤트 실패");
         onEventFailed?.Invoke(this);
     }
 
