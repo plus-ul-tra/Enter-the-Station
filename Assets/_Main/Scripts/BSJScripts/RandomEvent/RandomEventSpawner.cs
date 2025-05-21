@@ -316,7 +316,6 @@ public class RandomEventSpawner : MonoBehaviour
                     eventIndex = 5;
                     break;
                 case 2:
-                    if(SceneManager.)
                     eventIndex = 8;
                     break;
                 default:
