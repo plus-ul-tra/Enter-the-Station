@@ -91,60 +91,6 @@ public class PlayerController : MonoBehaviour
 
             Time.timeScale = 0f;
         }
-     
-        // E 키 눌러서 상호작용
-        if (Input.GetKeyDown(KeyCode.E) && randomEventObject != null)
-        {
-            playerAnim.SetMoved(false);
-
-            randomEventObject.CompleteInteractEvent(); // 이벤트 실행
-            
-
-            // TODO :
-            switch (randomEventObject.task)
-            {
-                case KindOfTask.FixWire://선 잇기
-                    // TODO : FixWire 애니메이션 변경
-                    playerAnim.SetSitting(true);
-                    break;
-
-                case KindOfTask.ArrowMatch://화살표 맞추기
-                    // TODO : ArrowMatch 애니메이션 변경
-                    playerAnim.SetFight(true);
-                    break;
-
-                case KindOfTask.MaintainingGauge://게이지 유지
-                    // TODO : MaintainingGauge 애니메이션 변경
-                    playerAnim.SetWork(true);
-                    break;
-
-                case KindOfTask.MovingCircle:
-                    // TODO : MovingCircle 애니메이션 변경
-                    playerAnim.SetFight(true);
-                    break;
-
-                case KindOfTask.Swinging:
-                    // TODO : RythmGauge 애니메이션 변경
-                    playerAnim.SetFight(true);
-                    break;
-
-                case KindOfTask.StackingGauge:
-                    // TODO : StackingGauge 애니메이션 변경
-                    playerAnim.SetWork(true);
-                    break;
-
-                case KindOfTask.MapGuide:
-                    // TODO : MapGuide 애니메이션 변경
-                    playerAnim.SetMap(true);
-                    break;
-
-                //default:
-                //    // TODO : 기타 처리
-                //    break;
-            }
-
-            randomEventObject = null; // 참조 초기화
-        }
     }
     private void FixedUpdate()
     {
@@ -242,20 +188,25 @@ public class PlayerController : MonoBehaviour
             bool isUp = other.CompareTag("Stairs_up");
             HandleStairsCollision(isUp);//업인지 다운이지 확인 플래그를 코루틴으로 보내줌
         }
-
-        if (other.CompareTag("EventObject"))
-        {
-            randomEventObject = other.GetComponent<RandomEventObject>();
-        }
     }
+
     void OnTriggerStay2D(Collider2D other)
     {
+        // 아이템 위에서 E 클릭
         if (other.CompareTag("Item") && Input.GetKeyDown(KeyCode.E))
         {
             count++;
             item = other.GetComponent<Item>();
             item.Picked();
             
+            if(isTutorial)
+            {
+                TutorialManager tutorialManager = GameObject.Find("TutorialManager").GetComponent<TutorialManager>();
+
+                if (tutorialManager != null)
+                    tutorialManager.StartEvent7();
+            }
+
             //item 관련 index++
         }
         if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E))
@@ -263,6 +214,63 @@ public class PlayerController : MonoBehaviour
             CountManager.Instance.AddItemCount(count);
             Debug.Log(count);
             count = 0;
+        }
+
+        // 돌발상황 위에서 E 클릭
+        if (other.CompareTag("EventObject") && Input.GetKeyDown(KeyCode.E))
+        {
+            randomEventObject = other.GetComponent<RandomEventObject>();
+
+            playerAnim.SetMoved(false);
+
+            if(randomEventObject != null)
+            {
+                randomEventObject.CompleteInteractEvent(); // 이벤트 실행
+
+                switch (randomEventObject.task)
+                {
+                    case KindOfTask.FixWire://선 잇기
+                                            // TODO : FixWire 애니메이션 변경
+                        playerAnim.SetSitting(true);
+                        break;
+
+                    case KindOfTask.ArrowMatch://화살표 맞추기
+                                               // TODO : ArrowMatch 애니메이션 변경
+                        playerAnim.SetFight(true);
+                        break;
+
+                    case KindOfTask.MaintainingGauge://게이지 유지
+                                                     // TODO : MaintainingGauge 애니메이션 변경
+                        playerAnim.SetWork(true);
+                        break;
+
+                    case KindOfTask.MovingCircle:
+                        // TODO : MovingCircle 애니메이션 변경
+                        playerAnim.SetFight(true);
+                        break;
+
+                    case KindOfTask.Swinging:
+                        // TODO : RythmGauge 애니메이션 변경
+                        playerAnim.SetFight(true);
+                        break;
+
+                    case KindOfTask.StackingGauge:
+                        // TODO : StackingGauge 애니메이션 변경
+                        playerAnim.SetWork(true);
+                        break;
+
+                    case KindOfTask.MapGuide:
+                        // TODO : MapGuide 애니메이션 변경
+                        playerAnim.SetMap(true);
+                        break;
+
+                        //default:
+                        //    // TODO : 기타 처리
+                        //    break;
+                }
+
+                randomEventObject = null; // 참조 초기화
+            }
         }
     }
 
