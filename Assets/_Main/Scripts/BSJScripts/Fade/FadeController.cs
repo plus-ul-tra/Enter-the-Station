@@ -59,7 +59,7 @@ public class FadeController : MonoBehaviour
     public void DirectEndingFade(bool isClear)
     {
         if (playerController != null)
-            playerController.canMove = true;
+            playerController.canMove = false;
 
         if (playerAnimator != null)
         {

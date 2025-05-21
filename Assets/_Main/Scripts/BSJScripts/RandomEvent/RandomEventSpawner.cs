@@ -82,6 +82,8 @@ public class RandomEventSpawner : MonoBehaviour
 
     private void Update()
     {
+        if(stageManager.GetIsClear()) { return; }
+
         // 돌발상황 발생 주기 마다 이벤트 생성
         currentSpawnTimer += Time.deltaTime;
 

@@ -12,7 +12,7 @@ public class StageManager : MonoBehaviour
 
 
     [Header("스테이지 제한 시간")]
-
+    [field: SerializeField]
     public float stageMaxTime { get; private set; }
     public float stageCurTime { get; private set; }
 
@@ -30,6 +30,7 @@ public class StageManager : MonoBehaviour
     //--------------------------------------------------
 
     private FadeController fadeController;
+    private bool isStageClear = false;
 
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class StageManager : MonoBehaviour
         playerCurHp = playerMaxHp;
 
         // Stage Time 초기화
-        stageMaxTime = 60f; // 3분인데 테스트용으로 1분만 함
+        // stageMaxTime = 60f; (인스펙터에서 초기화)
         stageCurTime = 0f;
 
         // FadeController 초기화
@@ -65,11 +66,22 @@ public class StageManager : MonoBehaviour
             stageCurTime += Time.deltaTime;
         }
 
-        else if (stageCurTime >= stageMaxTime)
+        else if (!isStageClear && stageCurTime >= stageMaxTime)
         {
+            isStageClear = true;
+
             // 스테이지 클리어
             ClearStage();
         }
+    }
+
+    /// <summary>
+    /// 현재 스테이지를 클리어했는지 여부
+    /// </summary>
+    /// <returns></returns>
+    public bool GetIsClear()
+    {
+        return isStageClear;
     }
 
     /// <summary>

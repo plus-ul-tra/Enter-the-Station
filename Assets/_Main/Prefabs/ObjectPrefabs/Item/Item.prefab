@@ -330,3 +330,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 2975731853168444236}
+  lifeTime: 15
