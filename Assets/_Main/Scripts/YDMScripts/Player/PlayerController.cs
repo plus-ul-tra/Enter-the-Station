@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     [Header("옵션 창")]
     [SerializeField] private GameObject optionPanel;
 
+    [Header("스턴 애니")]
+    [SerializeField] private GameObject stunAim;
+
     private SpriteRenderer spriteRenderer;
     private PlayerAnimator playerAnim;
     //private Rigidbody2D rigidbody;
@@ -69,7 +72,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        if(isTutorial) {
+
+        if (isTutorial) {
             StartCoroutine(PauseMovement(introCameraSwitcher.introDuration + 2));
         }
         else { /*DoNothing*/ }
@@ -360,10 +364,12 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator StunRoutine(float duration)//애니메이션 코루틴
     {
+        stunAim.SetActive(true);
         yield return new WaitForSeconds(duration);
 
-        // 3) 넉다운 해제
+        
         playerAnim.SetStunned(false);
+        stunAim.SetActive(false);
     }
     private IEnumerator PauseMovement(float duration)//정지 코루틴
     {
@@ -371,6 +377,7 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(duration);
         canMove = true;
+        
     }
 
     private void ClearAllMonsters()//몬스터컨테이너 순회 및 삭제
