@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tokki2_0: -6490967706271272933
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
