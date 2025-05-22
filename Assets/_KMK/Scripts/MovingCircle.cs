@@ -11,6 +11,8 @@ using UnityEngine.Splines.ExtrusionShapes;
 
 public class MovingCircle : MonoBehaviour
 {
+    private MovingCircleManager movingCircleManager;
+
     public UnityEvent Success;
     public UnityEvent Fail;
     public UnityEvent ScopeStop;
@@ -20,24 +22,22 @@ public class MovingCircle : MonoBehaviour
     private Image image;
     float circlePosX;
     Vector2 vectorCircle;
-    public float circleSpeed;
+    float circleSpeed;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnEnable()
     {
-
         gameObject.transform.localPosition = new Vector3(290.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
         image = GetComponent<Image>();
+        movingCircleManager = transform.parent.GetComponent<MovingCircleManager>();
 
         vectorCircle.x = -1.0f;
         //circleSpeed = 0.0f;
         isStopped = false;
-        image.sprite = rage;
-        
+        image.sprite = rage;    
     }
 
-    // Update is called once per frame
+    public void Balance() { circleSpeed = movingCircleManager.circleSpeed; }
+
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
