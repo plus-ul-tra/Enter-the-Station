@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
                 optionPanel.SetActive(true);
 
             // canMove = true;
+            playerFootsteps.StopfootstepsSound();
 
             Time.timeScale = 0f;
         }
@@ -158,11 +159,13 @@ public class PlayerController : MonoBehaviour
             {
                 HandleEnemyCollision();//기본승객충돌 코루틴
                 StartCoroutine(InvincibleCoroutine());//무적시간
+                playerFootsteps.StopfootstepsSound();
             }
             if (other.CompareTag("EnemyStun"))//승객충돌확인(양아치)
             {
                 HandleEnemyStunCollision();//양아치승객충돌코루틴
                 StartCoroutine(InvincibleCoroutine());
+                playerFootsteps.StopfootstepsSound();
             }
             if (other.CompareTag("EnemyKnockback"))//승객충돌확인(덩치)
             {
@@ -171,6 +174,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(KnockbackCoroutine(knockDir, 1f));//넉백코루틴
                 HandleEnemyKnockbackCollision();//덩치충돌코루틴
                 StartCoroutine(InvincibleCoroutine());
+                playerFootsteps.StopfootstepsSound();
             }
             if(other.CompareTag("Trash"))//쓰레기 충돌
             {

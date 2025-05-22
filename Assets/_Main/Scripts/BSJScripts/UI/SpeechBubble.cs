@@ -79,6 +79,7 @@ public class SpeechBubble : MonoBehaviour
     public void PlayArrowNotice()
     {
         StopAllCoroutines(); // 기존 코루틴 정지
+
         StartCoroutine(DisplayMessagesOneByOne());
     }
 

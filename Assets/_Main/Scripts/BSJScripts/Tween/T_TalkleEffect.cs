@@ -27,6 +27,13 @@ public class T_TalkleEffect : MonoBehaviour
                           .SetEase(Ease.InExpo)
         );
 
+        seq.AppendCallback(() => {
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlaySFX("Player_notice");
+            }
+        });
+
         // 0.25√  ¥Î±‚
         seq.AppendInterval(0.25f);
 

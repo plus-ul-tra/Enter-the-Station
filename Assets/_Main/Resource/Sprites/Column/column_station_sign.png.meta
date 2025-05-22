@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 806080f63dfd6ff43824cf727314f2d5
+guid: a9a919de1f7192e4e9ab32686fc09147
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9020498650059873580
-    second: map_icon_school_2_0
+      213: 1255230993650482945
+    second: column_station_sign_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: map_icon_school_2_0
+      name: column_station_sign_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 110
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 2
+        y: 2
+        width: 162
+        height: 425
+      alignment: 9
+      pivot: {x: 0.5, y: 0.08}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d26a4a3540c0d280800000000000000
-      internalID: -9020498650059873580
+      spriteID: 10ff89f20f97b6110800000000000000
+      internalID: 1255230993650482945
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2d447b489b4edb14fbbeaad4da81c031
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      map_icon_school_2_0: -9020498650059873580
+      column_station_sign_0: 1255230993650482945
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

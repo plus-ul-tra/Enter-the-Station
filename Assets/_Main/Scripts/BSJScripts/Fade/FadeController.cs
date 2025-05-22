@@ -11,7 +11,7 @@ public class FadeController : MonoBehaviour
     public Transform player;        // 플레이어 트랜스폼
     public Image fadeImage;         // UI Image 컴포넌트
 
-    private Vector3 playerFaceOffset = new Vector3(0f, 1.5f, 0f);
+    private Vector3 playerFaceOffset = new Vector3(0f, 1f, 0f);
 
     private PlayerAnimator playerAnimator;
     private PlayerController playerController;
@@ -72,7 +72,8 @@ public class FadeController : MonoBehaviour
     public void DirectEndingFade(bool isClear)
     {
         // 진행중인 게임 종료
-        canvanObj.SetActive(false);
+        if (canvanObj != null)
+            canvanObj.SetActive(false);
 
         // 플레이어 이동 금지(?) 안됨...
         if (playerController != null)

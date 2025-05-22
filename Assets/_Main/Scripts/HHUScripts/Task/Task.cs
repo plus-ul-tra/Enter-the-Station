@@ -15,7 +15,7 @@ public class Task : MonoBehaviour
     private UIAction action;
     public GameObject successImage;
     public GameObject failedImage;
-
+    private PlayerFootsteps playerFootsteps;
 
     public virtual void InitGame() { } //초기화 방식은 Task마다 다름. 시작이 아닌 말그대로 초기화 시작시 불러져야 하는 것
     
@@ -41,6 +41,13 @@ public class Task : MonoBehaviour
         }
         playerController.canMove = false;
         //++애니메이션
+
+        GameObject playerSound = GameObject.FindGameObjectWithTag("Steps");
+        if (playerSound != null)
+        {
+            playerFootsteps = playerSound.GetComponent<PlayerFootsteps>();
+        }
+        playerFootsteps.StopfootstepsSound();
     }
 
     protected void Timer()

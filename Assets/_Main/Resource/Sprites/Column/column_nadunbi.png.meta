@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 806080f63dfd6ff43824cf727314f2d5
+guid: b3f485d100270f94db51fdab708be1eb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -9020498650059873580
-    second: map_icon_school_2_0
+      213: -5808216248664127012
+    second: column_nadunbi_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: map_icon_school_2_0
+      name: column_nadunbi_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 110
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 2
+        y: 0
+        width: 163
+        height: 427
+      alignment: 9
+      pivot: {x: 0.5, y: 0.08}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d26a4a3540c0d280800000000000000
-      internalID: -9020498650059873580
+      spriteID: cd909b75812156fa0800000000000000
+      internalID: -5808216248664127012
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 139eaa95c6e6ba04e969b61c7e6d5acc
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      map_icon_school_2_0: -9020498650059873580
+      column_nadunbi_0: -5808216248664127012
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
