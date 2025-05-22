@@ -96,7 +96,8 @@ public class ArrowMatching : Task
     }
     private void checkSuccess()
     {
-        if(matchIndex == maxBlockCount)
+        //SoundManager.Instance.PlaySFX("Treat_drunk_clearline");
+        if (matchIndex == maxBlockCount)
         {
             successCount++;
         }

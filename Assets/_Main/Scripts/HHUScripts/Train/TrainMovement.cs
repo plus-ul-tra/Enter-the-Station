@@ -21,14 +21,19 @@ public class TrainMovement : MonoBehaviour
     [Header("스폰")]
     [SerializeField] private GameObject spawn;
 
+    [Header("기차 사운드")]
+    [SerializeField] private TrainSound transSound;
+
     private Vector3 startPos;//열차 시작 위치 저장
     private bool isWaiting = false;//열차 정지 플래그
     private bool hasPaused = false;//현재 정지 상태 확인 플래그
     private PassengerSpawner passengerSpawner;
     private void Start()
     {
+        transSound.PlayTrainSound();
         if (spawn != null)
             passengerSpawner = spawn.GetComponent<PassengerSpawner>();
+
         startPos = transform.position;
     }
 
@@ -64,9 +69,10 @@ public class TrainMovement : MonoBehaviour
         //열차 정지 코루틴
     {
         isWaiting = true;
+        transSound.PauseTrain();
 
         // 1) 닫힌 상태 문 위치 저장 (닫힌 상태)
-        
+
         Vector3[] initialLeftPositions = new Vector3[leftDoor.Length];
         Vector3[] initialRightPositions = new Vector3[rightDoor.Length];
         for (int i = 0; i < leftDoor.Length; i++)
@@ -83,7 +89,7 @@ public class TrainMovement : MonoBehaviour
             openedRightPositions[i] = initialRightPositions[i] + Vector3.right * doorOpenDistance;
 
         yield return new WaitForSeconds(1.0f);
-        //SoundManager.Instance.PlaySFX("Train_dooropen");
+        transSound.PlayDoorOpen();
         // 3) 문 열기 애니메이션 (닫힌 → 열린)
         if (passengerSpawner != null)
             passengerSpawner.StartCoroutine(passengerSpawner.SpawnRoutine(pauseDuration));
@@ -99,6 +105,7 @@ public class TrainMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         isWaiting = false;
+        transSound.UnpauseTrain();
     }
 
     private IEnumerator AnimateDoors(
