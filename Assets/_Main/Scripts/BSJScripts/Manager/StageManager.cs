@@ -66,7 +66,6 @@ public class StageManager : MonoBehaviour
         {
             stageCurTime += Time.deltaTime;
         }
-
         else if (!isStageClear && stageCurTime >= stageMaxTime)
         {
             isStageClear = true;
