@@ -182,6 +182,7 @@ public class RandomEventSpawner : MonoBehaviour
         Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
         Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
 
+        randomIndex = 7;
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
         if (eventObject.TryGetComponent<RandomEventObject>(out RandomEventObject randomEvent))
         {

@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Reach100 : BaseGauge
 {
@@ -14,6 +15,8 @@ public class Reach100 : BaseGauge
     [SerializeField]
     private Image extra;
     private int index=0;
+
+    public UnityEvent SetAllStop;
     void OnEnable()
     {
         //Debug.Log("chchchc");
@@ -70,6 +73,7 @@ public class Reach100 : BaseGauge
                 successImage.SetActive(true);
                 CountManager.Instance.AddClearCount();
                 isClose = true;
+                SetAllStop.Invoke(); // 관련 다른 오브젝트의 anim을 멈춘다. Spacebar 오브젝트의 SetisOver() 함수 넣기
                 SoundManager.Instance.PlaySFX("Medical_finish");
                 Close();
                 timer = 0.0f;
@@ -82,6 +86,7 @@ public class Reach100 : BaseGauge
                 failedImage.SetActive(true);
                 SoundManager.Instance.PlaySFX("Fail_sound");
                 isClose = true;
+                SetAllStop.Invoke(); // 관련 다른 오브젝트의 anim을 멈춘다. Spacebar 오브젝트의 SetisOver() 함수 넣기
                 Close();
                 timer = 0.0f;
             }

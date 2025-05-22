@@ -106,10 +106,10 @@ TextureImporter:
       name: spacebar_tap_2_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 103
-        width: 108
-        height: 69
+        x: 14
+        y: 2
+        width: 454
+        height: 169
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,33 +124,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: spacebar_tap_2_1
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 1
-        width: 421
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 007cda1bb9edf6cc0800000000000000
-      internalID: -3715506407275116800
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cf451a628ac717643a3c9b2cc125e221
     internalID: 0
     vertices: []
     indices: 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum ArrowDir
 {
@@ -10,7 +11,10 @@ public enum ArrowDir
     Left,
 }
 public class ArrowMatching : Task
-{   
+{
+    public UnityEvent setZero;
+    [SerializeField]
+    private GameObject baseLineGroup;
     [SerializeField]
     private GameObject container;
     [SerializeField]
@@ -18,8 +22,8 @@ public class ArrowMatching : Task
     [SerializeField]
     private int maxBlockCount = 9;
     [SerializeField]
-    private int maxSuccessCount = 3; // task success Complete
-    private int successCount = 0; //9개 전부 맞추면 count++
+    public int maxSuccessCount = 3; // task success Complete
+    public int successCount = 0; //9개 전부 맞추면 count++
     private List<ArrowButton> arrowBlocks = new List<ArrowButton>();
     private int matchIndex =0;
     private bool isOver = false;
@@ -46,15 +50,7 @@ public class ArrowMatching : Task
             return;
         }
 
-        if (arrowBlocks.Count == 0) return;
-
-        if (Input.GetKeyDown(KeyCode.UpArrow)&&!isOver) TryMatch(ArrowDir.Up);
-        else if (Input.GetKeyDown(KeyCode.RightArrow)&&!isOver) TryMatch(ArrowDir.Right);
-        else if (Input.GetKeyDown(KeyCode.DownArrow)&&!isOver) TryMatch(ArrowDir.Down);
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)&&!isOver) TryMatch(ArrowDir.Left);
-        checkSuccess();
-
-        if (successCount == maxSuccessCount && timer < limitTime) 
+        if (successCount == maxSuccessCount && timer < limitTime)
         {
             // task 성공
             //필요시 함수 추가
@@ -66,6 +62,18 @@ public class ArrowMatching : Task
             Close();
             return;
         }
+
+        if (arrowBlocks.Count == 0) return;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)&&!isOver) TryMatch(ArrowDir.Up);
+        else if (Input.GetKeyDown(KeyCode.RightArrow)&&!isOver) TryMatch(ArrowDir.Right);
+        else if (Input.GetKeyDown(KeyCode.DownArrow)&&!isOver) TryMatch(ArrowDir.Down);
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)&&!isOver) TryMatch(ArrowDir.Left);
+        checkSuccess();
+
+        if (successCount >= 4) return;
+        baseLineGroup.transform.GetChild(successCount).gameObject.SetActive(true); // 다음 baseline 켜기
+
     }
 
     private void SetBlock()
@@ -96,10 +104,10 @@ public class ArrowMatching : Task
     }
     private void checkSuccess()
     {
-        //SoundManager.Instance.PlaySFX("Treat_drunk_clearline");
-        if (matchIndex == maxBlockCount)
+        if(matchIndex == maxBlockCount && !isOver)
         {
-            successCount++;
+            successCount++; 
+            setZero.Invoke(); //drunken 이미지 원점으로 이동
         }
         if(matchIndex == maxBlockCount && successCount < maxSuccessCount)
         {
@@ -135,6 +143,12 @@ public class ArrowMatching : Task
         successImage.SetActive(false);
         failedImage.SetActive(false);
         SetBlock();
+
+        baseLineGroup.transform.GetChild(0).gameObject.SetActive(true); // 첫번째 자식은 켜두고
+        for (int i = 1; i < baseLineGroup.transform.childCount; i++)
+        {
+            baseLineGroup.transform.GetChild(i).gameObject.SetActive(false); // 나머지 자식은 꺼둔다
+        }
     }
     
 }

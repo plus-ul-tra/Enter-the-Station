@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class DrunkenManager : Task
 {
+    [SerializeField]
+    private Drunken drunken;
+    [Header("난이도 조정")]
+    public float swingSpeed;
+
     public UnityEvent onSpacebar;
     public UnityEvent onResult;
 
@@ -21,8 +26,11 @@ public class DrunkenManager : Task
 
     public int countLevel;
 
-    //float time;
-
+    private void Start()
+    {
+        drunken = drunken.GetComponent<Drunken>();
+        drunken.Balance();
+    }
     void OnEnable()
     {
 

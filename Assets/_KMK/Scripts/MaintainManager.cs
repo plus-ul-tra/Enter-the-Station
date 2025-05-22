@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class MaintainManager : BaseGauge
@@ -7,8 +8,8 @@ public class MaintainManager : BaseGauge
     BoxCollider2D gaugeCollider;
     public GameObject movingGaugeCollider;
 
-    //[SerializeField]
-    //private GameObject spacebar;
+    public UnityEvent SetAllStop;
+
     [SerializeField]
     private GameObject heart;
     bool isReached;
@@ -52,20 +53,22 @@ public class MaintainManager : BaseGauge
 
             if (isReached && timer >= limitTime)
             { //성공
-                //Debug.Log("성공");
+                SetAllStop.Invoke();
                 SoundManager.Instance.PlaySFX("Medical_finish");
                 CountManager.Instance.AddClearCount();
                 successImage.SetActive(true);
                 isClose = true;
+
                 Close();
             }
-            if (!isReached && timer >= limitTime)
+            if (!isReached && timer >= limitTime || gauge.fillAmount >= 1.0f) // 제한 시간이 다 되거나 게이지가 100%에 도달해도 실패!
             {//실패
-                //Debug.Log("실패");
+                SetAllStop.Invoke();
                 failedImage.SetActive(true);
                 if (stageManager != null)
                     stageManager.DecreasePlayerHp();
                 isClose = true;
+
                 Close();
                 timer = 0.0f;
             }
@@ -73,7 +76,6 @@ public class MaintainManager : BaseGauge
         
         colliderPosY = gaugeCollider.offset.y * 2 * gauge.fillAmount; // 게이지 콜라이더 y좌표 움직임
         movingGaugeCollider.transform.localPosition = new Vector3(0, -colliderPosY, 0); // '-'를 안붙혀주면 콜라이더가 반대로 가는데 이걸 이해할 수가 없드아..
-        if (gauge.fillAmount >= 1.0f) { failedImage.SetActive(true); isClose = true; Close(); timer = 0.0f; return; } // 게이지가 100%에 도달해도 실패!
     }
     private void FixedUpdate()
     {

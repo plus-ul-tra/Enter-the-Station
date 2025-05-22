@@ -5,42 +5,33 @@ using static UnityEditor.PlayerSettings;
 using UnityEditor.U2D.Sprites;
 using UnityEngine.UI;
 
-public class Drunken : MonoBehaviour
+public class DrunkenInArrow : MonoBehaviour
 {
-    public UnityEvent onTriggerEnter;
-    public UnityEvent onTriggerExit;
-    public UnityEvent onLeft;
-    public UnityEvent onRight;
-
     public Sprite drunken1;
     public Sprite drunken2;
     public Sprite drunken3;
     Image thisImage;
-
-    [SerializeField]
-    private DrunkenManager drunkenManager;
 
     Rigidbody2D rb;
 
     Vector3 pos;
     Vector2 dirVector;
     Quaternion rotation;
-    
+
     public float adjustSpeed;
-    float speed;
+    public float speed;
     float applySpeed;
+
+    private ArrowMatching arrowMAtching;
 
     float time;
     float animTime;
-    bool isOver;
-    
 
     void OnEnable()
     {
         thisImage = GetComponent<Image>();
         thisImage.sprite = drunken1;
 
-        isOver = false;
         rotation = Quaternion.Euler(0f, 0f, 0f);
         transform.localRotation = rotation;
         transform.localPosition = new Vector3(0f, 53.5f, 0f);
@@ -51,22 +42,26 @@ public class Drunken : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.gravityScale = 0f;
 
+        arrowMAtching = transform.parent.parent.GetComponent<ArrowMatching>();
+
         time = 0;
         animTime = 0f;
         applySpeed = speed;
     }
-    public void Balance() { speed = drunkenManager.swingSpeed; }  // 난이도 조정을 용이하게 하고자 추가된 부분
-void Update()
-    {
-        ChangeSpeed();
 
+    void Update()
+    {
+        if (arrowMAtching.successCount == arrowMAtching.maxSuccessCount) return;
+
+        ChangeSpeed();
         time += Time.deltaTime;
         if (time >= animTime) { ChangeAnim(); time = 0f; }
     }
     void FixedUpdate()
     {
-        if (isOver) { thisImage.sprite = drunken1; return; }
-       
+        //Debug.Log("successCount: " + arrowMAtching.successCount + " maxSuccessCount: " + arrowMAtching.maxSuccessCount);
+        if (arrowMAtching.successCount == arrowMAtching.maxSuccessCount) return;
+
         pos.x = transform.localPosition.x + (dirVector.x * applySpeed * 2.75f * Time.fixedDeltaTime);
         pos.y = -0.00116f * Mathf.Pow(pos.x, 2f) + 53.5f;
 
@@ -74,7 +69,7 @@ void Update()
 
         float angle = -pos.x * 0.002f * Mathf.Rad2Deg;
         // Clamp z값을 -45° ~ +45°로 제한
-        angle = Mathf.Clamp(angle, -45f, 45f);
+        angle = Mathf.Clamp(angle, -45, 45f);
         transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
@@ -86,36 +81,25 @@ void Update()
 
         dirVector.x *= -1f; // 좌우만 반전
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        onTriggerEnter.Invoke();
-        if (dirVector.x > 0) { onRight.Invoke(); } // ReachAim을 갖고있는 객체의 SetIsRight()
-        else if (dirVector.x < 0) { onLeft.Invoke(); } // ReachAim을 갖고있는 객체의 SetIsLeft()
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        onTriggerExit.Invoke();
-    }
     public void SetZero()
     {
         rotation = Quaternion.Euler(0f, 0f, 0f);
-        transform.localPosition = new Vector3(0f, 55f, 0f);
+        transform.localPosition = new Vector3(0f, 53.5f, 0f);
     }
-    public void SetIsOver() { isOver = true; }// ReachAim을 갖고 있는 Spacebar 객체에서 사용
 
     void ChangeSpeed()
     {
-        if (drunkenManager.countLevel == 0 || drunkenManager.countLevel == 1) { applySpeed = speed + (adjustSpeed * 0); }
-        if (drunkenManager.countLevel == 2) { applySpeed = speed + (adjustSpeed * 1); }
-        if (drunkenManager.countLevel == 3) { applySpeed = speed + (adjustSpeed * 2); }
-        if (drunkenManager.countLevel == 4) { applySpeed = speed + (adjustSpeed * 3); }
+        if (arrowMAtching.successCount == 0) { applySpeed = speed + (adjustSpeed * 0); }
+        if (arrowMAtching.successCount == 1) { applySpeed = speed + (adjustSpeed * 1); }
+        if (arrowMAtching.successCount == 2) { applySpeed = speed + (adjustSpeed * 2); }
+        if (arrowMAtching.successCount == 3) { applySpeed = speed + (adjustSpeed * 3); }
     }
     void ChangeAnim()
     {
-        if (drunkenManager.countLevel == 0 || drunkenManager.countLevel == 1) { animTime = 0.6f; ChangeImage(); }
-        if (drunkenManager.countLevel == 2) { animTime = 0.8f; ChangeImage(); }
-        if (drunkenManager.countLevel == 3) { animTime = 1f; ChangeImage(); }
-        if (drunkenManager.countLevel == 4) { thisImage.sprite = drunken1; }
+        if (arrowMAtching.successCount == 0) { animTime = 0.6f; ChangeImage(); }
+        if (arrowMAtching.successCount == 1 && (arrowMAtching.successCount != arrowMAtching.maxSuccessCount)) { animTime = 0.8f; ChangeImage(); }
+        if (arrowMAtching.successCount == 2 && (arrowMAtching.successCount != arrowMAtching.maxSuccessCount)) { animTime = 1f; ChangeImage(); }
+        if (arrowMAtching.successCount == arrowMAtching.maxSuccessCount) { thisImage.sprite = drunken1; }
     }
     void ChangeImage()
     {

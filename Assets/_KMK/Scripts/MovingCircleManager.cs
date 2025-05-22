@@ -10,6 +10,14 @@ using UnityEngine.UI;
 
 public class MovingCircleManager : Task
 {
+    private MovingScope movingScope;
+    private MovingCircle movingCircle;
+
+    [Header("난이도 조정")]
+    public float scopeScaleX;
+    public float circleSpeed;
+    public float scopeSpeed;
+
     public UnityEvent Initial;
     public UnityEvent SetAllStop;
 
@@ -37,8 +45,6 @@ public class MovingCircleManager : Task
     private int count = 1;//성공횟수
     private void Start()
     {
-        
-
         if (playerImage == null)
         {
             playerImage = GetComponent<Image>();
@@ -66,12 +72,17 @@ public class MovingCircleManager : Task
 
         // 초기 스프라이트 세팅
         targetImage.sprite = sprites[currentIndex];
+
+        movingScope = scope.GetComponent<MovingScope>();
+        movingScope.Balance();
+        movingCircle = circle.GetComponent<MovingCircle>();
+        movingCircle.Balance();
     }
 
 
     void OnEnable()
     {
-        
+        targetImage.sprite = sprites[currentIndex];
         InitGame();
         Initial.Invoke();
     }
@@ -129,6 +140,7 @@ public class MovingCircleManager : Task
                 Reset();
             }
             ApplyRotation(currentAngle);
+            Debug.Log(currentIndex);
         }
 
         //타임오버
@@ -150,7 +162,6 @@ public class MovingCircleManager : Task
         timer = 0.0f;
         count = 1;
         currentIndex = 0;
-        targetImage.sprite = sprites[currentIndex];
         currentAngle = 0f;
     }
     public void ApplyRotation(float angle)
