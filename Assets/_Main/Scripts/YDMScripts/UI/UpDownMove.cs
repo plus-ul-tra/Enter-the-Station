@@ -16,6 +16,9 @@ public class UpDownMove : MonoBehaviour
 
     public IEnumerator MoveDown()
     {
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("Shutter_down");
+
         canvasGroup.alpha = 1f;
 
         Vector3 startPos = transform.position;
@@ -36,6 +39,9 @@ public class UpDownMove : MonoBehaviour
     }
     public IEnumerator MoveUp()
     {
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySFX("Shutter_open");
+
         canvasGroup.alpha = 1f;
 
         Vector3 startPos = transform.position;

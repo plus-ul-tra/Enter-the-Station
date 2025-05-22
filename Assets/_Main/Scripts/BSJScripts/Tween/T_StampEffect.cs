@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI; // CanvasGroup 사용 시 필요
+using UnityEngine.UI;
+using UnityEngine.SceneManagement; // CanvasGroup 사용 시 필요
 
 public class T_StampEffect : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class T_StampEffect : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         seq.Append(target.DOScale(0.8f, duration * 0.6f).SetEase(Ease.OutQuad));
+        seq.AppendCallback(() => {
+            if (SceneManager.GetActiveScene().name == "Clear")
+            {
+                SoundManager.Instance.PlaySFX("Seal_sound");
+            }
+        });
         seq.Append(target.DOScale(1.0f, duration * 0.4f).SetEase(Ease.OutBack));
     }
 }

@@ -28,6 +28,7 @@ public class TutorialManager : MonoBehaviour
     [Header("플레이어 컨트롤러")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerAnimator playerAnimator;
+    [SerializeField] private PlayerFootsteps playerFootsteps;
 
     [Header("돌발상황(미니게임) 오브젝트")] // 리스트로 관리할까 하다가 헷갈릴까봐 따로 객체하나씩 뺴놓음.
     [Header("에스컬레이터 고장 _ 튜토리얼 01")]
@@ -190,38 +191,49 @@ public class TutorialManager : MonoBehaviour
         if (isEvent01 || isEvent02 || isEvent03 || isEvent04 || isEvent05 || isEvent06
              || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11)
         {
-            if (playerController != null)
-                playerController.canMove = false;
-            if (playerAnimator != null)
-                playerAnimator.SetMoved(false);
-
             if (Input.GetMouseButtonDown(0))
                 HandleTypingInput();
         }
 
+        if(isEvent01 || isEvent07)
+        {
+            // 플레이어가 이동 못하게
+            if (playerController != null)
+            {
+                playerController.canMove = false;
+            }
+
+            if (playerAnimator != null)
+            {
+                playerAnimator.SetMoved(false);
+            }
+
+            playerFootsteps.StopfootstepsSound();
+        }
+
         // 테스트 ( 튜토리얼 미니게임 인풋 끝난 다음에 콜백 받아서 다음 이벤트 실행시켜야함 )
-        if (Input.GetKeyDown(KeyCode.F1))
-            StartEvent1();
-        else if (Input.GetKeyDown(KeyCode.F2))
-            StartEvent2();
-        else if (Input.GetKeyDown(KeyCode.F3))
-            StartEvent3();
-        else if (Input.GetKeyDown(KeyCode.F4))
-            StartEvent4();
-        else if (Input.GetKeyDown(KeyCode.F5))
-            StartEvent5();
-        else if (Input.GetKeyDown(KeyCode.F6))
-            StartEvent6();
-        else if (Input.GetKeyDown(KeyCode.F7))
-            StartEvent7();
-        else if (Input.GetKeyDown(KeyCode.F8))
-            StartEvent8();
-        else if (Input.GetKeyDown(KeyCode.F9))
-            StartEvent9();
-        else if (Input.GetKeyDown(KeyCode.F10))
-            StartEvent10();
-        else if (Input.GetKeyDown(KeyCode.F11))
-            StartEvent11();
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //    StartEvent1();
+        //else if (Input.GetKeyDown(KeyCode.F2))
+        //    StartEvent2();
+        //else if (Input.GetKeyDown(KeyCode.F3))
+        //    StartEvent3();
+        //else if (Input.GetKeyDown(KeyCode.F4))
+        //    StartEvent4();
+        //else if (Input.GetKeyDown(KeyCode.F5))
+        //    StartEvent5();
+        //else if (Input.GetKeyDown(KeyCode.F6))
+        //    StartEvent6();
+        //else if (Input.GetKeyDown(KeyCode.F7))
+        //    StartEvent7();
+        //else if (Input.GetKeyDown(KeyCode.F8))
+        //    StartEvent8();
+        //else if (Input.GetKeyDown(KeyCode.F9))
+        //    StartEvent9();
+        //else if (Input.GetKeyDown(KeyCode.F10))
+        //    StartEvent10();
+        //else if (Input.GetKeyDown(KeyCode.F11))
+        //    StartEvent11();
     }
 
     /// <summary>

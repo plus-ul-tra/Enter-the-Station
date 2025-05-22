@@ -45,24 +45,29 @@ public class ResultPaper : MonoBehaviour
                     if (CountManager.Instance.GetTotalItemCount() >= 10)
                     {
                         stampImage.sprite = stampSprites[0];
+                        totalScoreText.text = "99";
                     }
                     else
                     {
                         stampImage.sprite = stampSprites[1];
+                        totalScoreText.text = "90";
                     }
                     break;
                 case 2:
                 case 3:
                 case 4:
                     stampImage.sprite = stampSprites[2];
+                    totalScoreText.text = "85";
                     break;
                 case 5:
                 case 6:
                 case 7:
                     stampImage.sprite = stampSprites[3];
+                    totalScoreText.text = "80";
                     break;
                 default:
                     stampImage.sprite = stampSprites[0];
+                    totalScoreText.text = "99";
                     break;
             }
         }
@@ -70,9 +75,9 @@ public class ResultPaper : MonoBehaviour
         {
             itemCountText.text = CountManager.Instance.GetTotalItemCount().ToString();
         }
-        if (totalScoreText != null)
-        {
-            totalScoreText.text = CountManager.Instance.GetScore().ToString();
-        }
+        //if (totalScoreText != null)
+        //{
+        //    totalScoreText.text = CountManager.Instance.GetScore().ToString();
+        //}
     }
 }

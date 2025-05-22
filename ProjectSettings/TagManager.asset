@@ -21,6 +21,7 @@ TagManager:
   - EnemyStun
   - EnemyKnockback
   - Trash
+  - Steps
   layers:
   - Default
   - TransparentFX
