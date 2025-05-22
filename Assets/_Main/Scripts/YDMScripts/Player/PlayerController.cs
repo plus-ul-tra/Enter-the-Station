@@ -1,9 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using Unity.Cinemachine;
-using DG.Tweening.Core.Easing;
-using UnityEditor.Experimental.GraphView;
-using System.Threading;
+using TMPro;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
@@ -47,23 +46,24 @@ public class PlayerController : MonoBehaviour
     private CinemachineCameraClamp cameraClamp;
     //private TaskManager taskManager;
     [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
-    private int count;
+
+    [SerializeField] private TMP_Text lostItemCount_Text;
+    private int count = 0;
 
     [Header("넉백 지속 시간")]
     public float knockbackDuration = 0.2f;
     [Header("무적 지속 시간")]
     public float invincibleTime = 0.5f;
     private bool isInvincible = false;
-
-    [SerializeField] private float stepInterval = 0.5f; // 걷는 소리 간격
-    private float stepTimer = 0f;
-    private bool wasMoving = false;
     // --------------------------------------------------
     RandomEventObject randomEventObject;
     Item item;
 
     [Header("튜토리얼이면 체크")]
     [SerializeField] private bool isTutorial;
+
+    [Header("걸음 사운드")]
+    [SerializeField] private PlayerFootsteps playerFootsteps;
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//플립시 사용
@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        if (lostItemCount_Text != null)
+            lostItemCount_Text.text = count.ToString();
 
         if (isTutorial) {
             StartCoroutine(PauseMovement(introCameraSwitcher.introDuration + 2));
@@ -110,7 +112,6 @@ public class PlayerController : MonoBehaviour
     }
     private void ApplyMovement(Vector2 input)//이동로직
     {
-        bool inputKeyPressed = !Mathf.Approximately(input.x, 0f) || !Mathf.Approximately(input.y, 0f);
 
         if (!Mathf.Approximately(input.x, 0f))
         {
@@ -128,33 +129,17 @@ public class PlayerController : MonoBehaviour
         if (raw.sqrMagnitude > 1f)
             raw.Normalize();
 
-        
-        if (inputKeyPressed)
+
+        if (!Mathf.Approximately(input.x, 0f) || !Mathf.Approximately(input.y, 0f))
         {
             playerAnim.SetMoved(true);
-            if (!wasMoving)
-            {
-                SoundManager.Instance.PlaySFX("Player_move");
-                stepTimer = 0f;
-            }
-
-            // 인터벌 타이머 갱신
-            stepTimer += Time.deltaTime;
-            if (stepTimer >= stepInterval)
-            {
-                SoundManager.Instance.PlaySFX("Player_move");
-                stepTimer = 0f;
-            }
+            playerFootsteps.PlayfootstepsSound();
         }
         else
         {
             playerAnim.SetMoved(false);
-            // 멈췄을 때 타이머를 인터벌로 세팅해두면,
-            // 다시 이동을 시작할 때 즉시 소리가 나게 할 수 있음
-            stepTimer = stepInterval;
+            playerFootsteps.StopfootstepsSound();
         }
-
-        wasMoving = inputKeyPressed;
 
         // 4) 실제 이동: 방향(normalized) * 수평 속도 * deltaTime
         Vector3 move = new Vector3(raw.x, raw.y, 0f)
@@ -190,6 +175,7 @@ public class PlayerController : MonoBehaviour
             if(other.CompareTag("Trash"))//쓰레기 충돌
             {
                 SoundManager.Instance.PlaySFX("Trash_sound");
+                
             }
             
         }
@@ -208,6 +194,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Item") && Input.GetKeyDown(KeyCode.E))
         {
             count++;
+
+            if (lostItemCount_Text != null)
+                lostItemCount_Text.text = count.ToString();
+
             item = other.GetComponent<Item>();
             item.Picked();
             SoundManager.Instance.PlaySFX("Item_sound");
@@ -228,6 +218,8 @@ public class PlayerController : MonoBehaviour
             //item 반환 소리(아무거나 있는거 넣으삼)
             //Debug.Log(count);
             count = 0;
+            if (lostItemCount_Text != null)
+                lostItemCount_Text.text = count.ToString();
         }
 
         // 돌발상황 위에서 E 클릭

@@ -13,6 +13,12 @@ public class ResultPaper : MonoBehaviour
     private TMP_Text itemCountText;
     [SerializeField]
     private TMP_Text totalScoreText;
+
+    [Header("도장 이미지")]
+    [SerializeField] private Image stampImage;
+
+    [Header("도장 랭크 스프라이트")] // C B A S
+    [SerializeField] private Sprite[] stampSprites;
     void Start()
     {
         ShowResult();
@@ -31,6 +37,34 @@ public class ResultPaper : MonoBehaviour
         if (claimCountText != null)
         {
             claimCountText.text = CountManager.Instance.GetClaim().ToString();
+
+            switch(CountManager.Instance.GetClaim())
+            {
+                case 0:
+                case 1:
+                    if (CountManager.Instance.GetTotalItemCount() >= 10)
+                    {
+                        stampImage.sprite = stampSprites[3];
+                    }
+                    else
+                    {
+                        stampImage.sprite = stampSprites[2];
+                    }
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    stampImage.sprite = stampSprites[2];
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                    stampImage.sprite = stampSprites[1];
+                    break;
+                default:
+                    stampImage.sprite = stampSprites[0];
+                    break;
+            }
         }
         if (itemCountText != null)
         {
@@ -40,10 +74,5 @@ public class ResultPaper : MonoBehaviour
         {
             totalScoreText.text = CountManager.Instance.GetScore().ToString();
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

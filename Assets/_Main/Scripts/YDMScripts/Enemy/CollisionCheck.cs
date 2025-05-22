@@ -15,7 +15,8 @@ public class CollisionCheck : MonoBehaviour
     {
         // 충돌한 상대가 Wall 이거나 Stairs_down 이면 부모 오브젝트 파괴
         if (other.collider.CompareTag("Wall") ||
-            other.collider.CompareTag("Stairs_down"))
+            other.collider.CompareTag("Stairs_down") ||
+            other.collider.CompareTag("Stairs_up"))
         {
             Destroy(transform.parent.gameObject);
         }

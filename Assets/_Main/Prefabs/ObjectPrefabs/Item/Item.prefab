@@ -206,8 +206,8 @@ Transform:
   m_GameObject: {fileID: 4522524475716015610}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0776, y: -3.816, z: -2.1489022}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalPosition: {x: -2.1235, y: -3.9324, z: -2.1489022}
+  m_LocalScale: {x: 0.9075001, y: 1.005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 809611210808175533}
@@ -331,3 +331,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 2975731853168444236}
   lifeTime: 15
+  blinkStart: 6

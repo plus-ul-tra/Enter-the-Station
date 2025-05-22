@@ -1950,6 +1950,12 @@ MonoBehaviour:
   claimCountText: {fileID: 485585841}
   itemCountText: {fileID: 646991411}
   totalScoreText: {fileID: 2037456134}
+  stampImage: {fileID: 667561162}
+  stampSprites:
+  - {fileID: 468043336100711302, guid: 7a54d41616091004688824630b1ef3a5, type: 3}
+  - {fileID: 3252040158237013565, guid: b39f6fec151771540903a25d2eb820bc, type: 3}
+  - {fileID: 5893733131801983031, guid: ffbf08c11a24dde4db5379abed4b18f9, type: 3}
+  - {fileID: 3106651354224630975, guid: 15c0a459335c2a94fb4eb81cd223fff8, type: 3}
 --- !u!1 &1359854600
 GameObject:
   m_ObjectHideFlags: 0

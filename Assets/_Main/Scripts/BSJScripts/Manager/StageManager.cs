@@ -91,7 +91,7 @@ public class StageManager : MonoBehaviour
     public void DecreasePlayerHp(int value = 1)
     {
         CountManager.Instance.AddClaimCount();
-        Debug.Log(playerCurHp);
+        //Debug.Log(playerCurHp);
         playerCurHp -= value;
         OnPlayerHpChanged?.Invoke(playerCurHp);
 

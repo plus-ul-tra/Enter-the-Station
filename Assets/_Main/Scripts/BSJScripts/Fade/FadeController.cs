@@ -177,6 +177,8 @@ public class FadeController : MonoBehaviour
     private IEnumerator MoveAndResizeCamera()
     {
         // 시작 크기와 목표 크기
+        if (vcam == null) yield break;
+
         float startSize = vcam.Lens.OrthographicSize;
         float endSize = zoomSize;
 
