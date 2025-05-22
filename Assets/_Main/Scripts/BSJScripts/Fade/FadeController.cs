@@ -37,6 +37,9 @@ public class FadeController : MonoBehaviour
     [Header("셔터")]
     [SerializeField] private UpDownMove shutter;
 
+    [Header("진행 중인 게임 캔버스")]
+    [SerializeField] private GameObject canvanObj;
+
     private void Start()
     {
         playerAnimator = player.GetComponent<PlayerAnimator>();
@@ -68,9 +71,14 @@ public class FadeController : MonoBehaviour
     /// </summary>
     public void DirectEndingFade(bool isClear)
     {
+        // 진행중인 게임 종료
+        canvanObj.SetActive(false);
+
+        // 플레이어 이동 금지(?) 안됨...
         if (playerController != null)
             playerController.canMove = false;
 
+        // 플레이어 얼굴 변경
         if (playerAnimator != null)
         {
             if (isClear)

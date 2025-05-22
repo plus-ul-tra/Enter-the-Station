@@ -7148,14 +7148,14 @@ MonoBehaviour:
   taskManager: {fileID: 2070640014}
   playerController: {fileID: 232534221}
   playerAnimator: {fileID: 232534217}
-  tutorialEventObject_01: {fileID: 7122171767316536684, guid: aa94beb46bb412f4e83cc36327f000c2, type: 3}
-  tutorialEventObject_02: {fileID: 7122171767316536684, guid: 6a10906e8db3b3b40933fa83c909156d, type: 3}
-  tutorialEventObject_03: {fileID: 7122171767316536684, guid: 9880361974edd0845a7a4d36fed0f3ff, type: 3}
-  tutorialEventObject_04: {fileID: 7122171767316536684, guid: 963ea3091a6af5a42bb9e1e4832d830d, type: 3}
-  tutorialEventObject_05: {fileID: 7122171767316536684, guid: 839e9c0d923ef5c4ea6f436ae5972234, type: 3}
-  tutorialEventObject_06: {fileID: 7122171767316536684, guid: 41062ba743a69024eab2c589905cbbbc, type: 3}
-  tutorialEventObject_07: {fileID: 7122171767316536684, guid: 3a061a7bee768374ca600b7e35713522, type: 3}
-  tutorialEventObject_08: {fileID: 7122171767316536684, guid: 2aa7194918baf6846987f0664ec0a991, type: 3}
+  tutorialEventObject_01: {fileID: 7122171767316536684, guid: 91a8b0faac783ae4ba8d3f85b7324999, type: 3}
+  tutorialEventObject_02: {fileID: 7122171767316536684, guid: d44ca77dccf9c8b4e8b51c8d4e7e3e4f, type: 3}
+  tutorialEventObject_03: {fileID: 7122171767316536684, guid: 2ffbf7998c5b581449daf1d76d38304a, type: 3}
+  tutorialEventObject_04: {fileID: 7122171767316536684, guid: 26feb24a68a49bc4b81e786bfa30ef9d, type: 3}
+  tutorialEventObject_05: {fileID: 7122171767316536684, guid: 85043bca1170cc1409d8176670308eb3, type: 3}
+  tutorialEventObject_06: {fileID: 7122171767316536684, guid: 0d27bf2ae16710e4799972f756dfce86, type: 3}
+  tutorialEventObject_07: {fileID: 7122171767316536684, guid: e86255f60f1c9854e922af913a70919b, type: 3}
+  tutorialEventObject_08: {fileID: 7122171767316536684, guid: d557e222dacf03b4a8332d209e513dcf, type: 3}
   createdEventList: []
   spawnPoint:
   - {fileID: 1185171499}

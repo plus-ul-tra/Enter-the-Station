@@ -258,6 +258,13 @@ public class TutorialManager : MonoBehaviour
             if (isEvent01)
             {
                 isEvent01 = false;
+
+                // 플레이어가 다시 이동할 수 있게
+                if (playerController != null)
+                {
+                    playerController.canMove = true;
+                }
+
                 yield return EndEvent1_Routine();
             }
             else if (isEvent02)
@@ -288,6 +295,13 @@ public class TutorialManager : MonoBehaviour
             else if (isEvent07)
             {
                 isEvent07 = false;
+
+                // 플레이어가 다시 이동할 수 있게
+                if (playerController != null)
+                {
+                    playerController.canMove = true;
+                }
+
                 yield return EndEvent7_Routine();
             }
             else if (isEvent08)
@@ -309,12 +323,6 @@ public class TutorialManager : MonoBehaviour
             {
                 isEvent11 = false;
                 yield return EndEvent11_Routine();
-            }
-
-            // 플레이어가 다시 이동할 수 있게
-            if (playerController != null)
-            {
-                playerController.canMove = true;
             }
             yield break;
         }

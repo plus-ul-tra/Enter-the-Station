@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
             if (optionPanel != null)
                 optionPanel.SetActive(true);
 
-            canMove = true;
+            // canMove = true;
 
             Time.timeScale = 0f;
         }
