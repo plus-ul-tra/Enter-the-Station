@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     [Header("스턴 애니")]
     [SerializeField] private GameObject stunAim;
 
+
+
     private SpriteRenderer spriteRenderer;
     private PlayerAnimator playerAnim;
     //private Rigidbody2D rigidbody;
@@ -53,10 +55,9 @@ public class PlayerController : MonoBehaviour
     public float invincibleTime = 0.5f;
     private bool isInvincible = false;
 
-    [Header("발소리 재생 간격(초)")]
-    [SerializeField] private float stepInterval = 0.4f;
-
+    [SerializeField] private float stepInterval = 0.5f; // 걷는 소리 간격
     private float stepTimer = 0f;
+    private bool wasMoving = false;
     // --------------------------------------------------
     RandomEventObject randomEventObject;
     Item item;
@@ -109,6 +110,8 @@ public class PlayerController : MonoBehaviour
     }
     private void ApplyMovement(Vector2 input)//이동로직
     {
+        bool inputKeyPressed = !Mathf.Approximately(input.x, 0f) || !Mathf.Approximately(input.y, 0f);
+
         if (!Mathf.Approximately(input.x, 0f))
         {
             horizontalDirection = input.x > 0f ? 1 : -1;
@@ -125,25 +128,33 @@ public class PlayerController : MonoBehaviour
         if (raw.sqrMagnitude > 1f)
             raw.Normalize();
 
-        if(!Mathf.Approximately(input.x, 0f) || !Mathf.Approximately(input.y, 0f))
+        
+        if (inputKeyPressed)
         {
             playerAnim.SetMoved(true);
+            if (!wasMoving)
+            {
+                SoundManager.Instance.PlaySFX("Player_move");
+                stepTimer = 0f;
+            }
+
+            // 인터벌 타이머 갱신
             stepTimer += Time.deltaTime;
             if (stepTimer >= stepInterval)
             {
-                SoundManager.Instance.PlaySFX("Player_move_another_floor");
+                SoundManager.Instance.PlaySFX("Player_move");
                 stepTimer = 0f;
             }
         }
         else
         {
             playerAnim.SetMoved(false);
-            // 멈췄으면 타이머를 바로 만료시켜서
-            // 재출발 시 바로 소리 나게 준비
+            // 멈췄을 때 타이머를 인터벌로 세팅해두면,
+            // 다시 이동을 시작할 때 즉시 소리가 나게 할 수 있음
             stepTimer = stepInterval;
         }
-            
 
+        wasMoving = inputKeyPressed;
 
         // 4) 실제 이동: 방향(normalized) * 수평 속도 * deltaTime
         Vector3 move = new Vector3(raw.x, raw.y, 0f)
@@ -178,8 +189,9 @@ public class PlayerController : MonoBehaviour
             }
             if(other.CompareTag("Trash"))//쓰레기 충돌
             {
-
+                SoundManager.Instance.PlaySFX("Trash_sound");
             }
+            
         }
         
 
@@ -198,8 +210,8 @@ public class PlayerController : MonoBehaviour
             count++;
             item = other.GetComponent<Item>();
             item.Picked();
-            
-            if(isTutorial)
+            SoundManager.Instance.PlaySFX("Item_sound");
+            if (isTutorial)
             {
                 TutorialManager tutorialManager = GameObject.Find("TutorialManager").GetComponent<TutorialManager>();
 
@@ -211,6 +223,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Return") && Input.GetKeyDown(KeyCode.E) && count !=0)
         {
+            SoundManager.Instance.PlaySFX("Itemgive_sound");
             CountManager.Instance.AddItemCount(count);
             //item 반환 소리(아무거나 있는거 넣으삼)
             //Debug.Log(count);
@@ -323,8 +336,8 @@ public class PlayerController : MonoBehaviour
             ? new Vector2(0f, 9f) 
          : new Vector2(0f, -9f);
 
-        
 
+        SoundManager.Instance.PlaySFX("Player_move_floor");
         StartCoroutine(PauseMovement(0.5f));//정지 코루틴
 
         StartCoroutine(
@@ -373,9 +386,10 @@ public class PlayerController : MonoBehaviour
     }
     private IEnumerator StunRoutine(float duration)//애니메이션 코루틴
     {
+        SoundManager.Instance.PlaySFX("Player_stun");
         stunAim.SetActive(true);
-        yield return new WaitForSeconds(duration);
 
+        yield return new WaitForSeconds(duration);
         
         playerAnim.SetStunned(false);
         stunAim.SetActive(false);
