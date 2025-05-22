@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class RandomEventSpawner : MonoBehaviour
 {
@@ -78,7 +79,10 @@ public class RandomEventSpawner : MonoBehaviour
         {
             if (currentScene.name == "Day1")
             {
-                speechBubble.PlayArrowNotice();
+                CountManager.Instance.ResetTotal();
+
+                // 시작할 때 3초 대기 후 화살표 설명 시작
+                StartCoroutine(PlayNoticeWithDelay(3f));
                 SelectRandomEventZone();
             }
             else
@@ -153,6 +157,13 @@ public class RandomEventSpawner : MonoBehaviour
         }
     }
 
+    // 화살표 설명 대기 코루틴
+    private IEnumerator PlayNoticeWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        speechBubble.PlayArrowNotice();
+    }
+
     /// <summary>
     /// 랜덤 오브젝트를 생성하는 함수
     /// </summary>
@@ -170,7 +181,6 @@ public class RandomEventSpawner : MonoBehaviour
         Debug.Log($"현재 존 : {spawnPointData.zoneIndex}");
         Debug.Log($"현재 존의 스폰포인트 : {spawnPointData.spawnPoint}");
         Debug.Log($"현재 이벤트 번호: {randomIndex + 1}");
-
 
         GameObject eventObject = Instantiate(randomEventList[randomIndex].gameObject, eventPosition, Quaternion.identity);
         if (eventObject.TryGetComponent<RandomEventObject>(out RandomEventObject randomEvent))

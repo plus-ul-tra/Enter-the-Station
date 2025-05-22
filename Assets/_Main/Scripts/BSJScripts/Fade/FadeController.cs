@@ -131,33 +131,45 @@ public class FadeController : MonoBehaviour
             if (isClear)
             {
                 DOTween.KillAll();
-                
-                if (currentScene.name == "Day1")
-                {
-                    SceneManager.LoadScene("Day2t");
-                }
-                else if(currentScene.name == "Day2t")
-                {
-                    SceneManager.LoadScene("Day3t");
-                }
-                else if(currentScene.name == "Day3t")
-                {
-                    SceneManager.LoadScene("Clear");
-                }
-            }
-            else
-            {
+
                 if (isTutorial)
                 {
-                    // 실패 엔딩씬으로 이동
+                    // 튜토리얼에서 1일차로 이동
                     DOTween.KillAll();
                     SceneManager.LoadScene("Day1");
                 }
                 else
                 {
-                    // 실패 엔딩씬으로 이동
-                    DOTween.KillAll();
-                    SceneManager.LoadScene("FailEnding");
+                    if (currentScene.name == "Day1")
+                    {
+                        SceneManager.LoadScene("Day2t");
+                    }
+                    else if (currentScene.name == "Day2t")
+                    {
+                        SceneManager.LoadScene("Day3t");
+                    }
+                    else if (currentScene.name == "Day3t")
+                    {
+                        SceneManager.LoadScene("Clear");
+                    }
+                }
+            }
+            else
+            {
+                // 실패 엔딩씬으로 이동
+                DOTween.KillAll();
+
+                if (currentScene.name == "Day1")
+                {
+                    SceneManager.LoadScene("FailEnding_Day1");
+                }
+                else if (currentScene.name == "Day2t")
+                {
+                    SceneManager.LoadScene("FailEnding_Day2");
+                }
+                else if (currentScene.name == "Day3t")
+                {
+                    SceneManager.LoadScene("FailEnding_Day3");
                 }
             }
         });

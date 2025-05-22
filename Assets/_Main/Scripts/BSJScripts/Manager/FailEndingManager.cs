@@ -9,6 +9,9 @@ public class FailEndingManager : MonoBehaviour
     [Header("다시하기 버튼")]
     [SerializeField] private Button retry_Button;
 
+    [Header("돌아갈씬 이름")]
+    [SerializeField] private string sceneName;
+
     private void Start()
     {
         // 다시하기 버튼
@@ -21,7 +24,7 @@ public class FailEndingManager : MonoBehaviour
             DOTween.KillAll();
 
             // TODO : 이전 씬이 뭐지 알아야함
-            SceneManager.LoadScene("Day1"); //이전 Scene으로
+            SceneManager.LoadScene(sceneName); //이전 Scene으로
         });
     }
 }
