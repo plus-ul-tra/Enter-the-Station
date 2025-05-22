@@ -105,6 +105,7 @@ public class MovingCircleManager : Task
 
             if (isSuccess)
             {
+                SoundManager.Instance.PlaySFX("Map_finish");
                 currentIndex = (currentIndex + 1) % sprites.Length;
                 targetImage.sprite = sprites[currentIndex];
                 currentAngle -= deltaAngle;
@@ -114,6 +115,7 @@ public class MovingCircleManager : Task
             {
                 if (currentIndex - 1 >= 0)
                 {
+                    SoundManager.Instance.PlaySFX("Fail_sound");
                     currentIndex = (currentIndex - 1) % sprites.Length;
                     targetImage.sprite = sprites[currentIndex];
                 }

@@ -23,6 +23,7 @@ public class ArrowMatching : Task
     private int maxBlockCount = 9;
     [SerializeField]
     public int maxSuccessCount = 3; // task success Complete
+    [HideInInspector]
     public int successCount = 0; //9개 전부 맞추면 count++
     private List<ArrowButton> arrowBlocks = new List<ArrowButton>();
     private int matchIndex =0;
@@ -50,10 +51,8 @@ public class ArrowMatching : Task
             return;
         }
 
-        if (successCount == maxSuccessCount && timer < limitTime)
+        if (successCount == maxSuccessCount && timer < limitTime && !isOver)
         {
-            // task 성공
-            //필요시 함수 추가
             successImage.SetActive(true);
             CountManager.Instance.AddClearCount();
             timer = 0.0f;
@@ -72,7 +71,7 @@ public class ArrowMatching : Task
         checkSuccess();
 
         if (successCount >= 4) return;
-        baseLineGroup.transform.GetChild(successCount).gameObject.SetActive(true); // 다음 baseline 켜기
+        baseLineGroup.transform.GetChild(successCount).gameObject.SetActive(true); // 다음 baseline 켜기 //
 
     }
 

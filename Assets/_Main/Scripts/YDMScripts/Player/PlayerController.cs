@@ -185,6 +185,7 @@ public class PlayerController : MonoBehaviour
         {
             bool isUp = other.CompareTag("Stairs_up");
             HandleStairsCollision(isUp);//업인지 다운이지 확인 플래그를 코루틴으로 보내줌
+            StartCoroutine(InvincibleCoroutine());
         }
     }
 

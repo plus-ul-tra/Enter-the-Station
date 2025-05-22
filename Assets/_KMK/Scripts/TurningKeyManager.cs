@@ -77,7 +77,7 @@ public class TurningKeyManager : Task
             timer = 0.0f;
         }
 
-        if (clearNum < 2 && timer >= limitTime &&!isDone)
+        if (clearNum < successNum && timer >= limitTime &&!isDone)
         {
             isDone = true;
             SendIsOver.Invoke();

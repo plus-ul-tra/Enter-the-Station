@@ -44,11 +44,11 @@ public class ResultPaper : MonoBehaviour
                 case 1:
                     if (CountManager.Instance.GetTotalItemCount() >= 10)
                     {
-                        stampImage.sprite = stampSprites[3];
+                        stampImage.sprite = stampSprites[0];
                     }
                     else
                     {
-                        stampImage.sprite = stampSprites[2];
+                        stampImage.sprite = stampSprites[1];
                     }
                     break;
                 case 2:
@@ -59,7 +59,7 @@ public class ResultPaper : MonoBehaviour
                 case 5:
                 case 6:
                 case 7:
-                    stampImage.sprite = stampSprites[1];
+                    stampImage.sprite = stampSprites[3];
                     break;
                 default:
                     stampImage.sprite = stampSprites[0];

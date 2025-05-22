@@ -862,6 +862,12 @@ public class TutorialManager : MonoBehaviour
     private void RespawnEventObject(int currentIndex = 0)
     {
         // 생성된 오브젝트 관리 리스트 클리어
+        foreach(GameObject obj in createdObjects)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
+
         createdObjects.Clear();
 
         switch (currentIndex)
