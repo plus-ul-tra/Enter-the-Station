@@ -3533,7 +3533,7 @@ Transform:
   m_GameObject: {fileID: 142180746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.098, y: -5.245, z: -10}
+  m_LocalPosition: {x: -9.98996, y: -2.92045, z: -10}
   m_LocalScale: {x: 0.4467386, y: 0.4467386, z: 0.4467386}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5309,7 +5309,6 @@ MonoBehaviour:
   stunAim: {fileID: 183159353}
   canMove: 1
   introCameraSwitcher: {fileID: 1935231341}
-  count: 0
   knockbackDuration: 0.2
   invincibleTime: 1.5
   stepInterval: 1
@@ -5378,7 +5377,7 @@ Transform:
   m_GameObject: {fileID: 232534215}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.098, y: -5.745, z: 0}
+  m_LocalPosition: {x: -11.32, y: -3.42, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8828,7 +8827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\uC77C\uCC28"
+  m_text: "3\uC77C\uCC28"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bd891b30bbb8d2d47958e2df32ca6524, type: 2}
   m_sharedMaterial: {fileID: 358521423603633017, guid: bd891b30bbb8d2d47958e2df32ca6524, type: 2}
@@ -12208,7 +12207,7 @@ MonoBehaviour:
   moveDuration: 2
   snapY: -14
   fadeDuration: 1
-  isCutScene: 0
+  fadeImage: {fileID: 0}
 --- !u!1 &626000637
 GameObject:
   m_ObjectHideFlags: 0
@@ -33916,7 +33915,7 @@ Transform:
   m_GameObject: {fileID: 1827288556}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.098, y: -5.245, z: -10}
+  m_LocalPosition: {x: -11.32, y: -2.92, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -47,7 +47,8 @@ public class FadeController : MonoBehaviour
         fadeImage.gameObject.SetActive(false);
 
         // ¼ÅÅÍ ¿­±â
-        shutter.StartCoroutine(shutter.MoveUp());
+        if (shutter != null)
+            StartCoroutine(shutter.MoveUp());
     }
 
     private void Update()
@@ -117,7 +118,8 @@ public class FadeController : MonoBehaviour
 
         seq.AppendCallback(() =>
         {
-            shutter.StartCoroutine(shutter.MoveDown());
+            if (shutter != null)
+                StartCoroutine(shutter.MoveDown());
         });
 
         seq.AppendInterval(2f);

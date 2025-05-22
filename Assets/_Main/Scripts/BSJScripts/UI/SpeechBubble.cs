@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using System.Text;
+using System.Collections.Generic;
 
 public enum SpeechKey
 {
@@ -49,6 +50,9 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField] private T_TalkleEffect t_talkleEffect;
     private WaitForSeconds speechWaitTime = new WaitForSeconds(0.5f);    // 말하기 까지 대기시간
 
+    // 화살표 말풍선
+    private List<string> arrowNotice_Lines;
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -58,16 +62,25 @@ public class SpeechBubble : MonoBehaviour
     void Start()
     {
         canvasGroup.alpha = 0;
+
+        // 화살표 대사 초기화
+        arrowNotice_Lines = new List<string>
+        {
+            "화살표를 따라가면\n네 할일이 보여",
+            "빨간색 화살표는 지하 1층,",
+            "노란색은 지하 2층이니\n명심해둬",
+            "이제 할일을 하러 가볼까?"
+        };
     }
 
-    ///// <summary>
-    ///// 화살표 안내 말풍선을 실행시키는 함수
-    ///// </summary>
-    //public void PlayArrowNotice()
-    //{
-    //    tmpText.text = sb.ToString();
-    //}
-
+    /// <summary>
+    /// 화살표 말풍선을 실행시키는 함수
+    /// </summary>
+    public void PlayArrowNotice()
+    {
+        StopAllCoroutines(); // 기존 코루틴 정지
+        StartCoroutine(DisplayMessagesOneByOne());
+    }
 
     /// <summary>
     /// 무전기 말풍선을 실행시키는 함수
@@ -255,6 +268,49 @@ public class SpeechBubble : MonoBehaviour
                 sb.Append("\"그래, 이번엔 눈빛 하나는 좋았어.\"");
                 break;
         }
+    }
+
+    IEnumerator DisplayMessagesOneByOne()
+    {
+        // 무전기 올라오는 트윈
+        t_talkleEffect.MoveUp();
+        yield return speechWaitTime;
+
+        // 캔버스 그룹 초기화
+        canvasGroup.alpha = 1;
+
+        // 이미지 한 번만 흔들기
+        if (imageRect != null)
+        {
+            imageRect.DOKill();
+            imageRect.DOShakeAnchorPos(
+                1.2f,
+                strength: new Vector2(20f, 20f),
+                vibrato: 10,
+                randomness: 90f,
+                snapping: false,
+                fadeOut: true
+            );
+        }
+
+        // 대화 한 줄씩 출력
+        foreach (string message in arrowNotice_Lines)
+        {
+            tmpText.text = message;
+
+            tmpText.transform.DOKill();
+            tmpText.transform.localScale = Vector3.one;
+            tmpText.transform.DOPunchScale(Vector3.one * punchPower, 0.2f, 1, 0.1f);
+
+            yield return new WaitForSeconds(2f);
+        }
+
+        // 무전기 내려가는 트윈
+        t_talkleEffect.MoveDown();
+        yield return speechWaitTime;
+
+        // 팝업 오브젝트 페이드아웃
+        canvasGroup.DOFade(0, 1f);
     }
 
     IEnumerator PunchMultipleTimes()

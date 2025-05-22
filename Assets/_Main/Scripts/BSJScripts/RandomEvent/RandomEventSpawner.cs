@@ -69,15 +69,25 @@ public class RandomEventSpawner : MonoBehaviour
         // TODO : 튜토리얼 일때에는 그냥 실행, 
         if (isTutorial)
         {
-            SelectRandomEventZone();
+            // 아무것도 하지 않음
+            // SelectRandomEventZone();
         }
 
         // 일차일 경우에는 시작 시간 10초에서부터 시작
         else
         {
-            currentSpawnTimer = 10f;
-            SelectRandomEventZone();
+            if (currentScene.name == "Day1")
+            {
+                speechBubble.PlayArrowNotice();
+                SelectRandomEventZone();
+            }
+            else
+            {
+                currentSpawnTimer = 10f;
+                SelectRandomEventZone();
+            }
         }
+
     }
 
     private void Update()
