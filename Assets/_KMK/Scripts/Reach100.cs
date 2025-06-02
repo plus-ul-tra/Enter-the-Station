@@ -60,6 +60,7 @@ public class Reach100 : BaseGauge
 
             if (Input.GetKeyDown(KeyCode.Space) && !isFilled)
             {
+                SoundManager.Instance.PlaySFX("Medical_input");
                 ChangeSprite();
                 gauge.fillAmount += addGauge;
                 if (gauge.fillAmount == 1.0f)

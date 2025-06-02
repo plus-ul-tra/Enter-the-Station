@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
-using static UnityEditor.PlayerSettings;
-using UnityEditor.U2D.Sprites;
 using UnityEngine.UI;
 
 public class Drunken : MonoBehaviour

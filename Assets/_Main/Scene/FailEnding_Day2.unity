@@ -761,7 +761,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 323.1, y: 0}
-  m_SizeDelta: {x: 700, y: 200}
+  m_SizeDelta: {x: 808, y: 200}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1394179494
 MonoBehaviour:
@@ -783,7 +783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB2E4\uC2DC\uD574\uBCF4\uC9C0\uADF8\uB798?"
+  m_text: "\uB2E4\uC2DC \uC2DC\uB3C4\uD558\uC9C0 \uADF8\uB798?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b31645fe2f1e03e40bab40dc47a43020, type: 2}
   m_sharedMaterial: {fileID: 7581465733796279910, guid: b31645fe2f1e03e40bab40dc47a43020, type: 2}

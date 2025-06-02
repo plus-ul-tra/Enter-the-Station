@@ -22,6 +22,9 @@ public class SkipOptionManager : MonoBehaviour
     [Header("스킵하고 다음으로 갈 씬 이름")]
     [SerializeField] private String sceneName;
 
+    [Header("플레이어 발소리")]
+    [SerializeField] private PlayerFootsteps playerFootstpes;
+
     private void Start()
     {
         // 초기화
@@ -32,6 +35,9 @@ public class SkipOptionManager : MonoBehaviour
         {
             if (SoundManager.Instance != null)
                 SoundManager.Instance.PlaySFX("UIButton_sound");
+
+            if (playerFootstpes != null)
+                playerFootstpes.StopfootstepsSound();
 
             // 게임 중지
             Time.timeScale = 0f;

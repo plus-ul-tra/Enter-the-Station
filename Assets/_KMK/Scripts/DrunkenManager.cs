@@ -74,7 +74,8 @@ public class DrunkenManager : Task
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isOver)
-        {    
+        {
+            SoundManager.Instance.PlaySFX("Medical_input");
             if (isReached)
             {
                 if (countLevel == 4) { isOver = true;  return; }
@@ -102,6 +103,7 @@ public class DrunkenManager : Task
             onResult.Invoke();
             if (!isClose)
             {
+                SoundManager.Instance.PlaySFX("Map_finish");
                 successImage.SetActive(true);
                 CountManager.Instance.AddClearCount();
                 isClose = true;
@@ -118,6 +120,7 @@ public class DrunkenManager : Task
             onResult.Invoke();
             if (!isClose)
             {
+                SoundManager.Instance.PlaySFX("Fail_sound");
                 failedImage.SetActive(true);
                 isClose = true;
                 Close();

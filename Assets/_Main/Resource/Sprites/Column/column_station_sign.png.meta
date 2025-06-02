@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 61ffc400d69c9ce4bb0fa130b0e862b6
+guid: a9a919de1f7192e4e9ab32686fc09147
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5567957103113409758
-    second: sign_horizontal_rescuestrike_0
+      213: 1255230993650482945
+    second: column_station_sign_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,27 +96,40 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sign_horizontal_rescuestrike_0
+      name: column_station_sign_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 195
-        height: 72
+        x: 2
+        y: 2
+        width: 162
+        height: 425
       alignment: 9
-      pivot: {x: 0.49906784, y: -0.1185139}
+      pivot: {x: 0.5, y: 0.08}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed410b72c7b554d40800000000000000
-      internalID: 5567957103113409758
+      spriteID: 10ff89f20f97b6110800000000000000
+      internalID: 1255230993650482945
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6e20434deda92ce468f40b85e68afaa2
+    spriteID: 2d447b489b4edb14fbbeaad4da81c031
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sign_horizontal_rescuestrike_0: 5567957103113409758
+      column_station_sign_0: 1255230993650482945
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -28,6 +28,7 @@ public class TutorialManager : MonoBehaviour
     [Header("플레이어 컨트롤러")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerAnimator playerAnimator;
+    [SerializeField] private PlayerFootsteps playerFootsteps;
 
     [Header("돌발상황(미니게임) 오브젝트")] // 리스트로 관리할까 하다가 헷갈릴까봐 따로 객체하나씩 뺴놓음.
     [Header("에스컬레이터 고장 _ 튜토리얼 01")]
@@ -106,6 +107,7 @@ public class TutorialManager : MonoBehaviour
             "너가 새로운 수습이구나.",
             "우리역은 돌발상황이\n가아~끔 생기거든?",
             "오늘은 모의 상황을\n해결해 볼거야~",
+            "역도 한번 둘러보고!",
         };
 
         // 화살표 설명 + 튜토리얼 미니게임 1  (에스컬레이터 고장)
@@ -124,20 +126,23 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼 미니게임 3  (진상 고객 제압)
         event04_Lines = new List<string>
         {
-            "게이지 범위에 맞춰서 딱 누르면 돼.\n떨면 끝.",
+            "게이지 범위에 맞춰서 딱 누르면 돼.\n빨간 얼굴때 실수하면 끝이야.",
         };
 
         // 튜토리얼 미니게임 4  (지도 안내)
         event05_Lines = new List<string>
         {
-            "역에서 시작해서\n길을 따라 목적지를 이어.",
-            "목적지는 배경이 다를거야.",
+            "역에서 마우스 클릭으로 시작해서\n 드래그로 길을 따라 목적지를 이어.",
+            "목적지는 초록색 표시야.",
+            "정확히 길을 따라가야해!",
+            
         };
 
         // 튜토리얼 미니게임 5  (엘레베이터 고장)
         event06_Lines = new List<string>
         {
-            "전선? 색깔 맞춰서 잇는 거야.\n딱보면 모르겠어?",
+            "전선? 왼쪽에서 오른쪽으로 \n색깔 맞춰서 잇는 거야.",
+            "딱보면 모르겠어?",
         };
 
         // 유실물 획득
@@ -145,7 +150,7 @@ public class TutorialManager : MonoBehaviour
         {
             "아 참,",
             "역에 가끔 분실물이\n떨어진 경우가 있어.",
-            "발견하면 역무실로 가져와~",
+            "발견하면 역무실이나 부스로 가져와~",
         };
 
         // 튜토리얼 미니게임 7  (승객 추락 구조)
@@ -164,7 +169,7 @@ public class TutorialManager : MonoBehaviour
         event10_Lines = new List<string>
         {
             "진상 취객한테 \n움찔하면 지는 거다.",
-            "웃는 타이밍에 맞춰서\n 버튼을 눌러",
+            "웃는 타이밍에 맞춰서\n 스페이스를 눌러",
         };
 
         // 튜토리얼 종료
@@ -190,38 +195,49 @@ public class TutorialManager : MonoBehaviour
         if (isEvent01 || isEvent02 || isEvent03 || isEvent04 || isEvent05 || isEvent06
              || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11)
         {
-            if (playerController != null)
-                playerController.canMove = false;
-            if (playerAnimator != null)
-                playerAnimator.SetMoved(false);
-
             if (Input.GetMouseButtonDown(0))
                 HandleTypingInput();
         }
 
+        if(isEvent01 || isEvent07)
+        {
+            // 플레이어가 이동 못하게
+            if (playerController != null)
+            {
+                playerController.canMove = false;
+            }
+
+            if (playerAnimator != null)
+            {
+                playerAnimator.SetMoved(false);
+            }
+
+            playerFootsteps.StopfootstepsSound();
+        }
+
         // 테스트 ( 튜토리얼 미니게임 인풋 끝난 다음에 콜백 받아서 다음 이벤트 실행시켜야함 )
-        if (Input.GetKeyDown(KeyCode.F1))
-            StartEvent1();
-        else if (Input.GetKeyDown(KeyCode.F2))
-            StartEvent2();
-        else if (Input.GetKeyDown(KeyCode.F3))
-            StartEvent3();
-        else if (Input.GetKeyDown(KeyCode.F4))
-            StartEvent4();
-        else if (Input.GetKeyDown(KeyCode.F5))
-            StartEvent5();
-        else if (Input.GetKeyDown(KeyCode.F6))
-            StartEvent6();
-        else if (Input.GetKeyDown(KeyCode.F7))
-            StartEvent7();
-        else if (Input.GetKeyDown(KeyCode.F8))
-            StartEvent8();
-        else if (Input.GetKeyDown(KeyCode.F9))
-            StartEvent9();
-        else if (Input.GetKeyDown(KeyCode.F10))
-            StartEvent10();
-        else if (Input.GetKeyDown(KeyCode.F11))
-            StartEvent11();
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //    StartEvent1();
+        //else if (Input.GetKeyDown(KeyCode.F2))
+        //    StartEvent2();
+        //else if (Input.GetKeyDown(KeyCode.F3))
+        //    StartEvent3();
+        //else if (Input.GetKeyDown(KeyCode.F4))
+        //    StartEvent4();
+        //else if (Input.GetKeyDown(KeyCode.F5))
+        //    StartEvent5();
+        //else if (Input.GetKeyDown(KeyCode.F6))
+        //    StartEvent6();
+        //else if (Input.GetKeyDown(KeyCode.F7))
+        //    StartEvent7();
+        //else if (Input.GetKeyDown(KeyCode.F8))
+        //    StartEvent8();
+        //else if (Input.GetKeyDown(KeyCode.F9))
+        //    StartEvent9();
+        //else if (Input.GetKeyDown(KeyCode.F10))
+        //    StartEvent10();
+        //else if (Input.GetKeyDown(KeyCode.F11))
+        //    StartEvent11();
     }
 
     /// <summary>
