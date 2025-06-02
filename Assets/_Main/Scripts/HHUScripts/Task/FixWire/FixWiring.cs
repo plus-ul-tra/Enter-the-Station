@@ -92,7 +92,7 @@ public class FixWiring : Task
                         var right = hit.collider.GetComponentInParent<RightWire>();
                         if (right != null)
                         {
-                            selectWire.SetTarget(hit.transform.position, -100.0f);
+                            selectWire.SetTarget(hit.transform.position, -150.0f);
                             selectWire.ConnectWire(right);
                             right.ConnectWire(selectWire);
                             selectWire = null;
