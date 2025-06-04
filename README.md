@@ -11,7 +11,7 @@
 ## OverView
 
 메인 타이틀
-<p align="center">
+<p align="left">
 <img width="90%" src="https://github.com/user-attachments/assets/e11c451b-eb03-417d-9423-d784fb5a8f19">  
 </p>
 
