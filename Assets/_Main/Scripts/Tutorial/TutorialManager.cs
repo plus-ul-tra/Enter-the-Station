@@ -119,6 +119,7 @@ public class TutorialManager : MonoBehaviour
     // ----------------------------------------
 
     // 튜토리얼을 한번이라도 클리어했는가?
+    [SerializeField] GameObject[] tutorialRrogressImages;
     private bool[] tutorialClears = { false, false, false, false, false, false, false, false };
     private List<GameObject> createdObjects = new List<GameObject>();
 
@@ -1205,41 +1206,49 @@ public class TutorialManager : MonoBehaviour
         {
             StartEvent2();
             tutorialClears[0] = true;
+            if (tutorialRrogressImages[0] != null) { tutorialRrogressImages[0].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.ArrowMatch)
         {
             StartEvent3();
             tutorialClears[1] = true;
+            if (tutorialRrogressImages[1] != null) { tutorialRrogressImages[1].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.MovingCircle)
         {
             StartEvent4();
             tutorialClears[2] = true;
+            if (tutorialRrogressImages[2] != null) { tutorialRrogressImages[2].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.MapGuide)
         {
             StartEvent5();
             tutorialClears[3] = true;
+            if (tutorialRrogressImages[3] != null) { tutorialRrogressImages[3].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.FixWire)
         {
             StartEvent6();
             tutorialClears[4] = true;
+            if (tutorialRrogressImages[4] != null) { tutorialRrogressImages[4].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.StackingGauge)
         {
             StartEvent8();
             tutorialClears[5] = true;
+            if (tutorialRrogressImages[5] != null) { tutorialRrogressImages[5].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.MaintainingGauge)
         {
             StartEvent9();
             tutorialClears[6] = true;
+            if (tutorialRrogressImages[6] != null) { tutorialRrogressImages[6].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.Swinging)
         {
             StartEvent10();
             tutorialClears[7] = true;
+            if (tutorialRrogressImages[7] != null) { tutorialRrogressImages[7].SetActive(true); }
         }
 
         // 이벤트 해제 (누수 방지)

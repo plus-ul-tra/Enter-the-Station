@@ -53,6 +53,12 @@ public class SpeechBubble : MonoBehaviour
     // 화살표 말풍선
     private List<string> arrowNotice_Lines;
 
+    // ------------------------------
+    // 텍스트 색상
+    // ------------------------------
+    Color FirstFloorColor = new Color32(255, 72, 0, 255); // #FF4800
+    Color SecondFloorColor = new Color32(238, 234, 15, 255); // #eeea0f 
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -90,6 +96,21 @@ public class SpeechBubble : MonoBehaviour
     {
         SetSpeechBubbleText(speechKey, zoneIndex);
         tmpText.text = sb.ToString();
+
+
+        switch (zoneIndex)
+        {
+            case 1:
+            case 2:
+            case 3:
+                tmpText.color = FirstFloorColor;
+                break;
+            case 4:
+            case 5:
+            case 6:
+                tmpText.color = SecondFloorColor;
+                break;
+        }
 
         StartCoroutine(PunchMultipleTimes());
     }
