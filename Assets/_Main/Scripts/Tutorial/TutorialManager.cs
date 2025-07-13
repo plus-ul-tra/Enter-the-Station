@@ -1,8 +1,8 @@
+using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
-using System.Collections.Generic;
-using System.Collections;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -84,6 +84,29 @@ public class TutorialManager : MonoBehaviour
     private List<string> event10_Lines;    // 튜토리얼 미니게임 9  (진상 취객 깨우기)
     private List<string> event11_Lines;    // 튜토리얼 종료
 
+    // 이벤트별 플래그
+    private bool istalkleEvent01 = false;     // 01번 이벤트  오프닝 컷신 이후
+    private bool istalkleEvent02 = false;     // 02번 이벤트  튜토리얼 미니게임 1  (에스컬레이터 고장)
+    private bool istalkleEvent03 = false;     // 03번 이벤트  튜토리얼 미니게임 2  (취객 깨우기)
+    private bool istalkleEvent04 = false;     // 04번 이벤트  튜토리얼 미니게임 3  (진상 고객 제압)
+    private bool istalkleEvent05 = false;     // 05번 이벤트  튜토리얼 미니게임 4  (지도 안내)
+    private bool istalkleEvent06 = false;     // 06번 이벤트  튜토리얼 미니게임 5  (엘레베이터 고장)
+    private bool istalkleEvent07 = false;     // 유실물 획득
+    private bool istalkleEvent08 = false;     // 08번 이벤트  튜토리얼 미니게임 7  (승객 추락 구조)
+    private bool istalkleEvent09 = false;     // 09번 이벤트  튜토리얼 미니게임 8  (심장마비)
+    private bool istalkleEvent10 = false;     // 10번 이벤트  튜토리얼 미니게임 9  (진상 취객 깨우기)
+    private bool istalkleEvent11 = false;     // 11번 이벤트  튜토리얼 종료
+
+    // 다음으로 넘어가는 대사 리스트
+    private List<string> miniGameStart01_Lines;     // 튜토리얼 미니게임 1 시작 대사    (에스컬레이터 고장)   02번 이벤트
+    private List<string> miniGameStart02_Lines;     // 튜토리얼 미니게임 2 시작 대사    (취객 깨우기)        03번 이벤트
+    private List<string> miniGameStart03_Lines;     // 튜토리얼 미니게임 3 시작 대사    (진상 고객 제압)      04번 이벤트
+    private List<string> miniGameStart04_Lines;     // 튜토리얼 미니게임 4 시작 대사    (지도 안내)          05번 이벤트
+    private List<string> miniGameStart05_Lines;     // 튜토리얼 미니게임 5 시작 대사    (엘레베이터 고장)     06번 이벤트
+    private List<string> miniGameStart06_Lines;     // 튜토리얼 미니게임 7 시작 대사    (승객 추락 구조)      08번 이벤트
+    private List<string> miniGameStart07_Lines;     // 튜토리얼 미니게임 8 시작 대사    (심장마비)           09번 이벤트
+    private List<string> miniGameStart08_Lines;     // 튜토리얼 미니게임 9 시작 대사    (진상 취객 깨우기)    10번 이벤트
+
     private int currentLine = -1;
 
     private Coroutine typingCoroutine;
@@ -96,6 +119,7 @@ public class TutorialManager : MonoBehaviour
     // ----------------------------------------
 
     // 튜토리얼을 한번이라도 클리어했는가?
+    [SerializeField] GameObject[] tutorialRrogressImages;
     private bool[] tutorialClears = { false, false, false, false, false, false, false, false };
     private List<GameObject> createdObjects = new List<GameObject>();
 
@@ -107,7 +131,8 @@ public class TutorialManager : MonoBehaviour
             "너가 새로운 수습이구나.",
             "우리역은 돌발상황이\n가아~끔 생기거든?",
             "오늘은 모의 상황을\n해결해 볼거야~",
-            "역도 한번 둘러보고!",
+            "너가 겪어본 상황들은\n좌상단에 표시될거야.",
+            "한 번씩 겪어보면\n튜토리얼 끝이야."
         };
 
         // 화살표 설명 + 튜토리얼 미니게임 1  (에스컬레이터 고장)
@@ -126,7 +151,8 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼 미니게임 3  (진상 고객 제압)
         event04_Lines = new List<string>
         {
-            "게이지 범위에 맞춰서 딱 누르면 돼.\n빨간 얼굴때 실수하면 끝이야.",
+            "게이지 범위에 맞춰서\n스페이스바를 눌러",
+            "빨간 얼굴때 실수하면 끝이야.",
         };
 
         // 튜토리얼 미니게임 4  (지도 안내)
@@ -135,13 +161,13 @@ public class TutorialManager : MonoBehaviour
             "역에서 마우스 클릭으로 시작해서\n 드래그로 길을 따라 목적지를 이어.",
             "목적지는 초록색 표시야.",
             "정확히 길을 따라가야해!",
-            
+
         };
 
         // 튜토리얼 미니게임 5  (엘레베이터 고장)
         event06_Lines = new List<string>
         {
-            "전선? 왼쪽에서 오른쪽으로 \n색깔 맞춰서 잇는 거야.",
+            "전선? 왼쪽에서 오른쪽으로\n색깔 맞춰서 잇는 거야.",
             "딱보면 모르겠어?",
         };
 
@@ -150,7 +176,8 @@ public class TutorialManager : MonoBehaviour
         {
             "아 참,",
             "역에 가끔 분실물이\n떨어진 경우가 있어.",
-            "발견하면 역무실이나 부스로 가져와~",
+            "발견하면 역무실이나\n부스로 가져와~",
+            "초록색 화살표로\n표시된 곳이야",
         };
 
         // 튜토리얼 미니게임 7  (승객 추락 구조)
@@ -180,6 +207,57 @@ public class TutorialManager : MonoBehaviour
             "내일부턴 일에 시간제한도 걸려있어.\n각오하고 오는게 좋을걸?",
         };
 
+        #region 미니게임 시작 대사
+        // 튜토리얼 미니게임 1 에스컬레이터 고장 시작 대사 (event 02)
+        miniGameStart01_Lines = new List<string>
+        {
+            "자, 에스컬레이터 고장"
+        };
+
+        // 튜토리얼 미니게임 2 취객 깨우기 시작 대사 (event 03)
+        miniGameStart02_Lines = new List<string>
+        {
+            "자, 취객 깨우기"
+        };
+
+        // 튜토리얼 미니게임 3 진상 고객 제압 시작 대사 (event 04)
+        miniGameStart03_Lines = new List<string>
+        {
+            "자, 진상 고객 제압"
+        };
+
+        // 튜토리얼 미니게임 4 지도 안내 시작 대사 (event 05)
+        miniGameStart04_Lines = new List<string>
+        {
+            "자, 지도 안내"
+        };
+
+        // 튜토리얼 미니게임 5 엘레베이터 고장 시작 대사 (event 06)
+        miniGameStart05_Lines = new List<string>
+        {
+            "자, 엘레베이터 고장"
+        };
+
+        // 튜토리얼 미니게임 7 승객 추락 구조 시작 대사 (event 08)
+        miniGameStart06_Lines = new List<string>
+        {
+            "자, 승객 추락 구조"
+        };
+
+        // 튜토리얼 미니게임 8 심장마비 시작 대사 (event 09)
+        miniGameStart07_Lines = new List<string>
+        {
+            "자, 심장마비"
+        };
+
+        // 튜토리얼 미니게임 9 진상 취객 깨우기 시작 대사 (event 10)
+        miniGameStart08_Lines = new List<string>
+        {
+            "자, 진상 취객 깨우기"
+        };
+
+        #endregion 미니게임 시작 대사
+
         fadeController = GetComponent<FadeController>();
         canvasGroup.alpha = 0;
 
@@ -193,13 +271,21 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         if (isEvent01 || isEvent02 || isEvent03 || isEvent04 || isEvent05 || isEvent06
-             || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11)
+             || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11
+             || istalkleEvent01 || istalkleEvent02 || istalkleEvent03 || istalkleEvent04
+             || istalkleEvent05 || istalkleEvent06 || istalkleEvent07 || istalkleEvent08
+             || istalkleEvent09 || istalkleEvent10 || istalkleEvent11 )
         {
             if (Input.GetMouseButtonDown(0))
                 HandleTypingInput();
         }
 
-        if(isEvent01 || isEvent07)
+        //if (isEvent01 || isEvent07)
+        if (isEvent01 || isEvent02 || isEvent03 || isEvent04 || isEvent05 || isEvent06
+             || isEvent07 || isEvent08 || isEvent09 || isEvent10 || isEvent11
+             || istalkleEvent01 || istalkleEvent02 || istalkleEvent03 || istalkleEvent04
+             || istalkleEvent05 || istalkleEvent06 || istalkleEvent07 || istalkleEvent08
+             || istalkleEvent09 || istalkleEvent10 || istalkleEvent11)
         {
             // 플레이어가 이동 못하게
             if (playerController != null)
@@ -270,17 +356,10 @@ public class TutorialManager : MonoBehaviour
         if (currentLine >= textLines.Count - 1)
         {
             // 이벤트별 플래그 false 처리 및 종료 애니메이션, 페이드 아웃 처리
-
+            #region 이벤트
             if (isEvent01)
             {
                 isEvent01 = false;
-
-                // 플레이어가 다시 이동할 수 있게
-                if (playerController != null)
-                {
-                    playerController.canMove = true;
-                }
-
                 yield return EndEvent1_Routine();
             }
             else if (isEvent02)
@@ -311,13 +390,6 @@ public class TutorialManager : MonoBehaviour
             else if (isEvent07)
             {
                 isEvent07 = false;
-
-                // 플레이어가 다시 이동할 수 있게
-                if (playerController != null)
-                {
-                    playerController.canMove = true;
-                }
-
                 yield return EndEvent7_Routine();
             }
             else if (isEvent08)
@@ -340,6 +412,78 @@ public class TutorialManager : MonoBehaviour
                 isEvent11 = false;
                 yield return EndEvent11_Routine();
             }
+            #endregion 이벤트
+
+            #region
+            // 다음 이벤트 시작 플래그
+            if (istalkleEvent02)
+            {
+                istalkleEvent02 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent03)
+            {
+                istalkleEvent03 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent04)
+            {
+                istalkleEvent04 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent05)
+            {
+                istalkleEvent05 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent06)
+            {
+                istalkleEvent06 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent07)
+            {
+                istalkleEvent07 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent08)
+            {
+                istalkleEvent08 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent09)
+            {
+                istalkleEvent09 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent10)
+            {
+                istalkleEvent10 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            if (istalkleEvent11)
+            {
+                istalkleEvent11 = false;
+                yield return EndEventTalkle_Routine();
+            }
+
+            #endregion
+
+            // 플레이어가 다시 이동할 수 있게
+            if (playerController != null)
+            {
+                playerController.canMove = true;
+            }
+
             yield break;
         }
 
@@ -400,6 +544,37 @@ public class TutorialManager : MonoBehaviour
         // 팝업 페이드아웃
         canvasGroup.DOFade(0, 1f);
         speechText.text = "";
+
+        // 전부 깔려 있는 상태에서 알아서 시작하기로함. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //Invoke("WaitEvent2", 5f);
+    }
+
+    void WaitEvent2()
+    {
+        CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+
+        PlayRandomEventTalkle_02();
+    }
+
+    // 02 _ 에스컬레이터 고장 이벤트 시작
+    void PlayRandomEventTalkle_02()
+    {
+        textLines = miniGameStart01_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_02());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_02()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent02 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -407,7 +582,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent2()
     {
         // 오브젝트 재생성
-        RespawnEventObject(1);
+        // RespawnEventObject(1);
 
         textLines = event02_Lines;
         t_talkleEffect.MoveUp();
@@ -437,6 +612,37 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 아니면 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent3", 5f); }
+    }
+
+    void WaitEvent3()
+    {
+        CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+
+        PlayRandomEventTalkle_03();
+    }
+
+    // 03 _ 취객 깨우기 이벤트 시작
+    void PlayRandomEventTalkle_03()
+    {
+        textLines = miniGameStart02_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_03());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_03()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent03 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -444,7 +650,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent3()
     {
         // 오브젝트 재생성
-        RespawnEventObject(2);
+        // RespawnEventObject(2);
 
         textLines = event03_Lines;
         t_talkleEffect.MoveUp();
@@ -474,6 +680,37 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent4", 5f); }
+    }
+
+    void WaitEvent4()
+    {
+        CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+
+        PlayRandomEventTalkle_04();
+    }
+
+    // 04 _ 진상 고객 제압 이벤트 시작
+    void PlayRandomEventTalkle_04()
+    {
+        textLines = miniGameStart03_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_04());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_04()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent04 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -481,7 +718,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent4()
     {
         // 오브젝트 재생성
-        RespawnEventObject(3);
+        // RespawnEventObject(3);
 
         textLines = event04_Lines;
         t_talkleEffect.MoveUp();
@@ -511,6 +748,37 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent5", 5f); }
+    }
+
+    void WaitEvent5()
+    {
+        CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+
+        PlayRandomEventTalkle_05();
+    }
+
+    // 05 _ 지도 안내 이벤트 시작
+    void PlayRandomEventTalkle_05()
+    {
+        textLines = miniGameStart04_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_05());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_05()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent05 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -518,7 +786,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent5()
     {
         // 오브젝트 재생성
-        RespawnEventObject(4);
+        // RespawnEventObject(4);
 
         textLines = event05_Lines;
         t_talkleEffect.MoveUp();
@@ -548,6 +816,37 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent6", 5f); }
+    }
+
+    void WaitEvent6()
+    {
+        CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+
+        PlayRandomEventTalkle_06();
+    }
+
+    // 06 _ 엘리베이터 이벤트 시작
+    void PlayRandomEventTalkle_06()
+    {
+        textLines = miniGameStart05_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_06());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_06()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent06 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -555,7 +854,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent6()
     {
         // 오브젝트 재생성
-        RespawnEventObject(5);
+        // RespawnEventObject(5);
 
         textLines = event06_Lines;
         t_talkleEffect.MoveUp();
@@ -585,7 +884,40 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent8", 5f); }
     }
+
+    void WaitEvent8()
+    {
+        CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+
+        PlayRandomEventTalkle_08();
+    }
+
+    // 08 _ 승객 추락 구조 이벤트 시작
+    void PlayRandomEventTalkle_08()
+    {
+        textLines = miniGameStart06_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_08());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_08()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent08 = true;
+        StartCoroutine(ShowNextLine());
+    }
+
+
     #endregion
 
     #region 이벤트 7 분실물
@@ -623,7 +955,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent8()
     {
         // 오브젝트 재생성
-        RespawnEventObject(6);
+        // RespawnEventObject(6);
 
         textLines = event08_Lines;
         t_talkleEffect.MoveUp();
@@ -653,6 +985,37 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent9", 5f); }
+    }
+
+    void WaitEvent9()
+    {
+        CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+
+        PlayRandomEventTalkle_09();
+    }
+
+    // 09 _ 심장마비 이벤트 시작
+    void PlayRandomEventTalkle_09()
+    {
+        textLines = miniGameStart07_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_09());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_09()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent09 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -660,7 +1023,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent9()
     {
         // 오브젝트 재생성
-        RespawnEventObject(7);
+        // RespawnEventObject(7);
 
         textLines = event09_Lines;
         t_talkleEffect.MoveUp();
@@ -690,6 +1053,37 @@ public class TutorialManager : MonoBehaviour
 
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
+
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent10", 5f); }
+    }
+
+    void WaitEvent10()
+    {
+        CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+
+        PlayRandomEventTalkle_10();
+    }
+
+    // 09 _ 심장마비 이벤트 시작
+    void PlayRandomEventTalkle_10()
+    {
+        textLines = miniGameStart08_Lines;
+        t_talkleEffect.MoveUp();
+        StartCoroutine(PlayRandomEventTalkleDelay_10());
+    }
+
+    private IEnumerator PlayRandomEventTalkleDelay_10()
+    {
+        yield return new WaitForSeconds(1f);  // 1초 대기
+
+        canvasGroup.alpha = 1;
+        currentLine = -1;
+
+        istalkleEvent10 = true;
+        StartCoroutine(ShowNextLine());
     }
     #endregion
 
@@ -697,7 +1091,7 @@ public class TutorialManager : MonoBehaviour
     public void StartEvent10()
     {
         // 오브젝트 재생성
-        RespawnEventObject(8);
+        // RespawnEventObject(8);
 
         textLines = event10_Lines;
         t_talkleEffect.MoveUp();
@@ -762,11 +1156,23 @@ public class TutorialManager : MonoBehaviour
         // 페이드 아웃 엔딩씬
         if (fadeController != null)
         {
+            playerController.canMove = false;
             fadeController.DirectEndingFade(true);
         }
     }
     #endregion
     #endregion
+
+    IEnumerator EndEventTalkle_Routine()
+    {
+        // 무전기 내려가는 트윈
+        t_talkleEffect.MoveDown();
+        yield return speechWaitTime;
+
+        // 팝업 페이드아웃
+        canvasGroup.DOFade(0, 1f);
+        speechText.text = "";
+    }
 
     // --------------------------------------------------
 
@@ -790,8 +1196,10 @@ public class TutorialManager : MonoBehaviour
             // 미니게임 생성용 참조
             randomEvent.ReferTaskManager(taskManager);
 
-            // 화살표 생성 (튜토리얼은 화살표 생성 X)
-            // eventDirectionArrow.CreateArrow(randomEvent, tutorialIndex);
+            // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+            //// 화살표 생성 (튜토리얼은 화살표 생성 X)
+            //eventDirectionArrow.CreateArrow(randomEvent, tutorialIndex);
 
             // 생성된 오브젝트들 관리 리스트
             createdObjects.Add(eventObject);
@@ -808,41 +1216,49 @@ public class TutorialManager : MonoBehaviour
         {
             StartEvent2();
             tutorialClears[0] = true;
+            if (tutorialRrogressImages[0] != null) { tutorialRrogressImages[0].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.ArrowMatch)
         {
             StartEvent3();
             tutorialClears[1] = true;
+            if (tutorialRrogressImages[1] != null) { tutorialRrogressImages[1].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.MovingCircle)
         {
             StartEvent4();
             tutorialClears[2] = true;
+            if (tutorialRrogressImages[2] != null) { tutorialRrogressImages[2].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.MapGuide)
         {
             StartEvent5();
             tutorialClears[3] = true;
+            if (tutorialRrogressImages[3] != null) { tutorialRrogressImages[3].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.FixWire)
         {
             StartEvent6();
             tutorialClears[4] = true;
+            if (tutorialRrogressImages[4] != null) { tutorialRrogressImages[4].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.StackingGauge)
         {
             StartEvent8();
             tutorialClears[5] = true;
+            if (tutorialRrogressImages[5] != null) { tutorialRrogressImages[5].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.MaintainingGauge)
         {
             StartEvent9();
             tutorialClears[6] = true;
+            if (tutorialRrogressImages[6] != null) { tutorialRrogressImages[6].SetActive(true); }
         }
         else if (successEvent.task == KindOfTask.Swinging)
         {
             StartEvent10();
             tutorialClears[7] = true;
+            if (tutorialRrogressImages[7] != null) { tutorialRrogressImages[7].SetActive(true); }
         }
 
         // 이벤트 해제 (누수 방지)
@@ -879,6 +1295,9 @@ public class TutorialManager : MonoBehaviour
         return true;
     }
 
+    //// LEGACY : 튜토리얼 재생성 안하기로 함. 2025.07.02 백승주
+    // 튜토리얼 재생성 안하지만 전부 깔려있기로 함. 2025.07.13 백승주 
+
     /// <summary>
     /// 돌발상황 튜토리얼을 재생성하는 코드
     /// </summary>
@@ -886,7 +1305,7 @@ public class TutorialManager : MonoBehaviour
     private void RespawnEventObject(int currentIndex = 0)
     {
         // 생성된 오브젝트 관리 리스트 클리어
-        foreach(GameObject obj in createdObjects)
+        foreach (GameObject obj in createdObjects)
         {
             if (obj != null)
                 Destroy(obj);
