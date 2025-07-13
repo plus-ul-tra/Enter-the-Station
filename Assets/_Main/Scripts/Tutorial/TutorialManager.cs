@@ -131,7 +131,8 @@ public class TutorialManager : MonoBehaviour
             "너가 새로운 수습이구나.",
             "우리역은 돌발상황이\n가아~끔 생기거든?",
             "오늘은 모의 상황을\n해결해 볼거야~",
-            "역도 한번 둘러보고!",
+            "너가 겪어본 상황들은\n좌상단에 표시될거야.",
+            "한 번씩 겪어보면\n튜토리얼 끝이야."
         };
 
         // 화살표 설명 + 튜토리얼 미니게임 1  (에스컬레이터 고장)
@@ -150,7 +151,8 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼 미니게임 3  (진상 고객 제압)
         event04_Lines = new List<string>
         {
-            "게이지 범위에 맞춰서 딱 누르면 돼.\n빨간 얼굴때 실수하면 끝이야.",
+            "게이지 범위에 맞춰서\n스페이스바를 눌러",
+            "빨간 얼굴때 실수하면 끝이야.",
         };
 
         // 튜토리얼 미니게임 4  (지도 안내)
@@ -165,7 +167,7 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼 미니게임 5  (엘레베이터 고장)
         event06_Lines = new List<string>
         {
-            "전선? 왼쪽에서 오른쪽으로 \n색깔 맞춰서 잇는 거야.",
+            "전선? 왼쪽에서 오른쪽으로\n색깔 맞춰서 잇는 거야.",
             "딱보면 모르겠어?",
         };
 
@@ -174,7 +176,8 @@ public class TutorialManager : MonoBehaviour
         {
             "아 참,",
             "역에 가끔 분실물이\n떨어진 경우가 있어.",
-            "발견하면 역무실이나 부스로 가져와~",
+            "발견하면 역무실이나\n부스로 가져와~",
+            "초록색 화살표로\n표시된 곳이야",
         };
 
         // 튜토리얼 미니게임 7  (승객 추락 구조)
@@ -204,6 +207,7 @@ public class TutorialManager : MonoBehaviour
             "내일부턴 일에 시간제한도 걸려있어.\n각오하고 오는게 좋을걸?",
         };
 
+        #region 미니게임 시작 대사
         // 튜토리얼 미니게임 1 에스컬레이터 고장 시작 대사 (event 02)
         miniGameStart01_Lines = new List<string>
         {
@@ -252,11 +256,13 @@ public class TutorialManager : MonoBehaviour
             "자, 진상 취객 깨우기"
         };
 
+        #endregion 미니게임 시작 대사
+
         fadeController = GetComponent<FadeController>();
         canvasGroup.alpha = 0;
 
-        //// 오브젝트 전체 생성
-        //RespawnEventObject(0);
+        // 오브젝트 전체 생성
+        RespawnEventObject(0);
 
         // 10초 후 이벤트1 시작
         Invoke(nameof(StartEvent1), 10f);
@@ -354,13 +360,6 @@ public class TutorialManager : MonoBehaviour
             if (isEvent01)
             {
                 isEvent01 = false;
-
-                // 플레이어가 다시 이동할 수 있게
-                if (playerController != null)
-                {
-                    playerController.canMove = true;
-                }
-
                 yield return EndEvent1_Routine();
             }
             else if (isEvent02)
@@ -391,13 +390,6 @@ public class TutorialManager : MonoBehaviour
             else if (isEvent07)
             {
                 isEvent07 = false;
-
-                // 플레이어가 다시 이동할 수 있게
-                if (playerController != null)
-                {
-                    playerController.canMove = true;
-                }
-
                 yield return EndEvent7_Routine();
             }
             else if (isEvent08)
@@ -553,8 +545,10 @@ public class TutorialManager : MonoBehaviour
         canvasGroup.DOFade(0, 1f);
         speechText.text = "";
 
-        // 5초 후 다음 이벤트 시작
-        Invoke("WaitEvent2", 5f);
+        // 전부 깔려 있는 상태에서 알아서 시작하기로함. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //Invoke("WaitEvent2", 5f);
     }
 
     void WaitEvent2()
@@ -619,8 +613,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 아니면 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent3", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 아니면 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent3", 5f); }
     }
 
     void WaitEvent3()
@@ -685,8 +681,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent4", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent4", 5f); }
     }
 
     void WaitEvent4()
@@ -751,8 +749,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent5", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent5", 5f); }
     }
 
     void WaitEvent5()
@@ -817,8 +817,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent6", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent6", 5f); }
     }
 
     void WaitEvent6()
@@ -883,8 +885,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent8", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent8", 5f); }
     }
 
     void WaitEvent8()
@@ -982,8 +986,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent9", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent9", 5f); }
     }
 
     void WaitEvent9()
@@ -1048,8 +1054,10 @@ public class TutorialManager : MonoBehaviour
         // 튜토리얼을 모두 진행했으면 10초 후에 튜토리얼 종료
         if (AllTutorialsCleared()) { Invoke(nameof(StartEvent11), 10f); }
 
-        // 5초 후 다음 이벤트 시작
-        else { Invoke("WaitEvent10", 5f); }
+        // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+        //// 5초 후 다음 이벤트 시작
+        //else { Invoke("WaitEvent10", 5f); }
     }
 
     void WaitEvent10()
@@ -1188,8 +1196,10 @@ public class TutorialManager : MonoBehaviour
             // 미니게임 생성용 참조
             randomEvent.ReferTaskManager(taskManager);
 
-            // 화살표 생성 (튜토리얼은 화살표 생성 X)
-            eventDirectionArrow.CreateArrow(randomEvent, tutorialIndex);
+            // 전부 깔려있고 이벤트 시작 부분 없앴음. 2025.07.13 백승주
+
+            //// 화살표 생성 (튜토리얼은 화살표 생성 X)
+            //eventDirectionArrow.CreateArrow(randomEvent, tutorialIndex);
 
             // 생성된 오브젝트들 관리 리스트
             createdObjects.Add(eventObject);
@@ -1285,114 +1295,116 @@ public class TutorialManager : MonoBehaviour
         return true;
     }
 
-    //// LEGACY : 튜토리얼 재생성하지 않기로 함. 2025.07.02 백승주
-    ///// <summary>
-    ///// 돌발상황 튜토리얼을 재생성하는 코드
-    ///// </summary>
-    ///// <param name="currentIndex">현재 튜토리얼 인덱스</param>
-    //private void RespawnEventObject(int currentIndex = 0)
-    //{
-    //    // 생성된 오브젝트 관리 리스트 클리어
-    //    foreach (GameObject obj in createdObjects)
-    //    {
-    //        if (obj != null)
-    //            Destroy(obj);
-    //    }
+    //// LEGACY : 튜토리얼 재생성 안하기로 함. 2025.07.02 백승주
+    // 튜토리얼 재생성 안하지만 전부 깔려있기로 함. 2025.07.13 백승주 
 
-    //    createdObjects.Clear();
+    /// <summary>
+    /// 돌발상황 튜토리얼을 재생성하는 코드
+    /// </summary>
+    /// <param name="currentIndex">현재 튜토리얼 인덱스</param>
+    private void RespawnEventObject(int currentIndex = 0)
+    {
+        // 생성된 오브젝트 관리 리스트 클리어
+        foreach (GameObject obj in createdObjects)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
 
-    //    switch (currentIndex)
-    //    {
-    //        case 0: // 전체 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 1: // 에스컬레이터 제외하고 리스폰
-    //            //CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 2: // 취객 깨우기 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            //CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 3: // 진상 고객 깨우기 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            //CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 4: // 지도 안내 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            //CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 5: // 엘레베이터 고장 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            //CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 6: // 승객 추락 구조 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            //CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 7: // 심장마비 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            //CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //        case 8: // 진상 취객 깨우기 제외하고 리스폰
-    //            CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
-    //            CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
-    //            CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
-    //            //CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
-    //            break;
-    //    }
-    //}
+        createdObjects.Clear();
+
+        switch (currentIndex)
+        {
+            case 0: // 전체 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 1: // 에스컬레이터 제외하고 리스폰
+                //CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 2: // 취객 깨우기 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                //CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 3: // 진상 고객 깨우기 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                //CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 4: // 지도 안내 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                //CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 5: // 엘레베이터 고장 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                //CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 6: // 승객 추락 구조 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                //CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 7: // 심장마비 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                //CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+            case 8: // 진상 취객 깨우기 제외하고 리스폰
+                CreateMinigameObject(tutorialEventObject_01, spawnPoint[0].position, 1);
+                CreateMinigameObject(tutorialEventObject_02, spawnPoint[1].position, 1);
+                CreateMinigameObject(tutorialEventObject_03, spawnPoint[2].position, 1);
+                CreateMinigameObject(tutorialEventObject_04, spawnPoint[3].position, 1);
+                CreateMinigameObject(tutorialEventObject_05, spawnPoint[4].position, 1);
+                CreateMinigameObject(tutorialEventObject_06, spawnPoint[5].position, 2);
+                CreateMinigameObject(tutorialEventObject_07, spawnPoint[6].position, 2);
+                //CreateMinigameObject(tutorialEventObject_08, spawnPoint[7].position, 2);
+                break;
+        }
+    }
 }

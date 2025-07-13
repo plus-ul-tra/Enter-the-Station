@@ -57,7 +57,7 @@ public class SpeechBubble : MonoBehaviour
     // 텍스트 색상
     // ------------------------------
     Color FirstFloorColor = new Color32(255, 72, 0, 255); // #FF4800
-    Color SecondFloorColor = new Color32(238, 234, 15, 255); // #eeea0f 
+    Color SecondFloorColor = new Color32(238, 234, 15, 255); // #eeea0f
 
     private void Awake()
     {
@@ -73,8 +73,8 @@ public class SpeechBubble : MonoBehaviour
         arrowNotice_Lines = new List<string>
         {
             "화살표를 따라가면\n네 할일이 보여",
-            "빨간색 화살표는 지하 1층,",
-            "노란색은 지하 2층이니\n명심해둬",
+            "\"<color=#FF4800>빨간색</color>\" 화살표는 \"<color=#FF4800>지하 1층</color>\",",
+            "\"<color=#eeea0f>노란색</color>\" 화살표는 \"<color=#eeea0f>지하 2층</color>\",",
             "이제 할일을 하러 가볼까?"
         };
     }
@@ -98,19 +98,20 @@ public class SpeechBubble : MonoBehaviour
         tmpText.text = sb.ToString();
 
 
-        switch (zoneIndex)
-        {
-            case 1:
-            case 2:
-            case 3:
-                tmpText.color = FirstFloorColor;
-                break;
-            case 4:
-            case 5:
-            case 6:
-                tmpText.color = SecondFloorColor;
-                break;
-        }
+        // 특정 부분에만 richText로 넣기로 했음.
+        //switch (zoneIndex)
+        //{
+        //    case 1:
+        //    case 2:
+        //    case 3:
+        //        tmpText.color = FirstFloorColor;
+        //        break;
+        //    case 4:
+        //    case 5:
+        //    case 6:
+        //        tmpText.color = SecondFloorColor;
+        //        break;
+        //}
 
         StartCoroutine(PunchMultipleTimes());
     }
@@ -125,12 +126,12 @@ public class SpeechBubble : MonoBehaviour
             case 1:
             case 2:
             case 3:
-                sb.AppendLine("\"지하 1층\"");
+                sb.AppendLine("<color=#FF4800>\"지하 1층\"</color>");
                 break;
             case 4:
             case 5:
             case 6:
-                sb.AppendLine("\"지하 2층\"");
+                sb.AppendLine("<color=#eeea0f>\"지하 2층\"</color>");
                 break;
         }
 
