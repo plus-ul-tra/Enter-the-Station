@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      drunk person_0: 1031692819378796774
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

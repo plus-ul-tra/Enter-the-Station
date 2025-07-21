@@ -41,8 +41,8 @@ public class MovingCircleManager : Task
     [Header("제어할 UI Image")]
     public Image targetImage;
     
-    private int currentIndex = 0;//적 애니매이션 바뀌는 횟수
-    private int count = 1;//성공횟수
+    private int currentIndex = 1;//적 애니매이션 바뀌는 횟수
+    private int count = 2;//성공횟수
     private void Start()
     {
         if (playerImage == null)
@@ -162,8 +162,8 @@ public class MovingCircleManager : Task
     private void Reset()
     {
         timer = 0.0f;
-        count = 1;
-        currentIndex = 0;
+        count = 2;
+        currentIndex = 1;
         currentAngle = 0f;
     }
     public void ApplyRotation(float angle)
