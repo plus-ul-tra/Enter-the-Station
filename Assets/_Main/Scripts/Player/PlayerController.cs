@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using Unity.Cinemachine;
@@ -7,16 +7,22 @@ using TMPro;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
+    ////////////////////////////////////////////////////////////////////////////////
+    
     [Header("수평 이동 속도")]
     [SerializeField] private float horizontalSpeed = 5f;
     [Header("수직 이동 속도")]
     [SerializeField] private float verticalSpeed = 0.5f;
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     [Header("몬스터스포너")]
     [SerializeField] private Transform[] spawner;
 
     [Header("몬스터 컨테이너")]
     [SerializeField] private Transform monsterContainer;
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     [Header("Cinemachine 가상 카메라")]
     [SerializeField] private CinemachineCamera cinemachineCam;
@@ -30,13 +36,22 @@ public class PlayerController : MonoBehaviour
     [Header("내려가는 계단")]
     [SerializeField] GameObject stairs_Down;
 
+    ////////////////////////////////////////////////////////////////////////////////
+
+    [Header("현재 위치 (지하 몇 층 인지 알려주기 위함)")]
+    public CurrentLocationUpdator curLocationUpdator;
+
+    ////////////////////////////////////////////////////////////////////////////////
+
     [Header("옵션 창")]
     [SerializeField] private GameObject optionPanel;
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     [Header("스턴 애니")]
     [SerializeField] private GameObject stunAim;
 
-
+    ////////////////////////////////////////////////////////////////////////////////
 
     private SpriteRenderer spriteRenderer;
     private PlayerAnimator playerAnim;
@@ -47,15 +62,21 @@ public class PlayerController : MonoBehaviour
     //private TaskManager taskManager;
     [SerializeField] private IntroCameraSwitcher introCameraSwitcher;
 
+    ////////////////////////////////////////////////////////////////////////////////
+
     [SerializeField] private TMP_Text lostItemCount_Text;
     private int count = 0;
+
+    ////////////////////////////////////////////////////////////////////////////////
 
     [Header("넉백 지속 시간")]
     public float knockbackDuration = 0.2f;
     [Header("무적 지속 시간")]
     public float invincibleTime = 0.5f;
     private bool isInvincible = false;
-    // --------------------------------------------------
+
+    ////////////////////////////////////////////////////////////////////////////////
+
     RandomEventObject randomEventObject;
     Item item;
 
@@ -64,6 +85,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("걸음 사운드")]
     [SerializeField] private PlayerFootsteps playerFootsteps;
+
+    ////////////////////////////////////////////////////////////////////////////////
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();//플립시 사용
@@ -83,17 +107,20 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (InputManager.Instance.PausePressed)
+        if (InputManager.Instance != null)
         {
-            Debug.Log("GameController에서 Pause 감지!");
+            if (InputManager.Instance.PausePressed)
+            {
+                Debug.Log("GameController에서 Pause 감지!");
 
-            if (optionPanel != null)
-                optionPanel.SetActive(true);
+                if (optionPanel != null)
+                    optionPanel.SetActive(true);
 
-            // canMove = true;
-            playerFootsteps.StopfootstepsSound();
+                // canMove = true;
+                playerFootsteps.StopfootstepsSound();
 
-            Time.timeScale = 0f;
+                Time.timeScale = 0f;
+            }
         }
 
         #region 상호작용
@@ -267,6 +294,13 @@ public class PlayerController : MonoBehaviour
             bool isUp = other.CompareTag("Stairs_up");
             HandleStairsCollision(isUp);//업인지 다운이지 확인 플래그를 코루틴으로 보내줌
             StartCoroutine(InvincibleCoroutine());
+
+            // 현재 위치 텍스트 업데이트
+            if (!curLocationUpdator) return;
+            if (isUp)
+                curLocationUpdator.ChangeLocationText(LocationType.b1);
+            else
+                curLocationUpdator.ChangeLocationText(LocationType.b2);
         }
 
         // 상호작용 닿았을 때 캐싱

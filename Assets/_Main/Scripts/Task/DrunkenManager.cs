@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SocialPlatforms.Impl;
@@ -8,7 +8,7 @@ public class DrunkenManager : Task
 {
     [SerializeField]
     private Drunken drunken;
-    [Header("³­ÀÌµµ Á¶Á¤")]
+    [Header("ë‚œì´ë„ ì¡°ì •")]
     public float swingSpeed;
 
     public UnityEvent onSpacebar;
@@ -58,7 +58,7 @@ public class DrunkenManager : Task
     {
         timer += Time.deltaTime;
 
-        if (isReached)  // ½º¸¶ÀÏ ¾ÆÀÌÄÜ
+        if (isReached)  // ìŠ¤ë§ˆì¼ ì•„ì´ì½˜
         {
             //if (isLeft)
             //{ pressSignGroup.transform.GetChild(0).transform.GetChild(countLevel).gameObject.SetActive(true); }
@@ -85,7 +85,7 @@ public class DrunkenManager : Task
                 onSpacebar.Invoke();
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(false);
 
-                // ¹ö±× ¼öÁ¤ ÇÊ¿ä. ÀÓ½Ã ºôµå¸¦ À§ÇØ ÀÏ´Ü ÁÖ¼® Ã³¸®.
+                // ë²„ê·¸ ìˆ˜ì • í•„ìš”. ì„ì‹œ ë¹Œë“œë¥¼ ìœ„í•´ ì¼ë‹¨ ì£¼ì„ ì²˜ë¦¬.
                 //PopEffect();
                 //if (isLeft) { PopEffect(0); }
                 // else if (!isLeft) { PopEffect(1); }
@@ -97,7 +97,7 @@ public class DrunkenManager : Task
             {
                 if (countLevel == 0) return;
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(false);
-                countLevel--;
+                //countLevel--; BIC ìœ ì € í…ŒìŠ¤íŠ¸ í›„ ì£¼ì„ ì²˜ë¦¬í•¨. 2025.08.16 BSJ
                 baseLineGroup.transform.GetChild(countLevel).gameObject.SetActive(true);
             }
         }
@@ -147,16 +147,16 @@ public class DrunkenManager : Task
     //    Sequence seq = DOTween.Sequence();
     //    img = pressSignGroup.transform.GetChild(i).transform.GetChild(countLevel).GetComponent<Image>();
 
-    //    // Ä¿Á³´Ù°¡ ÁÙ¾îµé¸é¼­ »ç¶óÁö±â
+    //    // ì»¤ì¡Œë‹¤ê°€ ì¤„ì–´ë“¤ë©´ì„œ ì‚¬ë¼ì§€ê¸°
     //    seq.Append(img.transform.DOScale(1.3f, 0.2f).SetEase(Ease.OutBack))
-    //       .Join(img.DOFade(0f, 0.2f)) // µ¿½Ã¿¡ Åõ¸íµµ °¨¼Ò
+    //       .Join(img.DOFade(0f, 0.2f)) // ë™ì‹œì— íˆ¬ëª…ë„ ê°ì†Œ
     //       .Append(img.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack))
     //       .OnComplete(() => {
     //           DOVirtual.DelayedCall(0.1f, () =>
     //           {
-    //               img.gameObject.SetActive(false); // ¾Ö´Ï¸ŞÀÌ¼Ç ³¡³ª¸é ºñÈ°¼ºÈ­
-    //           // Àç»ç¿ëÀ» À§ÇÑ º¹¿ø
-    //           img.color = new Color(img.color.r, img.color.g, img.color.b, 1f); // »ö»ó(¾ËÆÄ) º¹¿ø
+    //               img.gameObject.SetActive(false); // ì• ë‹ˆë©”ì´ì…˜ ëë‚˜ë©´ ë¹„í™œì„±í™”
+    //           // ì¬ì‚¬ìš©ì„ ìœ„í•œ ë³µì›
+    //           img.color = new Color(img.color.r, img.color.g, img.color.b, 1f); // ìƒ‰ìƒ(ì•ŒíŒŒ) ë³µì›
     //           img.transform.localScale = new Vector3(1f, 1f, 1f);
     //           });
     //       });
@@ -167,14 +167,14 @@ public class DrunkenManager : Task
 
         img = pressSign.GetComponent<Image>();
 
-        // Ä¿Á³´Ù°¡ ÁÙ¾îµé¸é¼­ »ç¶óÁö±â
+        // ì»¤ì¡Œë‹¤ê°€ ì¤„ì–´ë“¤ë©´ì„œ ì‚¬ë¼ì§€ê¸°
         seq.Append(img.transform.DOScale(4.3f, 0.2f).SetEase(Ease.OutBack))
-           .Join(img.DOFade(0f, 0.2f)) // µ¿½Ã¿¡ Åõ¸íµµ °¨¼Ò
+           .Join(img.DOFade(0f, 0.2f)) // ë™ì‹œì— íˆ¬ëª…ë„ ê°ì†Œ
            .Append(img.transform.DOScale(0f, 0.2f).SetEase(Ease.InBack))
            .OnComplete(() => {
                DOVirtual.DelayedCall(0.1f, () =>
                {
-                   // ¾Ö´Ï¸ŞÀÌ¼Ç ³¡³ª¸é ºñÈ°¼ºÈ­
+                   // ì• ë‹ˆë©”ì´ì…˜ ëë‚˜ë©´ ë¹„í™œì„±í™”
                    pressSign.SetActive(false);
                });
            });
