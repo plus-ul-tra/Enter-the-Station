@@ -42,7 +42,7 @@ W,A,S,D : 플레이어 이동
 
 튜토리얼
 <p align="left">
-<img width="90%" src="https://github.com/user-attachments/assets/676c66fc-2b5d-42eb-80d1-8078f1283f50">  
+<img width="90%" src="https://github.com/user-attachments/assets/245283ac-32e5-4da3-8a9f-3b0755394071">  
 </p>
 
 전체 게임 맵
@@ -82,6 +82,6 @@ W,A,S,D : 플레이어 이동
 
 
 
-## Build File
+## Build File(BIC 버전)
 
-https://drive.google.com/file/d/1iyJ6kFBTecIOEEkOR4jY_le7NfjvZwm2/view?usp=sharing
+https://drive.google.com/file/d/1s__rf1hubWSpUvNviQDTvqN0DOy7va3w/view?usp=sharing
